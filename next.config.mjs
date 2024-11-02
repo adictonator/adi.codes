@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+	reactStrictMode: false,
+	images: {
+		domains: ['labs.phaser.io'],
+	},
+}
 
-export default nextConfig;
+export default nextConfig
