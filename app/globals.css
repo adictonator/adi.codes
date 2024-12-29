@@ -1,88 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-    
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
- 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
- 
-    --primary: 221 39% 36%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222 47% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 15 100% 62%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221 39% 36%;
- 
-    --radius: 0.5rem;
-  }
- 
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 217 33% 37%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 15 100% 62%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+	:root {
+		--background: 60 6% 96%; /* Cool Beige */
+		--foreground: 0 0% 43%; /* Slate Gray */
+
+		--card: 60 7% 88%; /* Pale Gray */
+		--card-foreground: 0 0% 43%; /* Slate Gray */
+
+		--popover: 60 7% 88%; /* Pale Gray */
+		--popover-foreground: 0 0% 43%; /* Slate Gray */
+
+		--primary: 60 6% 96%; /* Cool Beige */
+		--primary-foreground: 0 0% 43%; /* Slate Gray */
+
+		--secondary: 0 0% 72%; /* Muted Steel */
+		--secondary-foreground: 0 0% 43%; /* Slate Gray */
+
+		--muted: 60 7% 88%; /* Pale Gray */
+		--muted-foreground: 0 0% 43%; /* Slate Gray */
+
+		--accent: 216 91% 59%; /* Bright Blue */
+		--accent-foreground: 60 6% 96%; /* Cool Beige */
+
+		--accent-hover: 216 85% 53%; /* Soft Hover Blue */
+
+		--destructive: 0 62.8% 60.2%; /* Muted Red */
+		--destructive-foreground: 60 6% 96%; /* Cool Beige */
+
+		--border: 0 0% 72%; /* Muted Steel */
+		--input: 0 0% 72%; /* Muted Steel */
+		--ring: 216 91% 59%; /* Bright Blue */
+
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: 0 0% 20%; /* Dark Charcoal */
+		--foreground: 60 6% 96%; /* Cool Beige */
+
+		--card: 0 0% 25%; /* Slightly lighter charcoal */
+		--card-foreground: 60 6% 96%; /* Cool Beige */
+
+		--popover: 0 0% 25%; /* Slightly lighter charcoal */
+		--popover-foreground: 60 6% 96%; /* Cool Beige */
+
+		--primary: 0 0% 20%; /* Dark Charcoal */
+		--primary-foreground: 60 6% 96%; /* Cool Beige */
+
+		--secondary: 0 0% 72%; /* Muted Steel */
+		--secondary-foreground: 60 6% 96%; /* Cool Beige */
+
+		--muted: 0 0% 25%; /* Slightly lighter charcoal */
+		--muted-foreground: 60 6% 96%; /* Cool Beige */
+
+		--accent: 216 91% 59%; /* Bright Blue */
+		--accent-foreground: 0 0% 20%; /* Dark Charcoal */
+
+		--accent-hover: 216 76% 75%; /* Light Steel Blue */
+
+		--destructive: 0 40% 30%; /* Dark Muted Red */
+		--destructive-foreground: 60 6% 96%; /* Cool Beige */
+
+		--border: 0 0% 25%; /* Slightly lighter charcoal */
+		--input: 0 0% 25%; /* Slightly lighter charcoal */
+		--ring: 216 91% 59%; /* Bright Blue */
+	}
 }
- 
+
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground transition-colors duration-300;
-  }
+	* {
+		@apply border-border;
+	}
 }
 
 @keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 .animate-gradient {
-  background-size: 200% auto;
-  animation: gradient 8s linear infinite;
+	background-size: 200% auto;
+	animation: gradient 8s linear infinite;
 }
-
