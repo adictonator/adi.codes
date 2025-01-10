@@ -1,8 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
 import { Providers } from './providers'
-import Header from '@/components/header'
-import Footer from '@/components/footer'
 import Script from 'next/script'
 
 const archivo = localFont({
@@ -30,15 +28,17 @@ export const metadata = {
 		'Personal portfolio of Aditya, a passionate developer and technical author from India. Explore projects, read blogs, and subscribe to the newsletter.',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode
+}) {
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${clash.variable} ${archivo.variable} font-body relative flex min-h-screen flex-col bg-background text-foreground antialiased transition-colors duration-300`}>
+				className={`${clash.variable} ${archivo.variable} h-full bg-background font-body text-foreground antialiased transition-colors duration-300`}>
 				<Providers>
-					<Header />
-					<main className="flex-1">{children}</main>
-					<Footer />
+					<main className="h-screen p-4 md:p-6">{children}</main>
 				</Providers>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
