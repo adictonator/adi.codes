@@ -1,5 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
+import { Space_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import Script from 'next/script'
 
@@ -22,6 +23,12 @@ const clash = localFont({
 	variable: '--font-display',
 })
 
+const spaceMono = Space_Mono({
+	subsets: ['latin'],
+	weight: ['400', '700'],
+	variable: '--font-source',
+})
+
 export const metadata = {
 	title: 'Aditya - Technical Author & Developer from India',
 	description:
@@ -36,9 +43,9 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${clash.variable} ${archivo.variable} h-full bg-background font-body text-foreground antialiased transition-colors duration-300`}>
+				className={`${clash.variable} ${archivo.variable} ${spaceMono.variable} bg-background font-body text-foreground h-full antialiased transition-colors duration-300`}>
 				<Providers>
-					<main className="h-screen p-4 md:p-6">{children}</main>
+					<main className="h-screen">{children}</main>
 				</Providers>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
