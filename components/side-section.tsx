@@ -1,96 +1,144 @@
+import { useEffect } from 'react'
 import BlogShowcase from './blog-showcase'
-import { useState } from 'react'
+import Projects from './projects'
+import TimelineExperience from './timeline-experience'
+import CreativeLab from './creative-lab'
+import SkillsShowcase from './skills-showcase'
+import UsesShowcase from './uses-showcase'
+import StickyTitle from './sticky-title'
+import HireMe from './hire-me'
+import GitHubActivity from './github-activity'
+import AboutMe from './about-me'
 
-export default function SideSection() {
-	const [activeTab, setActiveTab] = useState('projects')
+export default function SideSection({
+	onScroll,
+}: {
+	onScroll: (section: string) => void
+}) {
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			entries => {
+				const visibleHeaders = entries.filter(entry => {
+					const rect = entry.boundingClientRect
+					// Consider a header "active" when it's just about to stick to the top
+					return rect.top <= 64 && rect.bottom > 64
+				})
 
-	const tabs = [
-		{ id: 'projects', label: 'Projects', width: 'w-40' },
-		{ id: 'about', label: 'About Me', width: 'w-44' },
-		{ id: 'blog', label: 'Blog', width: 'w-36' },
-		{ id: 'ideas', label: 'Ideas', width: 'w-32' },
-	]
+				if (visibleHeaders.length > 0) {
+					const activeHeader = visibleHeaders[0]
+					const sectionId =
+						activeHeader.target.getAttribute('data-section')
+					if (sectionId) onScroll(sectionId)
+				}
+			},
+			{
+				threshold: [0, 1],
+				rootMargin: '-64px 0px 0px 0px',
+			},
+		)
+
+		document
+			.querySelectorAll('[data-section]')
+			.forEach(header => observer.observe(header))
+		return () => observer.disconnect()
+	}, [onScroll])
 
 	return (
-		<div className="relative h-full">
-			{/* Floating Tabs - Position them relative to parent */}
-			<div className="absolute -left-[170px] top-14 z-0 flex flex-col items-end gap-0.5">
-				{tabs.map(tab => (
-					<button
-						key={tab.id}
-						onClick={() => setActiveTab(tab.id)}
-						className={` ${tab.width} transform rounded-l-md bg-gray-800/90 px-6 py-3.5 text-left font-display text-lg font-medium text-gray-300 backdrop-blur-sm transition-all duration-200 hover:-translate-x-1 hover:bg-gray-700/90 ${activeTab === tab.id ? '-translate-x-1 bg-gray-700/90' : ''} `}>
-						{tab.label}
-					</button>
-				))}
-			</div>
+		<div className="relative h-full transition-all duration-200 md:max-w-7xl">
+			<div className="bg-background relative z-20 flex h-full flex-col overflow-hidden">
+				<div className="flex-1 overflow-y-auto">
+					{/* About Me Section */}
+					<section>
+						<StickyTitle data-section="about">
+							Who? Me? oh, okay
+						</StickyTitle>
+						<div className="p-4">
+							<AboutMe />
+						</div>
+					</section>
 
-			{/* Main Content Container - Fixed Height with Internal Scroll */}
-			<div className="relative z-20 flex h-full flex-col overflow-hidden rounded-md border bg-background shadow-2xl">
-				<div className="flex-1 space-y-8 overflow-y-auto">
+					{/* Experience Section */}
+					<section>
+						<StickyTitle data-section="experience">
+							Professional Experience
+							<a
+								href="/resume.pdf"
+								className="text-sm text-blue-400 hover:text-blue-300">
+								Download CV
+							</a>
+						</StickyTitle>
+						<div className="p-4">
+							<TimelineExperience />
+						</div>
+					</section>
+
+					{/* Skills Section */}
+					<section>
+						<StickyTitle data-section="skills">
+							Technical Skills
+						</StickyTitle>
+						<div className="p-4">
+							<SkillsShowcase />
+						</div>
+					</section>
+
+					{/* Open Source Section */}
+					<section>
+						<StickyTitle data-section="opensource">
+							Open Source
+						</StickyTitle>
+						<div className="p-4">
+							<GitHubActivity />
+						</div>
+					</section>
+
 					{/* Projects Section */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							Projects
-						</h2>
-						<div className="space-y-4 p-4">
-							<BlogShowcase />
+					<section>
+						<StickyTitle data-section="projects">
+							Featured Projects
+						</StickyTitle>
+						<div className="p-4">
+							<Projects />
 						</div>
-					</div>
-					{/* Add your projects content here */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							Projects
-						</h2>
-						<div className="space-y-4 p-4">
-							{/* Add your projects content here */}
-							<div className="h-96">Projects content...</div>
-						</div>
-					</div>
+					</section>
 
-					{/* Socials Section */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							Socials
-						</h2>
-						<div className="space-y-4 p-4">
-							{/* Add your socials content here */}
-							<div className="h-96">Socials content...</div>
+					{/* Uses Section */}
+					<section>
+						<StickyTitle data-section="uses">
+							Setup & Tools
+						</StickyTitle>
+						<div className="p-4">
+							<UsesShowcase />
 						</div>
-					</div>
+					</section>
+
+					{/* Creative Lab Section */}
+					<section>
+						<StickyTitle data-section="lab">
+							Creative Lab
+						</StickyTitle>
+						<div className="p-4">
+							<CreativeLab />
+						</div>
+					</section>
 
 					{/* Blog Section */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							Blog
-						</h2>
-						<div className="space-y-4 p-4">
-							{/* Add your blog content here */}
-							<div className="h-96">Blog content...</div>
+					<section>
+						<StickyTitle data-section="blog">Blog</StickyTitle>
+						<div className="p-4">
+							<BlogShowcase />
 						</div>
-					</div>
+					</section>
 
-					{/* About Section */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							About Me
-						</h2>
-						<div className="space-y-4 p-4">
-							{/* Add your about content here */}
-							<div className="h-96">About content...</div>
+					{/* Hire Me Section */}
+					<section>
+						<StickyTitle data-section="hire">
+							Got projects?
+						</StickyTitle>
+						<div className="p-4">
+							<HireMe />
 						</div>
-					</div>
-
-					{/* Quotes Section */}
-					<div className="flex flex-col">
-						<h2 className="sticky top-0 z-10 bg-black/80 p-4 text-xl font-bold backdrop-blur-sm">
-							Quotes
-						</h2>
-						<div className="space-y-4 p-4">
-							{/* Add your quotes content here */}
-							<div className="h-96">Quotes content...</div>
-						</div>
-					</div>
+					</section>
 				</div>
 			</div>
 		</div>
