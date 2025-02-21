@@ -1,90 +1,57 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-	:root {
-		--background: 60 6% 96%; /* Cool Beige */
-		--foreground: 0 0% 43%; /* Slate Gray */
+@theme {
+	--color-background: hsl(60 6% 96%); /* Cool Beige */
+	--color-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--card: 60 7% 88%; /* Pale Gray */
-		--card-foreground: 0 0% 43%; /* Slate Gray */
+	--color-card: hsl(60 7% 88%); /* Pale Gray */
+	--color-card-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--popover: 60 7% 88%; /* Pale Gray */
-		--popover-foreground: 0 0% 43%; /* Slate Gray */
+	--color-popover: hsl(60 7% 88%); /* Pale Gray */
+	--color-popover-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--primary: 60 6% 96%; /* Cool Beige */
-		--primary-foreground: 0 0% 43%; /* Slate Gray */
+	--color-primary: hsl(60 6% 96%); /* Cool Beige */
+	--color-primary-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--secondary: 0 0% 72%; /* Muted Steel */
-		--secondary-foreground: 0 0% 43%; /* Slate Gray */
+	--color-secondary: hsl(0 0% 72%); /* Muted Steel */
+	--color-secondary-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--muted: 60 7% 88%; /* Pale Gray */
-		--muted-foreground: 0 0% 43%; /* Slate Gray */
+	--color-muted: hsl(60 7% 88%); /* Pale Gray */
+	--color-muted-foreground: hsl(0 0% 43%); /* Slate Gray */
 
-		--accent: 216 91% 59%; /* Bright Blue */
-		--accent-foreground: 60 6% 96%; /* Cool Beige */
+	--color-accent: hsl(216 91% 59%); /* Bright Blue */
+	--color-accent-foreground: hsl(60 6% 96%); /* Cool Beige */
 
-		--accent-hover: 216 85% 53%; /* Soft Hover Blue */
+	--color-accent-hover: hsl(216 85% 53%); /* Soft Hover Blue */
 
-		--destructive: 0 62.8% 60.2%; /* Muted Red */
-		--destructive-foreground: 60 6% 96%; /* Cool Beige */
+	--color-destructive: hsl(0 62.8% 60.2%); /* Muted Red */
+	--color-destructive-foreground: hsl(60 6% 96%); /* Cool Beige */
 
-		--border: 0 0% 72%; /* Muted Steel */
-		--input: 0 0% 72%; /* Muted Steel */
-		--ring: 216 91% 59%; /* Bright Blue */
+	--border: 0 0% 72%; /* Muted Steel */
+	--input: 0 0% 72%; /* Muted Steel */
+	--ring: 216 91% 59%; /* Bright Blue */
 
-		--radius: 0.5rem;
-	}
+	--radius: 0.5rem;
 
-	.dark {
-		--background: 0 0% 20%; /* Dark Charcoal */
-		--foreground: 60 6% 96%; /* Cool Beige */
+	--text-10xl: 10rem;
+	--text-12xl: 12rem;
+	--text-14xl: 14rem;
 
-		--card: 0 0% 25%; /* Slightly lighter charcoal */
-		--card-foreground: 60 6% 96%; /* Cool Beige */
-
-		--popover: 0 0% 25%; /* Slightly lighter charcoal */
-		--popover-foreground: 60 6% 96%; /* Cool Beige */
-
-		--primary: 0 0% 20%; /* Dark Charcoal */
-		--primary-foreground: 60 6% 96%; /* Cool Beige */
-
-		--secondary: 0 0% 72%; /* Muted Steel */
-		--secondary-foreground: 60 6% 96%; /* Cool Beige */
-
-		--muted: 0 0% 25%; /* Slightly lighter charcoal */
-		--muted-foreground: 60 6% 96%; /* Cool Beige */
-
-		--accent: 216 91% 59%; /* Bright Blue */
-		--accent-foreground: 0 0% 20%; /* Dark Charcoal */
-
-		--accent-hover: 216 76% 75%; /* Light Steel Blue */
-
-		--destructive: 0 40% 30%; /* Dark Muted Red */
-		--destructive-foreground: 60 6% 96%; /* Cool Beige */
-
-		--border: 0 0% 25%; /* Slightly lighter charcoal */
-		--input: 0 0% 25%; /* Slightly lighter charcoal */
-		--ring: 216 91% 59%; /* Bright Blue */
-	}
+	--font-display: var(--font-display);
+	--font-body: var(--font-body);
+	--font-source: var(--font-source);
 }
 
-@layer base {
+.dark {
+	--color-background: hsl(0 0% 7%); /* Dark Slate */
+}
+
+/*@layer base {
 	* {
 		@apply border-border;
 	}
-}
-
-@layer utilities {
-	.scrollbar-hide {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-	}
-	.scrollbar-hide::-webkit-scrollbar {
-		display: none;
-	}
-}
+}*/
 
 @keyframes gradient {
 	0% {
@@ -98,7 +65,9 @@
 	}
 }
 
-.animate-gradient {
-	background-size: 200% auto;
-	animation: gradient 8s linear infinite;
+@layer utilities {
+	.animate-gradient {
+		background-size: 200% auto;
+		animation: gradient 8s linear infinite;
+	}
 }
