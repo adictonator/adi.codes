@@ -11,7 +11,7 @@ import AboutMe from './about-me'
 import SocialConnects from './social-connects'
 import Section from './section'
 
-export default function SideSection({
+export default function RightPanel({
 	onScroll,
 }: {
 	onScroll: (section: string) => void
