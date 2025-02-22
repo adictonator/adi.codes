@@ -39,6 +39,10 @@ export const sectionContent: Record<
 		title: 'Writing',
 		items: ['Technical Guides', 'Industry Insights', 'Best Practices'],
 	},
+	connect: {
+		title: 'Connect With Me',
+		items: ['Social Media', 'Professional Networks', 'Contact Information'],
+	},
 	hire: {
 		title: 'Work With Me',
 		items: [

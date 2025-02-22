@@ -37,7 +37,7 @@ export default function AboutMe() {
 				</div>
 
 				<aside className="relative flex items-center justify-center text-sm text-gray-400">
-					<div className="group relative z-50 size-[450px] border border-dashed border-neutral-600">
+					<div className="group relative size-[450px] border border-dashed border-neutral-600">
 						{/* Corner Borders */}
 						<div className="absolute -top-4 -left-4 size-4 rotate-180 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -top-4 -right-4 size-4 rotate-270 border-t border-l border-dashed border-inherit" />
