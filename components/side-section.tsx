@@ -5,10 +5,11 @@ import TimelineExperience from './timeline-experience'
 import CreativeLab from './creative-lab'
 import SkillsShowcase from './skills-showcase'
 import UsesShowcase from './uses-showcase'
-import StickyTitle from './sticky-title'
 import HireMe from './hire-me'
 import GitHubActivity from './github-activity'
 import AboutMe from './about-me'
+import SocialConnects from './social-connects'
+import Section from './section'
 
 export default function SideSection({
 	onScroll,
@@ -44,103 +45,57 @@ export default function SideSection({
 	}, [onScroll])
 
 	return (
-		<div className="relative h-full transition-all duration-200 md:max-w-7xl">
-			<div className="bg-background relative z-20 flex h-full flex-col overflow-hidden">
-				<div className="flex-1 overflow-y-auto">
-					{/* About Me Section */}
-					<section>
-						<StickyTitle data-section="about">
-							Who? Me? oh, okay
-						</StickyTitle>
-						<div className="p-4">
-							<AboutMe />
-						</div>
-					</section>
+		<section className="relative z-20 flex h-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl">
+			<div className="flex-1 overflow-y-auto">
+				<Section title="Who? Me? Oh, okay" ariaTitle="about">
+					<AboutMe />
+				</Section>
 
-					{/* Experience Section */}
-					<section>
-						<StickyTitle data-section="experience">
-							Professional Experience
-							<a
-								href="/resume.pdf"
-								className="text-sm text-blue-400 hover:text-blue-300">
-								Download CV
-							</a>
-						</StickyTitle>
-						<div className="p-4">
-							<TimelineExperience />
-						</div>
-					</section>
+				<Section
+					title="	Professional Experience"
+					ariaTitle="experience"
+					headerChildren={
+						<a
+							href="/resume.pdf"
+							className="text-sm text-blue-400 hover:text-blue-300">
+							Download CV
+						</a>
+					}>
+					<TimelineExperience />
+				</Section>
 
-					{/* Skills Section */}
-					<section>
-						<StickyTitle data-section="skills">
-							Technical Skills
-						</StickyTitle>
-						<div className="p-4">
-							<SkillsShowcase />
-						</div>
-					</section>
+				<Section title="Technical skills" ariaTitle="skills">
+					<SkillsShowcase />
+				</Section>
 
-					{/* Open Source Section */}
-					<section>
-						<StickyTitle data-section="opensource">
-							Open Source
-						</StickyTitle>
-						<div className="p-4">
-							<GitHubActivity />
-						</div>
-					</section>
+				<Section title="I've been coding" ariaTitle="opensource">
+					<GitHubActivity />
+				</Section>
 
-					{/* Projects Section */}
-					<section>
-						<StickyTitle data-section="projects">
-							Featured Projects
-						</StickyTitle>
-						<div className="p-4">
-							<Projects />
-						</div>
-					</section>
+				<Section title="Current projects" ariaTitle="projects">
+					<Projects />
+				</Section>
 
-					{/* Uses Section */}
-					<section>
-						<StickyTitle data-section="uses">
-							Setup & Tools
-						</StickyTitle>
-						<div className="p-4">
-							<UsesShowcase />
-						</div>
-					</section>
+				<Section title="Uses" ariaTitle="uses">
+					<UsesShowcase />
+				</Section>
 
-					{/* Creative Lab Section */}
-					<section>
-						<StickyTitle data-section="lab">
-							Creative Lab
-						</StickyTitle>
-						<div className="p-4">
-							<CreativeLab />
-						</div>
-					</section>
+				<Section title="Experimental stuff" ariaTitle="lab">
+					<CreativeLab />
+				</Section>
 
-					{/* Blog Section */}
-					<section>
-						<StickyTitle data-section="blog">Blog</StickyTitle>
-						<div className="p-4">
-							<BlogShowcase />
-						</div>
-					</section>
+				<Section title="Blog" ariaTitle="blog">
+					<BlogShowcase />
+				</Section>
 
-					{/* Hire Me Section */}
-					<section>
-						<StickyTitle data-section="hire">
-							Got projects?
-						</StickyTitle>
-						<div className="p-4">
-							<HireMe />
-						</div>
-					</section>
-				</div>
+				<Section title="Social stuff" ariaTitle="connect">
+					<SocialConnects />
+				</Section>
+
+				<Section title="Got projects?" ariaTitle="hire">
+					<HireMe />
+				</Section>
 			</div>
-		</div>
+		</section>
 	)
 }
