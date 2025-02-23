@@ -1,195 +1,135 @@
 'use client'
 
+import { setup } from '@/data/uses'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ExternalLink, ShoppingCart, ChevronRight } from 'lucide-react'
+import { ExternalLink, ShoppingCart } from 'lucide-react'
 import { useState } from 'react'
-
-type SetupItem = {
-	name: string
-	description?: string
-	link?: string
-	affiliateLink?: string
-	price?: string
-	category: 'Hardware' | 'Development' | 'Productivity'
-}
-
-const setup: SetupItem[] = [
-	{
-		name: 'MacBook Pro 16" M1 Max',
-		description: '64GB RAM, 2TB SSD - Main development machine',
-		category: 'Hardware',
-		price: '$3,499',
-		affiliateLink: 'https://amazon.com/...',
-	},
-	{
-		name: 'Dell U2720Q',
-		description: '27" 4K USB-C Monitor',
-		category: 'Hardware',
-		link: 'https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-monitor-u2720q/apd/210-avjv/monitors-monitor-accessories',
-	},
-	{
-		name: 'Keychron K3',
-		description: 'Low Profile Mechanical Keyboard - Brown switches',
-		category: 'Hardware',
-	},
-	{
-		name: 'VS Code',
-		description: 'Primary IDE - Using GitHub theme',
-		category: 'Development',
-	},
-	{
-		name: 'iTerm2',
-		description: 'Terminal Emulator - With Oh My Zsh & Starship prompt',
-		category: 'Development',
-	},
-	{
-		name: 'Fig',
-		description: 'Terminal Enhancement',
-		category: 'Development',
-		link: 'https://fig.io',
-	},
-	{
-		name: 'Figma',
-		description: 'UI/UX Design - For wireframes and prototypes',
-		category: 'Productivity',
-	},
-	{
-		name: 'Arc Browser',
-		description: 'Primary Browser',
-		category: 'Productivity',
-		link: 'https://arc.net',
-	},
-	{
-		name: 'Raycast',
-		description: 'Productivity Tool - Replaced Spotlight',
-		category: 'Productivity',
-	},
-]
 
 export default function UsesShowcase() {
 	const [selectedItem, setSelectedItem] = useState<SetupItem | null>(null)
 	const categories = ['Hardware', 'Development', 'Productivity'] as const
 
+	const getCategoryColorClass = (category: string) => {
+		switch (category) {
+			case 'Hardware':
+				return 'group-hover:text-blue-500/50' // Using Tailwind's blue
+			case 'Development':
+				return 'group-hover:text-emerald-500/50' // Using Tailwind's emerald
+			case 'Productivity':
+				return 'group-hover:text-amber-500/50' // Using Tailwind's amber
+		}
+	}
+
 	return (
-		<>
-			<div className="space-y-8">
-				{categories.map(category => (
-					<div key={category} className="space-y-4">
-						{/* Category Header */}
-						<div className="flex items-center gap-4">
-							<h3 className="text-sm font-medium tracking-wider text-blue-400 uppercase">
-								{category}
-							</h3>
-							<div className="h-px flex-1 bg-gradient-to-r from-blue-500/20 to-transparent" />
-						</div>
+		<div className="relative grid grid-cols-1 divide-x divide-dashed divide-neutral-700/80 lg:grid-cols-3">
+			{categories.map(category => (
+				<article
+					key={category}
+					className="group relative flex flex-col bg-neutral-950 transition-colors hover:bg-neutral-950/95">
+					<header className="p-6">
+						<h3 className="text-2xl text-neutral-400">
+							{category}
+						</h3>
+					</header>
 
-						{/* Items Grid */}
-						<div className="grid gap-3">
-							{setup
-								.filter(item => item.category === category)
-								.map(item => (
-									<motion.button
-										key={item.name}
-										onClick={() => setSelectedItem(item)}
-										className="group flex items-center justify-between rounded-lg border border-gray-800/50 bg-gray-900/30 p-4 text-left transition-all hover:border-blue-500/30 hover:bg-gray-800/50">
-										<div className="flex-1 space-y-1 pr-6">
-											<div className="flex items-center gap-3">
-												<h4 className="font-medium text-gray-200 group-hover:text-white">
-													{item.name}
-												</h4>
-												{item.price && (
-													<span className="rounded-full bg-blue-500/10 px-2 py-0.5 text-xs font-medium text-blue-400">
-														{item.price}
-													</span>
-												)}
-											</div>
-											{item.description && (
-												<p className="line-clamp-1 text-sm text-gray-500">
-													{item.description}
-												</p>
-											)}
-										</div>
-										<ChevronRight className="h-4 w-4 text-gray-600 transition-colors group-hover:text-blue-400" />
-									</motion.button>
-								))}
-						</div>
-					</div>
-				))}
-			</div>
+					{/* Items Stack */}
+					<ul className="mb-3.5">
+						{setup
+							.filter(item => item.category === category)
+							.map((item, index) => (
+								<motion.li
+									key={item.name}
+									initial={{ opacity: 0, x: -20 }}
+									animate={{ opacity: 1, x: 0 }}
+									transition={{ delay: index * 0.1 }}
+									onClick={() => setSelectedItem(item)}
+									className="group/item relative w-full text-left">
+									<div className="flex cursor-pointer flex-col items-baseline justify-between border-y border-dashed border-transparent px-6 py-4 transition-all duration-200 hover:border-neutral-700/50 hover:bg-neutral-900/30">
+										<span className="font-light text-neutral-300 transition-colors group-hover/item:text-neutral-200">
+											{item.name}
+										</span>
+										{item.description && (
+											<p className="mt-1 line-clamp-1 text-sm text-neutral-500 group-hover/item:text-neutral-400">
+												{item.description}
+											</p>
+										)}
+									</div>
+								</motion.li>
+							))}
+					</ul>
 
-			{/* Enhanced Modal */}
+					{/* Enhanced Background Category Display */}
+					<footer className="pointer-events-none relative right-1.5 bottom-1.5 mt-auto w-fit self-end overflow-hidden select-none">
+						<motion.div
+							initial={{ y: '100%' }}
+							animate={{ y: 0 }}
+							transition={{ delay: 0.2 }}
+							className="flex flex-col items-end">
+							<span className="text-xxs tracking-[0.5em] text-neutral-600 duration-200 group-hover:text-neutral-500">
+								{category === 'Hardware'
+									? '01:SYSTEM'
+									: category === 'Development'
+										? '02:COMMAND'
+										: '03:OUTPUT'}
+							</span>
+
+							<span
+								className={`text-5xl font-light tracking-widest text-neutral-700/80 transition-colors duration-200 ${getCategoryColorClass(category)}`}>
+								{category === 'Hardware'
+									? 'SYS'
+									: category === 'Development'
+										? 'CMD'
+										: 'OUT'}
+							</span>
+						</motion.div>
+					</footer>
+				</article>
+			))}
+
+			{/* Item Details Modal */}
 			<AnimatePresence>
 				{selectedItem && (
 					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						onClick={() => setSelectedItem(null)}
-						className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-						<motion.div
-							initial={{ scale: 0.95, opacity: 0 }}
-							animate={{ scale: 1, opacity: 1 }}
-							exit={{ scale: 0.95, opacity: 0 }}
-							onClick={e => e.stopPropagation()}
-							className="relative mx-4 w-full max-w-lg overflow-hidden rounded-xl border border-gray-800 bg-gray-900 shadow-2xl">
-							{/* Modal Header */}
-							<div className="relative border-b border-gray-800 bg-gray-900/80 px-6 py-4 backdrop-blur supports-[backdrop-filter]:bg-gray-900/50">
-								<h3 className="pr-8 font-medium text-white">
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: 20 }}
+						className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl rounded-lg border border-neutral-800 bg-neutral-900 p-6 shadow-xl backdrop-blur-sm">
+						<div className="flex justify-between gap-8">
+							<div className="flex-1 space-y-4">
+								<h3 className="text-2xl text-white">
 									{selectedItem.name}
 								</h3>
-								<button
-									onClick={() => setSelectedItem(null)}
-									className="absolute top-4 right-4 rounded-full bg-gray-800 p-1.5 text-gray-400 hover:text-white">
-									<X size={14} />
-								</button>
-							</div>
-
-							{/* Modal Content */}
-							<div className="p-6">
-								<div className="space-y-6">
-									{selectedItem.description && (
-										<p className="text-gray-400">
-											{selectedItem.description}
-										</p>
-									)}
-
-									<div className="flex flex-wrap gap-3">
-										{selectedItem.affiliateLink && (
-											<a
-												href={
-													selectedItem.affiliateLink
-												}
-												target="_blank"
-												rel="noopener noreferrer sponsored"
-												className="inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-600">
-												<ShoppingCart size={16} />
-												View on Amazon
-											</a>
-										)}
-										{selectedItem.link && (
-											<a
-												href={selectedItem.link}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="inline-flex items-center gap-2 rounded-lg border border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-gray-800">
-												<ExternalLink size={16} />
-												Learn More
-											</a>
-										)}
-									</div>
-
+								<p className="text-neutral-400">
+									{selectedItem.description}
+								</p>
+								<div className="flex gap-4">
 									{selectedItem.affiliateLink && (
-										<p className="text-xs text-gray-500">
-											* As an Amazon Associate I earn from
-											qualifying purchases
-										</p>
+										<a
+											href={selectedItem.affiliateLink}
+											className="flex items-center gap-2 text-sm text-neutral-300 hover:text-white">
+											<ShoppingCart className="h-4 w-4" />
+											Buy
+										</a>
+									)}
+									{selectedItem.link && (
+										<a
+											href={selectedItem.link}
+											className="flex items-center gap-2 text-sm text-neutral-300 hover:text-white">
+											<ExternalLink className="h-4 w-4" />
+											More Info
+										</a>
 									)}
 								</div>
 							</div>
-						</motion.div>
+							<button
+								onClick={() => setSelectedItem(null)}
+								className="text-neutral-500 hover:text-white">
+								ESC
+							</button>
+						</div>
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</>
+		</div>
 	)
 }
