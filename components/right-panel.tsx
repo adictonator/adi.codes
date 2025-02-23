@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import BlogShowcase from './blog-showcase'
 import Projects from './projects'
 import TimelineExperience from './timeline-experience'
@@ -10,6 +10,7 @@ import GitHubActivity from './github-activity'
 import AboutMe from './about-me'
 import SocialConnects from './social-connects'
 import Section from './section'
+import SkillPill from './skill-pill'
 
 export default function RightPanel({
 	onScroll,
@@ -44,6 +45,10 @@ export default function RightPanel({
 		return () => observer.disconnect()
 	}, [onScroll])
 
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(
+		null,
+	)
+
 	return (
 		<section className="relative z-20 flex h-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl">
 			<div className="flex-1 overflow-y-auto">
@@ -64,8 +69,16 @@ export default function RightPanel({
 					<TimelineExperience />
 				</Section>
 
-				<Section title="Technical skills" ariaTitle="skills">
-					<SkillsShowcase />
+				<Section
+					title="Technical skills"
+					ariaTitle="skills"
+					headerChildren={
+						<SkillPill
+							selected={selectedCategory}
+							setCategory={setSelectedCategory}
+						/>
+					}>
+					<SkillsShowcase selectedCategory={selectedCategory} />
 				</Section>
 
 				<Section title="I've been coding" ariaTitle="opensource">
