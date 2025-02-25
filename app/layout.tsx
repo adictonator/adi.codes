@@ -26,7 +26,7 @@ const clash = localFont({
 const spaceMono = Space_Mono({
 	subsets: ['latin'],
 	weight: ['400', '700'],
-	variable: '--font-source',
+	variable: '--font-space',
 })
 
 export const metadata = {
@@ -43,7 +43,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${clash.variable} ${archivo.variable} ${spaceMono.variable} bg-background font-body text-foreground h-full antialiased transition-colors duration-300`}>
+				className={`${clash.variable} ${archivo.variable} ${spaceMono.variable} bg-background text-foreground font-space h-full antialiased transition-colors duration-300`}>
 				<Providers>
 					<main className="h-screen">{children}</main>
 				</Providers>
