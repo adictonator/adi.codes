@@ -13,8 +13,7 @@ export default function SkillsShowcase({
 	)
 
 	return (
-		<div
-			className={`grid grid-cols-1 divide-x divide-dashed divide-neutral-700/80 md:grid-cols-2 lg:grid-cols-3 [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*]:border-b [&>*]:border-dashed [&>*]:border-neutral-700/80 last:[&>*]:border-r [&>*:last-child]:border-b-0`}>
+		<div className="divide-border [&>*]:border-border grid grid-cols-1 divide-x divide-dashed md:grid-cols-2 lg:grid-cols-3 [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*]:border-b [&>*]:border-dashed last:[&>*]:border-r [&>*:last-child]:border-b-0">
 			{filteredSkills.map((skill, index) => (
 				<motion.div
 					key={skill.name}
@@ -22,7 +21,7 @@ export default function SkillsShowcase({
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -20 }}
 					transition={{ delay: index * 0.1 }}
-					className="group relative grid aspect-video h-full overflow-hidden hover:bg-neutral-700/15 md:p-6">
+					className="group hover:bg-secondary relative grid aspect-video h-full overflow-hidden md:p-6">
 					<div className="flex items-start justify-between">
 						<div className="flex-1">
 							<div className="flex items-center gap-3">
@@ -63,7 +62,7 @@ export default function SkillsShowcase({
 						))}
 					</div>
 
-					<div className="mt-2 h-1 w-full self-end overflow-hidden bg-neutral-700">
+					<div className="mt-2 h-1 w-full self-end overflow-hidden">
 						<motion.div
 							initial={{ width: 0 }}
 							animate={{ width: `${skill.expertise}%` }}

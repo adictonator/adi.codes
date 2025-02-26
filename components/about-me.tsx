@@ -9,8 +9,8 @@ export default function AboutMe() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="grid grid-cols-1 divide-x divide-dashed divide-neutral-700/80 md:grid-cols-2">
-				<div className="font-source space-y-16 p-6 text-xl leading-relaxed tracking-wide text-neutral-200 md:p-8">
+				className="divide-border grid grid-cols-1 divide-x divide-dashed md:grid-cols-2">
+				<div className="font-source text-primary space-y-16 p-6 text-xl leading-relaxed tracking-wide md:p-8">
 					<h2 className="text-3xl">TL; DR</h2>
 
 					<section className="space-y-5" aria-label="Introduction">
@@ -28,7 +28,7 @@ export default function AboutMe() {
 							And of course, always experimenting with more cool{' '}
 							<a
 								href="#skills"
-								className="border-b border-dashed border-neutral-500/90 hover:border-neutral-300/70">
+								className="border-border hover:border-primary-foreground border-b border-dashed">
 								tech stuff
 							</a>{' '}
 							whenever possible.
@@ -36,8 +36,8 @@ export default function AboutMe() {
 					</section>
 				</div>
 
-				<aside className="relative flex items-center justify-center text-sm text-gray-400">
-					<div className="group relative size-[450px] border border-dashed border-neutral-600">
+				<aside className="relative flex items-center justify-center">
+					<div className="group border-border relative size-[450px] border border-dashed">
 						{/* Corner Borders */}
 						<div className="absolute -top-4 -left-4 size-4 rotate-180 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -top-4 -right-4 size-4 rotate-270 border-t border-l border-dashed border-inherit" />

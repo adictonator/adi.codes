@@ -25,7 +25,7 @@ export default function UsesShowcase() {
 			{categories.map(category => (
 				<article
 					key={category}
-					className="group relative flex flex-col bg-neutral-950 transition-colors hover:bg-neutral-950/95">
+					className="group hover:bg-secondary relative flex flex-col transition-colors">
 					<header className="p-6">
 						<h3 className="text-2xl text-neutral-400">
 							{category}
@@ -38,7 +38,7 @@ export default function UsesShowcase() {
 							.filter(item => item.category === category)
 							.map((item, index) => (
 								<motion.li
-									key={item.name}
+									key={index}
 									initial={{ opacity: 0, x: -20 }}
 									animate={{ opacity: 1, x: 0 }}
 									transition={{ delay: index * 0.1 }}

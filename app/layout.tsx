@@ -43,10 +43,8 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${clash.variable} ${archivo.variable} ${spaceMono.variable} bg-background text-foreground font-space h-full antialiased transition-colors duration-300`}>
-				<Providers>
-					<main className="h-screen">{children}</main>
-				</Providers>
+				className={`${spaceMono.variable} font-space bg-background h-full text-blue-400 antialiased`}>
+				<Providers>{children}</Providers>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
 					strategy="afterInteractive"

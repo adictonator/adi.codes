@@ -18,12 +18,12 @@ export default function Page() {
 	)
 
 	return (
-		<div className="relative flex h-screen divide-x divide-dashed divide-neutral-700/80">
+		<main className="divide-border relative flex h-screen divide-x divide-dashed">
 			<LeftPanel activeSection={activeSection} />
 			<RightPanel onScroll={handleSectionChange} />
 
 			{/* Hiding for now until I figure out the light shades I wanna use. */}
 			{/*<ThemeToggle />*/}
-		</div>
+		</main>
 	)
 }

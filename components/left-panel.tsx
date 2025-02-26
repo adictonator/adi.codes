@@ -9,7 +9,7 @@ export default function LeftPanel({
 	activeSection: string
 }) {
 	return (
-		<div className="grid size-full max-w-7xl p-4 md:p-6 dark:bg-neutral-950/85">
+		<div className="grid size-full max-w-7xl p-4 md:p-6">
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
