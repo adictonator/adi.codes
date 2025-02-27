@@ -13,8 +13,8 @@
 
 	--color-border: oklch(0.371 0 0 / 0.8);
 
-	--color-muted: hsl(60 7% 88%);
-	--color-muted-foreground: hsl(0 0% 43%);
+	--color-muted: oklch(0.708 0 0);
+	--color-muted-foreground: oklch(0.556 0 0);
 
 	--color-accent: hsl(216 91% 59%);
 	--color-accent-foreground: hsl(60 6% 96%);
