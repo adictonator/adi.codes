@@ -1,15 +1,16 @@
 'use client'
 
-import { misc, SocialPlatform, socialPlatforms } from '@/data/socials'
+import { SocialPlatform, socialPlatforms, spotifyData } from '@/data/socials'
 import { motion } from 'framer-motion'
-import DiscordServer from './social-section/discord-server'
-//import DonationInfo from './social-section/donation-info'
 import SpotifyPlaylist from './social-section/spotify-playlist'
+import DiscordInvite from './social-section/discord-invite'
+import Discord from './social-icons/discord'
+import Spotify from './social-icons/spotify'
 
 export default function SocialConnects() {
 	return (
-		<div className="grid divide-x divide-dashed divide-neutral-700/80 md:grid-cols-2">
-			<div className="divide-y divide-dashed divide-neutral-700/80">
+		<div className="divide-border grid divide-x divide-dashed md:grid-cols-2">
+			<div className="divide-border grid divide-y divide-dashed">
 				{socialPlatforms.map((platform: SocialPlatform) => (
 					<motion.a
 						key={platform.name}
@@ -18,19 +19,21 @@ export default function SocialConnects() {
 						rel="noopener noreferrer"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className={`group relative flex items-center justify-between gap-3 self-start overflow-hidden p-6 transition-all duration-500`}>
+						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-3 self-start overflow-hidden bg-gradient-to-tr p-6`}>
 						<div className="flex items-center gap-3">
-							<platform.icon className="size-6 fill-current dark:text-neutral-400" />
-							<span className="text-neutral-300">
+							<platform.icon
+								className={`text-muted size-6 fill-current duration-200 ${platform.color}`}
+							/>
+							<span className="text-primary">
 								{platform.handle || platform.name}
 							</span>
 						</div>
 						{platform.stats && platform.statLabel && (
 							<div className="flex flex-col items-end">
-								<span className="ml-2 text-xs text-neutral-500">
+								<span className="text-muted-foreground ml-2 text-xs">
 									{platform.statLabel}
 								</span>
-								<span className="text-2xl font-light text-neutral-300 tabular-nums">
+								<span className="text-primary text-2xl font-light tabular-nums">
 									~{platform.stats}
 								</span>
 							</div>
@@ -39,49 +42,45 @@ export default function SocialConnects() {
 				))}
 			</div>
 			<div className="grid divide-y divide-dashed divide-neutral-700/80">
-				{misc.map(platform => (
-					<motion.a
-						key={platform.name}
-						href={platform.url}
-						target="_blank"
-						rel="noopener noreferrer"
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						className={`group relative overflow-hidden p-6 transition-all duration-500`}>
-						<div className="mb-4 flex items-center justify-between">
-							<div className="flex items-center gap-3">
-								<platform.icon className="size-6 fill-current dark:text-neutral-400" />
-								{'handle' in platform ? (
-									<span className="text-neutral-300">
-										{platform.handle}
-									</span>
-								) : (
-									<span className="text-neutral-300">
-										{platform.name}
-									</span>
-								)}
-							</div>
-							{platform.stats && platform.statLabel && (
-								<div className="flex flex-col items-end">
-									<span className="ml-2 text-xs text-neutral-500">
-										{platform.statLabel}
-									</span>
-									<span className="text-2xl font-light text-neutral-300 tabular-nums">
-										~{platform.stats}
-									</span>
-								</div>
-							)}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					className={`group/social divide-border relative flex divide-x divide-dashed overflow-hidden transition-all duration-500`}>
+					<div className="flex flex-1 items-center justify-between p-6">
+						<div className="flex items-center gap-3">
+							<Discord
+								className={`text-muted size-6 fill-current duration-200`}
+							/>
+							<span className="text-neutral-300">Discord</span>
 						</div>
+					</div>
 
-						<div className="mt-6 space-y-4">
-							{/*{'isDonation' in platform && <DonationInfo />}*/}
+					<div className="flex-1">
+						<DiscordInvite />
+					</div>
+				</motion.div>
 
-							{'serverInfo' in platform && <DiscordServer />}
-
-							{'playlists' in platform && <SpotifyPlaylist />}
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					className={`group/social relative overflow-hidden transition-all duration-500`}>
+					<div className="flex items-center justify-between p-6">
+						<div className="flex items-center gap-3">
+							<Spotify
+								className={`text-muted size-6 fill-current duration-200 ${spotifyData.color}`}
+							/>
+							<span className="text-neutral-300">
+								{spotifyData.name}
+							</span>
 						</div>
-					</motion.a>
-				))}
+					</div>
+
+					<div className="space-y-4">
+						<SpotifyPlaylist
+							playlists={spotifyData.playlists || []}
+						/>
+					</div>
+				</motion.div>
 			</div>
 		</div>
 	)
