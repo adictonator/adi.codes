@@ -1,30 +1,39 @@
-type SetupItem = {
+export type SetupItem = {
 	name: string
 	description?: string
-	link?: string
+	image?: string
 	affiliateLink?: string
-	price?: string
 	category: 'Hardware' | 'Development' | 'Productivity'
 }
 
 export const setup: SetupItem[] = [
 	{
-		name: 'MacBook Pro 16" M1 Max',
-		description: '64GB RAM, 2TB SSD - Main development machine',
+		name: 'Mac Mini M4 2024',
+		description: '24GB RAM, 500GB SSD - Primary development machine',
 		category: 'Hardware',
-		price: '$3,499',
+		image: '/assets/images/me.png',
 		affiliateLink: 'https://amazon.com/...',
 	},
 	{
-		name: 'Dell U2720Q',
-		description: '27" 4K USB-C Monitor',
+		name: 'MacBook Pro 16" 2019 Intel',
+		description: '64GB RAM, 2TB SSD - Secondary development machine',
 		category: 'Hardware',
-		link: 'https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-monitor-u2720q/apd/210-avjv/monitors-monitor-accessories',
+		image: '/assets/images/me.png',
+		affiliateLink: 'https://amazon.com/...',
+	},
+	{
+		name: 'Acer XV2720',
+		description: '27" 2K Monitor',
+		category: 'Hardware',
+		affiliateLink:
+			'https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-monitor-u2720q/apd/210-avjv/monitors-monitor-accessories',
 	},
 	{
 		name: 'Keychron K3',
 		description: 'Low Profile Mechanical Keyboard - Brown switches',
 		category: 'Hardware',
+		affiliateLink:
+			'https://www.keychron.com/products/keychron-k3-wireless-mechanical-keyboard',
 	},
 	{
 		name: 'Keychron K3',
@@ -50,7 +59,6 @@ export const setup: SetupItem[] = [
 		name: 'Fig',
 		description: 'Terminal Enhancement',
 		category: 'Development',
-		link: 'https://fig.io',
 	},
 	{
 		name: 'Figma',
@@ -58,10 +66,9 @@ export const setup: SetupItem[] = [
 		category: 'Productivity',
 	},
 	{
-		name: 'Arc Browser',
+		name: 'Google Chrome',
 		description: 'Primary Browser',
 		category: 'Productivity',
-		link: 'https://arc.net',
 	},
 	{
 		name: 'Raycast',
