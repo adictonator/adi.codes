@@ -37,14 +37,13 @@ export default function AboutMe() {
 				</div>
 
 				<aside className="relative flex items-center justify-center">
-					<div className="group border-border relative size-[450px] border border-dashed">
+					<div className="group border-border relative border border-dashed md:size-[450px]">
 						{/* Corner Borders */}
 						<div className="absolute -top-4 -left-4 size-4 rotate-180 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -top-4 -right-4 size-4 rotate-270 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -right-4 -bottom-4 size-4 rotate-270 border-t border-r border-dashed border-inherit" />
 						<div className="absolute -bottom-4 -left-4 size-4 rotate-180 border-b border-l border-dashed border-inherit" />
 
-						{/* Main Image Container */}
 						<div className="relative -z-[1] size-full overflow-hidden">
 							<Image
 								src={'/assets/images/me.png'}

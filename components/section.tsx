@@ -1,15 +1,16 @@
+import { ReactNode } from 'react'
 import StickyTitle from './sticky-title'
 
 export default function Section({
 	title,
 	ariaTitle,
-	headerChildren,
 	children,
+	headerChildren,
 }: {
 	title: string
 	ariaTitle: string
-	headerChildren?: React.ReactNode
-	children: React.ReactNode
+	children: ReactNode
+	headerChildren?: ReactNode
 }) {
 	return (
 		<section

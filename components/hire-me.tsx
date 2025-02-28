@@ -37,7 +37,7 @@ export default function HireMe() {
 					{services.map(service => (
 						<motion.div
 							key={service.type}
-							className="group relative z-10 md:p-6"
+							className="group relative md:p-6"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}>
 							<div className="space-y-4">
