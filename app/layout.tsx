@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import { Space_Mono } from 'next/font/google'
 import { Providers } from './providers'
 import Script from 'next/script'
+import { ToastProvider } from '@/components/ui/toast'
 
 const archivo = localFont({
 	src: [
@@ -44,7 +45,9 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${spaceMono.variable} font-space bg-background h-full text-blue-400 antialiased`}>
-				<Providers>{children}</Providers>
+				<ToastProvider>
+					<Providers>{children}</Providers>
+				</ToastProvider>
 				<Script
 					src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
 					strategy="afterInteractive"
