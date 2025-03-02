@@ -4,7 +4,7 @@ type Experience = {
 	company: string
 	companyUrl?: string
 	location: string
-	type: 'engineering' | 'management' | 'freelance'
+	type: 'engineering' | 'management' | 'freelance' | 'education'
 	summary: string
 	details: {
 		achievements: string[]
@@ -14,63 +14,36 @@ type Experience = {
 
 export const experiences: Experience[] = [
 	{
-		period: '2022 - Present',
-		role: 'Principal Software Engineer',
-		company: 'TechCorp',
-		companyUrl: 'https://techcorp.com',
+		period: '2022 - CURR',
+		role: 'Founder & CEO',
+		company: 'LazyCodeLab Pvt. Ltd.',
+		companyUrl: 'https://lazycodelab.com',
 		location: 'Remote',
 		type: 'engineering',
-		summary:
-			'Leading cloud architecture and full-stack development initiatives',
+		summary: ' Building tools to help developers be more productive',
 		details: {
 			achievements: [
-				'Architected and led development of microservices-based e-commerce platform handling $50M+ in annual transactions',
-				'Reduced cloud infrastructure costs by 45% through optimization and implementation of serverless architecture',
+				'Grew team from 2 to 10 engineers in 6 months',
+				'Launched 3 products with 100% user satisfaction',
 				'Established engineering excellence programs resulting in 60% reduction in production incidents',
-				'Led team of 8 engineers across 3 time zones, maintaining 95% on-time delivery rate',
+				'Led team of 8 engineers across 2 time zones, maintaining 95% on-time delivery rate',
 			],
 			skills: [
-				'React',
+				'Shopify',
 				'Node.js',
 				'AWS',
 				'Kubernetes',
-				'GraphQL',
-				'TypeScript',
-			],
-		},
-	},
-	{
-		period: '2020 - 2022',
-		role: 'Senior Full Stack Developer',
-		company: 'FinTech Solutions',
-		companyUrl: 'https://fintech.com',
-		location: 'San Francisco',
-		type: 'engineering',
-		summary: 'Built high-performance trading platforms',
-		details: {
-			achievements: [
-				'Developed real-time trading dashboard processing 1M+ transactions daily',
-				'Implemented WebSocket-based live data synchronization reducing latency by 80%',
-				'Created automated testing pipeline improving code coverage from 65% to 95%',
-				'Mentored 4 junior developers who were promoted to mid-level roles',
-			],
-			skills: [
-				'Vue.js',
-				'Python',
-				'PostgreSQL',
 				'Redis',
-				'Docker',
-				'Jest',
+				'Liquid',
 			],
 		},
 	},
 	{
-		period: '2019 - 2020',
-		role: 'DevOps Team Lead',
-		company: 'CloudScale',
-		companyUrl: 'https://cloudscale.com',
-		location: 'Remote',
-		type: 'management',
+		period: '2019 - 2022',
+		role: 'Full Stack Developer',
+		company: 'Freelance',
+		location: 'Global',
+		type: 'freelance',
 		summary: 'Led cloud infrastructure and DevOps initiatives',
 		details: {
 			achievements: [
@@ -90,45 +63,100 @@ export const experiences: Experience[] = [
 		},
 	},
 	{
-		period: '2018 - 2019',
+		period: '2017 - 2019',
+		role: 'PHP Team Lead',
+		company: 'Sagmetic Infotech Pvt. Ltd.',
+		location: 'Punjab, India',
+		type: 'engineering',
+		summary:
+			'Led a team of 5 developers building POS system, CRM, and ERP solutions',
+		details: {
+			achievements: [
+				'Implemented WebSocket-based live data synchronization reducing latency by 80%',
+				'Led migration of monolithic architecture to microservices',
+				'Helped developing a custom CMS for a client, increasing revenue by 30%',
+				'Improved code quality and reduced technical debt by 40%',
+				'Enhanced a WordPress plugin for a client, increasing user engagement by 50%',
+				'Mentored 4 junior developers who were promoted to mid-level roles',
+			],
+			skills: [
+				'WordPress',
+				'Laravel',
+				'Next.js',
+				'PostgreSQL',
+				'Redis',
+				'Docker',
+				'Jest',
+			],
+		},
+	},
+	{
+		period: '2017 - 2018',
+		role: 'PHP Developer',
+		company: 'SitesSimply Pvt. Ltd.',
+		location: 'Punjab, India',
+		type: 'engineering',
+		summary:
+			'Handled various PHP-based projects, including WordPress and Laravel. Coordinated with clients and managed projects.',
+		details: {
+			achievements: [
+				'Worked on 5+ projects and learned about WordPress and Laravel',
+				'Learned about project management and client communication',
+				'Got to know about the importance of teamwork and collaboration',
+				'Learned how to manage time and meet deadlines',
+			],
+			skills: [
+				'Teamwork',
+				'Client Communication',
+				'Bootstrap',
+				'Swagger',
+				'Magento',
+				'OpenCart',
+			],
+		},
+	},
+	{
+		period: '2016 - 2017',
 		role: 'Full Stack Developer',
 		company: 'Freelance',
 		location: 'Global',
 		type: 'freelance',
-		summary: 'Developed solutions for international clients',
+		summary:
+			'Continued freelancing right off the college and tried to do it full-time over Fiverr and Upwork.',
 		details: {
 			achievements: [
-				'Built e-commerce platforms for 5 major retail clients',
-				'Developed custom CMS solution for content publishers',
-				'Created automated inventory management system',
-				'Integrated payment solutions processing $2M+ in transactions',
+				'Worked on 10+ projects and built a few long-term relationships',
+				'Learned about freelancing and how to deal with clients',
+				'Got to know about the importance of communication and time management',
+				'Learned how to manage finances and taxes',
 			],
-			skills: ['React', 'Laravel', 'MySQL', 'AWS', 'Stripe API', 'Redis'],
+			skills: [
+				'jQuery',
+				'JavScript',
+				'PHP',
+				'WordPress',
+				'React',
+				'Laravel',
+				'MySQL',
+			],
 		},
 	},
 	{
-		period: '2012 - 2014',
+		period: '2012 - 2016',
 		role: 'Graduated with Bachelor of Engineering in Civil Engineering',
 		company: 'Chandigarh University',
-		companyUrl: 'https://webtech.com',
-		location: 'India',
-		type: 'engineering',
+		location: 'Punjab, India',
+		type: 'education',
 		summary:
-			"I mean, I did study engineering at some point. So there's that. 🤷‍♂️",
+			"I mean, I did study engineering at some point. So there's that.",
 		details: {
 			achievements: [
 				'Started freelancing during my second year',
 				'Studied a lot of math and physics',
-				'Learned how to build bridges and stuff',
-				'Had a lot of fun in college',
+				'Learned how to build roads and stuff',
+				'Really miss my hostel life sometimes',
 			],
 			skills: ['Math', 'Physics', 'AutoCAD', 'STAAD Pro', 'Surveying'],
 		},
 	},
 ]
-
-export const icons = {
-	engineering: 'Code',
-	management: 'Briefcase',
-	freelance: 'Globe',
-} as const
