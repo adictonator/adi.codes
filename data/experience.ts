@@ -20,13 +20,15 @@ export const experiences: Experience[] = [
 		companyUrl: 'https://lazycodelab.com',
 		location: 'Remote',
 		type: 'engineering',
-		summary: ' Building tools to help developers be more productive',
+		summary:
+			'Helping Shopify merchants with custom apps and themes while building cool products',
 		details: {
 			achievements: [
-				'Grew team from 2 to 10 engineers in 6 months',
-				'Launched 3 products with 100% user satisfaction',
-				'Established engineering excellence programs resulting in 60% reduction in production incidents',
-				'Led team of 8 engineers across 2 time zones, maintaining 95% on-time delivery rate',
+				'Helped 10+ merchants with custom Shopify apps and themes',
+				'Grew team from 2 to 6 engineers in 5 months',
+				'Launched 2 products with 30+ paying customers',
+				'Increased revenue by 200% in 6 months',
+				'Established a remote-first culture with flexible work hours',
 			],
 			skills: [
 				'Shopify',
