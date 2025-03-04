@@ -1,3 +1,6 @@
+export default function BlogPost() {
+	return <h2>Dummy</h2>
+}
 //'use client'
 
 //import { motion } from 'framer-motion'
