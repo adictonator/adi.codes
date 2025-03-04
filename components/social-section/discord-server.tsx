@@ -103,11 +103,7 @@ export default function DiscordServer() {
 					<p className="mb-4 text-neutral-400">
 						Connect with our community on Discord
 					</p>
-					<DiscordInvite
-						inviteCode={DISCORD_INVITE_CODE}
-						serverName="Developer Community"
-						description="Join our Discord server to connect with other developers, ask questions, share your projects, and collaborate on exciting ideas."
-					/>
+					<DiscordInvite />
 				</div>
 			</div>
 		)
@@ -139,11 +135,7 @@ export default function DiscordServer() {
 					</div>
 				))}
 			</div>
-			<DiscordInvite
-				inviteCode={DISCORD_INVITE_CODE}
-				serverName={serverStats.name}
-				description="Join our vibrant community of developers to share ideas, get feedback, and collaborate on projects. We discuss coding, design, career tips, and more."
-			/>
+			<DiscordInvite />
 		</div>
 	)
 }

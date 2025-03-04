@@ -1,6 +1,13 @@
 import { ArrowUpRight } from 'lucide-react'
 
-export default function BlogMeta({ metaData }) {
+export default function BlogMeta({
+	metaData,
+}: {
+	metaData: {
+		date: string
+		readTime: string
+	}
+}) {
 	return (
 		<div className="mt-auto border-t border-dashed border-neutral-800/50 pt-4 font-mono text-xs text-neutral-500">
 			<div className="flex items-center justify-between">

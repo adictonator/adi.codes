@@ -1,4 +1,6 @@
-export default function TagList({ tags }) {
+import { motion } from 'framer-motion'
+
+export default function TagList({ tags }: { tags: string[] }) {
 	return (
 		<div className="flex flex-wrap gap-3">
 			{tags.map((tag, i) => (

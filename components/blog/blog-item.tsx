@@ -11,7 +11,21 @@ import {
 	Code,
 } from 'lucide-react'
 
-export default function BlogItem({ blog }) {
+export default function BlogItem({
+	blog,
+}: {
+	blog: {
+		title: string
+		snippet: string
+		date: string
+		readTime: string
+		excerpt?: {
+			filename?: string
+			language: string
+			code: string
+		}
+	}
+}) {
 	const renderCodeWithLineNumbers = (code: string) => {
 		const lines = code.split('\n')
 		return (

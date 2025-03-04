@@ -144,18 +144,19 @@ export default function BlogShowcase() {
 					className="scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-700 flex overflow-x-auto"
 					style={{ scrollbarWidth: 'thin' }} // Firefox support
 				>
-					{featuredBlogs.map((blog, index) => (
-						<motion.div
-							key={blog.title}
-							initial={{ opacity: 0, x: 20 }}
-							animate={{ opacity: 1, x: 0 }}
-							transition={{ delay: index * 0.1 }}
-							className="min-w-full shrink-0 border-r border-dashed border-neutral-800 last:border-r-0 sm:min-w-[80%] md:min-w-[60%] lg:min-w-[500px]">
-							<Link href={blog.link} className="block h-full">
-								<BlogItem blog={blog} />
-							</Link>
-						</motion.div>
-					))}
+					{featuredBlogs.length > 0 &&
+						featuredBlogs.map((blog, index) => (
+							<motion.div
+								key={blog.title}
+								initial={{ opacity: 0, x: 20 }}
+								animate={{ opacity: 1, x: 0 }}
+								transition={{ delay: index * 0.1 }}
+								className="min-w-full shrink-0 border-r border-dashed border-neutral-800 last:border-r-0 sm:min-w-[80%] md:min-w-[60%] lg:min-w-[500px]">
+								<Link href={blog.link} className="block h-full">
+									<BlogItem blog={blog} />
+								</Link>
+							</motion.div>
+						))}
 
 					{/* Peek element to indicate more content */}
 					{isScrollable && scrollPosition < maxScroll - 10 && (

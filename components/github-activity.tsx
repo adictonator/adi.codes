@@ -522,12 +522,16 @@ export default function GitHubActivity() {
 											value: stats?.issuesOpened,
 											icon: MessageCircle,
 											color: 'amber',
-											detail: `${stats?.issuesClosed} closed (${Math.round(
-												(stats?.issuesClosed /
-													(stats?.issuesOpened ||
-														1)) *
-													100,
-											)}%)`,
+											detail: `${stats?.issuesClosed} closed (${
+												stats
+													? Math.round(
+															(stats?.issuesClosed /
+																(stats?.issuesOpened ||
+																	1)) *
+																100,
+														)
+													: 0
+											}%)`,
 										},
 										{
 											label: 'Stars Received',

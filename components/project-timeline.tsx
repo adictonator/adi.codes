@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { Project, ProjectTimelineEvent } from '@/data/projects'
 import { useState } from 'react'
+import { format } from 'util'
 
 export default function ProjectTimeline() {
 	const [activeTimeline, setActiveTimeline] = useState<

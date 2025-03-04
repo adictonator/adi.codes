@@ -48,7 +48,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 						</div>
 
 						{/* Preview Content */}
-						{project.preview.video ? (
+						{/*{project.preview.video ? (
 							<video
 								src={project.preview.video}
 								autoPlay
@@ -64,7 +64,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 								alt={project.title}
 								className="w-full"
 							/>
-						)}
+						)}*/}
 
 						{/* Preview Footer */}
 						<div className="border-t border-dashed border-neutral-800 p-4">
