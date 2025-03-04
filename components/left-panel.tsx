@@ -9,18 +9,18 @@ export default function LeftPanel({
 	activeSection: string
 }) {
 	return (
-		<div className="grid size-full max-w-7xl p-4 md:p-6">
+		<div className="relative grid size-full p-4 md:max-w-7xl md:p-6">
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				transition={{ duration: 0.5 }}
 				className="relative self-end">
-				{activeSection === 'about' && (
+				{activeSection === 'about' ? (
 					<h1 className="animate-gradient from-primary via-accent to-primary font-source flex flex-col bg-gradient-to-r bg-clip-text text-transparent">
 						<small className="md:pl-10 md:text-7xl">Hey! I'm</small>
 						<>
 							<span
-								className="lg:text-14xl cursor-e-resize text-4xl font-bold sm:text-5xl md:text-6xl lg:leading-64"
+								className="lg:text-14xl cursor-e-resize text-4xl font-bold sm:text-5xl md:text-6xl lg:leading-72"
 								title="Go ahead, click me!"
 								onClick={() => {
 									const fullName = ' Bhaskar Sharma'
@@ -80,27 +80,30 @@ export default function LeftPanel({
 							</span>
 						</>
 					</h1>
-				)}
-
-				<AnimatePresence mode="wait">
-					{sectionContent[activeSection] && (
+				) : (
+					<AnimatePresence mode="wait">
 						<motion.div
 							key={activeSection}
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: -20 }}
-							className="absolute bottom-20 space-y-4">
+							className="space-y-4">
 							<h2 className="animate-gradient from-primary via-accent to-primary font-source flex flex-col bg-gradient-to-r bg-clip-text text-transparent">
-								<small className="md:pl-10 md:text-5xl">
-									{sectionContent[activeSection]?.subheading}
-								</small>
-								<span className="lg:text-12xl cursor-e-resize text-4xl font-bold sm:text-5xl md:text-6xl lg:leading-64">
-									{sectionContent[activeSection].title}
+								{sectionContent[activeSection]?.subheading && (
+									<small className="md:pl-10 md:text-5xl">
+										{
+											sectionContent[activeSection]
+												.subheading
+										}
+									</small>
+								)}
+								<span className="lg:text-12xl text-4xl font-bold sm:text-5xl md:text-6xl lg:leading-64">
+									{sectionContent[activeSection]?.title}
 								</span>
 							</h2>
-							<div className="space-y-2">
-								{sectionContent[activeSection]?.items &&
-									sectionContent[activeSection]?.items.map(
+							{sectionContent[activeSection]?.items && (
+								<div className="space-y-2">
+									{sectionContent[activeSection].items.map(
 										(item, i) => (
 											<motion.p
 												key={item}
@@ -112,10 +115,11 @@ export default function LeftPanel({
 											</motion.p>
 										),
 									)}
-							</div>
+								</div>
+							)}
 						</motion.div>
-					)}
-				</AnimatePresence>
+					</AnimatePresence>
+				)}
 			</motion.div>
 		</div>
 	)
