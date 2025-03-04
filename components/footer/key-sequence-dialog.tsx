@@ -2,6 +2,7 @@ import { sequenceCode } from '@/data/easter-eggs'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useState, useRef } from 'react'
 import { useToast } from '../ui/toast'
+import { useDialog } from '@/hooks/use-dialog'
 
 export default function KeySequenceDialog({
 	onClose,
@@ -15,40 +16,15 @@ export default function KeySequenceDialog({
 	const dialogRef = useRef<HTMLDivElement>(null)
 	const cancelButtonRef = useRef<HTMLButtonElement>(null)
 
+	// Use our custom dialog hook
+	useDialog({
+		dialogRef,
+		initialFocusRef: cancelButtonRef,
+		onClose,
+	})
+
 	useEffect(() => {
-		const dialog = dialogRef.current
-		const focusableElements = dialog?.querySelectorAll(
-			'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-		)
-		const firstElement = focusableElements?.[0] as HTMLElement
-		const lastElement = focusableElements?.[
-			focusableElements.length - 1
-		] as HTMLElement
-
-		// Focus the dialog on mount
-		cancelButtonRef.current?.focus()
-
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				setSequenceIndex(0)
-				onClose()
-				return
-			}
-
-			if (e.key === 'Tab') {
-				if (e.shiftKey) {
-					if (document.activeElement === firstElement) {
-						e.preventDefault()
-						lastElement?.focus()
-					}
-				} else {
-					if (document.activeElement === lastElement) {
-						e.preventDefault()
-						firstElement?.focus()
-					}
-				}
-			}
-
 			if (e.code === sequenceCode[sequenceIndex]) {
 				const nextIndex = sequenceIndex + 1
 				setSequenceIndex(nextIndex)
@@ -64,15 +40,19 @@ export default function KeySequenceDialog({
 					unlockEasterEggs() // Enable other easter eggs on the page.
 					onClose()
 				}
-			} else {
-				// Wrong key, reset sequence
+			} else if (
+				e.key !== 'Tab' &&
+				e.key !== 'Escape' &&
+				e.key !== 'Shift'
+			) {
+				// Wrong key, reset sequence (ignoring tab, escape and shift keys)
 				setSequenceIndex(0)
 			}
 		}
 
 		document.addEventListener('keydown', handleKeyDown)
 		return () => document.removeEventListener('keydown', handleKeyDown)
-	}, [onClose, sequenceIndex])
+	}, [onClose, sequenceIndex, unlockEasterEggs, showToast])
 
 	return (
 		<AnimatePresence>
