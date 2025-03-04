@@ -25,44 +25,51 @@ export default function SkillsShowcase({
 					<div className="flex items-start justify-between">
 						<div className="flex-1">
 							<div className="flex items-center gap-3">
-								<h3 className="text-2xl font-normal text-white/90">
+								<h3 className="text-primary text-2xl font-normal">
 									{skill.name}
 								</h3>
 							</div>
 							<div className="mt-2 flex items-center gap-3 text-sm font-light">
-								<span className="text-white/40">
+								<span className="text-muted">
 									{skill.category}
 								</span>
-								<span className="text-white/30">&bull;</span>
-								<span className="text-white/40 duration-300 group-hover:text-neutral-100/80">
+								<span className="text-muted-foreground">
+									&bull;
+								</span>
+								<span className="text-muted group-hover:text-primary duration-300">
 									{skill.yearsOfExperience}y exp
 								</span>
-								<span className="text-white/30">&bull;</span>
-								<span className="text-white/40">
-									{skill.projectCount} projects
+								<span className="text-muted-foreground">
+									&bull;
+								</span>
+								<span className="text-muted">
+									{skill.projectCount}{' '}
+									{skill.projectCount > 1
+										? 'projects'
+										: 'project'}
 								</span>
 							</div>
 						</div>
 
 						<div className="ml-4 text-right">
-							<span className="font-mono text-3xl font-light tracking-tighter text-white/90">
+							<span className="text-primary text-3xl font-light tracking-tighter">
 								{skill.expertise}
 							</span>
-							<span className="font-light text-white/40">%</span>
+							<span className="text-muted font-light">%</span>
 						</div>
 					</div>
 
-					<div className="flex flex-wrap gap-2 self-start">
+					<div className="flex flex-wrap gap-1.5 self-start">
 						{skill.tags.map(tag => (
 							<span
 								key={tag}
-								className="rounded-full bg-white/5 px-3 py-1 text-xs font-light tracking-wider text-white/60">
+								className="bg-white/5 px-3 py-1 text-xs font-light tracking-wider text-white/60">
 								{tag}
 							</span>
 						))}
 					</div>
 
-					<div className="mt-2 h-1 w-full self-end overflow-hidden">
+					<div className="bg-muted-foreground mt-2 h-1 w-full self-end overflow-hidden">
 						<motion.div
 							initial={{ width: 0 }}
 							animate={{ width: `${skill.expertise}%` }}
@@ -70,7 +77,7 @@ export default function SkillsShowcase({
 								duration: 1,
 								ease: [0.32, 0.72, 0, 1],
 							}}
-							className="h-full bg-neutral-400 transition-[background-color] duration-300 group-hover:bg-[var(--brand-color)]"
+							className="bg-foreground h-full transition-[background-color] duration-300 group-hover:bg-[var(--brand-color)]"
 							style={
 								{
 									'--brand-color': skill.brandColor,

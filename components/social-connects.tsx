@@ -49,7 +49,7 @@ export default function SocialConnects() {
 					<div className="flex flex-1 items-center justify-between p-6">
 						<div className="flex items-center gap-3">
 							<Discord
-								className={`text-muted size-6 fill-current duration-200`}
+								className={`text-muted size-6 fill-current duration-200 group-hover/social:text-indigo-400`}
 							/>
 							<span className="text-neutral-300">Discord</span>
 						</div>
