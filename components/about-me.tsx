@@ -44,12 +44,12 @@ export default function AboutMe() {
 						<div className="absolute -right-4 -bottom-4 size-4 rotate-270 border-t border-r border-dashed border-inherit" />
 						<div className="absolute -bottom-4 -left-4 size-4 rotate-180 border-b border-l border-dashed border-inherit" />
 
-						<div className="relative -z-[1] size-full overflow-hidden">
+						<div className="relative -z-[1] size-full overflow-hidden opacity-80 transition-opacity duration-300 group-hover:opacity-100">
 							<Image
 								src={'/assets/images/me.png'}
-								alt="A photo of me"
+								alt="A photo of me in Manali, Himachal Pradesh, India"
 								fill
-								className="rounded-full object-cover"
+								className="object-cover object-center"
 							/>
 						</div>
 					</div>

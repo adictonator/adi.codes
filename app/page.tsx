@@ -30,7 +30,7 @@ export default function Home() {
 	}
 
 	return (
-		<main className="divide-border relative flex h-screen divide-x divide-dashed">
+		<main className="divide-border relative flex h-screen justify-between divide-x divide-dashed">
 			<LeftPanel activeSection={activeSection} />
 			<RightPanel onScroll={handleSectionChange} />
 

@@ -23,7 +23,7 @@ export default function UsesShowcase() {
 
 	return (
 		<>
-			<div className="divide-border grid grid-cols-1 divide-x divide-dashed lg:grid-cols-3">
+			<div className="divide-border grid w-full grid-cols-1 divide-x divide-dashed overflow-hidden lg:grid-cols-3">
 				{categories.map(category => (
 					<article
 						key={category}
