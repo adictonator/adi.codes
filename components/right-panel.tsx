@@ -43,7 +43,7 @@ export default function RightPanel({
 			},
 			{
 				threshold: 0.5,
-				rootMargin: '-50px 0px -50px 0px',
+				rootMargin: '-64px 0px -64px 0px',
 			},
 		)
 
@@ -80,7 +80,7 @@ export default function RightPanel({
 	}, [onScroll])
 
 	return (
-		<section className="bg-foreground relative z-20 flex h-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl">
+		<section className="bg-foreground relative z-20 flex size-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl">
 			<div className="flex-1 overflow-y-auto">
 				<Section title="Who? Me? Oh, okay" ariaTitle="about">
 					<AboutMe />
