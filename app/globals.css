@@ -1,18 +1,63 @@
-/* app/globals.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
-body {
-	margin: 0;
-	padding: 0;
-	background-color: black;
-	color: white;
+@theme {
+	--color-background: hsl(60 6% 96%);
+	--color-foreground: oklch(0.205 0 0 / 0.55);
+
+	--color-primary: oklch(0.922 0 0);
+	--color-primary-foreground: oklch(0.556 0 0);
+
+	--color-secondary: oklch(0.205 0 0);
+	--color-secondary-foreground: hsl(0 0% 43%);
+
+	--color-border: oklch(0.371 0 0 / 0.8);
+
+	--color-muted: oklch(0.708 0 0);
+	--color-muted-foreground: oklch(0.556 0 0);
+
+	--color-accent: hsl(216 91% 59%);
+	--color-accent-foreground: hsl(60 6% 96%);
+
+	--color-accent-hover: hsl(216 85% 53%);
+
+	--color-destructive: hsl(0 62.8% 60.2%);
+	--color-destructive-foreground: hsl(60 6% 96%);
+
+	--border: 0 0% 72%;
+
+	/* Typography */
+	--text-10px: 0.625rem;
+	--text-xxs: 0.5rem;
+	--text-10xl: 10rem;
+	--text-12xl: 12rem;
+	--text-14xl: 14rem;
+
+	--font-display: var(--font-display);
+	--font-body: var(--font-body);
+	--font-space: var(--font-space);
 }
 
-#game {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
+.dark {
+	/*--color-background: hsl(0 0% 7%);*/
+	--color-background: oklch(0.145 0 0 / 0.9);
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@layer utilities {
+	.animate-gradient {
+		background-size: 200% auto;
+		animation: gradient 8s linear infinite;
+	}
 }
