@@ -27,6 +27,7 @@
 	--border: 0 0% 72%;
 
 	/* Typography */
+	--text-10px: 0.625rem;
 	--text-xxs: 0.5rem;
 	--text-10xl: 10rem;
 	--text-12xl: 12rem;
