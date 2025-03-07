@@ -13,10 +13,12 @@ export default function RandomThought() {
 
 	return (
 		<div className="space-y-2">
-			<h3 className="text-sm text-neutral-400">
+			<h3 className="text-xs text-neutral-400 md:text-sm">
 				Oh hey, a random thought for you:
 			</h3>
-			<p className="text-neutral-500">{sassyComment}</p>
+			<p className="text-xs text-neutral-500 md:text-sm">
+				{sassyComment}
+			</p>
 		</div>
 	)
 }

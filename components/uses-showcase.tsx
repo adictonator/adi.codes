@@ -23,12 +23,12 @@ export default function UsesShowcase() {
 
 	return (
 		<>
-			<div className="divide-border grid w-full grid-cols-1 divide-x divide-dashed overflow-hidden lg:grid-cols-3">
+			<div className="divide-border grid w-full grid-cols-1 divide-dashed overflow-hidden max-md:divide-y md:divide-x lg:grid-cols-3">
 				{categories.map(category => (
 					<article
 						key={category}
 						className="group relative flex flex-col transition-colors">
-						<header className="p-6">
+						<header className="p-4 md:p-6">
 							<h3 className="text-muted text-xl">{category}</h3>
 						</header>
 
@@ -45,14 +45,14 @@ export default function UsesShowcase() {
 											onClick: () =>
 												setSelectedItem(item),
 										})}
-										className="group/item relative w-full text-left">
+										className="group/item relative w-full">
 										<div
-											className={`hover:bg-secondary hover:border-border flex flex-col items-baseline justify-between border-y border-dashed border-transparent px-6 py-4 transition-all duration-200 ${item.affiliateLink && 'cursor-pointer'}`}>
+											className={`hover:bg-secondary hover:border-border flex flex-col items-baseline justify-between border-y border-dashed border-transparent px-6 py-2.5 transition-all duration-200 md:py-4 ${item.affiliateLink && 'cursor-pointer'}`}>
 											<span className="text-primary/80 group-hover/item:text-primary font-light transition-colors">
 												{item.name}
 											</span>
 											{item.description && (
-												<p className="text-muted/50 group-hover/item:text-muted mt-1 line-clamp-1 text-sm">
+												<p className="text-muted/50 group-hover/item:text-muted line-clamp-1 text-xs md:mt-1 md:text-sm">
 													{item.description}
 												</p>
 											)}

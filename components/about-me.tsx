@@ -9,9 +9,9 @@ export default function AboutMe() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="divide-border grid grid-cols-1 divide-x divide-dashed md:grid-cols-2">
-				<div className="font-source text-primary space-y-16 p-6 text-xl leading-relaxed tracking-wide md:p-8">
-					<h2 className="text-3xl">TL; DR</h2>
+				className="divide-border grid grid-cols-1 gap-y-8 divide-dashed max-md:pb-10 md:grid-cols-2 md:divide-x">
+				<div className="font-source text-primary space-y-8 p-4 text-lg leading-relaxed tracking-wide md:p-8 md:text-xl lg:space-y-16 lg:p-6">
+					<h2 className="text-2xl md:text-3xl">TL; DR</h2>
 
 					<section className="space-y-5" aria-label="Introduction">
 						<p>
@@ -37,7 +37,7 @@ export default function AboutMe() {
 				</div>
 
 				<aside className="relative flex items-center justify-center">
-					<div className="group border-border relative border border-dashed md:size-[450px]">
+					<div className="group border-border relative size-60 border border-dashed md:size-[450px]">
 						{/* Corner Borders */}
 						<div className="absolute -top-4 -left-4 size-4 rotate-180 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -top-4 -right-4 size-4 rotate-270 border-t border-l border-dashed border-inherit" />

@@ -10,7 +10,7 @@ export default function SkillPill({
 	setCategory: (category: string | null) => void
 }) {
 	return (
-		<div className="flex gap-1">
+		<div className="hidden gap-1 md:flex">
 			{Array.from(new Set(skills.map(s => s.category))).map(category => (
 				<motion.button
 					key={category}

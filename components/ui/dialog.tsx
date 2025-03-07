@@ -40,7 +40,7 @@ export function Dialog({
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-6 backdrop-blur-sm">
+					className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-6">
 					<motion.div
 						initial={{ scale: 0.98, y: 10 }}
 						animate={{ scale: 1, y: 0 }}
@@ -50,12 +50,12 @@ export function Dialog({
 							stiffness: 200,
 							damping: 25,
 						}}
-						className="relative w-full overflow-hidden border border-dashed border-neutral-800 bg-neutral-950 md:max-w-3xl">
+						className="border-border bg-background relative w-full overflow-hidden border border-dashed md:max-w-3xl">
 						{/* Modal Header */}
-						<div className="flex items-center justify-between border-b border-dashed border-neutral-800 px-4 py-3">
-							<div className="flex items-center gap-3">
+						<div className="border-border flex items-center justify-between border-b border-dashed px-4 py-3">
+							<div className="flex items-center gap-1.5 md:gap-3">
 								<Terminal className="h-4 w-4 text-emerald-500" />
-								<span className="font-mono text-sm text-neutral-400">
+								<span className="text-xs text-neutral-400 md:text-sm">
 									preview/
 									{content.category.toLowerCase()}
 								</span>
@@ -63,7 +63,7 @@ export function Dialog({
 							<button
 								ref={closeButtonRef}
 								onClick={onClose}
-								className="text-xs text-neutral-500 hover:text-neutral-300">
+								className="text-xxs text-neutral-500 hover:text-neutral-300 md:text-xs">
 								ESC to close
 							</button>
 						</div>
@@ -90,14 +90,14 @@ export function Dialog({
 						<footer className="border-t border-dashed border-neutral-800 p-4">
 							<div className="flex items-center justify-between">
 								<div>
-									<h3 className="text-lg text-neutral-200">
+									<h3 className="text-base text-neutral-200 md:text-lg">
 										{content.name}
 									</h3>
-									<p className="mt-1 text-sm text-neutral-400">
+									<p className="mt-1 text-xs text-neutral-400 md:text-sm">
 										{content.description}
 									</p>
 									{content.list && (
-										<ul className="mt-5 space-y-1 text-sm text-neutral-400">
+										<ul className="text-muted-foreground mt-5 space-y-1 text-sm">
 											{content.list.map(
 												(item: string) => (
 													<li key={item} className="">

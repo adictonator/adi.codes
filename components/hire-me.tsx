@@ -33,11 +33,11 @@ export default function HireMe() {
 	return (
 		<>
 			<div className="relative">
-				<div className="grid grid-cols-1 items-stretch divide-x divide-dashed divide-neutral-700/80 border-b border-dashed border-neutral-700/80 md:grid-cols-2">
+				<div className="divide-border border-border grid grid-cols-1 items-stretch divide-dashed border-b border-dashed md:grid-cols-2 md:divide-x">
 					{services.map(service => (
 						<motion.div
 							key={service.type}
-							className="group relative md:p-6"
+							className="group relative p-4 md:p-6"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}>
 							<div className="space-y-4">
@@ -144,7 +144,7 @@ export default function HireMe() {
 					))}
 				</div>
 
-				<div className="flex items-center justify-stretch divide-x divide-dashed divide-neutral-700/80 md:h-14 md:grid-cols-4">
+				<div className="divide-border flex items-center justify-stretch divide-x divide-dashed md:h-14 md:grid-cols-4">
 					<div className="flex h-full flex-1 flex-col items-center justify-center gap-1">
 						<span className="text-muted-foreground text-xs">
 							next available
@@ -153,7 +153,7 @@ export default function HireMe() {
 							March 2024
 						</span>
 					</div>
-					<div className="flex h-full flex-1 flex-col items-center justify-center gap-1">
+					<div className="hidden h-full flex-1 flex-col items-center justify-center gap-1 md:flex">
 						<span className="text-muted-foreground text-xs">
 							successful projects
 						</span>
@@ -169,7 +169,7 @@ export default function HireMe() {
 							GMT+5:30
 						</span>
 					</div>
-					<div className="flex flex-1 flex-col items-center justify-center gap-1">
+					<div className="hidden flex-1 flex-col items-center justify-center gap-1 md:flex">
 						<span className="text-muted-foreground text-xs">
 							location
 						</span>
@@ -179,16 +179,16 @@ export default function HireMe() {
 					</div>
 				</div>
 
-				<div className="divide-border border-border flex items-stretch justify-stretch divide-x divide-dashed border-t border-dashed md:h-16 md:grid-cols-4">
+				<div className="divide-border border-border flex items-stretch justify-stretch divide-dashed border-t border-dashed max-md:flex-col max-md:divide-y md:h-16 md:grid-cols-4 md:divide-x">
 					<button
 						onClick={() => setShowBooking(true)}
-						className="flex flex-1 cursor-pointer items-center justify-center gap-2 text-center text-xl text-neutral-300 transition-colors">
+						className="flex flex-1 cursor-pointer items-center justify-center gap-2 text-center text-xl text-neutral-300 transition-colors max-md:py-3.5">
 						<Calendar className="size-4" />
 						schedule call
 					</button>
 					<a
 						href={`mailto:hello@example.com?subject=Project Inquiry`}
-						className="flex flex-1 items-center justify-center gap-2 text-lg transition-colors">
+						className="flex flex-1 items-center justify-center gap-2 text-sm transition-colors max-md:py-2 md:text-lg">
 						prefer email?
 					</a>
 				</div>
@@ -203,7 +203,7 @@ export default function HireMe() {
 					description:
 						"Let's discuss your project requirements and explore how we can work together.",
 				}}>
-				<div className="max-h-[500px] overflow-hidden">
+				<div className="max-h-56 overflow-hidden md:max-h-[500px]">
 					<CalWidget />
 				</div>
 			</Dialog>

@@ -7,16 +7,15 @@ import SkillsShowcase from './skills-showcase'
 import UsesShowcase from './uses-showcase'
 import SocialConnects from './social-connects'
 import HireMe from './hire-me'
-//import BlogShowcase from './blog-showcase'
-//import CreativeLab from './creative-lab'
-//import GitHubActivity from './github-activity'
 import Footer from './footer'
 
-export default function RightPanel({
-	onScroll,
-}: {
+// Add scrollRef prop to the component interface
+interface RightPanelProps {
 	onScroll: (section: string) => void
-}) {
+	scrollRef?: React.RefObject<HTMLDivElement | null>
+}
+
+export default function RightPanel({ onScroll, scrollRef }: RightPanelProps) {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(
 		null,
 	)
@@ -80,8 +79,11 @@ export default function RightPanel({
 	}, [onScroll])
 
 	return (
-		<section className="bg-foreground relative z-20 flex size-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl">
-			<div className="flex-1 overflow-y-auto">
+		<section
+			className="bg-foreground relative z-20 flex size-full flex-col overflow-hidden transition-all duration-200 md:max-w-7xl"
+			id="right-panel">
+			{/* Apply the scrollRef to the scrollable container */}
+			<div ref={scrollRef} className="flex-1 overflow-y-auto">
 				<Section title="Who? Me? Oh, okay" ariaTitle="about">
 					<AboutMe />
 				</Section>
@@ -113,20 +115,20 @@ export default function RightPanel({
 				</Section>
 
 				{/*<Section title="Experimental stuff" ariaTitle="lab">
-					<CreativeLab />
-				</Section>
+          <CreativeLab />
+        </Section>
 
-				<Section title="I've been coding" ariaTitle="opensource">
-					<GitHubActivity />
-				</Section>*/}
+        <Section title="I've been coding" ariaTitle="opensource">
+          <GitHubActivity />
+        </Section>*/}
 
 				<Section title="Uses" ariaTitle="uses">
 					<UsesShowcase />
 				</Section>
 
 				{/*<Section title="Blog" ariaTitle="blog">
-					<BlogShowcase />
-				</Section>*/}
+          <BlogShowcase />
+        </Section>*/}
 
 				<Section
 					title="Got projects?"

@@ -21,7 +21,7 @@ export default function Footer() {
 					'border-border bg-background relative border-t border-dashed',
 					{
 						'pt-16': easterEggsUnlocked,
-						'py-16': !easterEggsUnlocked,
+						'py-8 md:py-16': !easterEggsUnlocked,
 					},
 				)}>
 				<div className="px-4 md:mx-auto md:max-w-7xl md:px-6">
@@ -41,7 +41,7 @@ export default function Footer() {
 							</div>
 						</div>
 
-						<div className="space-y-6">
+						<div className="hidden space-y-6 md:block">
 							<div className="flex items-center justify-end gap-2 text-right text-xs text-neutral-600">
 								<span>Made with</span>
 								<button

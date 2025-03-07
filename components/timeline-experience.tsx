@@ -6,7 +6,7 @@ import { Briefcase, ChevronRight, University } from 'lucide-react'
 
 export default function TimelineExperience() {
 	return (
-		<div className="divide-border relative grid grid-cols-2 divide-x divide-y divide-dashed">
+		<div className="divide-border relative grid divide-y divide-dashed md:grid-cols-2 md:divide-x">
 			{experiences.map((exp, index) => {
 				const [startYear, endYear] = exp.period.split(' - ')
 
@@ -14,22 +14,22 @@ export default function TimelineExperience() {
 					<article
 						key={index}
 						className="group hover:bg-secondary relative grid transition-colors">
-						<section className="flex-1 p-6 text-left md:p-8">
+						<section className="flex-1 p-4 text-left md:p-6 lg:p-8">
 							{exp.type === 'education' ? (
 								<University
-									className="stroke-border size-10"
+									className="stroke-border size-5 lg:size-10"
 									strokeWidth={1}
 								/>
 							) : (
 								<Briefcase
-									className="size-10 stroke-neutral-700/80"
+									className="size-5 stroke-neutral-700/80 lg:size-10"
 									strokeWidth={1}
 								/>
 							)}
-							<h3 className="mt-2.5 text-2xl font-medium text-neutral-300">
+							<h3 className="mt-2.5 text-xl font-medium text-neutral-300 md:text-2xl">
 								{exp.role}
 							</h3>
-							<p className="mt-2.5 flex items-center text-sm text-gray-500">
+							<p className="mt-1.5 flex items-center text-sm text-gray-500 md:mt-2.5">
 								{/*{exp.type} &bull;*/}
 								{exp.company} &bull; {exp.location}
 							</p>
@@ -51,7 +51,7 @@ export default function TimelineExperience() {
 								)}
 							</p>*/}
 
-							<p className="text-muted mt-3.5 text-lg">
+							<p className="text-muted mt-3.5 text-base md:text-lg">
 								{exp.summary}
 							</p>
 
@@ -91,43 +91,18 @@ export default function TimelineExperience() {
 										)}
 									</ul>
 								</div>
-
-								{/* Skills */}
-								{/*<div className="sm:col-span-2">
-									<h4 className="mb-3 text-xs font-medium tracking-wider text-gray-400 uppercase">
-										Technologies
-									</h4>
-									<div className="flex flex-wrap gap-1.5">
-										{exp.details.skills.map((skill, i) => (
-											<motion.span
-												key={skill}
-												initial={{
-													opacity: 0,
-													scale: 0.9,
-												}}
-												animate={{
-													opacity: 1,
-													scale: 1,
-												}}
-												transition={{
-													delay: i * 0.05,
-												}}
-												className="rounded-full bg-blue-500/5 px-2.5 py-0.5 text-xs text-blue-400">
-												{skill}
-											</motion.span>
-										))}
-									</div>
-								</div>*/}
 							</div>
 						</section>
 
-						<div className="relative right-4 bottom-0 w-full self-end overflow-hidden text-8xl font-medium tracking-wider text-amber-200/20 group-hover:text-amber-200/50">
+						<div className="relative right-4 bottom-0 w-full self-end overflow-hidden text-5xl font-medium tracking-wider text-amber-200/20 group-hover:text-amber-200/50 lg:text-8xl">
 							<div className="flex w-auto transform items-center justify-end justify-self-end whitespace-nowrap">
 								<div className="translate-x-0 text-right transition-transform duration-300 ease-out group-hover:mr-8 group-hover:-translate-x-full">
 									{startYear}
 								</div>
 								<div className="absolute flex translate-x-full transform items-center transition-transform duration-300 ease-out group-hover:-translate-x-0">
-									<span className="text-5xl">&#10035;</span>
+									<span className="text-2xl md:text-5xl">
+										&#10035;
+									</span>
 									<span>{endYear}</span>
 								</div>
 							</div>

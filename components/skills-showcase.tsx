@@ -13,7 +13,7 @@ export default function SkillsShowcase({
 	)
 
 	return (
-		<div className="divide-border [&>*]:border-border grid grid-cols-1 divide-x divide-dashed md:grid-cols-2 lg:grid-cols-3 [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*]:border-b [&>*]:border-dashed last:[&>*]:border-r [&>*:last-child]:border-b-0">
+		<div className="divide-border [&>*]:border-border grid grid-cols-2 divide-x divide-dashed lg:grid-cols-3 [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*]:border-b [&>*]:border-dashed last:[&>*]:border-r [&>*:last-child]:border-b-0">
 			{filteredSkills.map((skill, index) => (
 				<motion.div
 					key={skill.name}
@@ -21,19 +21,19 @@ export default function SkillsShowcase({
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -20 }}
 					transition={{ delay: index * 0.1 }}
-					className="group hover:bg-secondary relative grid aspect-video h-full overflow-hidden md:p-6">
-					<div className="flex items-start justify-between">
+					className="group/skill hover:bg-secondary relative grid h-full overflow-hidden px-4 py-2.5 md:aspect-video md:p-6">
+					<div className="flex items-start justify-between max-md:flex-col">
 						<div className="flex-1">
 							<div className="flex items-center gap-3">
-								<h3 className="text-primary text-2xl font-normal">
+								<h3 className="text-primary text-lg font-normal md:text-2xl">
 									{skill.name}
 								</h3>
 							</div>
-							<div className="mt-2 flex items-center gap-3 text-sm font-light">
-								<span className="text-muted">
+							<div className="mt-2 flex items-center gap-1.5 text-xs font-light md:gap-3 md:text-sm">
+								<span className="text-muted max-md:hidden">
 									{skill.category}
 								</span>
-								<span className="text-muted-foreground">
+								<span className="text-muted-foreground max-md:hidden">
 									&bull;
 								</span>
 								<span className="text-muted group-hover:text-primary duration-300">
@@ -51,15 +51,15 @@ export default function SkillsShowcase({
 							</div>
 						</div>
 
-						<div className="ml-4 text-right">
-							<span className="text-primary text-3xl font-light tracking-tighter">
+						<div className="text-right max-md:order-first md:ml-4">
+							<span className="text-primary text-base font-light tracking-tighter md:text-3xl">
 								{skill.expertise}
 							</span>
 							<span className="text-muted font-light">%</span>
 						</div>
 					</div>
 
-					<div className="flex flex-wrap gap-1.5 self-start">
+					<div className="hidden flex-wrap gap-1.5 self-start md:flex">
 						{skill.tags.map(tag => (
 							<span
 								key={tag}
@@ -77,7 +77,7 @@ export default function SkillsShowcase({
 								duration: 1,
 								ease: [0.32, 0.72, 0, 1],
 							}}
-							className="bg-foreground h-full transition-[background-color] duration-300 group-hover:bg-[var(--brand-color)]"
+							className="bg-foreground h-full transition-[background-color] duration-300 group-hover/skill:bg-[var(--brand-color)]"
 							style={
 								{
 									'--brand-color': skill.brandColor,

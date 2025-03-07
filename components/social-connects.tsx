@@ -19,7 +19,7 @@ export default function SocialConnects() {
 						rel="noopener noreferrer"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-3 self-start overflow-hidden bg-gradient-to-tr p-6`}>
+						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-3 self-start overflow-hidden bg-gradient-to-tr p-4 md:p-6`}>
 						<div className="flex items-center gap-3">
 							<platform.icon
 								className={`text-muted size-6 fill-current duration-200 ${platform.color}`}
@@ -41,12 +41,12 @@ export default function SocialConnects() {
 					</motion.a>
 				))}
 			</div>
-			<div className="grid divide-y divide-dashed divide-neutral-700/80">
+			<div className="divide-border grid divide-y divide-dashed">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					className={`group/social divide-border relative flex divide-x divide-dashed overflow-hidden transition-all duration-500`}>
-					<div className="flex flex-1 items-center justify-between p-6">
+					<div className="flex flex-1 items-center justify-between p-4 md:p-6">
 						<div className="flex items-center gap-3">
 							<Discord
 								className={`text-muted size-6 fill-current duration-200 group-hover/social:text-indigo-400`}
