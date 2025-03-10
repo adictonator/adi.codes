@@ -1,8 +1,8 @@
 import './globals.css'
 import { Space_Mono } from 'next/font/google'
 import { Providers } from './providers'
-import Script from 'next/script'
 import { ToastProvider } from '@/components/ui/toast'
+import { Analytics } from '@vercel/analytics/react'
 
 const spaceMono = Space_Mono({
 	subsets: ['latin'],
@@ -28,18 +28,7 @@ export default function RootLayout({
 				<ToastProvider>
 					<Providers>{children}</Providers>
 				</ToastProvider>
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-					strategy="afterInteractive"
-				/>
-				<Script id="google-analytics" strategy="afterInteractive">
-					{`
-						window.dataLayer = window.dataLayer || [];
-						function gtag(){dataLayer.push(arguments);}
-						gtag('js', new Date());
-						gtag('config', 'G-XXXXXXXXXX');
-					`}
-				</Script>
+				<Analytics />
 			</body>
 		</html>
 	)
