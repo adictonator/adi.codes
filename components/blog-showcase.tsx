@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Calendar, Clock, FileText } from 'lucide-react'
+import { ArrowRight, Calendar, Clock, FileText, Frown } from 'lucide-react'
 
 type PostData = {
 	slug: string
@@ -20,13 +20,13 @@ interface BlogShowcaseProps {
 export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 	const allPosts = posts.slice(0, 5)
 
-	// Empty state - no posts at all
 	if (allPosts.length === 0) {
 		return (
 			<div className="border-border bg-secondary text-muted p-12 text-center font-light">
-				<FileText className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+				<Frown className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
 				<p className="text-lg">No articles yet.</p>
 				<p className="text-muted-foreground mt-2 text-sm">
+					I must be busy with some other side-project. <br />
 					Check back soon for new content.
 				</p>
 			</div>
