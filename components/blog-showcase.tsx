@@ -2,225 +2,261 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { useRef, useEffect, useState } from 'react'
-import {
-	Book,
-	Terminal,
-	ArrowRight,
-	ChevronRight,
-	MousePointer2,
-} from 'lucide-react'
+import { ArrowRight, Calendar, Clock, FileText } from 'lucide-react'
 
-import NoBlogs from './blog/no-blogs'
-import BlogItem from './blog/blog-item'
-import { blogs } from '@/data/blogs'
+type PostData = {
+	slug: string
+	title?: string
+	date?: string
+	description?: string
+	tags?: string[]
+	[key: string]: any
+}
 
-export default function BlogShowcase() {
-	const scrollContainerRef = useRef<HTMLDivElement>(null)
-	const [scrollPosition, setScrollPosition] = useState(0)
-	const [maxScroll, setMaxScroll] = useState(0)
-	const [isScrollable, setIsScrollable] = useState(false)
+interface BlogShowcaseProps {
+	posts?: PostData[]
+}
 
-	// Get only top 3 articles (or fewer if less are available)
-	const featuredBlogs = blogs.slice(0, 3)
+export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
+	const allPosts = posts.slice(0, 5)
 
-	// Render empty state if no blog posts
-	if (blogs.length === 0) {
-		return <NoBlogs />
+	// Empty state - no posts at all
+	if (allPosts.length === 0) {
+		return (
+			<div className="border-border bg-secondary text-muted p-12 text-center font-light">
+				<FileText className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
+				<p className="text-lg">No articles yet.</p>
+				<p className="text-muted-foreground mt-2 text-sm">
+					Check back soon for new content.
+				</p>
+			</div>
+		)
 	}
 
-	// Update scroll metrics when container dimensions change
-	useEffect(() => {
-		const updateScrollMetrics = () => {
-			if (scrollContainerRef.current) {
-				const { scrollWidth, clientWidth, scrollLeft } =
-					scrollContainerRef.current
-				setMaxScroll(scrollWidth - clientWidth)
-				setScrollPosition(scrollLeft)
-				setIsScrollable(scrollWidth > clientWidth)
-			}
-		}
-
-		// Initial update
-		updateScrollMetrics()
-
-		// Update on resize
-		window.addEventListener('resize', updateScrollMetrics)
-
-		// Track scroll position
-		const scrollContainer = scrollContainerRef.current
-		const handleScroll = () => {
-			if (scrollContainer) {
-				setScrollPosition(scrollContainer.scrollLeft)
-			}
-		}
-
-		if (scrollContainer) {
-			scrollContainer.addEventListener('scroll', handleScroll)
-		}
-
-		return () => {
-			window.removeEventListener('resize', updateScrollMetrics)
-			if (scrollContainer) {
-				scrollContainer.removeEventListener('scroll', handleScroll)
-			}
-		}
-	}, [])
-
-	// Scroll to next article
-	const scrollNext = () => {
-		if (scrollContainerRef.current) {
-			const articleWidth =
-				scrollContainerRef.current.scrollWidth / featuredBlogs.length
-			scrollContainerRef.current.scrollBy({
-				left: articleWidth,
-				behavior: 'smooth',
-			})
-		}
-	}
+	// We have at least one post
+	const [featuredPost, ...otherPosts] = allPosts
 
 	return (
-		<div className="space-y-6">
-			{/* Header with Terminal style */}
-			<div className="flex items-center justify-between border-b border-dashed border-neutral-800 pb-4">
-				<div className="flex items-center gap-2">
-					<Terminal className="h-4 w-4 text-emerald-500" />
-					<h2 className="font-mono text-sm text-neutral-300">
-						recent.articles{' '}
-						<span className="text-emerald-500">
-							({featuredBlogs.length})
-						</span>
-					</h2>
-				</div>
-
-				{/* Only show scroll indicator if content is scrollable */}
-				{isScrollable && (
-					<div className="flex items-center gap-2 font-mono text-xs text-neutral-500">
+		<div className="grid md:grid-cols-2">
+			<motion.div
+				initial={{ opacity: 0, x: -20 }}
+				animate={{ opacity: 1, x: 0 }}
+				transition={{ duration: 0.4 }}
+				className="group border-border relative flex flex-col border-r border-dashed">
+				<Link
+					href={`/blog/${featuredPost.slug}`}
+					className="flex h-full flex-col">
+					{/* Header badge */}
+					<div className="border-border bg-secondary flex items-center gap-x-4 border-t-0 border-b border-dashed px-4 py-2">
 						<motion.div
-							animate={{
-								opacity: [0.4, 1, 0.4],
-								x: [0, 5, 0],
-							}}
+							className="size-1.5 rounded-full bg-emerald-500"
+							whileHover={{ scale: 1.5 }}
 							transition={{
-								duration: 2,
-								ease: 'easeInOut',
-								repeat: Infinity,
-								repeatDelay: 1,
+								type: 'spring',
+								stiffness: 400,
 							}}
-							className="flex items-center gap-1">
-							<MousePointer2 className="h-3 w-3" />
-							<span>scroll</span>
-							<ChevronRight className="h-3 w-3" />
-						</motion.div>
+						/>
 
-						<div className="h-1 w-16 rounded-full bg-neutral-800">
-							<motion.div
-								className="h-1 rounded-full bg-blue-500"
-								style={{
-									width: `${(scrollPosition / maxScroll) * 100}%`,
-									minWidth: '10%',
-								}}
-							/>
+						<span className="text-muted text-xs font-light tracking-wider uppercase">
+							Latest Article
+						</span>
+					</div>
+
+					{/* Content */}
+					<div className="hover:bg-secondary flex flex-1 flex-col justify-between p-6 transition-colors duration-300">
+						<div className="flex h-full flex-col space-y-4">
+							<h3 className="text-primary text-2xl leading-tight font-normal transition-colors duration-300 group-hover:text-[var(--brand-color)]">
+								{featuredPost.title}
+							</h3>
+
+							{featuredPost.description && (
+								<p className="text-muted line-clamp-3 grow leading-relaxed">
+									{featuredPost.description}
+								</p>
+							)}
+
+							{/* Tags */}
+							{featuredPost.tags &&
+								featuredPost.tags.length > 0 && (
+									<div className="flex flex-wrap gap-2">
+										{featuredPost.tags
+											.slice(0, 3)
+											.map(tag => (
+												<span
+													key={tag}
+													className="bg-secondary text-muted border-border border border-dashed px-2 py-1 text-xs font-light">
+													{tag}
+												</span>
+											))}
+									</div>
+								)}
+						</div>
+
+						{/* Footer metadata */}
+						<div className="text-muted border-border mt-6 flex items-center gap-3 border-t border-dashed pt-4 text-xs font-light">
+							{featuredPost.date && (
+								<span className="flex items-center gap-1.5">
+									<Calendar className="h-3.5 w-3.5" />
+									{new Date(
+										featuredPost.date,
+									).toLocaleDateString('en-US', {
+										month: 'short',
+										day: 'numeric',
+										year: 'numeric',
+									})}
+								</span>
+							)}
+							<span className="text-muted-foreground">
+								&bull;
+							</span>
+							<span className="flex items-center gap-1.5">
+								<Clock className="h-3.5 w-3.5" />
+								{featuredPost.description
+									? `${Math.ceil(featuredPost.description.split(' ').length / 200)} min read`
+									: '5 min read'}
+							</span>
+
+							<span className="text-muted group-hover:text-accent ml-auto h-4 w-4 transition-all duration-300 group-hover:translate-x-2">
+								&rarr;
+							</span>
 						</div>
 					</div>
-				)}
-			</div>
+				</Link>
+			</motion.div>
 
-			{/* Terminal-inspired container */}
-			<div className="border border-dashed border-neutral-800 bg-neutral-950">
-				{/* Terminal Tab */}
-				<div className="flex items-center gap-1.5 border-b border-neutral-800 bg-neutral-900/80 px-3 py-1.5">
-					<span className="h-2.5 w-2.5 rounded-full bg-red-500/70"></span>
-					<span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70"></span>
-					<span className="h-2.5 w-2.5 rounded-full bg-green-500/70"></span>
-					<span className="ml-3 font-mono text-xs text-neutral-500">
-						blog-recent.sh
-					</span>
-				</div>
+			<div className="grid grid-cols-1 sm:grid-cols-2">
+				{[...Array(4)].map((_, index) => {
+					const post = otherPosts[index]
+					const postIndex = index + 1
 
-				{/* Horizontal scrolling container with visible overflow */}
-				<div
-					ref={scrollContainerRef}
-					className="scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-700 flex overflow-x-auto"
-					style={{ scrollbarWidth: 'thin' }} // Firefox support
-				>
-					{featuredBlogs.length > 0 &&
-						featuredBlogs.map((blog, index) => (
+					if (post) {
+						return (
 							<motion.div
-								key={blog.title}
-								initial={{ opacity: 0, x: 20 }}
-								animate={{ opacity: 1, x: 0 }}
-								transition={{ delay: index * 0.1 }}
-								className="min-w-full shrink-0 border-r border-dashed border-neutral-800 last:border-r-0 sm:min-w-[80%] md:min-w-[60%] lg:min-w-[500px]">
-								<Link href={blog.link} className="block h-full">
-									<BlogItem blog={blog} />
+								key={post.slug}
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{ delay: 0.1 + index * 0.1 }}
+								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b lg:min-h-52">
+								<Link
+									href={`/blog/${post.slug}`}
+									className="flex h-full flex-col">
+									{/* Animated gradient overlay */}
+									<div className="absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+										<div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-color)]/5 via-transparent to-transparent" />
+									</div>
+
+									{/* Header with index and hover indicator */}
+									<div className="border-border group-hover:bg-secondary/50 flex items-center justify-between border-b border-dashed bg-transparent px-3 py-2 transition-colors duration-300">
+										<div className="flex items-center gap-2">
+											<motion.div
+												className="bg-muted-foreground/20 size-1.5 rounded-full"
+												whileHover={{ scale: 1.5 }}
+												transition={{
+													type: 'spring',
+													stiffness: 400,
+												}}
+											/>
+											<span className="text-muted text-xs font-light tracking-wider uppercase">
+												#{postIndex + 1}
+											</span>
+										</div>
+										<motion.div
+											initial={{ x: -5, opacity: 0 }}
+											animate={{ x: 0, opacity: 0 }}
+											whileHover={{
+												x: 0,
+												opacity: 1,
+											}}
+											className="text-muted-foreground">
+											<ArrowRight className="h-3 w-3" />
+										</motion.div>
+									</div>
+
+									{/* Content */}
+									<div className="flex flex-1 flex-col justify-between p-4">
+										<div className="space-y-3">
+											<h4 className="text-primary line-clamp-2 text-sm leading-tight font-normal transition-colors duration-300 group-hover:text-[var(--brand-color)]">
+												{post.title}
+											</h4>
+
+											<p className="text-muted line-clamp-2 text-xs leading-relaxed">
+												{post.description}
+											</p>
+
+											{/* Tag preview - show first tag */}
+											{post.tags &&
+												post.tags.length > 0 && (
+													<div className="flex items-center gap-1">
+														<span className="bg-secondary/50 text-muted border-border inline-block border border-dashed px-1.5 py-0.5 text-[9px] font-light">
+															{post.tags[0]}
+														</span>
+														{post.tags.length >
+															1 && (
+															<span className="text-muted-foreground text-[9px]">
+																+
+																{post.tags
+																	.length - 1}
+															</span>
+														)}
+													</div>
+												)}
+										</div>
+
+										{/* Footer with date */}
+										<div className="text-muted border-border mt-3 flex items-center gap-2 border-dashed pt-3 text-[10px] font-light">
+											<Calendar className="size-3 opacity-60" />
+											{post.date &&
+												new Date(
+													post.date,
+												).toLocaleDateString('en-US', {
+													month: 'short',
+													day: '2-digit',
+												})}
+											<span className="text-muted-foreground group-hover:text-accent ml-auto transition-all duration-300 group-hover:translate-x-1">
+												&rarr;
+											</span>
+										</div>
+									</div>
 								</Link>
 							</motion.div>
-						))}
+						)
+					}
 
-					{/* Peek element to indicate more content */}
-					{isScrollable && scrollPosition < maxScroll - 10 && (
-						<div
-							className="absolute top-0 right-0 bottom-0 flex w-16 cursor-pointer items-center justify-center bg-gradient-to-r from-transparent to-neutral-950/90"
-							onClick={scrollNext}>
-							<motion.div
-								animate={{
-									x: [0, 5, 0],
-								}}
-								transition={{
-									duration: 1.5,
-									ease: 'easeInOut',
-									repeat: Infinity,
-									repeatDelay: 0.5,
-								}}>
-								<ArrowRight className="h-5 w-5 text-neutral-400" />
-							</motion.div>
-						</div>
-					)}
-				</div>
+					// Otherwise, show a placeholder that hints at "more coming"
+					return (
+						<motion.div
+							key={`placeholder-${index}`}
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.1 + index * 0.1 }}
+							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-gradient-to-br to-transparent not-last:border-r lg:min-h-52">
+							{/* Animated dots pattern */}
+							<div className="absolute inset-0 size-full opacity-20">
+								<div
+									className="h-full w-full"
+									style={{
+										backgroundImage:
+											'radial-gradient(circle, currentColor 1px, transparent 1px)',
+										backgroundSize: '20px 20px',
+									}}
+								/>
+							</div>
 
-				{/* Mobile prompt - only show on smaller screens */}
-				<div className="flex items-center justify-center border-t border-neutral-800 bg-neutral-900/30 py-2 text-xs text-neutral-500 md:hidden">
-					<span>swipe to see more</span>
-					<ChevronRight className="h-3 w-3" />
-				</div>
+							<div className="relative flex flex-col items-center justify-center self-center p-4 text-center backdrop-blur-[1px]">
+								<FileText className="text-muted-foreground/40 mb-3 size-8" />
+								<p className="text-muted-foreground text-xs leading-relaxed font-light">
+									More content
+									<br />
+									<span className="text-muted-foreground/60">
+										coming soon
+									</span>
+								</p>
+								<div className="bg-muted-foreground/10 mt-2 h-px w-8" />
+							</div>
+						</motion.div>
+					)
+				})}
 			</div>
-
-			{/* View all blogs button */}
-			<div className="flex justify-center pt-2">
-				<Link
-					href="/blog"
-					className="group flex items-center gap-2 border border-dashed border-neutral-800 bg-neutral-900/30 px-6 py-3 text-sm text-neutral-400 transition-colors hover:border-neutral-700 hover:bg-neutral-900/60 hover:text-neutral-300">
-					<Book className="h-4 w-4" />
-					<span>View All Articles</span>
-					<motion.div
-						className="inline-flex"
-						whileHover={{ x: 2, y: -2 }}>
-						<ArrowRight className="h-3.5 w-3.5" />
-					</motion.div>
-				</Link>
-			</div>
-
-			{/* Add CSS for custom scrollbar in Webkit browsers */}
-			<style jsx global>{`
-				/* Custom scrollbar for Webkit browsers */
-				.scrollbar-thin::-webkit-scrollbar {
-					height: 4px;
-				}
-
-				.scrollbar-thin::-webkit-scrollbar-track {
-					background: #171717;
-				}
-
-				.scrollbar-thin::-webkit-scrollbar-thumb {
-					background: #404040;
-					border-radius: 4px;
-				}
-
-				.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-					background: #525252;
-				}
-			`}</style>
 		</div>
 	)
 }
