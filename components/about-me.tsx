@@ -9,9 +9,9 @@ export default function AboutMe() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="divide-border grid grid-cols-1 gap-y-8 divide-dashed max-md:pb-10 md:grid-cols-2 md:divide-x">
-				<div className="font-source text-primary space-y-8 p-4 text-lg leading-relaxed tracking-wide md:p-8 md:text-xl lg:space-y-16 lg:p-6">
-					<h2 className="text-2xl md:text-3xl">TL; DR</h2>
+				className="divide-border grid min-w-0 grid-cols-1 gap-y-6 divide-dashed max-md:divide-x sm:gap-x-4 md:gap-x-6 lg:gap-x-8 lg:gap-y-8 xl:divide-y 2xl:grid-cols-2">
+				<div className="font-source text-primary space-y-6 p-3 text-base leading-relaxed tracking-wide sm:p-4 md:p-5 lg:space-y-16 lg:p-6 lg:text-xl">
+					<h2 className="text-xl md:text-2xl lg:text-3xl">TL; DR</h2>
 
 					<section className="space-y-5" aria-label="Introduction">
 						<p>
@@ -36,15 +36,15 @@ export default function AboutMe() {
 					</section>
 				</div>
 
-				<aside className="relative flex items-center justify-center">
-					<div className="group border-border relative size-60 border border-dashed md:size-[450px]">
+				<aside className="relative flex items-center justify-center p-3 sm:p-4 md:p-5">
+					<div className="group border-border relative size-48 border border-dashed sm:size-56 md:size-[280px] lg:size-[450px]">
 						{/* Corner Borders */}
 						<div className="absolute -top-4 -left-4 size-4 rotate-180 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -top-4 -right-4 size-4 rotate-270 border-t border-l border-dashed border-inherit" />
 						<div className="absolute -right-4 -bottom-4 size-4 rotate-270 border-t border-r border-dashed border-inherit" />
 						<div className="absolute -bottom-4 -left-4 size-4 rotate-180 border-b border-l border-dashed border-inherit" />
 
-						<div className="relative -z-[1] size-full overflow-hidden opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+						<div className="relative -z-1 size-full overflow-hidden opacity-80 transition-opacity duration-300 group-hover:opacity-100">
 							<Image
 								src={'/assets/images/me.png'}
 								alt="A photo of me in Manali, Himachal Pradesh, India"

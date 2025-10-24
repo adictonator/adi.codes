@@ -38,7 +38,7 @@ export default function LeftPanel({
 								Hey! I'm
 							</small>
 							<span
-								className="lg:text-14xl cursor-e-resize text-5xl font-bold sm:text-6xl md:text-7xl lg:leading-72"
+								className="2xl:text-14xl xl:text-10xl cursor-e-resize text-5xl font-bold sm:text-6xl md:text-7xl 2xl:leading-72"
 								title="Go ahead, click me!"
 								onClick={handleNameClick}>
 								Aditya
