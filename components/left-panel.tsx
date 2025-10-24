@@ -15,7 +15,7 @@ export default function LeftPanel({
 	})
 
 	// Faster spring animation (25% quicker)
-	const transition = {
+	const transition: any = {
 		type: 'spring',
 		stiffness: 125, // Increased from 100
 		damping: 15, // Reduced from 20
@@ -23,7 +23,7 @@ export default function LeftPanel({
 	}
 
 	return (
-		<div className="relative grid size-full p-4 md:max-w-7xl md:p-6">
+		<div className="bg-foreground relative hidden flex-col justify-end p-4 sm:p-5 md:flex md:w-1/2 md:p-5 lg:w-1/2 lg:p-6">
 			<AnimatePresence mode="wait">
 				<motion.div
 					key={activeSection}
@@ -31,14 +31,14 @@ export default function LeftPanel({
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -10 }}
 					transition={transition}
-					className="relative self-end">
+					className="relative">
 					{activeSection === 'about' ? (
-						<h1 className="animate-gradient from-primary via-accent to-primary font-source flex w-fit flex-col bg-gradient-to-r bg-clip-text text-transparent">
-							<small className="md:pl-10 md:text-7xl">
+						<h1 className="animate-gradient from-primary via-accent to-primary font-source flex w-fit flex-col bg-linear-to-r bg-clip-text text-transparent">
+							<small className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl">
 								Hey! I'm
 							</small>
 							<span
-								className="lg:text-14xl cursor-e-resize text-4xl font-bold sm:text-5xl md:text-6xl lg:leading-72"
+								className="lg:text-14xl cursor-e-resize text-5xl font-bold sm:text-6xl md:text-7xl lg:leading-72"
 								title="Go ahead, click me!"
 								onClick={handleNameClick}>
 								Aditya
@@ -47,9 +47,9 @@ export default function LeftPanel({
 						</h1>
 					) : (
 						<div className="space-y-4">
-							<h2 className="animate-gradient from-primary via-accent to-primary font-source flex flex-col bg-gradient-to-r bg-clip-text text-transparent">
+							<h2 className="animate-gradient from-primary via-accent to-primary font-source flex flex-col bg-linear-to-r bg-clip-text text-transparent">
 								{sectionContent[activeSection]?.subheading && (
-									<small className="md:pl-0 md:text-xl lg:text-4xl">
+									<small className="text-lg sm:text-2xl md:text-2xl lg:text-4xl">
 										{
 											sectionContent[activeSection]
 												.subheading
@@ -60,7 +60,7 @@ export default function LeftPanel({
 									{sectionContent[activeSection].title}
 								</span>
 							</h2>
-							<p className="text-lg text-gray-400 md:max-w-5xl md:pb-14">
+							<p className="text-base text-gray-400 sm:text-lg md:text-lg lg:max-w-5xl lg:pb-14">
 								{sectionContent[activeSection].description}
 							</p>
 						</div>
