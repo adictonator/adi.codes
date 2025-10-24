@@ -37,63 +37,59 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 	const [featuredPost, ...otherPosts] = allPosts
 
 	return (
-		<div className="grid md:grid-cols-2">
-			<motion.div
-				initial={{ opacity: 0, x: -20 }}
-				animate={{ opacity: 1, x: 0 }}
-				transition={{ duration: 0.4 }}
-				className="group border-border relative flex flex-col border-r border-dashed">
-				<Link
-					href={`/blog/${featuredPost.slug}`}
-					className="flex h-full flex-col">
-					{/* Header badge */}
-					<div className="border-border bg-secondary flex items-center gap-x-4 border-t-0 border-b border-dashed px-4 py-2">
-						<motion.div
-							className="size-1.5 rounded-full bg-emerald-500"
-							whileHover={{ scale: 1.5 }}
-							transition={{
-								type: 'spring',
-								stiffness: 400,
-							}}
-						/>
+		<section className="divide-border grid min-w-0 divide-x divide-dashed md:grid-cols-2 lg:grid-cols-2">
+			<div className="flex h-full flex-col">
+				<div className="border-border bg-secondary flex items-center gap-x-4 border-t-0 border-b border-dashed px-4 py-2">
+					<motion.div
+						className="size-1.5 rounded-full bg-emerald-500"
+						whileHover={{ scale: 1.5 }}
+						transition={{
+							type: 'spring',
+							stiffness: 400,
+						}}
+					/>
 
-						<span className="text-muted text-xs font-light tracking-wider uppercase">
-							Latest Article
-						</span>
+					<span className="text-muted text-xs font-light tracking-wider uppercase">
+						Latest Article
+					</span>
+				</div>
+
+				<motion.article
+					initial={{ opacity: 0, x: -20 }}
+					animate={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.4 }}
+					className="relative flex flex-1 flex-col justify-between gap-y-4">
+					<div className="space-y-4 p-6">
+						<Link
+							href={`/blog/${featuredPost.slug}`}
+							className="text-primary block transition-colors duration-300 hover:text-white">
+							<h2 className="text-2xl leading-tight font-normal">
+								{featuredPost.title}
+							</h2>
+						</Link>
+						{featuredPost.description && (
+							<p className="text-muted line-clamp-3 leading-relaxed">
+								{featuredPost.description}
+							</p>
+						)}
 					</div>
 
-					{/* Content */}
-					<div className="hover:bg-secondary flex flex-1 flex-col justify-between p-6 transition-colors duration-300">
-						<div className="flex h-full flex-col space-y-4">
-							<h3 className="text-primary text-2xl leading-tight font-normal transition-colors duration-300 group-hover:text-[var(--brand-color)]">
-								{featuredPost.title}
-							</h3>
+					<footer className="text-muted flex flex-1 flex-col place-content-end items-center gap-3 text-xs font-light">
+						{featuredPost.tags && featuredPost.tags.length > 0 && (
+							<div className="flex w-full flex-wrap gap-2 px-4">
+								{featuredPost.tags.slice(0, 3).map(tag => (
+									<span
+										key={tag}
+										className="bg-secondary text-muted border-border border border-dashed px-2 py-1 text-xs font-light">
+										{tag}
+									</span>
+								))}
+							</div>
+						)}
 
-							{featuredPost.description && (
-								<p className="text-muted line-clamp-3 grow leading-relaxed">
-									{featuredPost.description}
-								</p>
-							)}
-
-							{/* Tags */}
-							{featuredPost.tags &&
-								featuredPost.tags.length > 0 && (
-									<div className="flex flex-wrap gap-2">
-										{featuredPost.tags
-											.slice(0, 3)
-											.map(tag => (
-												<span
-													key={tag}
-													className="bg-secondary text-muted border-border border border-dashed px-2 py-1 text-xs font-light">
-													{tag}
-												</span>
-											))}
-									</div>
-								)}
-						</div>
-
-						{/* Footer metadata */}
-						<div className="text-muted border-border mt-6 flex items-center gap-3 border-t border-dashed pt-4 text-xs font-light">
+						<Link
+							href={`/blog/${featuredPost.slug}`}
+							className="group/article border-border hover:bg-secondary flex w-full items-center gap-3 border-t border-dashed p-4 transition-colors duration-300">
 							{featuredPost.date && (
 								<span className="flex items-center gap-1.5">
 									<Calendar className="h-3.5 w-3.5" />
@@ -116,15 +112,15 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 									: '5 min read'}
 							</span>
 
-							<span className="text-muted group-hover:text-accent ml-auto h-4 w-4 transition-all duration-300 group-hover:translate-x-2">
+							<span className="text-muted group-hover/article:text-accent ml-auto h-4 w-4 transition-all duration-300 group-hover/article:translate-x-2">
 								&rarr;
 							</span>
-						</div>
-					</div>
-				</Link>
-			</motion.div>
+						</Link>
+					</footer>
+				</motion.article>
+			</div>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2">
+			<div className="divide-border grid grid-cols-1 divide-x divide-y divide-dashed sm:grid-cols-2 md:col-span-1 [:where(&_>_:nth-child(n+3))]:border-b-0">
 				{[...Array(4)].map((_, index) => {
 					const post = otherPosts[index]
 					const postIndex = index + 1
@@ -136,16 +132,14 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.1 + index * 0.1 }}
-								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b lg:min-h-52">
+								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b lg:min-h-44">
 								<Link
 									href={`/blog/${post.slug}`}
 									className="flex h-full flex-col">
-									{/* Animated gradient overlay */}
 									<div className="absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-										<div className="absolute inset-0 bg-gradient-to-br from-[var(--brand-color)]/5 via-transparent to-transparent" />
+										<div className="absolute inset-0 bg-linear-to-br from-[--brand-color]/5 via-transparent to-transparent" />
 									</div>
 
-									{/* Header with index and hover indicator */}
 									<div className="border-border group-hover:bg-secondary/50 flex items-center justify-between border-b border-dashed bg-transparent px-3 py-2 transition-colors duration-300">
 										<div className="flex items-center gap-2">
 											<motion.div
@@ -172,10 +166,9 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 										</motion.div>
 									</div>
 
-									{/* Content */}
 									<div className="flex flex-1 flex-col justify-between p-4">
 										<div className="space-y-3">
-											<h4 className="text-primary line-clamp-2 text-sm leading-tight font-normal transition-colors duration-300 group-hover:text-[var(--brand-color)]">
+											<h4 className="text-primary line-clamp-2 text-sm leading-tight font-normal transition-colors duration-300 group-hover:text-[--brand-color]">
 												{post.title}
 											</h4>
 
@@ -183,7 +176,6 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 												{post.description}
 											</p>
 
-											{/* Tag preview - show first tag */}
 											{post.tags &&
 												post.tags.length > 0 && (
 													<div className="flex items-center gap-1">
@@ -203,7 +195,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 										</div>
 
 										{/* Footer with date */}
-										<div className="text-muted border-border mt-3 flex items-center gap-2 border-dashed pt-3 text-[10px] font-light">
+										<div className="text-muted border-border text-10px mt-3 flex items-center gap-2 border-dashed pt-3 font-light">
 											<Calendar className="size-3 opacity-60" />
 											{post.date &&
 												new Date(
@@ -229,7 +221,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 + index * 0.1 }}
-							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-gradient-to-br to-transparent not-last:border-r lg:min-h-52">
+							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-linear-to-br to-transparent not-last:border-r lg:min-h-44">
 							{/* Animated dots pattern */}
 							<div className="absolute inset-0 size-full opacity-20">
 								<div
@@ -257,6 +249,6 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 					)
 				})}
 			</div>
-		</div>
+		</section>
 	)
 }
