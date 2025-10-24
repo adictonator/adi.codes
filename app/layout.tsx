@@ -49,7 +49,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${spaceMono.variable} font-space bg-background h-full antialiased`}>
+				className={`${spaceMono.variable} font-space bg-background h-full min-w-0 antialiased`}>
 				<ToastProvider>
 					<Providers>
 						{children}
