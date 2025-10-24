@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { blogs } from '@/data/blogs'
 import { ArrowUpRight, Terminal } from 'lucide-react'
 
 export default function NoBlogs() {
@@ -57,7 +56,7 @@ export default function NoBlogs() {
 
 			return () => clearInterval(typingInterval)
 		}
-	}, [isTyping, blogs.length])
+	}, [isTyping])
 
 	const comingSoonASCII = `
    _____                _              ____
