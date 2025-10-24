@@ -1,6 +1,6 @@
 import { getPostBySlug, getAllPosts } from '@/lib/mdx'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import AnimatedBlogPost from '@/components/blog/animated-blog-post-new'
+import AnimatedBlogPost from '@/components/blog/animated-blog-post'
 import CodeBlock from '@/components/blog/code-block'
 
 // Define custom MDX components
