@@ -9,7 +9,7 @@ export default function AboutMe() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="divide-border grid min-w-0 grid-cols-1 gap-y-6 divide-dashed max-md:divide-x sm:gap-x-4 md:gap-x-6 lg:gap-x-8 lg:gap-y-8 xl:divide-y 2xl:grid-cols-2">
+				className="divide-border grid min-w-0 grid-cols-1 gap-y-6 divide-dashed sm:gap-x-4 md:gap-x-6 md:divide-x lg:gap-x-8 lg:gap-y-8 xl:divide-y 2xl:grid-cols-2">
 				<div className="font-source text-primary space-y-6 p-3 text-base leading-relaxed tracking-wide sm:p-4 md:p-5 lg:space-y-16 lg:p-6 lg:text-xl">
 					<h2 className="text-xl md:text-2xl lg:text-3xl">TL; DR</h2>
 
@@ -46,7 +46,7 @@ export default function AboutMe() {
 
 						<div className="relative -z-1 size-full overflow-hidden opacity-80 transition-opacity duration-300 group-hover:opacity-100">
 							<Image
-								src={'/assets/images/me.png'}
+								src={'/assets/images/me.jpeg'}
 								alt="A photo of me in Manali, Himachal Pradesh, India"
 								fill
 								className="object-cover object-center"
