@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="ABS favicon">
+  <!-- Simple monospace text favicon. Uses generic monospace fallback; no filters. -->
+  <rect width="64" height="64" fill="#000" />
+
+  <!-- Small prompt glyph at top-left -->
+  <text x="8" y="24" font-family="monospace" font-size="24" fill="#10b981" font-weight="700">&gt;</text>
+   <!-- Small cursor block top-right for terminal cue -->
+  <rect x="30" y="14" width="6" height="6" fill="#10b981" rx="1" />
+
+  <!-- Centered monogram using monospace font family. Kept simple as requested. -->
+  <text x="50%" y="70%" text-anchor="middle" dominant-baseline="middle"
+    font-family="Space Mono, monospace"
+    font-size="32"
+    font-weight="700"
+    fill="#10b981">
+    ABS
+  </text>
+</svg>
