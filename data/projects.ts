@@ -33,71 +33,206 @@ export interface Project {
 	timeline?: ProjectTimelineEvent[]
 	lastCommit?: string
 	importance: 'primary' | 'secondary'
+	priority: 1 | 2 | 3 | 4 | 5 // Internal sorting: 1 = highest, 5 = lowest
 }
 
 export const projects: Project[] = [
 	{
-		title: 'Particle Physics Playground',
-		category: 'Experiment',
+		title: 'Gita Essence',
+		category: 'Project',
 		description:
-			'Interactive 3D particle system with real-time physics simulation',
-		stack: ['WebGL', 'Three.js', 'React Three Fiber', 'TypeScript'],
+			'iOS app bringing timeless wisdom from the Bhagavad Gita with daily verses, meditation guides, and personalized spiritual insights',
+		stack: ['Swift', 'SwiftUI', 'CoreData', 'WidgetKit'],
 		status: 'published',
 		preview: {
-			image: '/images/particle-sim.png',
-			video: '/videos/particle-demo.mp4',
-			demo: 'https://particle.demo.com',
+			image: '/images/gita-essence.png',
 		},
 		links: {
-			live: 'https://demo.com',
-			source: 'https://github.com/user/project',
+			live: 'https://apps.apple.com/app/gita-essence',
 		},
 		metadata: {
-			stars: 142,
-			forks: 23,
-			views: 1542,
-			lastUpdated: '2024-02-15',
-			awards: ['Product Hunt #3', 'GitHub Trending'],
+			lastUpdated: '2024-10-15',
+			version: '2.1.0',
 		},
 		features: [
-			'Real-time particle collisions',
-			'Custom shader effects',
-			'60+ FPS performance',
+			'Daily verse notifications',
+			'Home screen widgets',
+			'Offline access to all verses',
+			'Audio narration support',
 		],
 		importance: 'primary',
-		timeline: [
-			{
-				date: '2024-02-15',
-				type: 'milestone',
-				title: 'v1.0.0 Release',
-				description: 'First stable release with core features',
-			},
-			{
-				date: '2024-01-20',
-				type: 'feature',
-				title: 'Added custom shader support',
-			},
-		],
-		lastCommit: '2 hours ago',
+		priority: 2,
 	},
 	{
-		title: 'CLI Tool Framework',
-		category: 'Open Source',
+		title: 'CheckMate',
+		category: 'Project',
 		description:
-			'A modern framework for building CLI applications with TypeScript',
-		stack: ['Node.js', 'TypeScript', 'Commander.js'],
-		status: 'in-progress',
-		importance: 'secondary',
+			'Real-time fact-checking Chrome extension that verifies claims as you browse, powered by AI and multiple data sources',
+		stack: ['TypeScript', 'Chrome API', 'OpenAI', 'React'],
+		status: 'published',
+		preview: {
+			image: '/images/checkmate.png',
+		},
 		links: {
-			source: 'https://github.com/user/cli-tool',
+			live: 'https://chrome.google.com/webstore/detail/checkmate',
 		},
 		metadata: {
-			stars: 89,
-			forks: 12,
-			lastUpdated: '2024-02-10',
-			version: '0.8.0',
+			lastUpdated: '2024-09-28',
+			version: '1.5.2',
 		},
-		features: ['Plugin system', 'Interactive prompts', 'Custom themes'],
+		features: [
+			'Instant fact verification',
+			'Source credibility scoring',
+			'Context-aware detection',
+			'Privacy-first design',
+		],
+		importance: 'primary',
+		priority: 3,
 	},
-	// ... more projects
+	{
+		title: 'OurStars',
+		category: 'Project',
+		description:
+			'Create personalized star maps of any moment in time. Perfect for anniversaries, birthdays, and special memories',
+		stack: ['Next.js', 'Three.js', 'TypeScript', 'Stripe', 'Vercel'],
+		status: 'published',
+		preview: {
+			image: '/images/ourstars.png',
+			demo: 'https://ourstars.co/demo',
+		},
+		links: {
+			live: 'https://ourstars.co',
+		},
+		metadata: {
+			lastUpdated: '2024-10-20',
+			version: '3.0.0',
+		},
+		features: [
+			'Custom date & location picker',
+			'High-resolution downloads',
+			'Multiple poster styles',
+			'Gift certificate support',
+		],
+		importance: 'primary',
+		priority: 5,
+	},
+	{
+		title: 'WP Snippets AI',
+		category: 'Project',
+		description:
+			'Premium WordPress plugin that generates custom code snippets using AI. Extends functionality without bloat',
+		stack: [
+			'PHP',
+			'WordPress',
+			'React',
+			'MySQL',
+			'Tailwind CSS',
+			'Shadcn UI',
+		],
+		status: 'published',
+		preview: {
+			image: '/images/wp-snippets.png',
+		},
+		links: {
+			live: 'https://wpsnippets.ai',
+		},
+		metadata: {
+			lastUpdated: '2025-10-26',
+			version: '1.3.0',
+		},
+		features: [
+			'AI-powered snippet generation',
+			'Built-in code editor',
+			'Version control & rollback',
+			'Security scanning',
+		],
+		importance: 'primary',
+		priority: 1,
+	},
+	{
+		title: 'Mudo',
+		category: 'Experiment',
+		description:
+			'Minimalist micro mood journal for iOS. Track emotional patterns with quick check-ins and beautiful data visualizations',
+		stack: ['Swift', 'SwiftUI', 'HealthKit', 'Charts'],
+		status: 'in-progress',
+		preview: {
+			image: '/images/mudo.png',
+		},
+		links: {
+			source: 'https://github.com/adictonator/mudo',
+		},
+		metadata: {
+			lastUpdated: '2024-10-22',
+			version: '0.9.0 Beta',
+		},
+		features: [
+			'< 10 second check-ins',
+			'Mood pattern insights',
+			'Export to Health app',
+			'No cloud - privacy first',
+		],
+		importance: 'primary',
+		priority: 1,
+		timeline: [
+			{
+				date: '2024-10-22',
+				type: 'update',
+				title: 'Beta testing phase',
+				description: 'Internal testing with 25 users',
+			},
+			{
+				date: '2024-09-15',
+				type: 'milestone',
+				title: 'MVP Complete',
+				description: 'Core journaling features implemented',
+			},
+		],
+	},
+	{
+		title: 'Scope Creep',
+		category: 'Experiment',
+		description:
+			"2D puzzle-platformer where every level adds a new mechanic you didn't ask for. A satirical take on project management",
+		stack: ['Godot', 'GDScript', 'Aseprite'],
+		status: 'in-progress',
+		preview: {
+			image: '/images/scope-creep.png',
+		},
+		links: {},
+		metadata: {
+			lastUpdated: '2024-10-10',
+		},
+		features: [
+			'Progressive mechanic overload',
+			'Retro pixel art style',
+			'Meta game design commentary',
+		],
+		importance: 'secondary',
+		priority: 3,
+	},
+	{
+		title: 'ShadyHumans',
+		category: 'Experiment',
+		description:
+			'Narrative-driven PC game exploring the grey areas of human morality. Currently in pre-production phase',
+		stack: ['Godot', 'GDScript', 'Blender'],
+		status: 'concept',
+		preview: {
+			image: '/images/shadyhumans.png',
+		},
+		links: {
+			live: 'https://shadyhumans.com',
+		},
+		metadata: {
+			lastUpdated: '2024-08-05',
+		},
+		features: [
+			'Branching narrative system',
+			'Moral ambiguity mechanics',
+			'Multiple endings',
+		],
+		importance: 'secondary',
+		priority: 5,
+	},
 ]
