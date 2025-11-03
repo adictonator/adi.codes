@@ -1,0 +1,37 @@
+# AI Training and Use Restrictions
+# This file declares restrictions on the use of content from this website
+# for artificial intelligence training and development purposes.
+
+# Copyright Notice
+copyright: © 2024-2025 Aditya Bhaskar Sharma. All rights reserved.
+
+# License
+license: CC BY-NC-ND 4.0 with AI use restrictions
+license-url: https://adi.codes/license
+
+# AI Training Restrictions
+ai-training: prohibited
+machine-learning: prohibited
+web-scraping-for-ai: prohibited
+dataset-inclusion: prohibited
+model-training: prohibited
+
+# Explicit Prohibition Statement
+notice: |
+  All content on this website (adi.codes) is explicitly prohibited from being used
+  for training, improving, or developing artificial intelligence models, language
+  models, machine learning systems, or any similar automated systems without
+  explicit written permission from the copyright holder.
+
+# Legal Enforcement
+enforcement: |
+  Unauthorized use of this content for AI training purposes constitutes a violation
+  of copyright and licensing terms. Violations may result in legal action including
+  DMCA takedown notices, cease and desist orders, and participation in class action
+  litigation against infringing parties.
+
+# Contact
+contact: See social media channels at https://adi.codes for permission requests
+
+# Last Updated
+last-updated: 2025-10-24

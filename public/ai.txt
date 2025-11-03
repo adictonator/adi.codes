@@ -1,0 +1,45 @@
+# AI Use Policy for adi.codes
+# This file explicitly declares that content on this website
+# is NOT available for AI training or machine learning purposes
+
+# Copyright
+Copyright © 2024-2025 Aditya Bhaskar Sharma. All rights reserved.
+
+# License
+License: CC BY-NC-ND 4.0 with additional AI use restrictions
+License URL: https://adi.codes/license
+
+# AI Training Prohibition
+AI-Training: PROHIBITED
+Machine-Learning: PROHIBITED
+Web-Scraping: PROHIBITED (when used for AI/ML training)
+Dataset-Inclusion: PROHIBITED
+Model-Training: PROHIBITED
+Content-Generation-Training: PROHIBITED
+
+# Prohibited Uses (Explicit List)
+- Training large language models (LLMs)
+- Training code generation models
+- Creating training datasets
+- Fine-tuning existing AI models
+- Developing chatbots or conversational AI
+- Creating content generation systems
+- Improving existing AI systems
+- Web scraping for AI/ML purposes
+- Any automated content extraction for AI use
+
+# Enforcement
+Unauthorized use may result in:
+- DMCA takedown notices
+- Legal action for copyright infringement
+- Cease and desist orders
+- Participation in class action litigation
+- Claims for damages and legal fees
+
+# Contact for Permissions
+For licensing inquiries or permission requests:
+Visit: https://adi.codes
+Contact through social media channels listed on the website
+
+# Last Updated
+2025-10-24
