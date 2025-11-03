@@ -1,9 +1,13 @@
 import './globals.css'
 import { Space_Mono } from 'next/font/google'
+import Script from 'next/script'
 import { Providers } from './providers'
 import { ToastProvider } from '@/components/ui/toast'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GoogleAnalyticsListener } from '@/components/analytics/google-analytics-listener'
+import { AnalyticsInteractions } from '@/components/analytics/analytics-interactions'
+import { GA_MEASUREMENT_ID, isGaEnabled } from '@/lib/ga'
 
 const spaceMono = Space_Mono({
 	subsets: ['latin'],
@@ -50,9 +54,36 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${spaceMono.variable} font-space bg-background h-full min-w-0 antialiased`}>
+				{isGaEnabled && (
+					<>
+						<Script
+							src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+							strategy="afterInteractive"
+						/>
+						<Script
+							id="ga-init"
+							strategy="afterInteractive"
+							dangerouslySetInnerHTML={{
+								__html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}', {
+	send_page_view: false,
+	anonymize_ip: true
+});`,
+							}}
+						/>
+					</>
+				)}
 				<ToastProvider>
 					<Providers>
 						{children}
+						{isGaEnabled ? (
+							<>
+								<GoogleAnalyticsListener />
+								<AnalyticsInteractions />
+							</>
+						) : null}
 						<Analytics />
 						<SpeedInsights />
 					</Providers>
