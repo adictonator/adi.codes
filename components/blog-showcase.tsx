@@ -37,7 +37,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 	const [featuredPost, ...otherPosts] = allPosts
 
 	return (
-		<section className="divide-border grid min-w-0 divide-x divide-dashed md:grid-cols-2 lg:grid-cols-2">
+		<section className="divide-border grid min-w-0 divide-x divide-dashed 2xl:grid-cols-2">
 			<div className="flex h-full flex-col">
 				<div className="border-border bg-secondary flex items-center gap-x-4 border-t-0 border-b border-dashed px-4 py-2">
 					<motion.div
@@ -59,7 +59,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.4 }}
 					className="relative flex flex-1 flex-col justify-between gap-y-4">
-					<div className="space-y-4 p-6">
+					<div className="space-y-4 p-4 xl:p-6">
 						<Link
 							href={`/blog/${featuredPost.slug}`}
 							className="text-primary block transition-colors duration-300 hover:text-white">
@@ -132,7 +132,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 								initial={{ opacity: 0, y: 20 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.1 + index * 0.1 }}
-								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b lg:min-h-44">
+								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b md:min-h-32 lg:min-h-44">
 								<Link
 									href={`/blog/${post.slug}`}
 									className="flex h-full flex-col">
@@ -166,17 +166,17 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 										</motion.div>
 									</div>
 
-									<div className="flex flex-1 flex-col justify-between p-4">
-										<div className="space-y-3">
-											<h4 className="text-primary line-clamp-2 text-sm leading-tight font-normal transition-colors duration-300 group-hover:text-[--brand-color]">
+									<div className="flex flex-1 flex-col justify-between p-2.5">
+										<div className="space-y-2.5">
+											<h3 className="text-primary line-clamp-2 text-base leading-tight font-normal transition-colors duration-300 group-hover:text-[--brand-color]">
 												{post.title}
-											</h4>
+											</h3>
 
 											<p className="text-muted line-clamp-2 text-xs leading-relaxed">
 												{post.description}
 											</p>
 
-											{post.tags &&
+											{/*{post.tags &&
 												post.tags.length > 0 && (
 													<div className="flex items-center gap-1">
 														<span className="bg-secondary/50 text-muted border-border inline-block border border-dashed px-1.5 py-0.5 text-[9px] font-light">
@@ -191,11 +191,11 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 															</span>
 														)}
 													</div>
-												)}
+												)}*/}
 										</div>
 
 										{/* Footer with date */}
-										<div className="text-muted border-border text-10px mt-3 flex items-center gap-2 border-dashed pt-3 font-light">
+										<div className="text-muted border-border text-10px mt-3 flex items-center gap-2 border-dashed pt-1.5 font-light">
 											<Calendar className="size-3 opacity-60" />
 											{post.date &&
 												new Date(
@@ -214,14 +214,13 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 						)
 					}
 
-					// Otherwise, show a placeholder that hints at "more coming"
 					return (
 						<motion.div
 							key={`placeholder-${index}`}
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 + index * 0.1 }}
-							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-linear-to-br to-transparent not-last:border-r lg:min-h-44">
+							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-linear-to-br to-transparent not-last:border-r lg:min-h-32 2xl:min-h-44">
 							{/* Animated dots pattern */}
 							<div className="absolute inset-0 size-full opacity-20">
 								<div
