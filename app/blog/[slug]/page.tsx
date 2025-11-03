@@ -3,9 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import AnimatedBlogPost from '@/components/blog/animated-blog-post'
 import CodeBlock from '@/components/blog/code-block'
 
-// Define custom MDX components
 const mdxComponents = {
-	// Custom code block rendering
 	pre: ({ children, ...props }: any) => {
 		const codeElement = children?.props
 		if (codeElement?.children && typeof codeElement.children === 'string') {
@@ -18,6 +16,29 @@ const mdxComponents = {
 		}
 		return <pre {...props}>{children}</pre>
 	},
+
+	// Map heading elements so we can apply Tailwind classes directly from MDX
+	h1: (props: any) => (
+		<h1
+			className="mt-8 mb-4 text-3xl leading-tight font-bold md:text-4xl"
+			{...props}
+		/>
+	),
+	h2: (props: any) => (
+		<h2
+			className="anchor mt-6 mb-3 text-2xl leading-tight font-semibold md:text-3xl"
+			{...props}
+		/>
+	),
+	h3: (props: any) => (
+		<h3
+			className="mt-5 mb-2 text-xl font-semibold md:text-2xl"
+			{...props}
+		/>
+	),
+	h4: (props: any) => (
+		<h4 className="mt-4 mb-2 text-lg font-medium" {...props} />
+	),
 }
 
 export async function generateStaticParams() {
@@ -37,6 +58,9 @@ export async function generateMetadata({
 	const description = frontmatter.description as string
 	const publishedTime = frontmatter.date as string
 	const tags = frontmatter.tags as string[]
+	// Ensure Open Graph images include the absolute URL to your dynamic OG endpoint
+	const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://adi.codes'
+	const ogImage = `${site}/api/og/${slug}`
 
 	return {
 		title,
@@ -44,14 +68,21 @@ export async function generateMetadata({
 		keywords: tags?.join(', '),
 		authors: [{ name: 'Aditya Bhaskar Sharma' }],
 		publisher: 'Aditya Bhaskar Sharma',
+		other: {
+			copyright: `&copy; ${new Date(publishedTime).getFullYear()} Aditya Bhaskar Sharma. All rights reserved.`,
+			license: 'CC BY-NC-ND 4.0 with AI restrictions',
+			'license-url': 'https://adi.codes/license',
+			'ai-training': 'prohibited',
+		},
 		openGraph: {
 			title,
 			description,
 			type: 'article',
 			publishedTime,
 			authors: ['Aditya Bhaskar Sharma'],
-			tags,
-			url: `/blog/${slug}`,
+			tags: frontmatter.tags as string[],
+			url: `${site}/blog/${slug}`,
+			images: [ogImage],
 		},
 		twitter: {
 			card: 'summary_large_image',
@@ -73,7 +104,6 @@ export default async function BlogPost({
 	const { slug } = await params
 	const { frontmatter, mdxContent } = await getPostBySlug(slug)
 
-	// Structured data for SEO
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@type': 'BlogPosting',
@@ -91,6 +121,16 @@ export default async function BlogPost({
 		dateModified: frontmatter.date,
 		keywords: (frontmatter.tags as string[])?.join(', '),
 		url: `/blog/${slug}`,
+		license: 'https://adi.codes/license',
+		copyrightHolder: {
+			'@type': 'Person',
+			name: 'Aditya Bhaskar Sharma',
+		},
+		copyrightYear: new Date(frontmatter.date as string).getFullYear(),
+		copyrightNotice:
+			'© Aditya Bhaskar Sharma. All rights reserved. This content may not be used for AI training without explicit written permission.',
+		conditionsOfAccess:
+			'This work is licensed under CC BY-NC-ND 4.0 with additional AI use restrictions. See https://adi.codes/license for full terms.',
 	}
 
 	return (
