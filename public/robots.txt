@@ -1,0 +1,94 @@
+# General Crawlers
+User-agent: *
+Allow: /
+Allow: /api/og/*
+
+# AI Crawlers - Explicitly Blocked for Training/Scraping
+# OpenAI
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+# Google AI
+User-agent: Google-Extended
+Disallow: /
+
+# Anthropic
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+# Meta AI
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+# Common Crawl (used for AI training)
+User-agent: CCBot
+Disallow: /
+
+# Omgili (AI training)
+User-agent: omgili
+Disallow: /
+
+User-agent: omgilibot
+Disallow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Disallow: /
+
+# Bytedance/TikTok AI
+User-agent: Bytespider
+Disallow: /
+
+# Amazon/Alexa
+User-agent: Amazonbot
+Disallow: /
+
+# Apple AI
+User-agent: Applebot-Extended
+Disallow: /
+
+# Cohere
+User-agent: cohere-ai
+Disallow: /
+
+# Diffbot (AI web scraping)
+User-agent: Diffbot
+Disallow: /
+
+# AI2 (Allen Institute for AI)
+User-agent: AI2Bot
+Disallow: /
+
+# Generic AI Crawlers
+User-agent: ai2bot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: peer-explorer
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+# Host
+Host: https://adi.codes
+
+# Sitemaps
+Sitemap: https://adi.codes/sitemap.xml
