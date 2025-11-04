@@ -8,6 +8,7 @@ import EasterEggs from './footer/easter-eggs'
 import TerminalEasterEgg from './footer/terminal-easter-egg'
 import KeySequenceDialog from './footer/key-sequence-dialog'
 import { Heart } from 'lucide-react'
+import Link from 'next/link'
 
 export default function Footer() {
 	const [easterEggsUnlocked, setEasterEggsUnlocked] = useState(false)
@@ -20,19 +21,24 @@ export default function Footer() {
 				className={cn(
 					'border-border bg-background relative border-t border-dashed',
 					{
-						'pt-16': easterEggsUnlocked,
-						'py-8 md:py-16': !easterEggsUnlocked,
+						'pt-12 md:pt-16': easterEggsUnlocked,
+						'py-6 sm:py-8 md:py-12 2xl:py-16': !easterEggsUnlocked,
 					},
 				)}>
-				<div className="px-4 md:mx-auto md:max-w-7xl md:px-6">
-					<div className="grid gap-8 md:grid-cols-2">
-						<div className="space-y-6">
+				<div className="px-3 sm:px-4 md:mx-auto md:max-w-full md:px-5 lg:px-6">
+					<div className="grid gap-6 md:grid-cols-2 lg:gap-8">
+						<div className="space-y-4 md:space-y-6">
 							<RandomThought />
 
-							<div className="text-xs text-neutral-600">
+							<div className="text-10px text-neutral-600 sm:text-xs">
 								<p className="mb-1">
 									&copy; {new Date().getFullYear()} - All
-									rights reserved and stuff
+									rights reserved and stuff.{' '}
+									<Link
+										href="/license"
+										className="text-blue-400 hover:underline">
+										License
+									</Link>
 								</p>
 								<p>
 									No cookies were harmed in the making of this
@@ -41,8 +47,8 @@ export default function Footer() {
 							</div>
 						</div>
 
-						<div className="hidden space-y-6 md:block">
-							<div className="flex items-center justify-end gap-2 text-right text-xs text-neutral-600">
+						<div className="hidden space-y-4 md:block md:space-y-6">
+							<div className="text-10px flex items-center justify-end gap-2 text-right text-neutral-600 sm:text-xs">
 								<span>Made with</span>
 								<button
 									onClick={() => setShowSequenceDialog(true)}
@@ -74,7 +80,7 @@ export default function Footer() {
 
 							<div
 								className={cn(
-									'hover:text-muted relative text-right text-[8px]',
+									'hover:text-muted text-xxs relative text-right',
 									{
 										'text-neutral-500': easterEggsUnlocked,
 										'text-neutral-800 grayscale hover:grayscale-0':
@@ -97,7 +103,7 @@ export default function Footer() {
 
 				{easterEggsUnlocked && (
 					<div
-						className="relative mt-64 hidden h-80 w-full grayscale md:block"
+						className="relative mt-40 hidden h-60 w-full grayscale md:mt-48 md:block md:h-72 lg:mt-64 lg:h-80"
 						title="WAAAAZZZZZUUUUUP!!!!!">
 						<Image
 							src="/assets/images/wazzup.gif"
