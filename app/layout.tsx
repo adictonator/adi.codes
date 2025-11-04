@@ -1,4 +1,5 @@
 import './globals.css'
+import { Suspense } from 'react'
 import { Space_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Providers } from './providers'
@@ -65,12 +66,12 @@ export default function RootLayout({
 							strategy="afterInteractive"
 							dangerouslySetInnerHTML={{
 								__html: `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA_MEASUREMENT_ID}', {
-	send_page_view: false,
-	anonymize_ip: true
-});`,
+									function gtag(){dataLayer.push(arguments);}
+									gtag('js', new Date());
+									gtag('config', '${GA_MEASUREMENT_ID}', {
+										send_page_view: false,
+										anonymize_ip: true
+									});`,
 							}}
 						/>
 					</>
@@ -79,10 +80,10 @@ gtag('config', '${GA_MEASUREMENT_ID}', {
 					<Providers>
 						{children}
 						{isGaEnabled ? (
-							<>
+							<Suspense fallback={null}>
 								<GoogleAnalyticsListener />
 								<AnalyticsInteractions />
-							</>
+							</Suspense>
 						) : null}
 						<Analytics />
 						<SpeedInsights />
