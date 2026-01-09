@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import GitHubCalendar from 'react-github-calendar'
+import { GitHubCalendar } from 'react-github-calendar'
 import {
 	GitBranch,
 	GitCommit,
@@ -183,7 +183,7 @@ export default function GitHubActivity() {
 						)}
 					</div>
 
-					<div className="grid grid-cols-2 gap-4 md:grid-cols-5">
+					<div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-5 md:gap-4">
 						{stats.topLanguages.map(
 							({ name, percentage }, index) => (
 								<motion.div
@@ -191,20 +191,20 @@ export default function GitHubActivity() {
 									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: index * 0.1 }}
-									className="border border-neutral-800 bg-neutral-900/30 p-3">
-									<div className="flex items-center gap-2">
+									className="border border-neutral-800 bg-neutral-900/30 p-2 sm:p-3 md:p-2">
+									<div className="flex items-center gap-1.5 sm:gap-2">
 										<span
-											className="h-3 w-3 rounded-full"
+											className="h-2 w-2 rounded-full sm:h-2.5 sm:w-2.5 md:h-2 md:w-2 lg:h-3 lg:w-3"
 											style={{
 												backgroundColor:
 													getLanguageColor(name),
 											}}
 										/>
-										<span className="text-sm text-neutral-300">
+										<span className="text-10px md:text-10px text-neutral-300 sm:text-xs lg:text-xs">
 											{name}
 										</span>
 									</div>
-									<div className="mt-2 font-mono text-xl text-neutral-400">
+									<div className="mt-1.5 font-mono text-sm text-neutral-400 sm:mt-2 sm:text-lg md:text-sm lg:text-lg">
 										{percentage}%
 									</div>
 								</motion.div>
@@ -214,30 +214,30 @@ export default function GitHubActivity() {
 				</div>
 
 				{/* Language metrics */}
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+				<div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-1 md:gap-3 lg:grid-cols-3 lg:gap-4">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Most productive in
 						</div>
-						<div className="font-mono text-lg text-blue-400">
+						<div className="font-mono text-base text-blue-400 sm:text-lg md:text-base lg:text-lg">
 							{stats.topLanguages[0].name}
 						</div>
 					</div>
 
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Language diversity
 						</div>
-						<div className="font-mono text-lg text-purple-400">
+						<div className="font-mono text-base text-purple-400 sm:text-lg md:text-base lg:text-lg">
 							{stats.topLanguages.length} languages
 						</div>
 					</div>
 
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Code balance
 						</div>
-						<div className="font-mono text-lg text-emerald-400">
+						<div className="font-mono text-base text-emerald-400 sm:text-lg md:text-base lg:text-lg">
 							{stats.topLanguages[0].percentage < 60
 								? 'Diversified'
 								: 'Specialized'}
@@ -252,27 +252,27 @@ export default function GitHubActivity() {
 		if (!stats) return null
 
 		return (
-			<div className="space-y-2">
+			<div className="space-y-1.5 sm:space-y-2 md:space-y-1.5 lg:space-y-2">
 				{stats.recentEvents.map((event, index) => (
 					<motion.div
 						key={index}
 						initial={{ opacity: 0, x: -10 }}
 						animate={{ opacity: 1, x: 0 }}
 						transition={{ delay: index * 0.1 }}
-						className="group flex items-start gap-3 border-l-2 border-neutral-800 bg-neutral-900/20 p-3 transition-colors hover:border-blue-500 hover:bg-neutral-900/40">
-						<div className="mt-1 rounded-md border border-neutral-800 bg-neutral-900 p-1">
+						className="group flex items-start gap-2 border-l-2 border-neutral-800 bg-neutral-900/20 p-2 transition-colors hover:border-blue-500 hover:bg-neutral-900/40 sm:gap-3 sm:p-3 md:gap-2 md:p-2 lg:gap-3 lg:p-3">
+						<div className="mt-0.5 rounded-md border border-neutral-800 bg-neutral-900 p-1 sm:mt-1 sm:p-1.5">
 							{renderEventIcon(event.type)}
 						</div>
 
 						<div className="flex-1">
-							<div className="flex items-center gap-2">
-								<span className="text-xs text-neutral-500">
+							<div className="flex flex-wrap items-center gap-1 sm:gap-2 md:gap-1 lg:gap-2">
+								<span className="text-10px text-neutral-500 sm:text-xs">
 									{event.repo}
 								</span>
-								<span className="text-xs text-neutral-600">
+								<span className="text-10px text-neutral-600 sm:text-xs">
 									•
 								</span>
-								<span className="text-xs text-neutral-500">
+								<span className="text-10px text-neutral-500 sm:text-xs">
 									{new Date(event.date).toLocaleDateString(
 										'en-US',
 										{
@@ -283,12 +283,12 @@ export default function GitHubActivity() {
 								</span>
 							</div>
 
-							<div className="mt-1 flex items-baseline gap-2">
-								<span className="text-sm text-neutral-300">
+							<div className="mt-1 flex flex-wrap items-baseline gap-1 sm:mt-1.5 sm:gap-2">
+								<span className="text-xs text-neutral-300 sm:text-sm md:text-xs lg:text-sm">
 									{event.message}
 								</span>
 								{event.sha && (
-									<span className="text-xs text-neutral-500">
+									<span className="text-10px text-neutral-500 sm:text-xs">
 										({event.sha})
 									</span>
 								)}
@@ -296,19 +296,19 @@ export default function GitHubActivity() {
 						</div>
 
 						<div className="opacity-0 transition-opacity group-hover:opacity-100">
-							<ArrowUpRight className="h-3 w-3 text-neutral-400" />
+							<ArrowUpRight className="h-3 w-3 text-neutral-400 sm:h-3.5 sm:w-3.5" />
 						</div>
 					</motion.div>
 				))}
 
-				<div className="mt-4 flex justify-center">
+				<div className="mt-3 flex justify-center sm:mt-4 md:mt-3 lg:mt-4">
 					<a
 						href={`https://github.com/${GITHUB_USERNAME}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 text-xs text-neutral-500 hover:text-neutral-300">
+						className="text-10px inline-flex items-center gap-1.5 text-neutral-500 hover:text-neutral-300 sm:gap-2 sm:text-xs">
 						<span>View all activity</span>
-						<ArrowUpRight className="h-3 w-3" />
+						<ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
 					</a>
 				</div>
 			</div>
@@ -340,11 +340,11 @@ export default function GitHubActivity() {
 		)
 
 		return (
-			<div className="space-y-6">
-				<div className="grid grid-cols-7 gap-1">
+			<div className="space-y-6 sm:space-y-8">
+				<div className="grid grid-cols-7 gap-0.5 sm:gap-1 md:gap-0.5 lg:gap-1">
 					{stats.contributionsByDay.map((day, i) => (
-						<div key={i} className="space-y-2">
-							<div className="h-20 w-full overflow-hidden rounded-sm bg-neutral-900">
+						<div key={i} className="space-y-1 sm:space-y-2">
+							<div className="h-16 w-full overflow-hidden rounded-sm bg-neutral-900 sm:h-20 md:h-16 lg:h-20">
 								<div
 									className="h-full w-full bg-blue-500/60 transition-all duration-500 hover:bg-blue-500/80"
 									style={{
@@ -353,7 +353,7 @@ export default function GitHubActivity() {
 									}}
 								/>
 							</div>
-							<div className="text-center text-xs text-neutral-500">
+							<div className="text-10px text-center text-neutral-500 sm:text-xs">
 								{day.day.substring(0, 3)}
 							</div>
 						</div>
@@ -361,12 +361,12 @@ export default function GitHubActivity() {
 				</div>
 
 				{/* Additional contribution stats */}
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+				<div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-1 md:gap-3 lg:grid-cols-3 lg:gap-4">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Most active day
 						</div>
-						<div className="font-mono text-lg text-blue-400">
+						<div className="font-mono text-base text-blue-400 sm:text-lg md:text-base lg:text-lg">
 							{
 								stats.contributionsByDay.reduce((max, day) =>
 									day.count > max.count ? day : max,
@@ -375,20 +375,20 @@ export default function GitHubActivity() {
 						</div>
 					</div>
 
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Current streak
 						</div>
-						<div className="font-mono text-lg text-emerald-400">
+						<div className="font-mono text-base text-emerald-400 sm:text-lg md:text-base lg:text-lg">
 							{stats.streakDays} days
 						</div>
 					</div>
 
-					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-						<div className="mb-2 text-xs text-neutral-500">
+					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
+						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Weekly average
 						</div>
-						<div className="font-mono text-lg text-amber-400">
+						<div className="font-mono text-base text-amber-400 sm:text-lg md:text-base lg:text-lg">
 							{Math.round(
 								stats.contributionsByDay.reduce(
 									(sum, day) => sum + day.count,
@@ -416,41 +416,41 @@ export default function GitHubActivity() {
 					<span className="h-3 w-2 animate-pulse bg-emerald-500" />
 				</div>
 
-				<div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+				<div className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-3">
 					<a
 						href={`https://github.com/${GITHUB_USERNAME}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="group flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-3 transition-all duration-300 hover:translate-y-[-2px] hover:transform-gpu hover:border-neutral-700 hover:bg-neutral-900/50">
-						<div className="flex items-center gap-3">
-							<Github className="h-5 w-5 text-neutral-500" />
-							<span className="text-sm text-neutral-300">
+						className="group flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-2 transition-all duration-300 hover:-translate-y-0.5 hover:transform-gpu hover:border-neutral-700 hover:bg-neutral-900/50 sm:p-3">
+						<div className="flex items-center gap-2 sm:gap-3">
+							<Github className="h-4 w-4 text-neutral-500 sm:h-5 sm:w-5" />
+							<span className="text-xs text-neutral-300 sm:text-sm">
 								Profile
 							</span>
 						</div>
-						<ArrowUpRight className="h-4 w-4 text-neutral-500 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-neutral-300" />
+						<ArrowUpRight className="h-3.5 w-3.5 text-neutral-500 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-neutral-300 sm:h-4 sm:w-4" />
 					</a>
 
-					<div className="flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-3">
-						<div className="flex items-center gap-3">
-							<GitFork className="h-5 w-5 text-neutral-500" />
-							<span className="text-sm text-neutral-300">
+					<div className="flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-2 sm:p-3">
+						<div className="flex items-center gap-2 sm:gap-3">
+							<GitFork className="h-4 w-4 text-neutral-500 sm:h-5 sm:w-5" />
+							<span className="text-xs text-neutral-300 sm:text-sm">
 								Repositories
 							</span>
 						</div>
-						<span className="font-mono text-emerald-400">
+						<span className="font-mono text-sm text-emerald-400 sm:text-base">
 							{stats?.repositories || '-'}
 						</span>
 					</div>
 
-					<div className="flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-3">
-						<div className="flex items-center gap-3">
-							<GitCommit className="h-5 w-5 text-neutral-500" />
-							<span className="text-sm text-neutral-300">
+					<div className="flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-2 sm:p-3">
+						<div className="flex items-center gap-2 sm:gap-3">
+							<GitCommit className="h-4 w-4 text-neutral-500 sm:h-5 sm:w-5" />
+							<span className="text-xs text-neutral-300 sm:text-sm">
 								Contributions
 							</span>
 						</div>
-						<span className="font-mono text-emerald-400">
+						<span className="font-mono text-sm text-emerald-400 sm:text-base">
 							{stats?.totalContributions.toLocaleString() || '-'}
 						</span>
 					</div>
@@ -501,7 +501,7 @@ export default function GitHubActivity() {
 						{currentView === 'overview' && (
 							<div className="space-y-8">
 								{/* Key metrics */}
-								<div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+								<div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 md:gap-4 lg:grid-cols-4 lg:gap-5">
 									{[
 										{
 											label: 'Repositories',
@@ -546,21 +546,21 @@ export default function GitHubActivity() {
 											initial={{ opacity: 0, y: 20 }}
 											animate={{ opacity: 1, y: 0 }}
 											transition={{ delay: index * 0.1 }}
-											className="flex flex-col justify-between border border-dashed border-neutral-800 bg-neutral-900/30 p-4 transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/50">
+											className="flex flex-col justify-between border border-dashed border-neutral-800 bg-neutral-900/30 p-3 transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/50 sm:p-4 md:p-3 lg:p-4">
 											<div className="flex items-center justify-between">
 												<stat.icon
-													className={`h-4 w-4 text-${stat.color}-500`}
+													className={`h-4 w-4 sm:h-4.5 sm:w-4.5 md:h-4 md:w-4 lg:h-5 lg:w-5 text-${stat.color}-500`}
 												/>
-												<span className="font-mono text-2xl text-neutral-300">
+												<span className="font-mono text-xl text-neutral-300 sm:text-2xl md:text-xl lg:text-2xl">
 													{stat.value?.toLocaleString() ||
 														'-'}
 												</span>
 											</div>
-											<div className="mt-3 space-y-1">
-												<div className="text-sm text-neutral-400">
+											<div className="mt-2 space-y-0.5 sm:mt-3 sm:space-y-1 md:mt-2 md:space-y-0.5 lg:mt-3 lg:space-y-1">
+												<div className="text-xs text-neutral-400 sm:text-sm md:text-xs lg:text-sm">
 													{stat.label}
 												</div>
-												<div className="text-xs text-neutral-500">
+												<div className="text-10px md:text-10px text-neutral-500 sm:text-xs lg:text-xs">
 													{stat.detail}
 												</div>
 											</div>
@@ -569,12 +569,12 @@ export default function GitHubActivity() {
 								</div>
 
 								{/* Mini calendar */}
-								<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-									<div className="flex items-center justify-between">
-										<h3 className="mb-4 text-sm font-medium text-neutral-400">
+								<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4 md:p-4 lg:p-5">
+									<div className="flex items-center justify-between gap-2 sm:gap-3">
+										<h3 className="mb-3 text-xs font-medium text-neutral-400 sm:mb-4 sm:text-sm md:text-sm lg:text-base">
 											Contribution Activity
 										</h3>
-										<div className="flex items-center gap-2 text-xs text-neutral-500">
+										<div className="text-10px flex items-center gap-1.5 text-neutral-500 sm:gap-2 sm:text-xs">
 											<span className="flex h-2 w-2 items-center rounded-full bg-neutral-700"></span>
 											Less
 											<span className="flex h-2 w-2 items-center rounded-full bg-blue-500/20"></span>
@@ -584,7 +584,7 @@ export default function GitHubActivity() {
 											More
 										</div>
 									</div>
-									<div className="overflow-x-auto py-2">
+									<div className="overflow-x-auto py-2 sm:py-3 md:py-2 lg:py-3">
 										<GitHubCalendar
 											username={GITHUB_USERNAME}
 											colorScheme="dark"
@@ -597,11 +597,11 @@ export default function GitHubActivity() {
 								</div>
 
 								{/* Recent Activity */}
-								<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-4">
-									<h3 className="mb-4 text-sm font-medium text-neutral-400">
+								<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4 md:p-4 lg:p-5">
+									<h3 className="mb-3 text-xs font-medium text-neutral-400 sm:mb-4 sm:text-sm md:text-sm lg:text-base">
 										Recent Activity
 									</h3>
-									<div className="space-y-2">
+									<div className="space-y-2 sm:space-y-2.5">
 										{stats?.recentEvents
 											.slice(0, 3)
 											.map((event, index) => (
@@ -618,18 +618,18 @@ export default function GitHubActivity() {
 													transition={{
 														delay: index * 0.1,
 													}}
-													className="group flex items-center gap-3 border-l-2 border-neutral-800 bg-neutral-900/30 px-3 py-2 transition-colors hover:border-blue-500">
-													<div className="rounded-md border border-neutral-800 bg-neutral-900 p-1">
+													className="group flex items-center gap-2 border-l-2 border-neutral-800 bg-neutral-900/30 px-2 py-1.5 transition-colors hover:border-blue-500 sm:gap-3 sm:px-3 sm:py-2 md:gap-2 md:px-2 md:py-1.5 lg:gap-3 lg:px-3 lg:py-2">
+													<div className="rounded-md border border-neutral-800 bg-neutral-900 p-1 sm:p-1.5">
 														{renderEventIcon(
 															event.type,
 														)}
 													</div>
 													<div className="flex-1">
-														<div className="flex items-center gap-2">
-															<span className="text-sm text-neutral-300">
+														<div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-2">
+															<span className="text-xs text-neutral-300 sm:text-sm md:text-xs lg:text-sm">
 																{event.message}
 															</span>
-															<span className="text-xs text-neutral-500">
+															<span className="text-10px text-neutral-500 sm:text-xs">
 																{event.repo}
 															</span>
 														</div>
