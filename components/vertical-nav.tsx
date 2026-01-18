@@ -15,7 +15,7 @@ const NAV_ITEMS: NavItem[] = [
 	//{ id: 'lab', label: 'Lab' },
 	{ id: 'experience', label: 'Work' },
 	{ id: 'skills', label: 'Skills' },
-	//{ id: 'blog', label: 'Blog' },
+	{ id: 'blog', label: 'Blog' },
 	{ id: 'uses', label: 'Uses' },
 	{ id: 'hire', label: 'Hire' },
 	{ id: 'connect', label: 'Social' },

@@ -6,7 +6,7 @@ import { Briefcase, ChevronRight, University } from 'lucide-react'
 
 export default function TimelineExperience() {
 	return (
-		<div className="divide-border relative grid divide-y divide-dashed md:grid-cols-2 md:divide-x">
+		<div className="divide-border relative grid min-w-0 divide-y divide-dashed sm:gap-x-4 md:grid-cols-2 md:gap-x-0 md:divide-x">
 			{experiences.map((exp, index) => {
 				const [startYear, endYear] = exp.period.split(' - ')
 
@@ -14,7 +14,7 @@ export default function TimelineExperience() {
 					<article
 						key={index}
 						className="group hover:bg-secondary relative grid transition-colors">
-						<section className="flex-1 p-4 text-left md:p-6 lg:p-8">
+						<section className="flex-1 p-3 text-left sm:p-4 md:p-5 lg:p-8">
 							{exp.type === 'education' ? (
 								<University
 									className="stroke-border size-5 lg:size-10"
@@ -26,10 +26,10 @@ export default function TimelineExperience() {
 									strokeWidth={1}
 								/>
 							)}
-							<h3 className="mt-2.5 text-xl font-medium text-neutral-300 md:text-2xl">
+							<h3 className="mt-2.5 text-lg font-medium text-neutral-300 sm:text-xl md:text-xl lg:text-2xl">
 								{exp.role}
 							</h3>
-							<p className="mt-1.5 flex items-center text-sm text-gray-500 md:mt-2.5">
+							<p className="mt-1.5 flex items-center text-xs text-gray-500 sm:text-sm md:mt-2.5">
 								{/*{exp.type} &bull;*/}
 								{exp.company} &bull; {exp.location}
 							</p>
@@ -51,13 +51,13 @@ export default function TimelineExperience() {
 								)}
 							</p>*/}
 
-							<p className="text-muted mt-3.5 text-base md:text-lg">
+							<p className="text-muted mt-3.5 text-base md:text-base lg:text-lg">
 								{exp.summary}
 							</p>
 
-							<div className="mt-8 grid gap-6 p-5 sm:grid-cols-5">
+							<div className="mt-6 grid gap-4 p-3 sm:gap-6 sm:p-4 md:mt-4 md:grid-cols-1 md:p-5 lg:grid-cols-5 lg:p-0">
 								{/* Achievements */}
-								<div className="space-y-3 sm:col-span-3">
+								<div className="space-y-3 sm:col-span-1 lg:col-span-3">
 									<h4 className="text-xs font-medium tracking-wider text-gray-400 uppercase">
 										Key Achievements
 									</h4>
@@ -77,9 +77,9 @@ export default function TimelineExperience() {
 													transition={{
 														delay: i * 0.1,
 													}}
-													className="flex gap-2 text-sm text-gray-400">
+													className="flex gap-2 text-xs text-gray-400 sm:text-sm">
 													<ChevronRight
-														className="mt-1 size-3.5 shrink-0 stroke-teal-400"
+														className="mt-1 size-3 shrink-0 stroke-teal-400 sm:size-3.5"
 														strokeWidth={1}
 													/>
 													{/*<span className="text-teal-400 select-none">

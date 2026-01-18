@@ -127,14 +127,6 @@ export default function TerminalNav({
 						</motion.div>
 					))}
 				</div>
-
-				{/* Current Directory Indicator */}
-				<div className="hidden items-center gap-2 font-mono text-xs text-neutral-600 lg:flex">
-					<span className="text-emerald-500/60">pwd:</span>
-					<span className="rounded border border-neutral-800 bg-neutral-900/50 px-2 py-0.5 text-neutral-500">
-						{currentPath}
-					</span>
-				</div>
 			</div>
 		</div>
 	)

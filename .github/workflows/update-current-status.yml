@@ -1,0 +1,44 @@
+name: Update current status
+
+on:
+    workflow_dispatch:
+        inputs:
+            status:
+                description: 'Current status message (e.g. Mudo — iOS app)'
+                required: true
+                default: 'Mudo — iOS app'
+            emoji:
+                description: 'Optional emoji to include (not used by badge, for reference)'
+                required: false
+                default: '📱'
+            since:
+                description: 'Optional since date (YYYY-MM-DD)'
+                required: false
+                default: '${{ github.event.pull_request ? github.event.pull_request.created_at : "2025-11-12" }}'
+
+jobs:
+    update:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Create or update status.json
+              uses: peter-evans/create-or-update-file@v4
+              with:
+                  # path in the repository
+                  path: .github/status.json
+                  commit-message: 'chore: update current status'
+                  content: |
+                      {
+                        "current": "${{ github.event.inputs.status }}",
+                        "emoji": "${{ github.event.inputs.emoji }}",
+                        "since": "${{ github.event.inputs.since }}"
+                      }
+                  # commit to default branch
+                  branch: ${{ github.ref_name }}
+
+            - name: Show status file
+              run: |
+                  echo 'Updated .github/status.json:'
+                  cat .github/status.json

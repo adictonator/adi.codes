@@ -3,9 +3,9 @@ export default function StickyTitle({
 	...props
 }: React.HTMLAttributes<HTMLHeadingElement>) {
 	return (
-		<header className="border-border bg-background sticky -top-1 z-10 border-y px-2 py-6 backdrop-blur-lg md:px-4 md:py-8">
+		<header className="border-border bg-background sticky -top-1 z-10 border-y px-3 py-4 backdrop-blur-lg sm:px-4 sm:py-6 md:py-5 lg:py-8">
 			<h3
-				className="text-primary flex items-center justify-between text-xs font-bold tracking-widest uppercase md:text-sm"
+				className="text-primary text-10px flex items-center justify-between font-bold tracking-widest uppercase sm:text-xs md:text-xs lg:text-sm"
 				{...props}>
 				{children}
 			</h3>

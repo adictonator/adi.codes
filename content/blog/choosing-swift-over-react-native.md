@@ -7,6 +7,7 @@ status: 'draft'
 tags: ['iOS', 'Design', 'Indie Dev']
 ---
 
+change needed.
 You might be wondering why would I even compare React Native with Swift&mdash;a tool that allows you to cross-platform apps with a single codebase vs. an over-the-top language that's so moody that it'll only work on Apple devices.
 
 In this post, I want to share my journey of choosing Swift over React Native, why I made that decision, and what it means for you.
