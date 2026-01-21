@@ -44,9 +44,8 @@
 	--text-12xl: 12rem;
 	--text-14xl: 14rem;
 
-	--font-display: var(--font-display);
-	--font-body: var(--font-body);
-	--font-space: var(--font-space);
+	--font-fira: var(--font-fira);
+	--font-ibm: var(--font-ibm);
 }
 
 .dark {
