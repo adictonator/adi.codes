@@ -61,7 +61,7 @@ export const projects: Project[] = [
 			'Audio narration support',
 		],
 		importance: 'primary',
-		priority: 2,
+		priority: 3,
 	},
 	{
 		title: 'CheckMate',
@@ -147,7 +147,7 @@ export const projects: Project[] = [
 			'Security scanning',
 		],
 		importance: 'primary',
-		priority: 1,
+		priority: 2,
 	},
 	{
 		title: 'Mudo',

@@ -56,7 +56,7 @@ export default function LeftPanel({
 										}
 									</small>
 								)}
-								<span className="text-4xl font-medium underline-offset-8 sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-8xl">
+								<span className="text-4xl leading-tight font-medium sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-8xl">
 									{sectionContent[activeSection].title}
 								</span>
 							</h2>

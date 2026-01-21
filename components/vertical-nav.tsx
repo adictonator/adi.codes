@@ -12,7 +12,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
 	{ id: 'about', label: 'About' },
-	//{ id: 'lab', label: 'Lab' },
+	{ id: 'lab', label: 'Lab' },
 	{ id: 'experience', label: 'Work' },
 	{ id: 'skills', label: 'Skills' },
 	{ id: 'blog', label: 'Blog' },

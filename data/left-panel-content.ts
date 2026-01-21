@@ -51,7 +51,7 @@ export const sectionContent: Record<
 		],
 	},
 	lab: {
-		subheading: 'R&D Zone',
+		subheading: 'Curiosity driven',
 		title: 'Experiments',
 		description: [
 			'Local test environment for bleeding-edge tech. Currently breaking things with AI and WebAssembly.',
@@ -69,7 +69,7 @@ export const sectionContent: Record<
 		],
 	},
 	hire: {
-		subheading: 'You know you want to',
+		subheading: 'You should',
 		title: 'Work with me',
 		description: [
 			'Specialized in unfucking codebases that make senior devs quit. Version control history is my documentation.',
@@ -78,8 +78,8 @@ export const sectionContent: Record<
 		],
 	},
 	connect: {
-		subheading: 'We should for sure',
-		title: 'Connect online',
+		subheading: 'Some of my',
+		title: 'Social spaces',
 		description: [
 			'Open to discussing tech architecture, performance optimization, or why tabs are better than spaces.',
 			'Active in dev communities where actual coding happens, not just meme sharing (though I enjoy those too).',
