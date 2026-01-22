@@ -235,4 +235,54 @@ export const projects: Project[] = [
 		importance: 'secondary',
 		priority: 5,
 	},
+	{
+		title: 'CSS & JavaScript Toolbox',
+		category: 'Project',
+		description:
+			'A curated collection of reusable CSS snippets and JavaScript utilities for rapid web development',
+		stack: ['HTML', 'CSS', 'JavaScript', 'Vite', 'Tailwind CSS'],
+		status: 'archived',
+		preview: {
+			image: '/images/css-js-toolbox.png',
+		},
+		links: {
+			source: 'https://github.com/adictonator/css-js-toolbox',
+		},
+		metadata: {
+			lastUpdated: '2023-12-01',
+			version: '1.0.0',
+		},
+		features: [
+			'Modular CSS components',
+			'Vanilla JS utilities',
+			'Responsive design patterns',
+		],
+		importance: 'secondary',
+		priority: 4,
+	},
+	{
+		title: 'Heckle: Desktop Gremlin',
+		category: 'Experiment',
+		description:
+			'A mischievous desktop companion that pops up with random jokes, facts, and distractions to keep you on your toes',
+		stack: ['Swift', 'macOS'],
+		status: 'in-progress',
+		preview: {
+			image: '/images/heckle.png',
+		},
+		links: {
+			source: 'https://github.com/adictonator/heckle-desktop-gremlin',
+		},
+		metadata: {
+			lastUpdated: '2026-02-01',
+			version: '1.0.0',
+		},
+		features: [
+			'Random joke pop-ups',
+			'Fact of the day notifications',
+			'Customizable distraction settings',
+		],
+		importance: 'secondary',
+		priority: 3,
+	},
 ]

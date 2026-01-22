@@ -89,7 +89,7 @@ export default function CreativeLab() {
 				</div>
 			</div>
 
-			<div className="divide-border relative grid min-w-0 divide-y divide-dashed md:grid-cols-2 md:gap-x-0 md:divide-x [:where(&_>_:nth-child(n+3))]:border-b-0">
+			<div className="divide-border relative grid min-h-0 min-w-0 divide-y divide-dashed md:grid-cols-2 md:gap-x-0 md:divide-x [:where(&_>_:nth-child(n+3))]:border-b-0">
 				{projectSlots.map((project, index) => {
 					// Empty slot - placeholder matching blog-showcase style
 					if (!project) {
@@ -129,7 +129,7 @@ export default function CreativeLab() {
 					return (
 						<article
 							key={project.title}
-							className="group bg-background relative cursor-pointer transition-colors duration-300 hover:bg-neutral-900/30"
+							className="group bg-background relative flex h-full flex-col cursor-pointer transition-colors duration-300 hover:bg-neutral-900/30"
 							onClick={() => {
 								setActiveProject(project)
 								setIsPreviewOpen(true)
@@ -187,7 +187,7 @@ export default function CreativeLab() {
 							</div>
 
 							{/* Project Content */}
-							<div className="flex flex-col gap-y-4">
+							<div className="flex flex-1 flex-col gap-y-4">
 								{/* Preview Section */}
 								{project.preview?.image && (
 									<div className="relative overflow-hidden bg-neutral-900 max-md:h-32 md:aspect-video">
@@ -209,12 +209,12 @@ export default function CreativeLab() {
 								)}
 
 								{/* Project Info */}
-								<div className="space-y-3 p-4 pt-0">
+								<div className="flex flex-1 flex-col space-y-3 p-4 pt-0">
 									<h3 className="font-mono text-base font-normal text-neutral-200 transition-colors group-hover:text-emerald-400">
 										{project.title}
 									</h3>
 
-									<p className="text-xs leading-relaxed text-neutral-500">
+									<p className="flex-1 text-xs leading-relaxed text-neutral-500">
 										{project.description}
 									</p>
 
@@ -235,7 +235,7 @@ export default function CreativeLab() {
 								</div>
 
 								{/* Footer Actions */}
-								<div className="border-border flex items-center justify-between border-t border-dashed p-3">
+								<div className="border-border flex shrink-0 items-center justify-between border-t border-dashed p-3">
 									<div className="text-10px flex items-center gap-3 text-neutral-600">
 										{project.metadata.stars && (
 											<span className="flex items-center gap-1">
