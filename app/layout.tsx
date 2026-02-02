@@ -9,6 +9,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { GoogleAnalyticsListener } from '@/components/analytics/google-analytics-listener'
 import { AnalyticsInteractions } from '@/components/analytics/analytics-interactions'
 import { GA_MEASUREMENT_ID, isGaEnabled } from '@/lib/ga'
+import { siteConfig } from '@/lib/site'
 
 const firaCode = Fira_Code({
 	subsets: ['latin'],
@@ -23,32 +24,31 @@ const ibmPlex = IBM_Plex_Mono({
 })
 
 export const metadata = {
-	title: 'Full Stack Developer/Creator/Innovator | 13+ Years of Experience',
+	title: 'Founder/Builder/Innovator | 13+ Years of Experience',
 	description:
 		"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
 	openGraph: {
-		title: 'Full Stack Developer/Creator/Innovator | 13+ Years of Experience',
+		type: 'website',
+		url: siteConfig.url,
+		title: 'Founder/Builder/Innovator | 13+ Years of Experience',
 		description:
 			"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
-		url: 'https://hstl.pro',
-		siteName: "Aditya's Portfolio",
+		siteName: siteConfig.name,
 		images: [
 			{
-				url: '/assets/images/og-image.png',
+				url: '/og.png',
 				width: 1200,
 				height: 630,
-				alt: 'Aditya - Software Developer & Technical Writer',
+				alt: `${siteConfig.name} portfolio site`,
 			},
 		],
-		locale: 'en_US',
-		type: 'website',
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Full Stack Developer/Creator/Innovator | 13+ Years of Experience',
+		title: 'Founder/Builder/Innovator | 13+ Years of Experience',
 		description:
 			"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
-		images: ['/assets/images/og-image.jpg'],
+		images: ['/og.png'],
 	},
 }
 
