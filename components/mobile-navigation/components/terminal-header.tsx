@@ -23,7 +23,7 @@ export function TerminalHeader({
 			<span className="h-2 w-2 rounded-full bg-green-500/70" />
 			<motion.span
 				animate={{ width: isMinimized ? 'auto' : '100px' }}
-				className="text-muted-foreground text-10px ml-2 overflow-hidden whitespace-nowrap">
+				className="text-muted-foreground text-xxs ml-2 overflow-hidden whitespace-nowrap">
 				{title}
 			</motion.span>
 			{extraContent}

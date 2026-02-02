@@ -195,7 +195,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 										</div>
 
 										{/* Footer with date */}
-										<div className="text-muted border-border text-10px mt-3 flex items-center gap-2 border-dashed pt-1.5 font-light">
+										<div className="text-muted border-border text-xxs mt-3 flex items-center gap-2 border-dashed pt-1.5 font-light">
 											<Calendar className="size-3 opacity-60" />
 											{post.date &&
 												new Date(

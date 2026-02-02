@@ -76,7 +76,7 @@ export default function UsesShowcase() {
 								animate={{ y: 0 }}
 								transition={{ delay: 0.2 }}
 								className="flex flex-col items-end">
-								<span className="text-xxs text-muted-foreground/50 group-hover:text-muted-foreground tracking-[0.3em] duration-200 sm:text-xs sm:tracking-[0.5em]">
+								<span className="text-tiny text-muted-foreground/50 group-hover:text-muted-foreground tracking-[0.3em] duration-200 sm:text-xs sm:tracking-[0.5em]">
 									{category === 'Hardware'
 										? '01:SYSTEM'
 										: category === 'Development'

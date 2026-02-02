@@ -191,7 +191,7 @@ export default function ProjectsPage() {
 										<Icon className="h-3.5 w-3.5" />
 										<span>{label}</span>
 										<span
-											className={`text-10px rounded-full px-1.5 py-0.5 ${
+											className={`text-xxs rounded-full px-1.5 py-0.5 ${
 												categoryFilter === value
 													? 'bg-emerald-900/50 text-emerald-400'
 													: 'bg-neutral-800 text-neutral-600'
@@ -264,7 +264,7 @@ export default function ProjectsPage() {
 											ease: 'easeInOut',
 										}}
 									/>
-									<span className="text-10px font-mono text-neutral-600">
+									<span className="text-xxs font-mono text-neutral-600">
 										{project.category.toLowerCase()}
 									</span>
 								</div>
@@ -336,19 +336,19 @@ export default function ProjectsPage() {
 									{project.stack.slice(0, 3).map(tech => (
 										<span
 											key={tech}
-											className="text-10px border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
+											className="text-xxs border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
 											{tech}
 										</span>
 									))}
 									{project.stack.length > 3 && (
-										<span className="text-10px border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
+										<span className="text-xxs border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
 											+{project.stack.length - 3}
 										</span>
 									)}
 								</div>
 
 								{/* Footer */}
-								<div className="text-10px mt-auto flex items-center justify-between border-t border-dashed border-neutral-800 pt-3 text-neutral-600">
+								<div className="text-xxs mt-auto flex items-center justify-between border-t border-dashed border-neutral-800 pt-3 text-neutral-600">
 									<div className="flex items-center gap-2">
 										{project.metadata.stars && (
 											<span>

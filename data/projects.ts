@@ -7,10 +7,19 @@ export interface ProjectTimelineEvent {
 
 export interface Project {
 	title: string
-	category: string
+	category:
+		| 'mobile-app'
+		| 'web-app'
+		| 'library'
+		| 'tool'
+		| 'project'
+		| 'browser-extension'
+		| 'desktop-app'
+		| 'game'
+		| 'experiment'
 	description: string
 	stack: string[]
-	status: 'published' | 'in-progress' | 'archived' | 'concept'
+	status: 'published' | 'in-progress' | 'archived' | 'concept' | 'stale'
 	preview?: {
 		image: string
 		video?: string
@@ -19,7 +28,9 @@ export interface Project {
 	links: {
 		live?: string
 		source?: string
+		storeLink?: string
 		demo?: string
+		caseStudy?: string
 	}
 	metadata: {
 		stars?: number
@@ -39,42 +50,43 @@ export interface Project {
 export const projects: Project[] = [
 	{
 		title: 'Gita Essence',
-		category: 'Project',
+		category: 'mobile-app',
 		description:
 			'iOS app bringing timeless wisdom from the Bhagavad Gita with daily verses, meditation guides, and personalized spiritual insights',
-		stack: ['Swift', 'SwiftUI', 'CoreData', 'WidgetKit'],
+		stack: ['SwiftUI', 'Notifications', 'UIKit'],
 		status: 'published',
 		preview: {
 			image: '/images/gita-essence.png',
 		},
 		links: {
-			live: 'https://apps.apple.com/app/gita-essence',
+			storeLink: 'https://apps.apple.com/app/gita-essence',
 		},
 		metadata: {
-			lastUpdated: '2024-10-15',
-			version: '2.1.0',
+			lastUpdated: '2025-06-15',
+			version: '1.0.0',
 		},
 		features: [
 			'Daily verse notifications',
-			'Home screen widgets',
+			'Hindi & English translations',
+			'Transliterations for pronunciation',
 			'Offline access to all verses',
-			'Audio narration support',
 		],
-		importance: 'primary',
+		importance: 'secondary',
 		priority: 3,
 	},
 	{
 		title: 'CheckMate',
-		category: 'Project',
+		category: 'browser-extension',
 		description:
 			'Real-time fact-checking Chrome extension that verifies claims as you browse, powered by AI and multiple data sources',
 		stack: ['TypeScript', 'Chrome API', 'OpenAI', 'React'],
-		status: 'published',
+		status: 'stale',
 		preview: {
 			image: '/images/checkmate.png',
 		},
 		links: {
 			live: 'https://chrome.google.com/webstore/detail/checkmate',
+			storeLink: 'https://chrome.google.com/webstore/detail/checkmate',
 		},
 		metadata: {
 			lastUpdated: '2024-09-28',
@@ -91,7 +103,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'OurStars',
-		category: 'Project',
+		category: 'web-app',
 		description:
 			'Create personalized star maps of any moment in time. Perfect for anniversaries, birthdays, and special memories',
 		stack: ['Next.js', 'Three.js', 'TypeScript', 'Stripe', 'Vercel'],
@@ -118,7 +130,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'WP Snippets AI',
-		category: 'Project',
+		category: 'tool',
 		description:
 			'Premium WordPress plugin that generates custom code snippets using AI. Extends functionality without bloat',
 		stack: [
@@ -150,39 +162,54 @@ export const projects: Project[] = [
 		priority: 2,
 	},
 	{
-		title: 'Mudo',
-		category: 'Experiment',
+		title: 'Mudo: Anxiety & Mood Tracker',
+		category: 'mobile-app',
 		description:
-			'Minimalist micro mood journal for iOS. Track emotional patterns with quick check-ins and beautiful data visualizations',
-		stack: ['Swift', 'SwiftUI', 'HealthKit', 'Charts'],
-		status: 'in-progress',
+			'Minimalist anxiety & mood tracker I built for iOS. It reduces friction and helps you track emotional patterns with quick check-ins and beautiful data visualizations',
+		stack: [
+			'Swift',
+			'SwiftUI',
+			'CoreData',
+			'Charts',
+			'WidgetKit',
+			'iCloud',
+			'UIKit',
+			'Combine',
+		],
+		status: 'published',
 		preview: {
-			image: '/images/mudo.png',
+			image: '/assets/images/projects/mudo/mudo-cover.png',
 		},
 		links: {
-			source: 'https://github.com/adictonator/mudo',
+			live: 'https://mudoapp.com',
+			caseStudy: '/case-studies/mudo',
+			storeLink: 'https://apps.apple.com/app/mudo-mood-journal',
 		},
 		metadata: {
-			lastUpdated: '2024-10-22',
-			version: '0.9.0 Beta',
+			lastUpdated: '2026-01-27',
+			version: '2.2.0',
 		},
 		features: [
 			'< 10 second check-ins',
 			'Mood pattern insights',
-			'Export to Health app',
-			'No cloud - privacy first',
+			'Smart notifications',
+			'Weekly reports',
+			'Mood dip and recovery tracking',
+			'Data export (CSV & JSON)',
+			'iCloud sync',
+			'Privacy-first design',
 		],
 		importance: 'primary',
 		priority: 1,
 		timeline: [
 			{
-				date: '2024-10-22',
+				date: '2025-10-27',
 				type: 'update',
-				title: 'Beta testing phase',
+				title: 'v1.0 Released',
 				description: 'Internal testing with 25 users',
 			},
 			{
-				date: '2024-09-15',
+				date: '2025-12-15',
 				type: 'milestone',
 				title: 'MVP Complete',
 				description: 'Core journaling features implemented',
@@ -191,7 +218,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'Scope Creep',
-		category: 'Experiment',
+		category: 'game',
 		description:
 			"2D puzzle-platformer where every level adds a new mechanic you didn't ask for. A satirical take on project management",
 		stack: ['Godot', 'GDScript', 'Aseprite'],
@@ -213,7 +240,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'ShadyHumans',
-		category: 'Experiment',
+		category: 'game',
 		description:
 			'Narrative-driven PC game exploring the grey areas of human morality. Currently in pre-production phase',
 		stack: ['Godot', 'GDScript', 'Blender'],
@@ -237,7 +264,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'CSS & JavaScript Toolbox',
-		category: 'Project',
+		category: 'tool',
 		description:
 			'A curated collection of reusable CSS snippets and JavaScript utilities for rapid web development',
 		stack: ['HTML', 'CSS', 'JavaScript', 'Vite', 'Tailwind CSS'],
@@ -262,7 +289,7 @@ export const projects: Project[] = [
 	},
 	{
 		title: 'Heckle: Desktop Gremlin',
-		category: 'Experiment',
+		category: 'desktop-app',
 		description:
 			'A mischievous desktop companion that pops up with random jokes, facts, and distractions to keep you on your toes',
 		stack: ['Swift', 'macOS'],

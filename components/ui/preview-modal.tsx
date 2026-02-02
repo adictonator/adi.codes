@@ -13,7 +13,9 @@ import {
 	GitFork,
 	Eye,
 	Trophy,
+	BookOpen,
 } from 'lucide-react'
+import Link from 'next/link'
 import { Project } from '@/data/projects'
 import { useState } from 'react'
 
@@ -201,6 +203,17 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 											</span>
 										</motion.a>
 									)}
+									{project.links.caseStudy && (
+										<Link
+											href={project.links.caseStudy}
+											onClick={onClose}
+											className="flex items-center gap-2 border border-dashed border-blue-800 bg-blue-950/30 px-3 py-2 font-mono text-xs text-blue-400 transition-colors hover:border-blue-700 hover:text-blue-300">
+											<BookOpen className="h-3.5 w-3.5" />
+											<span className="hidden sm:inline">
+												case study
+											</span>
+										</Link>
+									)}
 								</div>
 							</div>
 
@@ -308,7 +321,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 
 						{/* ESC to close hint */}
 						<div className="border-t border-dashed border-neutral-800 bg-neutral-900/30 px-4 py-2 text-center">
-							<span className="text-10px font-mono text-neutral-700">
+							<span className="text-xxs font-mono text-neutral-700">
 								Press{' '}
 								<kbd className="rounded border border-neutral-800 bg-neutral-900 px-1.5 py-0.5">
 									ESC

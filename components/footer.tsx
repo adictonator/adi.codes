@@ -30,7 +30,7 @@ export default function Footer() {
 						<div className="space-y-4 md:space-y-6">
 							<RandomThought />
 
-							<div className="text-10px text-neutral-600 sm:text-xs">
+							<div className="text-xxs text-neutral-600 sm:text-xs">
 								<p className="mb-1">
 									&copy; {new Date().getFullYear()} - All
 									rights reserved and stuff.{' '}
@@ -48,7 +48,7 @@ export default function Footer() {
 						</div>
 
 						<div className="hidden space-y-4 md:block md:space-y-6">
-							<div className="text-10px flex items-center justify-end gap-2 text-right text-neutral-600 sm:text-xs">
+							<div className="text-xxs flex items-center justify-end gap-2 text-right text-neutral-600 sm:text-xs">
 								<span>Made with</span>
 								<button
 									onClick={() => setShowSequenceDialog(true)}
@@ -80,7 +80,7 @@ export default function Footer() {
 
 							<div
 								className={cn(
-									'hover:text-muted text-xxs relative text-right',
+									'hover:text-muted text-tiny relative text-right',
 									{
 										'text-neutral-500': easterEggsUnlocked,
 										'text-neutral-800 grayscale hover:grayscale-0':
