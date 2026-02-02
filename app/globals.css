@@ -46,6 +46,9 @@
 
 	--font-fira: var(--font-fira);
 	--font-ibm: var(--font-ibm);
+
+	/* Breakpoints */
+	--breakpoint-3xl: 120rem; /* 1920px */
 }
 
 .dark {

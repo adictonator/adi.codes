@@ -13,7 +13,7 @@ export default function SkillsShowcase({
 	)
 
 	return (
-		<div className="divide-border [&>*]:border-border grid grid-cols-2 divide-x divide-dashed 2xl:grid-cols-3 [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*]:border-b [&>*]:border-dashed last:[&>*]:border-r [&>*:last-child]:border-b-0">
+		<div className="divide-border *:border-border 3xl:grid-cols-3 grid grid-cols-2 divide-x divide-dashed *:border-b *:border-dashed last:*:border-r [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*:last-child]:border-b-0">
 			{filteredSkills.map((skill, index) => (
 				<motion.div
 					key={skill.name}
