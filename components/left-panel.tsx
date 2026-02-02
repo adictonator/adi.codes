@@ -33,12 +33,12 @@ export default function LeftPanel({
 					transition={transition}
 					className="relative">
 					{activeSection === 'about' ? (
-						<h1 className="animate-gradient from-primary via-accent to-primary font-source flex w-fit flex-col bg-linear-to-r bg-clip-text text-transparent">
-							<small className="text-4xl sm:text-5xl md:text-5xl lg:text-7xl">
+						<h1 className="animate-gradient from-primary via-accent to-primary font-ibm flex w-fit flex-col bg-linear-to-r bg-clip-text tracking-tight text-transparent">
+							<small className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl">
 								Hey! I'm
 							</small>
 							<span
-								className="2xl:text-14xl xl:text-10xl cursor-e-resize text-5xl font-bold sm:text-6xl md:text-7xl 2xl:leading-72"
+								className="2xl:text-10xl cursor-e-resize text-5xl font-medium sm:text-6xl 2xl:leading-72"
 								title="Go ahead, click me!"
 								onClick={handleNameClick}>
 								Aditya
@@ -46,21 +46,21 @@ export default function LeftPanel({
 							</span>
 						</h1>
 					) : (
-						<div className="space-y-4">
-							<h2 className="animate-gradient from-primary via-accent to-primary font-source flex flex-col bg-linear-to-r bg-clip-text text-transparent">
+						<div className="space-y-4 sm:space-y-4 md:space-y-4 lg:space-y-5 2xl:space-y-6">
+							<h2 className="font-ibm flex flex-col bg-linear-to-b from-neutral-200 via-neutral-300 to-neutral-400 bg-clip-text tracking-tighter text-transparent">
 								{sectionContent[activeSection]?.subheading && (
-									<small className="text-lg sm:text-2xl md:text-2xl lg:text-4xl">
+									<small className="text-lg sm:text-2xl md:text-2xl lg:text-3xl 2xl:pl-3">
 										{
 											sectionContent[activeSection]
 												.subheading
 										}
 									</small>
 								)}
-								<span className="text-4xl font-bold underline-offset-8 sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-9xl 2xl:leading-snug">
+								<span className="text-4xl leading-tight font-medium sm:text-5xl md:text-6xl lg:text-8xl 2xl:text-8xl">
 									{sectionContent[activeSection].title}
 								</span>
 							</h2>
-							<p className="text-base text-gray-400 sm:text-lg md:text-lg lg:max-w-5xl lg:pb-14">
+							<p className="text-base sm:text-lg md:text-lg lg:max-w-3xl lg:pb-14 dark:text-neutral-400 dark:hover:text-neutral-300">
 								{sectionContent[activeSection].description}
 							</p>
 						</div>

@@ -59,7 +59,7 @@ export function NavItem({
 			</motion.div>
 
 			<span
-				className={`text-10px mt-1 tracking-tight ${
+				className={`text-xxs mt-1 tracking-tight ${
 					isActive
 						? 'text-emerald-200'
 						: 'text-neutral-500 group-hover:text-neutral-400'
@@ -80,7 +80,7 @@ export function NavItem({
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
-					className="text-xxs absolute -bottom-0.5 text-emerald-500/80">
+					className="text-tiny absolute -bottom-0.5 text-emerald-500/80">
 					cd ~/{item.id}
 				</motion.div>
 			)}

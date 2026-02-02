@@ -1,0 +1,10 @@
+{
+	"ignorePatterns": [
+		"^mailto:",
+		"^https://threads.net",
+		"^https://twitter.com",
+		"^#"
+	],
+	"retryFailed": 2,
+	"statusCodeWhitelist": [429, 403]
+}

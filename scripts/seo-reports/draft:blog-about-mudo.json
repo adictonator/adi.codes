@@ -1,0 +1,63 @@
+{
+  "slug": "draft:blog-about-mudo",
+  "file": "/Users/adictonator/Developer/adi.codes/content/blog/draft:blog-about-mudo.md",
+  "score": 40,
+  "signals": {
+    "title": {
+      "value": "Draft: Blog about mudo",
+      "score": 0
+    },
+    "description": {
+      "value": "Existing mood tracking apps do a tad too much, often leaving you feeling overwhelming. So I started building Mudo, a micro-mood journal app that does what it says. No fancy features, just a simple way to log your mood and reflect. Powerful insights to help you understand your emotional patterns over time.",
+      "score": 0
+    },
+    "h1": {
+      "value": "Draft: Blog about mudo",
+      "from": "frontmatter",
+      "score": 10
+    },
+    "wordCount": {
+      "value": 1061,
+      "score": 8
+    },
+    "readingTime": {
+      "value": 5,
+      "score": 4
+    },
+    "slugMatch": {
+      "value": "draft:blog-about-mudo",
+      "score": 10
+    },
+    "ogImage": {
+      "value": false,
+      "score": 0
+    },
+    "imageAlt": {
+      "value": {
+        "total": 0,
+        "withAlt": 0
+      },
+      "score": 6
+    },
+    "internalLinks": {
+      "value": 0,
+      "score": 0
+    },
+    "canonical": {
+      "value": false,
+      "score": 0
+    },
+    "accessibility": {
+      "value": {
+        "totalImages": 0,
+        "withAlt": 0
+      },
+      "score": 2
+    }
+  },
+  "recommendations": [
+    "Add an og/image in frontmatter for social previews",
+    "Add at least one internal link to other content",
+    "Add a canonical URL to frontmatter"
+  ]
+}

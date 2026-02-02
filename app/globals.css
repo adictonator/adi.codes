@@ -35,18 +35,26 @@
 	--color-destructive: hsl(0 62.8% 60.2%);
 	--color-destructive-foreground: hsl(60 6% 96%);
 
+	/* Status colors */
+	--color-success: var(--color-emerald-400);
+	--color-error: var(--color-rose-600);
+	--color-warning: var(--color-amber-600);
+	--color-stale: var(--color-neutral-400);
+
 	--border: 0 0% 72%;
 
 	/* Typography */
-	--text-10px: 0.625rem;
-	--text-xxs: 0.5rem;
+	--text-xxs: 0.625rem;
+	--text-tiny: 0.5rem;
 	--text-10xl: 10rem;
 	--text-12xl: 12rem;
 	--text-14xl: 14rem;
 
-	--font-display: var(--font-display);
-	--font-body: var(--font-body);
-	--font-space: var(--font-space);
+	--font-fira: var(--font-fira);
+	--font-ibm: var(--font-ibm);
+
+	/* Breakpoints */
+	--breakpoint-3xl: 120rem; /* 1920px */
 }
 
 .dark {

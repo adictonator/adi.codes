@@ -200,7 +200,7 @@ export default function GitHubActivity() {
 													getLanguageColor(name),
 											}}
 										/>
-										<span className="text-10px md:text-10px text-neutral-300 sm:text-xs lg:text-xs">
+										<span className="text-xxs md:text-xxs text-neutral-300 sm:text-xs lg:text-xs">
 											{name}
 										</span>
 									</div>
@@ -216,7 +216,7 @@ export default function GitHubActivity() {
 				{/* Language metrics */}
 				<div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-1 md:gap-3 lg:grid-cols-3 lg:gap-4">
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Most productive in
 						</div>
 						<div className="font-mono text-base text-blue-400 sm:text-lg md:text-base lg:text-lg">
@@ -225,7 +225,7 @@ export default function GitHubActivity() {
 					</div>
 
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Language diversity
 						</div>
 						<div className="font-mono text-base text-purple-400 sm:text-lg md:text-base lg:text-lg">
@@ -234,7 +234,7 @@ export default function GitHubActivity() {
 					</div>
 
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Code balance
 						</div>
 						<div className="font-mono text-base text-emerald-400 sm:text-lg md:text-base lg:text-lg">
@@ -266,13 +266,13 @@ export default function GitHubActivity() {
 
 						<div className="flex-1">
 							<div className="flex flex-wrap items-center gap-1 sm:gap-2 md:gap-1 lg:gap-2">
-								<span className="text-10px text-neutral-500 sm:text-xs">
+								<span className="text-xxs text-neutral-500 sm:text-xs">
 									{event.repo}
 								</span>
-								<span className="text-10px text-neutral-600 sm:text-xs">
+								<span className="text-xxs text-neutral-600 sm:text-xs">
 									•
 								</span>
-								<span className="text-10px text-neutral-500 sm:text-xs">
+								<span className="text-xxs text-neutral-500 sm:text-xs">
 									{new Date(event.date).toLocaleDateString(
 										'en-US',
 										{
@@ -288,7 +288,7 @@ export default function GitHubActivity() {
 									{event.message}
 								</span>
 								{event.sha && (
-									<span className="text-10px text-neutral-500 sm:text-xs">
+									<span className="text-xxs text-neutral-500 sm:text-xs">
 										({event.sha})
 									</span>
 								)}
@@ -306,7 +306,7 @@ export default function GitHubActivity() {
 						href={`https://github.com/${GITHUB_USERNAME}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="text-10px inline-flex items-center gap-1.5 text-neutral-500 hover:text-neutral-300 sm:gap-2 sm:text-xs">
+						className="text-xxs inline-flex items-center gap-1.5 text-neutral-500 hover:text-neutral-300 sm:gap-2 sm:text-xs">
 						<span>View all activity</span>
 						<ArrowUpRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
 					</a>
@@ -353,7 +353,7 @@ export default function GitHubActivity() {
 									}}
 								/>
 							</div>
-							<div className="text-10px text-center text-neutral-500 sm:text-xs">
+							<div className="text-xxs text-center text-neutral-500 sm:text-xs">
 								{day.day.substring(0, 3)}
 							</div>
 						</div>
@@ -363,7 +363,7 @@ export default function GitHubActivity() {
 				{/* Additional contribution stats */}
 				<div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-1 md:gap-3 lg:grid-cols-3 lg:gap-4">
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Most active day
 						</div>
 						<div className="font-mono text-base text-blue-400 sm:text-lg md:text-base lg:text-lg">
@@ -376,7 +376,7 @@ export default function GitHubActivity() {
 					</div>
 
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Current streak
 						</div>
 						<div className="font-mono text-base text-emerald-400 sm:text-lg md:text-base lg:text-lg">
@@ -385,7 +385,7 @@ export default function GitHubActivity() {
 					</div>
 
 					<div className="border border-dashed border-neutral-800 bg-neutral-900/20 p-3 sm:p-4">
-						<div className="text-10px mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
+						<div className="text-xxs mb-1.5 text-neutral-500 sm:mb-2 sm:text-xs">
 							Weekly average
 						</div>
 						<div className="font-mono text-base text-amber-400 sm:text-lg md:text-base lg:text-lg">
@@ -560,7 +560,7 @@ export default function GitHubActivity() {
 												<div className="text-xs text-neutral-400 sm:text-sm md:text-xs lg:text-sm">
 													{stat.label}
 												</div>
-												<div className="text-10px md:text-10px text-neutral-500 sm:text-xs lg:text-xs">
+												<div className="text-xxs md:text-xxs text-neutral-500 sm:text-xs lg:text-xs">
 													{stat.detail}
 												</div>
 											</div>
@@ -574,7 +574,7 @@ export default function GitHubActivity() {
 										<h3 className="mb-3 text-xs font-medium text-neutral-400 sm:mb-4 sm:text-sm md:text-sm lg:text-base">
 											Contribution Activity
 										</h3>
-										<div className="text-10px flex items-center gap-1.5 text-neutral-500 sm:gap-2 sm:text-xs">
+										<div className="text-xxs flex items-center gap-1.5 text-neutral-500 sm:gap-2 sm:text-xs">
 											<span className="flex h-2 w-2 items-center rounded-full bg-neutral-700"></span>
 											Less
 											<span className="flex h-2 w-2 items-center rounded-full bg-blue-500/20"></span>
@@ -629,7 +629,7 @@ export default function GitHubActivity() {
 															<span className="text-xs text-neutral-300 sm:text-sm md:text-xs lg:text-sm">
 																{event.message}
 															</span>
-															<span className="text-10px text-neutral-500 sm:text-xs">
+															<span className="text-xxs text-neutral-500 sm:text-xs">
 																{event.repo}
 															</span>
 														</div>

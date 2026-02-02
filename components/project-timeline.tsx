@@ -2,26 +2,27 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { Project, ProjectTimelineEvent } from '@/data/projects'
-import { useState } from 'react'
-import { format } from 'util'
 
-export default function ProjectTimeline() {
-	const [activeTimeline, setActiveTimeline] = useState<
-		ProjectTimelineEvent[]
-	>([])
+interface ProjectTimelineProps {
+	project: Project | null
+	onClose: () => void
+}
+
+export default function ProjectTimeline({
+	project,
+	onClose,
+}: ProjectTimelineProps) {
+	const activeTimeline = project?.timeline || []
 
 	return (
 		<AnimatePresence>
-			{activeTimeline.length > 0 && (
+			{activeTimeline.length > 0 && project && (
 				<motion.div
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
 					className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm">
-					<div
-						className="absolute inset-0"
-						onClick={() => setActiveTimeline([])}
-					/>
+					<div className="absolute inset-0" onClick={onClose} />
 
 					{/* Timeline Sheet with Enhanced Animation */}
 					<motion.div
@@ -40,11 +41,16 @@ export default function ProjectTimeline() {
 							{/* Header with Project Info */}
 							<div className="border-b border-dashed border-neutral-800 bg-neutral-900/30">
 								<div className="flex items-center justify-between p-6">
-									<h3 className="font-mono text-lg text-neutral-200">
-										Project Timeline
-									</h3>
+									<div>
+										<h3 className="font-mono text-lg text-neutral-200">
+											{project.title}
+										</h3>
+										<p className="mt-1 font-mono text-xs text-neutral-500">
+											Project Timeline
+										</p>
+									</div>
 									<button
-										onClick={() => setActiveTimeline([])}
+										onClick={onClose}
 										className="text-xs text-neutral-500 hover:text-neutral-300">
 										ESC to close
 									</button>
@@ -64,12 +70,13 @@ export default function ProjectTimeline() {
 											Last Updated:
 										</span>
 										<span className="font-mono text-neutral-300">
-											{format(
-												new Date(
-													activeTimeline[0].date,
-												),
-												'MMM dd, yyyy',
-											)}
+											{new Date(
+												activeTimeline[0].date,
+											).toLocaleDateString('en-US', {
+												month: 'short',
+												day: 'numeric',
+												year: 'numeric',
+											})}
 										</span>
 									</div>
 								</div>
@@ -102,11 +109,15 @@ export default function ProjectTimeline() {
 											<div className="space-y-2 rounded border border-transparent px-4 py-3 transition-all duration-300 group-hover:border-neutral-800 group-hover:bg-neutral-900/30">
 												<div className="flex items-center gap-2 text-xs">
 													<span className="font-mono text-neutral-500 transition-colors group-hover:text-neutral-400">
-														{format(
-															new Date(
-																event.date,
-															),
-															'MMM dd, yyyy',
+														{new Date(
+															event.date,
+														).toLocaleDateString(
+															'en-US',
+															{
+																month: 'short',
+																day: 'numeric',
+																year: 'numeric',
+															},
 														)}
 													</span>
 													<span className="rounded-full bg-neutral-800 px-2 py-0.5 text-xs text-neutral-400 transition-colors group-hover:bg-neutral-700/50 group-hover:text-neutral-300">
@@ -132,14 +143,15 @@ export default function ProjectTimeline() {
 								<div className="flex justify-between text-xs text-neutral-500">
 									<span>
 										First Update:{' '}
-										{format(
-											new Date(
-												activeTimeline[
-													activeTimeline.length - 1
-												].date,
-											),
-											'MMM dd, yyyy',
-										)}
+										{new Date(
+											activeTimeline[
+												activeTimeline.length - 1
+											].date,
+										).toLocaleDateString('en-US', {
+											month: 'short',
+											day: 'numeric',
+											year: 'numeric',
+										})}
 									</span>
 									<span>
 										{

@@ -1,6 +1,6 @@
 import './globals.css'
 import { Suspense } from 'react'
-import { Space_Mono } from 'next/font/google'
+import { Fira_Code, IBM_Plex_Mono } from 'next/font/google'
 import Script from 'next/script'
 import { Providers } from './providers'
 import { ToastProvider } from '@/components/ui/toast'
@@ -10,10 +10,16 @@ import { GoogleAnalyticsListener } from '@/components/analytics/google-analytics
 import { AnalyticsInteractions } from '@/components/analytics/analytics-interactions'
 import { GA_MEASUREMENT_ID, isGaEnabled } from '@/lib/ga'
 
-const spaceMono = Space_Mono({
+const firaCode = Fira_Code({
 	subsets: ['latin'],
 	weight: ['400', '700'],
-	variable: '--font-space',
+	variable: '--font-fira',
+})
+
+const ibmPlex = IBM_Plex_Mono({
+	subsets: ['latin'],
+	weight: ['400', '500', '700'],
+	variable: '--font-ibm',
 })
 
 export const metadata = {
@@ -54,7 +60,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${spaceMono.variable} font-space bg-background h-full min-w-0 antialiased`}>
+				className={`${firaCode.variable} ${ibmPlex.variable} font-fira bg-background h-full min-w-0 antialiased`}>
 				{isGaEnabled && (
 					<>
 						<Script

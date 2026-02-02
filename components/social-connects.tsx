@@ -9,7 +9,7 @@ import Spotify from './social-icons/spotify'
 
 export default function SocialConnects() {
 	return (
-		<div className="divide-border grid divide-x divide-dashed md:grid-cols-2">
+		<div className="divide-border grid min-w-0 divide-x divide-dashed md:grid-cols-2">
 			<div className="divide-border grid divide-y divide-dashed">
 				{socialPlatforms.map((platform: SocialPlatform) => (
 					<motion.a
@@ -19,21 +19,21 @@ export default function SocialConnects() {
 						rel="noopener noreferrer"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-3 self-start overflow-hidden bg-gradient-to-tr p-4 md:p-6`}>
-						<div className="flex items-center gap-3">
+						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-2 self-start overflow-hidden bg-gradient-to-tr p-3 sm:gap-3 sm:p-4 md:p-5 lg:p-6`}>
+						<div className="flex items-center gap-2 sm:gap-3">
 							<platform.icon
-								className={`text-muted size-6 fill-current duration-200 ${platform.color}`}
+								className={`text-muted size-5 fill-current duration-200 sm:size-6 ${platform.color}`}
 							/>
-							<span className="text-primary">
+							<span className="text-primary text-sm sm:text-base md:text-base lg:text-lg">
 								{platform.handle || platform.name}
 							</span>
 						</div>
 						{platform.stats && platform.statLabel && (
 							<div className="flex flex-col items-end">
-								<span className="text-muted-foreground ml-2 text-xs">
+								<span className="text-muted-foreground ml-2 text-[10px] sm:text-xs md:text-xs lg:text-sm">
 									{platform.statLabel}
 								</span>
-								<span className="text-primary text-2xl font-light tabular-nums">
+								<span className="text-primary text-lg font-light tabular-nums sm:text-xl md:text-2xl">
 									~{platform.stats}
 								</span>
 							</div>
@@ -46,12 +46,14 @@ export default function SocialConnects() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					className={`group/social divide-border relative flex divide-x divide-dashed overflow-hidden transition-all duration-500`}>
-					<div className="flex flex-1 items-center justify-between p-4 md:p-6">
-						<div className="flex items-center gap-3">
+					<div className="flex flex-1 items-center justify-between p-3 sm:p-4 md:p-5 lg:p-6">
+						<div className="flex items-center gap-2 sm:gap-3">
 							<Discord
-								className={`text-muted size-6 fill-current duration-200 group-hover/social:text-indigo-400`}
+								className={`text-muted size-5 fill-current duration-200 group-hover/social:text-indigo-400 sm:size-6`}
 							/>
-							<span className="text-neutral-300">Discord</span>
+							<span className="text-sm text-neutral-300 sm:text-base md:text-base lg:text-lg">
+								Discord
+							</span>
 						</div>
 					</div>
 
@@ -64,12 +66,12 @@ export default function SocialConnects() {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					className={`group/social relative overflow-hidden transition-all duration-500`}>
-					<div className="flex items-center justify-between p-6">
-						<div className="flex items-center gap-3">
+					<div className="flex items-center justify-between p-3 sm:p-4 md:p-5 lg:p-6">
+						<div className="flex items-center gap-2 sm:gap-3">
 							<Spotify
-								className={`text-muted size-6 fill-current duration-200 ${spotifyData.color}`}
+								className={`text-muted size-5 fill-current duration-200 sm:size-6 ${spotifyData.color}`}
 							/>
-							<span className="text-neutral-300">
+							<span className="text-sm text-neutral-300 sm:text-base md:text-base lg:text-lg">
 								{spotifyData.name}
 							</span>
 						</div>

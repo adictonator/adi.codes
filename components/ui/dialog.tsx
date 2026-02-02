@@ -63,7 +63,7 @@ export function Dialog({
 							<button
 								ref={closeButtonRef}
 								onClick={onClose}
-								className="text-xxs text-neutral-500 hover:text-neutral-300 md:text-xs">
+								className="text-tiny text-neutral-500 hover:text-neutral-300 md:text-xs">
 								ESC to close
 							</button>
 						</div>

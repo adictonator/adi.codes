@@ -68,7 +68,7 @@ export default function TerminalNav({
 
 				{/* Quick Actions - Desktop Only */}
 				{showKeyboardHints && (
-					<div className="text-10px hidden items-center gap-3 font-mono text-neutral-600 md:flex">
+					<div className="text-xxs hidden items-center gap-3 font-mono text-neutral-600 md:flex">
 						<span className="flex items-center gap-1">
 							<kbd className="rounded border border-neutral-800 bg-neutral-900 px-1 py-0.5">
 								{isMac ? '⌥' : 'Alt'}
@@ -126,14 +126,6 @@ export default function TerminalNav({
 							</Link>
 						</motion.div>
 					))}
-				</div>
-
-				{/* Current Directory Indicator */}
-				<div className="hidden items-center gap-2 font-mono text-xs text-neutral-600 lg:flex">
-					<span className="text-emerald-500/60">pwd:</span>
-					<span className="rounded border border-neutral-800 bg-neutral-900/50 px-2 py-0.5 text-neutral-500">
-						{currentPath}
-					</span>
 				</div>
 			</div>
 		</div>

@@ -195,4 +195,13 @@ export const skills: Skill[] = [
 		projectCount: 2,
 		brandColor: '#DC382D',
 	},
+	{
+		name: 'Swift',
+		expertise: 60,
+		category: 'Languages',
+		tags: ['iOS', 'SwiftUI', 'Combine'],
+		yearsOfExperience: 1,
+		projectCount: 2,
+		brandColor: '#FA7343',
+	},
 ]

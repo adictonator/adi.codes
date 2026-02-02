@@ -94,7 +94,7 @@ export default function RightPanel({
 			<VerticalNav />
 
 			<section
-				className="bg-foreground border-border relative z-20 flex h-screen w-full flex-1 flex-col border-l border-dashed transition-all duration-200 md:w-1/2"
+				className="bg-foreground border-border relative z-20 flex h-screen w-full flex-1 flex-col border-dashed transition-all duration-200 md:w-1/2 md:border-l"
 				id="right-panel">
 				{/* Apply the scrollRef to the scrollable container */}
 				<div
@@ -103,7 +103,7 @@ export default function RightPanel({
 					<Section title="Who? Me? Oh, okay" ariaTitle="about">
 						<AboutMe />
 					</Section>
-					{/*<Section
+					<Section
 						title="Experimental stuff"
 						ariaTitle="lab"
 						headerChildren={
@@ -114,7 +114,7 @@ export default function RightPanel({
 							</Link>
 						}>
 						<CreativeLab />
-					</Section>*/}
+					</Section>
 					<Section
 						title="	Professional Experience"
 						ariaTitle="experience"
@@ -139,7 +139,7 @@ export default function RightPanel({
 						}>
 						<SkillsShowcase selectedCategory={selectedCategory} />
 					</Section>
-					{/*<Section
+					<Section
 						title="Blog"
 						ariaTitle="blog"
 						headerChildren={
@@ -150,7 +150,7 @@ export default function RightPanel({
 							</Link>
 						}>
 						<BlogShowcase posts={posts} />
-					</Section>*/}
+					</Section>
 					{/*<Section title="I've been coding" ariaTitle="opensource">
 					<GitHubActivity />
 					</Section>*/}
