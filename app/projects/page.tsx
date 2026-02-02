@@ -83,14 +83,14 @@ export default function ProjectsPage() {
 			value: 'experiment',
 			label: 'experiments & wip',
 			icon: Sparkles,
-			count: projects.filter(p => p.category === 'Experiment').length,
+			count: projects.filter(p => p.category === 'experiment').length,
 		},
-		{
-			value: 'open-source',
-			label: 'open source',
-			icon: Github,
-			count: projects.filter(p => p.category === 'Open Source').length,
-		},
+		//{
+		//	value: 'open-source',
+		//	label: 'open source',
+		//	icon: Github,
+		//	count: projects.filter(p => p.category === 'Open Source').length,
+		//},
 	]
 
 	const statusFilters: { value: StatusFilter; label: string; icon: any }[] = [
