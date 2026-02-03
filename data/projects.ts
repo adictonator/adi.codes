@@ -82,7 +82,7 @@ export const projects: Project[] = [
 		stack: ['TypeScript', 'Chrome API', 'OpenAI', 'React'],
 		status: 'stale',
 		preview: {
-			image: '/images/checkmate.png',
+			image: '/assets/images/projects/checkmate/checkmate-cover.png',
 		},
 		links: {
 			live: 'https://chrome.google.com/webstore/detail/checkmate',
@@ -107,7 +107,7 @@ export const projects: Project[] = [
 		description:
 			'Create personalized star maps of any moment in time. Perfect for anniversaries, birthdays, and special memories',
 		stack: ['Next.js', 'Three.js', 'TypeScript', 'Stripe', 'Vercel'],
-		status: 'published',
+		status: 'archived',
 		preview: {
 			image: '/images/ourstars.png',
 			demo: 'https://ourstars.co/demo',
@@ -125,7 +125,7 @@ export const projects: Project[] = [
 			'Multiple poster styles',
 			'Gift certificate support',
 		],
-		importance: 'primary',
+		importance: 'secondary',
 		priority: 5,
 	},
 	{
@@ -143,7 +143,7 @@ export const projects: Project[] = [
 		],
 		status: 'published',
 		preview: {
-			image: '/images/wp-snippets.png',
+			image: '/assets/images/projects/wpsai/wpsai-cover.png',
 		},
 		links: {
 			live: 'https://wpsnippets.ai',
@@ -288,28 +288,28 @@ export const projects: Project[] = [
 		priority: 4,
 	},
 	{
-		title: 'Heckle: Desktop Gremlin',
+		title: 'Heckle: Dev Focus Monitor',
 		category: 'desktop-app',
 		description:
-			'A mischievous desktop companion that pops up with random jokes, facts, and distractions to keep you on your toes',
-		stack: ['Swift', 'macOS'],
+			'A mischievous desktop companion that pops up with random jokes, remarks, and distractions to keep you productive (or on your toes).',
+		stack: ['SwiftUI', 'macOS', 'NSApplication', 'Combine', 'UIKit'],
 		status: 'in-progress',
 		preview: {
-			image: '/images/heckle.png',
+			image: '/assets/images/projects/heckle/heckle-cover.png',
 		},
 		links: {
-			source: 'https://github.com/adictonator/heckle-desktop-gremlin',
+			storeLink: 'app-store-link-placeholder',
 		},
 		metadata: {
 			lastUpdated: '2026-02-01',
 			version: '1.0.0',
 		},
 		features: [
-			'Random joke pop-ups',
-			'Fact of the day notifications',
+			'Random jokes/remarks pop-up',
+			'Developer productivity',
 			'Customizable distraction settings',
 		],
-		importance: 'secondary',
-		priority: 3,
+		importance: 'primary',
+		priority: 2,
 	},
 ]
