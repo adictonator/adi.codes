@@ -150,7 +150,7 @@ export default function HireMe() {
 							next available
 						</span>
 						<span className="text-sm text-emerald-400 md:text-base">
-							March 2024
+							May 2026
 						</span>
 					</div>
 					<div className="hidden h-full flex-1 flex-col items-center justify-center gap-1 md:flex">
