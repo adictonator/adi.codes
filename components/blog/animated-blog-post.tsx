@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion'
 import { ReactNode, useEffect, useMemo, useRef } from 'react'
-import { Github } from 'lucide-react'
 import TerminalNav from '@/components/terminal-nav'
 import FloatingQuickNav from '@/components/floating-quick-nav'
 import { BackgroundEffect } from '../ui/background-effect'
@@ -30,7 +29,7 @@ const authorInfo = {
 			username: 'adictonator',
 		},
 		{
-			icon: Github,
+			icon: Threads,
 			url: 'https://github.com/adictonator',
 			username: 'adictonator',
 		},
