@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import {
 	Terminal,
-	Github,
 	Globe,
 	Play,
 	Sparkles,
@@ -15,6 +14,7 @@ import {
 	Wrench,
 	Star,
 } from 'lucide-react'
+import GitHub from '@/components/social-icons/github'
 import { useState, useMemo } from 'react'
 import { projects, Project } from '@/data/projects'
 import TerminalNav from '@/components/terminal-nav'
@@ -276,7 +276,7 @@ export default function ProjectsPage() {
 											rel="noopener noreferrer"
 											whileHover={{ scale: 1.1 }}
 											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<Github className="size-3" />
+											<GitHub className="size-3" />
 										</motion.a>
 									)}
 									{project.links.live && (

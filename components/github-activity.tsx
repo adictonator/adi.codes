@@ -13,7 +13,6 @@ import {
 	MessageCircle,
 	Timer,
 	Terminal,
-	Github,
 	ArrowUpRight,
 	CheckCircle2,
 	X,
@@ -22,6 +21,7 @@ import {
 	Hash,
 	Zap,
 } from 'lucide-react'
+import GitHub from '@/components/social-icons/github'
 import { useState, useEffect } from 'react'
 
 type GitHubStats = {
@@ -423,7 +423,7 @@ export default function GitHubActivity() {
 						rel="noopener noreferrer"
 						className="group flex items-center justify-between border border-neutral-800 bg-neutral-900/30 p-2 transition-all duration-300 hover:-translate-y-0.5 hover:transform-gpu hover:border-neutral-700 hover:bg-neutral-900/50 sm:p-3">
 						<div className="flex items-center gap-2 sm:gap-3">
-							<Github className="h-4 w-4 text-neutral-500 sm:h-5 sm:w-5" />
+							<GitHub className="h-4 w-4 text-neutral-500 sm:h-5 sm:w-5" />
 							<span className="text-xs text-neutral-300 sm:text-sm">
 								Profile
 							</span>
