@@ -51,7 +51,7 @@ export const sectionContent: Record<
 	},
 	uses: {
 		subheading: 'The hard/soft—wares',
-		title: 'I Use',
+		title: 'I use',
 		description: [
 			'These are the tools that keep me sane during debugging sessions that make me question my life choices. ',
 			"An almost clean and optimized development environment where I'm coding 12 hours straight. Yes, I take breaks. Sometimes. ",

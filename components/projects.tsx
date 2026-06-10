@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ExternalLink, Github, Play, Lock } from 'lucide-react'
+import { ExternalLink, Play, Lock } from 'lucide-react'
+import GitHub from '@/components/social-icons/github'
 import { useState } from 'react'
 
 type ProjectType = {
@@ -257,7 +258,7 @@ export default function Projects() {
 														<ExternalLink className="h-4 w-4" />
 													)}
 													{type === 'github' && (
-														<Github className="h-4 w-4" />
+														<GitHub className="h-4 w-4" />
 													)}
 													{type === 'demo' && (
 														<Play className="h-4 w-4" />
@@ -364,7 +365,7 @@ export default function Projects() {
 													<ExternalLink className="h-3.5 w-3.5" />
 												)}
 												{type === 'github' && (
-													<Github className="h-3.5 w-3.5" />
+													<GitHub className="h-3.5 w-3.5" />
 												)}
 												{type === 'demo' && (
 													<Play className="h-3.5 w-3.5" />
