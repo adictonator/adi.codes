@@ -13,6 +13,7 @@ import {
 	Rocket,
 	Wrench,
 	Star,
+	Skull,
 } from 'lucide-react'
 import GitHub from '@/components/social-icons/github'
 import { useState, useMemo } from 'react'
@@ -139,6 +140,17 @@ export default function ProjectsPage() {
 							Showcasing everything from production apps to
 							weekend hacks.
 						</p>
+
+						{/* Graveyard link — the dead ones live here */}
+						<a
+							href="/graveyard"
+							className="group inline-flex w-fit items-center gap-2 border border-dashed border-neutral-800 bg-neutral-950/50 px-3 py-1.5 font-mono text-xs text-neutral-500 transition-all duration-200 hover:border-rose-900/60 hover:text-rose-400">
+							<Skull className="size-3.5 text-rose-500/60 transition-colors group-hover:text-rose-400" />
+							<span>visit the graveyard</span>
+							<span className="text-xxs text-neutral-700 group-hover:text-rose-500/60">
+								// projects that didn&apos;t make it
+							</span>
+						</a>
 
 						{/* Stats Bar */}
 						<div className="flex flex-wrap items-center gap-4 border-t border-dashed border-neutral-800 pt-4 font-mono text-xs text-neutral-600">
