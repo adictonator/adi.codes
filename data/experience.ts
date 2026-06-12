@@ -21,14 +21,14 @@ export const experiences: Experience[] = [
 		location: 'Remote',
 		type: 'engineering',
 		summary:
-			'Helping Shopify merchants with custom apps and themes while building cool products',
+			'Solo product studio — custom Shopify apps and themes for merchants, plus my own iOS and web products, owned end to end',
 		details: {
 			achievements: [
 				'Helped 10+ merchants with custom Shopify apps and themes',
-				'Grew team from 2 to 6 engineers in 5 months',
+				'Hired and led a remote, cross-functional team of 6 for about a year to test scaling the agency model — ran hiring, mentoring, and delivery, then deliberately returned to solo operations in 2024',
 				'Launched 2 products with 30+ paying customers',
 				'Increased revenue by 200% in 6 months',
-				'Established a remote-first culture with flexible work hours',
+				'Ship iOS apps end to end as a one-person team — product, design, code, and App Store releases',
 			],
 			skills: [
 				'Shopify',

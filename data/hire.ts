@@ -13,7 +13,7 @@ export const services: ServiceCard[] = [
 		type: 'project-discovery',
 		title: 'Full Project Development',
 		description:
-			'End-to-end development of web applications that are performant, secure, and scalable',
+			'End-to-end product engineering — web and mobile apps that are performant, secure, and scalable',
 		features: [
 			'Complete technical ownership',
 			'Collaborative roadmap planning',
@@ -42,6 +42,7 @@ export const services: ServiceCard[] = [
 		expertise: [
 			'Full-stack web development',
 			'React/Next.js applications',
+			'iOS (Swift & SwiftUI) and React Native apps',
 			'API design and development',
 			'Database architecture',
 			'Performance optimization',

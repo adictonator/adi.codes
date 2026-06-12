@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import LeftPanel from '@/components/left-panel'
 import RightPanel from '@/components/right-panel'
 import ThemeToggle from '@/components/theme-toggle'
@@ -29,22 +29,36 @@ export default function HomeClient({ posts }: HomeClientProps) {
 	const scrollContainerRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
-		const hash = window.location.hash.slice(1) || 'about'
-		setActiveSection(hash)
-
-		const handleHashChange = () => {
-			const newHash = window.location.hash.slice(1) || 'about'
-			setActiveSection(newHash)
+		// Covers the initial #hash on load and native in-page anchor clicks
+		// (e.g. the "tech stuff" link in the about section).
+		const syncFromHash = () => {
+			setActiveSection(window.location.hash.slice(1) || 'about')
 		}
-
-		window.addEventListener('hashchange', handleHashChange)
-		return () => window.removeEventListener('hashchange', handleHashChange)
+		syncFromHash()
+		window.addEventListener('hashchange', syncFromHash)
+		return () => window.removeEventListener('hashchange', syncFromHash)
 	}, [])
 
-	const handleSectionChange = (section: string) => {
-		window.location.hash = `#${section}`
+	// Keep the URL in sync without ever scrolling: assigning to
+	// location.hash makes the browser scroll to the anchor, which fights
+	// any smooth scroll already in progress. replaceState does not.
+	const reflectSection = useCallback((section: string) => {
 		setActiveSection(section)
-	}
+		if (window.location.hash !== `#${section}`) {
+			history.replaceState(null, '', `#${section}`)
+		}
+	}, [])
+
+	// Nav clicks: update state, then do the scrolling ourselves.
+	const handleNavigate = useCallback(
+		(section: string) => {
+			reflectSection(section)
+			document
+				.getElementById(section)
+				?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+		},
+		[reflectSection],
+	)
 
 	return (
 		<main
@@ -55,19 +69,26 @@ export default function HomeClient({ posts }: HomeClientProps) {
 				<>
 					<LeftPanel activeSection={activeSection} />
 					{/* Desktop RightPanel scrolls naturally */}
-					<RightPanel onScroll={handleSectionChange} posts={posts} />
+					<RightPanel
+						onScroll={reflectSection}
+						activeSection={activeSection}
+						onNavigate={handleNavigate}
+						posts={posts}
+					/>
 				</>
 			) : (
 				<>
 					{/* On mobile, attach the ref to RightPanel's container */}
 					<RightPanel
-						onScroll={handleSectionChange}
+						onScroll={reflectSection}
+						activeSection={activeSection}
+						onNavigate={handleNavigate}
 						scrollRef={scrollContainerRef}
 						posts={posts}
 					/>
 					<MobileNavigation
 						activeSection={activeSection}
-						onSectionChange={handleSectionChange}
+						onSectionChange={handleNavigate}
 						scrollRef={scrollContainerRef}
 					/>
 				</>

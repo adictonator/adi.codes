@@ -15,14 +15,18 @@ export default function AboutMe() {
 
 					<section className="space-y-5" aria-label="Introduction">
 						<p>
-							A guy who loves to code and has been coding for 15+
-							years. Love building, learning, and experimenting.
+							Product engineer who's been coding for 15+ years —
+							I don't just build to spec, I own the outcome.
+							Shipped iOS apps solo from idea to App Store,
+							and web products from architecture to launch.
 						</p>
 						<p>
-							Current favorite stack: Next.js, Laravel, Tailwind
-							CSS, React, TypeScript, Postgres, and MySQL, in no
-							particular order. As an old-school guy, still got
-							love for vanilla JS, CSS, and PHP.
+							These days I live in Swift and SwiftUI, with React
+							Native when a product needs both stores. Under
+							that sits 13+ years of full-stack web — Next.js,
+							Laravel, TypeScript, Postgres — which is why my
+							apps come with real backends, real architecture,
+							and no hand-waving.
 						</p>
 						<p>
 							And of course, always experimenting with more cool{' '}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Section from './section'
 import AboutMe from './about-me'
 import TimelineExperience from './timeline-experience'
@@ -26,79 +26,87 @@ type PostData = {
 // Add scrollRef prop to the component interface
 interface RightPanelProps {
 	onScroll: (section: string) => void
+	activeSection: string
+	onNavigate: (section: string) => void
 	scrollRef?: React.RefObject<HTMLDivElement | null>
 	posts?: PostData[]
 }
 
-// Global flag to pause observer during programmatic scrolling
-let isScrollingProgrammatically = false
-export const pauseScrollObserver = () => {
-	isScrollingProgrammatically = true
-	setTimeout(() => {
-		isScrollingProgrammatically = false
-	}, 1000)
-}
-
 export default function RightPanel({
 	onScroll,
+	activeSection,
+	onNavigate,
 	scrollRef,
 	posts = [],
 }: RightPanelProps) {
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(
 		null,
 	)
+	const containerRef = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
-		let scrollTimeout: NodeJS.Timeout
+		const container = containerRef.current
+		const sections = Array.from(
+			document.querySelectorAll<HTMLElement>('[data-section]'),
+		)
+		const lastId = sections[sections.length - 1]?.dataset.section
 
+		// The last section can be too short to ever reach the viewport
+		// center, so pin it whenever the container is scrolled to the end.
+		const atBottom = () =>
+			!!container &&
+			container.scrollTop + container.clientHeight >=
+				container.scrollHeight - 4
+
+		const report = (id?: string) => {
+			if (atBottom() && lastId) {
+				onScroll(lastId)
+			} else if (id) {
+				onScroll(id)
+			}
+		}
+
+		// A section is active while it spans the vertical middle of the
+		// viewport — independent of section height or screen size.
 		const observer = new IntersectionObserver(
 			entries => {
-				// Skip if programmatic scroll is happening
-				if (isScrollingProgrammatically) return
-
-				const visibleSection = entries.find(
-					entry =>
-						entry.isIntersecting && entry.intersectionRatio >= 0.5,
-				)
-
-				if (visibleSection) {
-					const sectionId =
-						visibleSection.target.getAttribute('data-section')
-					if (sectionId) {
-						clearTimeout(scrollTimeout)
-						scrollTimeout = setTimeout(() => {
-							onScroll(sectionId)
-						}, 150)
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						report((entry.target as HTMLElement).dataset.section)
 					}
-				}
+				})
 			},
-			{
-				threshold: 0.5,
-				rootMargin: '-64px 0px -64px 0px',
-			},
+			{ rootMargin: '-50% 0px -50% 0px', threshold: 0 },
 		)
+		sections.forEach(section => observer.observe(section))
 
-		// Observe all sections
-		document
-			.querySelectorAll('[data-section]')
-			.forEach(section => observer.observe(section))
+		const handleScroll = () => {
+			if (atBottom()) report()
+		}
+		container?.addEventListener('scroll', handleScroll, { passive: true })
 
 		return () => {
 			observer.disconnect()
-			clearTimeout(scrollTimeout)
+			container?.removeEventListener('scroll', handleScroll)
 		}
 	}, [onScroll])
 
 	return (
 		<section className="flex h-screen w-full md:w-1/2" id="right-panel">
-			<VerticalNav />
+			<VerticalNav
+				activeSection={activeSection}
+				onNavigate={onNavigate}
+			/>
 
 			<section
 				className="bg-foreground border-border relative z-20 flex h-screen w-full flex-1 flex-col border-dashed transition-all duration-200 md:w-1/2 md:border-l"
 				id="right-panel">
 				{/* Apply the scrollRef to the scrollable container */}
 				<div
-					ref={scrollRef}
+					ref={node => {
+						containerRef.current = node
+						if (scrollRef) scrollRef.current = node
+					}}
 					className="flex-1 overflow-y-auto scroll-smooth">
 					<Section title="Who? Me? Oh, okay" ariaTitle="about">
 						<AboutMe />

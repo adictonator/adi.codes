@@ -56,7 +56,7 @@ export const projects: Project[] = [
 		stack: ['SwiftUI', 'Notifications', 'UIKit'],
 		status: 'published',
 		preview: {
-			image: '/images/gita-essence.png',
+			image: '/assets/images/projects/gita-essence/cover.svg',
 		},
 		links: {
 			storeLink: 'https://apps.apple.com/app/gita-essence',
@@ -100,33 +100,6 @@ export const projects: Project[] = [
 		],
 		importance: 'primary',
 		priority: 3,
-	},
-	{
-		title: 'OurStars',
-		category: 'web-app',
-		description:
-			'Create personalized star maps of any moment in time. Perfect for anniversaries, birthdays, and special memories',
-		stack: ['Next.js', 'Three.js', 'TypeScript', 'Stripe', 'Vercel'],
-		status: 'archived',
-		preview: {
-			image: '/images/ourstars.png',
-			demo: 'https://ourstars.co/demo',
-		},
-		links: {
-			live: 'https://ourstars.co',
-		},
-		metadata: {
-			lastUpdated: '2024-10-20',
-			version: '3.0.0',
-		},
-		features: [
-			'Custom date & location picker',
-			'High-resolution downloads',
-			'Multiple poster styles',
-			'Gift certificate support',
-		],
-		importance: 'secondary',
-		priority: 5,
 	},
 	{
 		title: 'WP Snippets AI',
@@ -293,12 +266,14 @@ export const projects: Project[] = [
 		description:
 			'A mischievous desktop companion that pops up with random jokes, remarks, and distractions to keep you productive (or on your toes).',
 		stack: ['SwiftUI', 'macOS', 'NSApplication', 'Combine', 'UIKit'],
-		status: 'in-progress',
+		status: 'published',
 		preview: {
 			image: '/assets/images/projects/heckle/heckle-cover.png',
 		},
 		links: {
-			storeLink: 'app-store-link-placeholder',
+			live: 'https://apps.apple.com/us/app/heckle-dev-focus-monitor/id6757296937',
+			storeLink:
+				'https://apps.apple.com/us/app/heckle-dev-focus-monitor/id6757296937',
 		},
 		metadata: {
 			lastUpdated: '2026-02-01',
@@ -311,5 +286,176 @@ export const projects: Project[] = [
 		],
 		importance: 'primary',
 		priority: 2,
+	},
+	{
+		title: 'Actionify',
+		category: 'web-app',
+		description:
+			"AI that turns the messy brain-dump in your head into a clean, ordered list of things you can actually do. Paste the chaos, get a checklist. Built for students, devs, and solo founders who overthink instead of ship.",
+		stack: [
+			'Next.js',
+			'TypeScript',
+			'Supabase',
+			'Gemini',
+			'Lemon Squeezy',
+			'Tailwind CSS',
+		],
+		status: 'published',
+		preview: {
+			image: '/assets/images/projects/actionify/cover.svg',
+		},
+		links: {
+			live: 'https://actionify.adi.codes',
+		},
+		metadata: {
+			lastUpdated: '2026-05-26',
+			version: '1.0.0',
+		},
+		features: [
+			'Thought-to-action in seconds',
+			'AI provider fallbacks (Gemini / OpenAI / Anthropic)',
+			'Credit-based usage via Lemon Squeezy',
+			'Supabase auth & storage',
+			'Privacy-first, no data hoarding',
+		],
+		importance: 'primary',
+		priority: 2,
+	},
+	{
+		title: 'Quotle',
+		category: 'game',
+		description:
+			"Wordle, but for the iconic lines you can't stop quoting. Guess the quote in six tries, keep your streak alive, and argue with friends about which show said it first. Trimmed down to a tight v1 launch line.",
+		stack: [
+			'Expo',
+			'React Native',
+			'TypeScript',
+			'Expo Router',
+			'AsyncStorage',
+		],
+		status: 'published',
+		preview: {
+			image: '/assets/images/projects/quotle/cover.png',
+		},
+		links: {},
+		metadata: {
+			lastUpdated: '2026-06-05',
+			version: '1.0.0',
+		},
+		features: [
+			'Daily puzzle + endless practice mode',
+			'Six guesses, streaks & stats',
+			'Pro-gated hints',
+			'Shareable results',
+			'Fully offline, local-first',
+		],
+		importance: 'primary',
+		priority: 2,
+	},
+	{
+		title: 'YT Planner',
+		category: 'web-app',
+		description:
+			'A planner that reads your own YouTube analytics (read-only, I promise) and tells you when to actually hit publish. Buckets Shorts and long-form separately and recommends post times based on how your last uploads really performed.',
+		stack: [
+			'Next.js',
+			'TypeScript',
+			'Google OAuth',
+			'YouTube Data API',
+			'Tailwind CSS',
+		],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-05-21',
+		},
+		features: [
+			'Read-only YouTube Analytics OAuth',
+			'Best-time-to-post by day & hour',
+			'Shorts vs long-form split',
+			'Driven by your own first-7-day numbers',
+		],
+		importance: 'secondary',
+		priority: 3,
+	},
+	{
+		title: 'Fmrkt',
+		category: 'mobile-app',
+		description:
+			"A daily marketing 'playbook' for creators who hate marketing. Instead of a vague 'post more', it hands you one concrete task a day based on your platforms and stage, tracks the streak, and gives you Sundays off.",
+		stack: ['Expo', 'React Native', 'TypeScript', 'Zustand'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-01-22',
+		},
+		features: [
+			'One actionable task per day',
+			'Tailored to your platforms + stage',
+			'Streaks and completion tracking',
+			'Built-in rest days',
+		],
+		importance: 'secondary',
+		priority: 4,
+	},
+	{
+		title: 'Weekly Planner',
+		category: 'web-app',
+		description:
+			'A no-nonsense weekly planner I built for myself when every other one felt like overkill. Plan the week on a grid, sync it through a background worker so it survives a refresh, and get on with your life.',
+		stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-05-13',
+		},
+		features: [
+			'Week-at-a-glance grid',
+			'Background sync worker',
+			'Local-first and fast',
+			'Zero-setup',
+		],
+		importance: 'secondary',
+		priority: 4,
+	},
+	{
+		title: 'Overreact',
+		category: 'experiment',
+		description:
+			'A macOS app that roasts your code and reacts with a perfectly-timed GIF. Pure self-indulgence — I wanted to see how fast I could ship a dumb-but-delightful SwiftUI toy. Mission accomplished, then promptly shelved.',
+		stack: ['SwiftUI', 'macOS', 'GIPHY API'],
+		status: 'archived',
+		preview: {
+			image: '/assets/images/projects/overreact/cover.svg',
+		},
+		links: {},
+		metadata: {
+			lastUpdated: '2025-05-08',
+		},
+		features: [
+			'Code "roasts" with personality',
+			'GIPHY-powered reactions',
+			'Native SwiftUI menu app',
+		],
+		importance: 'secondary',
+		priority: 5,
+	},
+	{
+		title: 'Daily Logs',
+		category: 'experiment',
+		description:
+			'An Expo scratchpad for a frictionless daily-log app — the kind where you note what you did without it turning into a journaling chore. Barely past the skeleton, parked while better ideas jumped the queue.',
+		stack: ['Expo', 'React Native', 'TypeScript'],
+		status: 'concept',
+		preview: {
+			image: '/assets/images/projects/daily-logs/cover.svg',
+		},
+		links: {},
+		metadata: {
+			lastUpdated: '2025-02-17',
+		},
+		features: ['Quick daily entries', 'Tab-based navigation skeleton'],
+		importance: 'secondary',
+		priority: 5,
 	},
 ]

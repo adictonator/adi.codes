@@ -54,7 +54,7 @@ export async function generateMetadata({
 	const { slug } = await params
 	const { frontmatter } = await getPostBySlug(slug)
 
-	const title = `${frontmatter.title as string} | Aditya Sharma`
+	const title = frontmatter.title as string
 	const description = frontmatter.description as string
 	const publishedTime = frontmatter.date as string
 	const tags = frontmatter.tags as string[]

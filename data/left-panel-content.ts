@@ -35,8 +35,8 @@ export const sectionContent: Record<
 		subheading: 'The galore of my',
 		title: 'Tech skills',
 		description: [
-			'Being a full-stack dev is crazy on its own, but my itch to learn new things always keeps me busy. I like logic. But I also like minimalistic design.',
-			'Over the past 13-ish years, I\'ve had the opportunities (and bad luck) of stumbling upon various tech stacks that I am "okay-ish" at now. ',
+			'Mobile-first these days: Swift, SwiftUI, and React Native, shipping real apps to real stores. The 13-ish years of full-stack web underneath is what keeps those apps standing.',
+			'I\'ve had the opportunities (and bad luck) of stumbling upon various tech stacks that I am "okay-ish" at now. ',
 			'I have a favorite tech-stack, a preferred tech-stack, and tech-stacks that I deeply despise (even though I can work with them). I think this what you call a "work hazard."',
 		],
 	},
@@ -63,8 +63,8 @@ export const sectionContent: Record<
 		subheading: 'Portfolio',
 		title: 'Live work',
 		description: [
+			'iOS apps shipped solo from idea to App Store — product, design, code, and store releases, all one pair of hands.',
 			"Architect of high-performance web apps that don't die under load. Production tested, user approved.",
-			'Creator of dev tools that make other developers question their file structure choices. In a good way.',
 			'Builder of systems that scale horizontally without breaking the bank. Your AWS bill will thank me.',
 		],
 	},
@@ -83,7 +83,7 @@ export const sectionContent: Record<
 		description: [
 			'Specialized in unfucking codebases that make senior devs quit. Version control history is my documentation.',
 			'Expert at optimizing systems that grew too fast for their own good. Your startup might need this.',
-			'Technical architect who writes code, not just Miro boards. I implement what I design.',
+			'Product engineer, not a ticket-taker. I question the spec, make the product calls, and implement what I design.',
 		],
 	},
 	connect: {
