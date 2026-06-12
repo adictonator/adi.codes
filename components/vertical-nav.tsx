@@ -1,9 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { pauseScrollObserver } from './right-panel'
 
 interface NavItem {
 	id: string
@@ -21,38 +19,19 @@ const NAV_ITEMS: NavItem[] = [
 	{ id: 'connect', label: 'Social' },
 ]
 
-export default function VerticalNav() {
-	const [activeSection, setActiveSection] = useState('about')
-
-	useEffect(() => {
-		const handleHashChange = () => {
-			const hash = window.location.hash.slice(1) || 'about'
-			setActiveSection(hash)
-		}
-
-		handleHashChange() // Set initial state
-		window.addEventListener('hashchange', handleHashChange)
-		return () => window.removeEventListener('hashchange', handleHashChange)
-	}, [])
-
+export default function VerticalNav({
+	activeSection,
+	onNavigate,
+}: {
+	activeSection: string
+	onNavigate: (id: string) => void
+}) {
 	const handleNavClick = (
 		e: React.MouseEvent<HTMLAnchorElement>,
 		id: string,
 	) => {
 		e.preventDefault()
-
-		// Pause the IntersectionObserver
-		pauseScrollObserver()
-
-		// Update state and hash
-		setActiveSection(id)
-		window.location.hash = `#${id}`
-
-		// Scroll to target
-		const target = document.getElementById(id)
-		if (target) {
-			target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-		}
+		onNavigate(id)
 	}
 
 	return (

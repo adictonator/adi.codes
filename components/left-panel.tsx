@@ -33,18 +33,28 @@ export default function LeftPanel({
 					transition={transition}
 					className="relative">
 					{activeSection === 'about' ? (
-						<h1 className="animate-gradient from-primary via-accent to-primary font-ibm flex w-fit flex-col bg-linear-to-r bg-clip-text tracking-tight text-transparent">
-							<small className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl">
-								Hey! I'm
-							</small>
-							<span
-								className="2xl:text-10xl cursor-e-resize text-5xl font-medium sm:text-6xl 2xl:leading-72"
-								title="Go ahead, click me!"
-								onClick={handleNameClick}>
-								Aditya
-								{/*<span id="typingName"></span>*/}
-							</span>
-						</h1>
+						<div>
+							<h1 className="animate-gradient from-primary via-accent to-primary font-ibm flex w-fit flex-col bg-linear-to-r bg-clip-text tracking-tight text-transparent">
+								<small className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl">
+									Hey! I'm
+								</small>
+								<span
+									className="2xl:text-10xl cursor-e-resize text-5xl font-medium sm:text-6xl 2xl:leading-72"
+									title="Go ahead, click me!"
+									onClick={handleNameClick}>
+									Aditya
+									{/*<span id="typingName"></span>*/}
+								</span>
+							</h1>
+							<p className="mt-4 text-lg tracking-wide text-neutral-400 sm:text-xl lg:text-2xl">
+								Product engineer — iOS, React Native &amp; web.
+								<br />
+								<span className="text-base text-neutral-500 sm:text-lg">
+									I ship the whole thing: product, code, and
+									App Store.
+								</span>
+							</p>
+						</div>
 					) : (
 						<div className="space-y-4 sm:space-y-4 md:space-y-4 lg:space-y-5 2xl:space-y-6">
 							<h2 className="font-ibm flex flex-col bg-linear-to-b from-neutral-200 via-neutral-300 to-neutral-400 bg-clip-text tracking-tighter text-transparent">

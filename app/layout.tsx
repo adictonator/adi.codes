@@ -24,32 +24,101 @@ const ibmPlex = IBM_Plex_Mono({
 })
 
 export const metadata = {
-	title: 'Founder/Builder/Innovator | 13+ Years of Experience',
-	description:
-		"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
+	metadataBase: new URL(siteConfig.url),
+	title: {
+		default: siteConfig.title,
+		template: `%s — ${siteConfig.name}`,
+	},
+	description: siteConfig.description,
+	keywords: [...siteConfig.baseKeywords],
+	authors: [{ name: siteConfig.name, url: siteConfig.url }],
+	creator: siteConfig.name,
+	alternates: {
+		canonical: '/',
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-image-preview': 'large' as const,
+			'max-snippet': -1,
+		},
+	},
 	openGraph: {
 		type: 'website',
 		url: siteConfig.url,
-		title: 'Founder/Builder/Innovator | 13+ Years of Experience',
-		description:
-			"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
-		siteName: siteConfig.name,
+		title: siteConfig.title,
+		description: siteConfig.description,
+		siteName: siteConfig.shortName,
 		images: [
 			{
-				url: '/og.png',
+				url: '/assets/og.png',
 				width: 1200,
 				height: 630,
-				alt: `${siteConfig.name} portfolio site`,
+				alt: `${siteConfig.name} — ${siteConfig.role} portfolio`,
 			},
 		],
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: 'Founder/Builder/Innovator | 13+ Years of Experience',
-		description:
-			"Building cool stuff with code for over a decade. From PHP to Next.js, I mix old-school skills with new-school stuff and I'm always down to try something different.",
-		images: ['/og.png'],
+		title: siteConfig.title,
+		description: siteConfig.description,
+		images: ['/assets/og.png'],
 	},
+}
+
+const personJsonLd = {
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Person',
+			'@id': `${siteConfig.url}/#person`,
+			name: siteConfig.name,
+			alternateName: 'Aditya Sharma',
+			url: siteConfig.url,
+			jobTitle: siteConfig.role,
+			description: siteConfig.description,
+			worksFor: {
+				'@type': 'Organization',
+				name: 'LazyCodeLab',
+				url: 'https://lazycodelab.com',
+			},
+			alumniOf: {
+				'@type': 'CollegeOrUniversity',
+				name: 'Chandigarh University',
+			},
+			address: {
+				'@type': 'PostalAddress',
+				addressRegion: 'Punjab',
+				addressCountry: 'IN',
+			},
+			knowsAbout: [
+				'Product Engineering',
+				'iOS Development',
+				'Swift',
+				'SwiftUI',
+				'React Native',
+				'Next.js',
+				'React',
+				'TypeScript',
+				'Laravel',
+				'PHP',
+				'Shopify',
+				'App Store Optimization',
+			],
+			sameAs: [...siteConfig.sameAs],
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${siteConfig.url}/#website`,
+			url: siteConfig.url,
+			name: siteConfig.shortName,
+			description: `Portfolio and blog of ${siteConfig.name}, ${siteConfig.role}.`,
+			publisher: { '@id': `${siteConfig.url}/#person` },
+		},
+	],
 }
 
 export default function RootLayout({
@@ -61,6 +130,14 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body
 				className={`${firaCode.variable} ${ibmPlex.variable} font-fira bg-background h-full min-w-0 antialiased`}>
+				<Script
+					id="json-ld-person"
+					type="application/ld+json"
+					strategy="beforeInteractive"
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(personJsonLd),
+					}}
+				/>
 				{isGaEnabled && (
 					<>
 						<Script

@@ -16,10 +16,20 @@ type Skill = {
 
 export const skills: Skill[] = [
 	{
+		name: 'Swift & SwiftUI',
+		expertise: 85,
+		category: 'Mobile',
+		tags: ['iOS', 'StoreKit 2', 'WidgetKit', 'CloudKit'],
+		yearsOfExperience: 1.5,
+		projectCount: 5,
+		highlight: 'Apps shipped solo — idea to App Store',
+		brandColor: '#FA7343',
+	},
+	{
 		name: 'React & React Native',
 		expertise: 95,
-		category: 'Frontend',
-		tags: ['Web', 'Mobile', 'UI/UX', 'Performance'],
+		category: 'Mobile',
+		tags: ['Cross-platform', 'iOS', 'Android', 'Performance'],
 		yearsOfExperience: 4,
 		projectCount: 12,
 		brandColor: '#61DAFB', // React blue
@@ -194,14 +204,5 @@ export const skills: Skill[] = [
 		yearsOfExperience: 1.5,
 		projectCount: 2,
 		brandColor: '#DC382D',
-	},
-	{
-		name: 'Swift',
-		expertise: 60,
-		category: 'Languages',
-		tags: ['iOS', 'SwiftUI', 'Combine'],
-		yearsOfExperience: 1,
-		projectCount: 2,
-		brandColor: '#FA7343',
 	},
 ]
