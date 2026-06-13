@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import {
 	Terminal,
-	Globe,
 	Play,
 	Sparkles,
 	TrendingUp,
@@ -15,9 +14,9 @@ import {
 	Star,
 	Skull,
 } from 'lucide-react'
-import GitHub from '@/components/social-icons/github'
 import { useState, useMemo } from 'react'
 import { projects, Project } from '@/data/projects'
+import { ProjectLinks } from '@/components/project-links'
 import TerminalNav from '@/components/terminal-nav'
 import { PreviewModal } from '@/components/ui/preview-modal'
 import { BackgroundEffect } from '@/components/ui/background-effect'
@@ -280,28 +279,7 @@ export default function ProjectsPage() {
 										{project.category.toLowerCase()}
 									</span>
 								</div>
-								<div className="flex gap-1.5">
-									{project.links.source && (
-										<motion.a
-											href={project.links.source}
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.1 }}
-											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<GitHub className="size-3" />
-										</motion.a>
-									)}
-									{project.links.live && (
-										<motion.a
-											href={project.links.live}
-											target="_blank"
-											rel="noopener noreferrer"
-											whileHover={{ scale: 1.1 }}
-											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<Globe className="size-3" />
-										</motion.a>
-									)}
-								</div>
+								<ProjectLinks project={project} variant="icon" />
 							</div>
 
 							{/* Preview Image */}

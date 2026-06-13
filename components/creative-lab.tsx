@@ -1,17 +1,10 @@
 'use client'
 
-import {
-	Globe,
-	ArrowUpRight,
-	Terminal,
-	Play,
-	Star,
-	ExternalLink,
-	Store,
-} from 'lucide-react'
+import { ArrowUpRight, Terminal, Play, Star } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Project, projects } from '@/data/projects'
+import { ProjectLinks, getPrimaryProjectLink } from './project-links'
 import { PreviewModal } from './ui/preview-modal'
 import ProjectTimeline from './project-timeline'
 import Image from 'next/image'
@@ -124,16 +117,9 @@ export default function CreativeLab() {
 					}
 
 					// Regular project slot
-					const hasLink =
-						project.links.caseStudy ||
-						project.links.live ||
-						project.links.source
-					const href =
-						project.links.caseStudy ||
-						project.links.live ||
-						project.links.source ||
-						'#'
-					const isExternal = !project.links.caseStudy
+					const primaryLink = getPrimaryProjectLink(project)
+					const hasLink = Boolean(primaryLink)
+					const href = primaryLink ?? '#'
 
 					return (
 						<article
@@ -142,12 +128,8 @@ export default function CreativeLab() {
 							{/* Main Card Link (Stretched) */}
 							<Link
 								href={href}
-								target={isExternal ? '_blank' : undefined}
-								rel={
-									isExternal
-										? 'noopener noreferrer'
-										: undefined
-								}
+								target={hasLink ? '_blank' : undefined}
+								rel={hasLink ? 'noopener noreferrer' : undefined}
 								className={`absolute inset-0 z-0 ${!hasLink ? 'cursor-default' : 'cursor-pointer'}`}
 								aria-label={`View ${project.title}`}
 							/>
@@ -188,38 +170,11 @@ export default function CreativeLab() {
 									</span>
 								</div>
 
-								<div className="flex gap-4">
-									{project.links.source && (
-										<a
-											href={project.links.source}
-											target="_blank"
-											rel="noopener noreferrer"
-											title="View Source"
-											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<ExternalLink className="size-3.5" />
-										</a>
-									)}
-									{project.links.storeLink && (
-										<a
-											href={project.links.storeLink}
-											target="_blank"
-											rel="noopener noreferrer"
-											title="View Store Page"
-											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<Store className="size-3.5" />
-										</a>
-									)}
-									{project.links.live && (
-										<a
-											href={project.links.live}
-											target="_blank"
-											rel="noopener noreferrer"
-											title="View Live"
-											className="text-neutral-600 transition-colors hover:text-neutral-400">
-											<Globe className="size-3.5" />
-										</a>
-									)}
-								</div>
+								<ProjectLinks
+									project={project}
+									variant="icon"
+									className="relative z-10"
+								/>
 							</div>
 
 							{/* Project Content */}
@@ -294,14 +249,6 @@ export default function CreativeLab() {
 								</div>
 
 								<div className="flex items-center gap-4">
-									{project.links.caseStudy && (
-										<Link
-											href={project.links.caseStudy}
-											className="text-xxs flex items-center gap-1 font-mono text-neutral-500 transition-colors hover:text-neutral-400">
-											<span>case study</span>
-											<ArrowUpRight className="h-3 w-3" />
-										</Link>
-									)}
 									{project.preview?.video && (
 										<button
 											onClick={e => {

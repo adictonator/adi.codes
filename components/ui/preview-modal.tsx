@@ -4,19 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
 	Terminal,
 	X,
-	Globe,
 	Play,
 	Maximize2,
 	Triangle,
-	Heart,
 	Star,
 	GitFork,
 	Eye,
 	Trophy,
-	BookOpen,
 } from 'lucide-react'
-import Link from 'next/link'
 import { Project } from '@/data/projects'
+import { ProjectLinks } from '@/components/project-links'
 import { useState } from 'react'
 
 type PreviewModalProps = {
@@ -178,43 +175,11 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 									</p>
 								</div>
 
-								<div className="ml-4 flex gap-2">
-									{project.links.source && (
-										<motion.a
-											href={project.links.source}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-center gap-2 border border-dashed border-neutral-800 bg-neutral-900/50 px-3 py-2 font-mono text-xs text-neutral-400 transition-colors hover:border-neutral-700 hover:text-neutral-300">
-											<Heart className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												source
-											</span>
-										</motion.a>
-									)}
-									{project.links.live && (
-										<motion.a
-											href={project.links.live}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-center gap-2 border border-dashed border-emerald-800 bg-emerald-950/30 px-3 py-2 font-mono text-xs text-emerald-400 transition-colors hover:border-emerald-700 hover:text-emerald-300">
-											<Globe className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												visit
-											</span>
-										</motion.a>
-									)}
-									{project.links.caseStudy && (
-										<Link
-											href={project.links.caseStudy}
-											onClick={onClose}
-											className="flex items-center gap-2 border border-dashed border-blue-800 bg-blue-950/30 px-3 py-2 font-mono text-xs text-blue-400 transition-colors hover:border-blue-700 hover:text-blue-300">
-											<BookOpen className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												case study
-											</span>
-										</Link>
-									)}
-								</div>
+								<ProjectLinks
+									project={project}
+									variant="button"
+									className="ml-4"
+								/>
 							</div>
 
 							{/* Tech Stack */}
