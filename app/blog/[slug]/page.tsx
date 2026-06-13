@@ -1,4 +1,5 @@
 import { getPostBySlug, getAllPosts } from '@/lib/mdx'
+import { siteConfig } from '@/lib/site'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import AnimatedBlogPost from '@/components/blog/animated-blog-post'
 import CodeBlock from '@/components/blog/code-block'
@@ -109,18 +110,26 @@ export default async function BlogPost({
 		'@type': 'BlogPosting',
 		headline: frontmatter.title,
 		description: frontmatter.description,
+		image: `${siteConfig.url}/api/og/${slug}`,
 		author: {
 			'@type': 'Person',
-			name: 'Aditya Bhaskar Sharma',
+			'@id': `${siteConfig.url}/#person`,
+			name: siteConfig.name,
+			url: siteConfig.url,
 		},
 		publisher: {
 			'@type': 'Person',
-			name: 'Aditya Bhaskar Sharma',
+			'@id': `${siteConfig.url}/#person`,
+			name: siteConfig.name,
 		},
 		datePublished: frontmatter.date,
-		dateModified: frontmatter.date,
+		dateModified: (frontmatter.updated as string) ?? frontmatter.date,
 		keywords: (frontmatter.tags as string[])?.join(', '),
-		url: `/blog/${slug}`,
+		url: `${siteConfig.url}/blog/${slug}`,
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `${siteConfig.url}/blog/${slug}`,
+		},
 		license: 'https://adi.codes/license',
 		copyrightHolder: {
 			'@type': 'Person',

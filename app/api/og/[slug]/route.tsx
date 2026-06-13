@@ -1,19 +1,15 @@
 import { ImageResponse } from 'next/og'
-
-const BLOG_POSTS: Record<string, { title: string; description: string }> = {
-	'choosing-swift-over-react-native': {
-		title: 'Choosing Swift Over React Native',
-		description:
-			'Why I chose Swift and SwiftUI for native iOS development instead of React Native.',
-	},
-}
+import { getAllPosts } from '@/lib/mdx'
 
 export async function GET(
 	request: Request,
 	{ params }: { params: Promise<{ slug: string }> },
 ) {
 	const { slug } = await params
-	const postData = BLOG_POSTS[slug]
+	const post = getAllPosts().find(p => p.slug === slug)
+	const postData = post
+		? { title: post.title ?? '', description: post.description ?? '' }
+		: undefined
 
 	let spaceMonoData: ArrayBuffer | null = null
 	let spaceMonoBoldData: ArrayBuffer | null = null
@@ -83,7 +79,6 @@ export async function GET(
 	return new ImageResponse(
 		(
 			<div
-				className="border-2 border-dashed border-red-400"
 				style={{
 					width: '100%',
 					height: '100%',

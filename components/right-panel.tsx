@@ -13,6 +13,8 @@ import CreativeLab from './creative-lab'
 //import GitHubActivity from './github-activity'
 import VerticalNav from './vertical-nav'
 import Link from 'next/link'
+import { siteConfig } from '@/lib/site'
+import { trackResumeClick } from '@/lib/ga'
 
 type PostData = {
 	slug: string
@@ -126,14 +128,19 @@ export default function RightPanel({
 					<Section
 						title="	Professional Experience"
 						ariaTitle="experience"
-						//headerChildren={
-						//	<a
-						//		href="/resume.pdf"
-						//		className="text-sm text-blue-400 hover:text-blue-300">
-						//		Download CV
-						//	</a>
-						//}
-					>
+						headerChildren={
+							<a
+								href={siteConfig.resume}
+								target="_blank"
+								rel="noopener noreferrer"
+								download
+								onClick={() =>
+									trackResumeClick({ variant: 'ios' })
+								}
+								className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100">
+								Download Résumé
+							</a>
+						}>
 						<TimelineExperience />
 					</Section>
 					<Section
