@@ -1,3 +1,16 @@
+// Single source of truth for every kind of project link.
+// Add a key here + render config in `components/project-links.tsx`, and it
+// shows up everywhere automatically. Leave a key out of a project's `links`
+// and it is simply hidden.
+export type ProjectLinkType =
+	| 'website' // dedicated landing page for the project
+	| 'appStore' // Apple App Store / Mac App Store
+	| 'playStore' // Google Play Store
+	| 'chromeStore' // Chrome Web Store (extensions)
+	| 'source' // public source repository
+	| 'demo' // live/interactive demo
+	| 'caseStudy' // long-form write-up (hosted on lazycodelab.com)
+
 export interface ProjectTimelineEvent {
 	date: string
 	type: 'feature' | 'update' | 'milestone'
@@ -25,13 +38,7 @@ export interface Project {
 		video?: string
 		demo?: string
 	}
-	links: {
-		live?: string
-		source?: string
-		storeLink?: string
-		demo?: string
-		caseStudy?: string
-	}
+	links: Partial<Record<ProjectLinkType, string>>
 	metadata: {
 		stars?: number
 		forks?: number
@@ -59,7 +66,7 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/gita-essence/cover.svg',
 		},
 		links: {
-			storeLink: 'https://apps.apple.com/app/gita-essence',
+			appStore: 'https://apps.apple.com/app/gita-essence',
 		},
 		metadata: {
 			lastUpdated: '2025-06-15',
@@ -85,8 +92,7 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/checkmate/checkmate-cover.png',
 		},
 		links: {
-			live: 'https://chrome.google.com/webstore/detail/checkmate',
-			storeLink: 'https://chrome.google.com/webstore/detail/checkmate',
+			chromeStore: 'https://chrome.google.com/webstore/detail/checkmate',
 		},
 		metadata: {
 			lastUpdated: '2024-09-28',
@@ -119,7 +125,7 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/wpsai/wpsai-cover.png',
 		},
 		links: {
-			live: 'https://wpsnippets.ai',
+			website: 'https://wpsnippets.ai',
 		},
 		metadata: {
 			lastUpdated: '2025-10-26',
@@ -154,9 +160,9 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/mudo/mudo-cover.png',
 		},
 		links: {
-			live: 'https://mudoapp.com',
-			caseStudy: '/case-studies/mudo',
-			storeLink: 'https://apps.apple.com/app/mudo-mood-journal',
+			website: 'https://mudoapp.com',
+			appStore: 'https://apps.apple.com/app/mudo-mood-journal',
+			caseStudy: 'https://lazycodelab.com/work/mudo',
 		},
 		metadata: {
 			lastUpdated: '2026-01-27',
@@ -222,7 +228,7 @@ export const projects: Project[] = [
 			image: '/images/shadyhumans.png',
 		},
 		links: {
-			live: 'https://shadyhumans.com',
+			website: 'https://shadyhumans.com',
 		},
 		metadata: {
 			lastUpdated: '2024-08-05',
@@ -271,8 +277,7 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/heckle/heckle-cover.png',
 		},
 		links: {
-			live: 'https://apps.apple.com/us/app/heckle-dev-focus-monitor/id6757296937',
-			storeLink:
+			appStore:
 				'https://apps.apple.com/us/app/heckle-dev-focus-monitor/id6757296937',
 		},
 		metadata: {
@@ -305,7 +310,7 @@ export const projects: Project[] = [
 			image: '/assets/images/projects/actionify/cover.svg',
 		},
 		links: {
-			live: 'https://actionify.adi.codes',
+			website: 'https://actionify.adi.codes',
 		},
 		metadata: {
 			lastUpdated: '2026-05-26',

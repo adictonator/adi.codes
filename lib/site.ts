@@ -27,12 +27,17 @@ export const siteConfig = {
 		'remote software engineer India',
 		'hire product engineer',
 	],
+	email: 'adityabhaskarsharma@gmail.com',
+	image: '/assets/images/adi-new.png',
+	resume: '/assets/resume/mobile-resume-latest.pdf',
 	social: {
+		linkedin: 'https://linkedin.com/in/-abs-',
 		twitter: 'https://threads.com/adictonator',
 		instagram: 'https://instagram.com/adictonator',
 		github: 'https://github.com/adictonator',
 	},
 	sameAs: [
+		'https://linkedin.com/in/-abs-',
 		'https://github.com/adictonator',
 		'https://threads.com/adictonator',
 		'https://instagram.com/adictonator',

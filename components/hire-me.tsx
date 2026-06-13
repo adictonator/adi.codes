@@ -15,6 +15,8 @@ import {
 	Award,
 } from 'lucide-react'
 import { useState } from 'react'
+import { trackHireClick } from '@/lib/ga'
+import { siteConfig } from '@/lib/site'
 import CalWidget from './cal-widget'
 import { Dialog } from './ui/dialog'
 
@@ -181,13 +183,17 @@ export default function HireMe() {
 
 				<div className="divide-border border-border flex items-stretch justify-stretch divide-dashed border-t border-dashed max-md:flex-col max-md:divide-y md:h-14 md:grid-cols-4 md:divide-x lg:h-16">
 					<button
-						onClick={() => setShowBooking(true)}
+						onClick={() => {
+							trackHireClick({ method: 'book' })
+							setShowBooking(true)
+						}}
 						className="flex flex-1 cursor-pointer items-center justify-center gap-2 py-3 text-center text-base text-neutral-300 transition-colors sm:text-lg md:py-0 md:text-xl">
 						<Calendar className="size-4" />
 						schedule call
 					</button>
 					<a
-						href={`mailto:hello@example.com?subject=Project Inquiry`}
+						href={`mailto:${siteConfig.email}?subject=Project Inquiry`}
+						onClick={() => trackHireClick({ method: 'email' })}
 						className="flex flex-1 items-center justify-center gap-2 py-2.5 text-xs transition-colors sm:text-sm md:py-0 md:text-lg">
 						prefer email?
 					</a>

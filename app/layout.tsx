@@ -78,6 +78,8 @@ const personJsonLd = {
 			name: siteConfig.name,
 			alternateName: 'Aditya Sharma',
 			url: siteConfig.url,
+			image: `${siteConfig.url}${siteConfig.image}`,
+			email: `mailto:${siteConfig.email}`,
 			jobTitle: siteConfig.role,
 			description: siteConfig.description,
 			worksFor: {

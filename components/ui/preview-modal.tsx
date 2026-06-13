@@ -4,20 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
 	Terminal,
 	X,
-	Globe,
 	Play,
 	Maximize2,
 	Triangle,
-	Heart,
 	Star,
 	GitFork,
 	Eye,
 	Trophy,
-	BookOpen,
 } from 'lucide-react'
-import Link from 'next/link'
 import { Project } from '@/data/projects'
-import { useState } from 'react'
+import { ProjectLinks } from '@/components/project-links'
+import { useEffect, useState } from 'react'
 
 type PreviewModalProps = {
 	isOpen: boolean
@@ -27,6 +24,15 @@ type PreviewModalProps = {
 
 export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 	const [isFullscreen, setIsFullscreen] = useState(false)
+
+	useEffect(() => {
+		if (!isOpen) return
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === 'Escape') onClose()
+		}
+		window.addEventListener('keydown', onKeyDown)
+		return () => window.removeEventListener('keydown', onKeyDown)
+	}, [isOpen, onClose])
 
 	if (!project) return null
 
@@ -49,11 +55,11 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 							damping: 30,
 						}}
 						onClick={e => e.stopPropagation()}
-						className={`relative w-full overflow-hidden border border-dashed border-neutral-800 bg-neutral-950 ${
+						className={`relative flex max-h-[90vh] w-full flex-col overflow-hidden border border-dashed border-neutral-800 bg-neutral-950 ${
 							isFullscreen ? 'max-w-7xl' : 'max-w-5xl'
 						}`}>
 						{/* Terminal Window Header */}
-						<div className="flex items-center justify-between border-b border-dashed border-neutral-800 bg-neutral-900/50 px-4 py-2.5">
+						<div className="flex shrink-0 items-center justify-between border-b border-dashed border-neutral-800 bg-neutral-900/50 px-4 py-2.5">
 							<div className="flex items-center gap-3">
 								<div className="flex gap-1.5">
 									<motion.button
@@ -98,10 +104,11 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 							</div>
 						</div>
 
-						{/* Preview Content */}
-						<div className="relative bg-neutral-900">
+						{/* Preview Content — fixed cover area so any image size fits
+						    consistently and never pushes the details off-screen */}
+						<div className="relative aspect-video max-h-[45vh] w-full shrink-0 overflow-hidden bg-neutral-900">
 							{project.preview?.video ? (
-								<div className="relative">
+								<>
 									<video
 										src={project.preview.video}
 										autoPlay
@@ -109,7 +116,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 										muted
 										playsInline
 										controls
-										className="w-full bg-neutral-900"
+										className="h-full w-full bg-neutral-900 object-cover"
 									/>
 									{/* Video Controls Overlay */}
 									<div className="absolute right-0 bottom-0 left-0 border-t border-dashed border-neutral-800 bg-linear-to-t from-neutral-950/90 to-transparent p-4">
@@ -118,15 +125,15 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 											<span>Interactive Demo</span>
 										</div>
 									</div>
-								</div>
+								</>
 							) : project.preview?.image ? (
 								<img
 									src={project.preview.image}
 									alt={project.title}
-									className="w-full"
+									className="h-full w-full object-cover"
 								/>
 							) : (
-								<div className="flex aspect-video items-center justify-center bg-neutral-900">
+								<div className="flex h-full w-full items-center justify-center bg-neutral-900">
 									<div className="text-center">
 										<Terminal className="mx-auto mb-3 h-12 w-12 text-neutral-700" />
 										<p className="font-mono text-sm text-neutral-600">
@@ -138,7 +145,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 						</div>
 
 						{/* Project Details Footer */}
-						<div className="border-t border-dashed border-neutral-800 bg-neutral-950 p-4 sm:p-6">
+						<div className="min-h-0 flex-1 overflow-y-auto border-t border-dashed border-neutral-800 bg-neutral-950 p-4 sm:p-6">
 							<div className="mb-4 flex items-start justify-between">
 								<div className="flex-1">
 									<div className="mb-2 flex items-center gap-2">
@@ -178,43 +185,11 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 									</p>
 								</div>
 
-								<div className="ml-4 flex gap-2">
-									{project.links.source && (
-										<motion.a
-											href={project.links.source}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-center gap-2 border border-dashed border-neutral-800 bg-neutral-900/50 px-3 py-2 font-mono text-xs text-neutral-400 transition-colors hover:border-neutral-700 hover:text-neutral-300">
-											<Heart className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												source
-											</span>
-										</motion.a>
-									)}
-									{project.links.live && (
-										<motion.a
-											href={project.links.live}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="flex items-center gap-2 border border-dashed border-emerald-800 bg-emerald-950/30 px-3 py-2 font-mono text-xs text-emerald-400 transition-colors hover:border-emerald-700 hover:text-emerald-300">
-											<Globe className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												visit
-											</span>
-										</motion.a>
-									)}
-									{project.links.caseStudy && (
-										<Link
-											href={project.links.caseStudy}
-											onClick={onClose}
-											className="flex items-center gap-2 border border-dashed border-blue-800 bg-blue-950/30 px-3 py-2 font-mono text-xs text-blue-400 transition-colors hover:border-blue-700 hover:text-blue-300">
-											<BookOpen className="h-3.5 w-3.5" />
-											<span className="hidden sm:inline">
-												case study
-											</span>
-										</Link>
-									)}
-								</div>
+								<ProjectLinks
+									project={project}
+									variant="button"
+									className="ml-4"
+								/>
 							</div>
 
 							{/* Tech Stack */}
@@ -320,7 +295,7 @@ export function PreviewModal({ isOpen, onClose, project }: PreviewModalProps) {
 						</div>
 
 						{/* ESC to close hint */}
-						<div className="border-t border-dashed border-neutral-800 bg-neutral-900/30 px-4 py-2 text-center">
+						<div className="shrink-0 border-t border-dashed border-neutral-800 bg-neutral-900/30 px-4 py-2 text-center">
 							<span className="text-xxs font-mono text-neutral-700">
 								Press{' '}
 								<kbd className="rounded border border-neutral-800 bg-neutral-900 px-1.5 py-0.5">

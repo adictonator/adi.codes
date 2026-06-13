@@ -69,6 +69,38 @@ export function trackNewsletterSignup({
 	})
 }
 
+export function trackHireClick({ method }: { method: 'book' | 'email' }) {
+	trackEvent('hire_click', {
+		event_category: 'engagement',
+		method,
+	})
+}
+
+export function trackResumeClick({ variant }: { variant: string }) {
+	trackEvent('resume_download', {
+		event_category: 'engagement',
+		variant,
+	})
+}
+
+export function trackProjectClick({
+	project,
+	linkType,
+	url,
+}: {
+	project: string
+	linkType: string
+	url: string
+}) {
+	trackEvent('project_click', {
+		event_category: 'engagement',
+		project_title: project,
+		link_type: linkType,
+		link_url: url,
+		link_domain: getDomain(url),
+	})
+}
+
 function getDomain(url: string) {
 	try {
 		return new URL(url).hostname
