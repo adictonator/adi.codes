@@ -30,6 +30,11 @@ export default function ProjectsPage() {
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
 	const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 
+	const openPreview = (project: Project) => {
+		setActiveProject(project)
+		setIsPreviewOpen(true)
+	}
+
 	// Filter and sort projects
 	const filteredProjects = useMemo(() => {
 		return projects
@@ -253,7 +258,17 @@ export default function ProjectsPage() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: index * 0.05 }}
-							className="group relative flex flex-col border border-dashed border-neutral-800 bg-neutral-950/50 transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/50">
+							role="button"
+							tabIndex={0}
+							aria-label={`View ${project.title} details`}
+							onClick={() => openPreview(project)}
+							onKeyDown={e => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									e.preventDefault()
+									openPreview(project)
+								}
+							}}
+							className="group focus-visible:ring-emerald-500/40 relative flex cursor-pointer flex-col border border-dashed border-neutral-800 bg-neutral-950/50 transition-all duration-300 outline-none hover:border-neutral-700 hover:bg-neutral-900/50 focus-visible:ring-2">
 							{/* Header Bar */}
 							<div className="flex items-center justify-between border-b border-dashed border-neutral-800 bg-neutral-900/30 px-3 py-2">
 								<div className="flex items-center gap-2">
@@ -279,18 +294,19 @@ export default function ProjectsPage() {
 										{project.category.toLowerCase()}
 									</span>
 								</div>
-								<ProjectLinks project={project} variant="icon" />
+								<span
+									onClick={e => e.stopPropagation()}
+									className="contents">
+									<ProjectLinks
+										project={project}
+										variant="icon"
+									/>
+								</span>
 							</div>
 
 							{/* Preview Image */}
 							{project.preview?.image && (
-								<motion.div
-									className="relative aspect-video cursor-pointer overflow-hidden border-b border-dashed border-neutral-800 bg-neutral-900"
-									onClick={() => {
-										setActiveProject(project)
-										setIsPreviewOpen(true)
-									}}
-									whileHover={{ scale: 0.98 }}>
+								<div className="relative aspect-video overflow-hidden border-b border-dashed border-neutral-800 bg-neutral-900">
 									<img
 										src={project.preview.image}
 										alt={project.title}
@@ -307,7 +323,7 @@ export default function ProjectsPage() {
 											</div>
 										</motion.div>
 									)}
-								</motion.div>
+								</div>
 							)}
 
 							{/* Content */}
