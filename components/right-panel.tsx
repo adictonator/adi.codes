@@ -51,17 +51,22 @@ export default function RightPanel({
 		const sections = Array.from(
 			document.querySelectorAll<HTMLElement>('[data-section]'),
 		)
+		const firstId = sections[0]?.dataset.section
 		const lastId = sections[sections.length - 1]?.dataset.section
 
-		// The last section can be too short to ever reach the viewport
-		// center, so pin it whenever the container is scrolled to the end.
+		// The first/last sections can be too short to ever reach the
+		// viewport center, so pin them whenever the container is scrolled
+		// all the way to the start or the end.
+		const atTop = () => !!container && container.scrollTop <= 4
 		const atBottom = () =>
 			!!container &&
 			container.scrollTop + container.clientHeight >=
 				container.scrollHeight - 4
 
 		const report = (id?: string) => {
-			if (atBottom() && lastId) {
+			if (atTop() && firstId) {
+				onScroll(firstId)
+			} else if (atBottom() && lastId) {
 				onScroll(lastId)
 			} else if (id) {
 				onScroll(id)
@@ -83,7 +88,7 @@ export default function RightPanel({
 		sections.forEach(section => observer.observe(section))
 
 		const handleScroll = () => {
-			if (atBottom()) report()
+			if (atTop() || atBottom()) report()
 		}
 		container?.addEventListener('scroll', handleScroll, { passive: true })
 
@@ -98,6 +103,7 @@ export default function RightPanel({
 			<VerticalNav
 				activeSection={activeSection}
 				onNavigate={onNavigate}
+				hasNotes={posts.length > 0}
 			/>
 
 			<section
@@ -154,18 +160,20 @@ export default function RightPanel({
 						}>
 						<SkillsShowcase selectedCategory={selectedCategory} />
 					</Section>
-					<Section
-						title="Blog"
-						ariaTitle="blog"
-						headerChildren={
-							<Link
-								className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100"
-								href={'/blog'}>
-								View all articles
-							</Link>
-						}>
-						<BlogShowcase posts={posts} />
-					</Section>
+					{posts.length > 0 && (
+						<Section
+							title="Notes"
+							ariaTitle="blog"
+							headerChildren={
+								<Link
+									className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100"
+									href={'/blog'}>
+									View all articles
+								</Link>
+							}>
+							<BlogShowcase posts={posts} />
+						</Section>
+					)}
 					{/*<Section title="I've been coding" ariaTitle="opensource">
 					<GitHubActivity />
 					</Section>*/}
@@ -173,7 +181,7 @@ export default function RightPanel({
 						<UsesShowcase />
 					</Section>
 					<Section
-						title="Got projects?"
+						title="Let's talk"
 						ariaTitle="hire"
 						headerChildren={
 							<span className="flex items-center gap-3 border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5">

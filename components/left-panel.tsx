@@ -14,17 +14,20 @@ export default function LeftPanel({
 		elementId: 'typingName',
 	})
 
-	// Faster spring animation (25% quicker)
+	// Critically damped spring settles as fast as possible without
+	// overshoot/bounce (damping = 2 * sqrt(stiffness * mass)).
 	const transition: any = {
 		type: 'spring',
-		stiffness: 125, // Increased from 100
-		damping: 15, // Reduced from 20
-		mass: 0.2, // Reduced from 0.3
+		stiffness: 300,
+		damping: 19,
+		mass: 0.3,
 	}
 
 	return (
 		<div className="bg-foreground relative hidden flex-col justify-end p-4 sm:p-5 md:flex md:w-1/2 md:p-5 lg:w-1/2 lg:p-6">
-			<AnimatePresence mode="wait">
+			{/* popLayout lets the incoming section animate in immediately
+			    instead of waiting for the outgoing one to finish exiting. */}
+			<AnimatePresence mode="popLayout">
 				<motion.div
 					key={activeSection}
 					initial={{ opacity: 0, y: 10 }}

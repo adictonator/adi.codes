@@ -32,6 +32,7 @@ export function getAllPosts(): PostData[] {
 			const { data } = matter(fileContent)
 			return { slug, ...data } as PostData
 		})
+		.filter(post => post.status !== 'draft')
 		.sort((a, b) => {
 			const dateA = a.date ? new Date(a.date).getTime() : 0
 			const dateB = b.date ? new Date(b.date).getTime() : 0

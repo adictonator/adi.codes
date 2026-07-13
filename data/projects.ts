@@ -30,6 +30,7 @@ export interface Project {
 		| 'desktop-app'
 		| 'game'
 		| 'experiment'
+		| 'client-work'
 	description: string
 	stack: string[]
 	status: 'published' | 'in-progress' | 'archived' | 'concept' | 'stale'
@@ -194,6 +195,32 @@ export const projects: Project[] = [
 				description: 'Core journaling features implemented',
 			},
 		],
+	},
+	{
+		title: 'HypeFlags',
+		category: 'client-work',
+		description:
+			'Three-year run (2020-2023) as core developer on a D2C Shopify store — two custom product designers and an order-management backend built from scratch, in-house features replacing paid apps, and a checkout upsell that lifted sales ~13%',
+		stack: ['Shopify', 'Liquid', 'JavaScript', 'Custom Storefront Apps'],
+		status: 'published',
+		preview: {
+			image: '/assets/images/projects/hypeflags/cover.png',
+		},
+		links: {
+			website: 'https://hypeflags.com',
+			caseStudy: 'https://lazycodelab.com/work/hypeflags',
+		},
+		metadata: {
+			lastUpdated: '2023-12-31',
+		},
+		features: [
+			'Two custom product designers built from scratch',
+			'Order-management backend',
+			'In-house features replacing paid Shopify apps',
+			'Checkout upsell flow (~13% sales lift)',
+		],
+		importance: 'primary',
+		priority: 2,
 	},
 	{
 		title: 'Scope Creep',

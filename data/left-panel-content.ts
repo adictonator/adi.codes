@@ -42,7 +42,7 @@ export const sectionContent: Record<
 	},
 	blog: {
 		subheading: 'Sometimes I write',
-		title: 'Articles',
+		title: 'Notes',
 		description: [
 			'Deep dives into system architecture decisions that kept me up at night so you can sleep better.',
 			'Performance optimization war stories with actual metrics and reproducible results.',
@@ -81,8 +81,8 @@ export const sectionContent: Record<
 		subheading: 'We should',
 		title: 'Work together',
 		description: [
-			'Specialized in unfucking codebases that make senior devs quit. Version control history is my documentation.',
-			'Expert at optimizing systems that grew too fast for their own good. Your startup might need this.',
+			'Currently open to full-time and contract roles — the kind where someone hands me a real problem and steps back. ',
+			"I've inherited enough codebases held together by hope and outdated docs to know exactly what technical debt costs a team. ",
 			'Product engineer, not a ticket-taker. I question the spec, make the product calls, and implement what I design.',
 		],
 	},

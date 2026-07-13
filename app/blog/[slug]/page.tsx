@@ -42,6 +42,11 @@ const mdxComponents = {
 	),
 }
 
+// Only slugs returned by getAllPosts() (which excludes drafts) are valid —
+// anything else 404s instead of falling back to on-demand SSR, so a draft's
+// slug can't be reached by guessing the URL.
+export const dynamicParams = false
+
 export async function generateStaticParams() {
 	const posts = getAllPosts()
 	return posts.map(post => ({ slug: post.slug }))
