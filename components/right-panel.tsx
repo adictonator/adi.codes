@@ -99,7 +99,10 @@ export default function RightPanel({
 	}, [onScroll])
 
 	return (
-		<section className="flex h-screen w-full md:w-1/2" id="right-panel">
+		// h-dvh (not h-screen): on iOS Safari 100vh is the large-viewport
+		// height, which pushes fixed-bottom UI (the mobile nav) behind the
+		// browser toolbar. dvh tracks the actually visible area.
+		<section className="flex h-dvh w-full md:w-1/2" id="right-panel">
 			<VerticalNav
 				activeSection={activeSection}
 				onNavigate={onNavigate}
@@ -107,7 +110,7 @@ export default function RightPanel({
 			/>
 
 			<section
-				className="bg-foreground border-border relative z-20 flex h-screen w-full flex-1 flex-col border-dashed transition-all duration-200 md:w-1/2 md:border-l"
+				className="bg-foreground border-border relative z-20 flex h-dvh w-full flex-1 flex-col border-dashed transition-all duration-200 md:w-1/2 md:border-l"
 				id="right-panel">
 				{/* Apply the scrollRef to the scrollable container */}
 				<div

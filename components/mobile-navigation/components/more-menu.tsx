@@ -76,7 +76,7 @@ export function MoreMenu({
 							stiffness: 400,
 							mass: 0.8,
 						}}
-						className="border-border bg-secondary fixed right-4 bottom-24 left-4 z-50 overflow-hidden border shadow-[0_0_20px_rgba(0,255,170,0.15)]">
+						className="dark border-border bg-secondary fixed right-4 bottom-24 left-4 z-50 overflow-hidden border shadow-[0_0_20px_rgba(0,255,170,0.15)]">
 						{/* Header with close button */}
 						<TerminalHeader
 							title="menu.sh"

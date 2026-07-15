@@ -63,7 +63,7 @@ export default function HomeClient({ posts }: HomeClientProps) {
 	return (
 		<main
 			className={cn('relative', {
-				'flex h-screen flex-row': !isMobile,
+				'flex h-dvh flex-row': !isMobile,
 			})}>
 			{!isMobile ? (
 				<>
@@ -93,6 +93,7 @@ export default function HomeClient({ posts }: HomeClientProps) {
 					/>
 				</>
 			)}
+			{!isMobile && <ThemeToggle />}
 			<BackgroundEffect variant="grid" intensity={0.4} opacity={0.7} />
 		</main>
 	)

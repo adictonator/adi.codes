@@ -23,7 +23,7 @@ export function TerminalContainer({
 }: TerminalContainerProps) {
 	return (
 		<motion.div
-			className="border-muted/15 fixed inset-x-0 bottom-2.5 z-20 mx-auto w-full overflow-hidden border shadow-[0_0_15px_rgba(0,255,170,0.15)]"
+			className="dark border-muted/15 fixed inset-x-0 bottom-2.5 z-20 mx-auto w-full overflow-hidden border shadow-[0_0_15px_rgba(0,255,170,0.15)]"
 			initial={{ y: 100, opacity: 0 }}
 			animate={{
 				y: 0,

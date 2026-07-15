@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, Calendar, Clock, FileText, Frown } from 'lucide-react'
+import { useMounted } from '@/hooks/use-mounted'
 
 type PostData = {
 	slug: string
@@ -18,6 +19,8 @@ interface BlogShowcaseProps {
 }
 
 export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
+	const mounted = useMounted()
+
 	const allPosts = posts.slice(0, 5)
 
 	if (allPosts.length === 0) {
@@ -55,14 +58,14 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 				</div>
 
 				<motion.article
-					initial={{ opacity: 0, x: -20 }}
+					initial={mounted ? { opacity: 0, x: -20 } : false}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.4 }}
 					className="relative flex flex-1 flex-col justify-between gap-y-4">
 					<div className="space-y-4 p-4 xl:p-6">
 						<Link
 							href={`/blog/${featuredPost.slug}`}
-							className="text-primary block transition-colors duration-300 hover:text-white">
+							className="text-primary block transition-colors duration-300 hover:text-neutral-100">
 							<h2 className="text-2xl leading-tight font-normal">
 								{featuredPost.title}
 							</h2>
@@ -129,7 +132,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 						return (
 							<motion.div
 								key={post.slug}
-								initial={{ opacity: 0, y: 20 }}
+								initial={mounted ? { opacity: 0, y: 20 } : false}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ delay: 0.1 + index * 0.1 }}
 								className="border-border group hover:bg-secondary relative flex flex-col overflow-hidden border-dashed transition-all duration-300 not-last:not-even:border-r not-last:not-[:nth-child(3)]:border-b md:min-h-32 lg:min-h-44">
@@ -217,7 +220,7 @@ export default function BlogShowcase({ posts = [] }: BlogShowcaseProps) {
 					return (
 						<motion.div
 							key={`placeholder-${index}`}
-							initial={{ opacity: 0, y: 20 }}
+							initial={mounted ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.1 + index * 0.1 }}
 							className="border-border group from-secondary/20 relative flex flex-col content-center justify-center overflow-hidden border-dashed bg-linear-to-br to-transparent not-last:border-r lg:min-h-32 2xl:min-h-44">

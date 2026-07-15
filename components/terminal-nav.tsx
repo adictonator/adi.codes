@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Home, ArrowLeft, Terminal, ChevronRight, Command } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { useMounted } from '@/hooks/use-mounted'
 
 interface NavItem {
 	label: string
@@ -22,6 +23,8 @@ export default function TerminalNav({
 	breadcrumbs,
 	showKeyboardHints = true,
 }: TerminalNavProps) {
+	const mounted = useMounted()
+
 	const [isMac, setIsMac] = useState(false)
 
 	useEffect(() => {
@@ -107,7 +110,7 @@ export default function TerminalNav({
 					{breadcrumbs.map((item, index) => (
 						<motion.div
 							key={item.href}
-							initial={{ opacity: 0, x: -10 }}
+							initial={mounted ? { opacity: 0, x: -10 } : false}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ delay: index * 0.1 }}
 							className="flex items-center gap-2">

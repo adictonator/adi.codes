@@ -11,6 +11,7 @@ import Threads from '../social-icons/threads'
 import Twitter from '../social-icons/twitter'
 import LinkedIn from '../social-icons/linked-in'
 import { isGaEnabled, trackOutboundClick, trackScrollDepth } from '@/lib/ga'
+import { useMounted } from '@/hooks/use-mounted'
 
 const authorInfo = {
 	name: 'Aditya',
@@ -61,6 +62,7 @@ export default function AnimatedBlogPost({
 	tags,
 	children,
 }: AnimatedBlogPostProps) {
+	const mounted = useMounted()
 	const articleRef = useRef<HTMLElement>(null)
 
 	useEffect(() => {
@@ -184,7 +186,7 @@ export default function AnimatedBlogPost({
 								</span>
 							</div>
 							<motion.h1
-								initial={{ opacity: 0, y: 20 }}
+								initial={mounted ? { opacity: 0, y: 20 } : false}
 								animate={{ opacity: 1, y: 0 }}
 								className="text-4xl font-light tracking-tight text-neutral-200 xl:text-5xl xl:leading-tight">
 								{title}
@@ -218,7 +220,7 @@ export default function AnimatedBlogPost({
 				</header>
 
 				<motion.div
-					initial={{ opacity: 0 }}
+					initial={mounted ? { opacity: 0 } : false}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.2 }}
 					className="prose prose-invert prose-p:text-lg prose-p:leading-relaxed prose-p:text-neutral-300 prose-headings:font-light prose-headings:tracking-tight prose-headings:text-neutral-200 prose-h2:mt-16 prose-h2:border-b prose-h2:border-dashed prose-h2:border-neutral-800 prose-h2:pb-4 prose-h2:text-3xl prose-h3:mt-8 prose-h3:text-2xl prose-code:font-mono prose-code:text-emerald-400 prose-pre:my-0 prose-pre:bg-transparent prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-blockquote:border-l-2 prose-blockquote:border-neutral-700 prose-blockquote:text-neutral-400 prose-ul:my-8 prose-li:my-2 prose-li:text-neutral-300 prose-hr:border-border prose-hr:border-dashed mx-auto max-w-none">

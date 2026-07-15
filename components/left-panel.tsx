@@ -3,12 +3,15 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { sectionContent } from '@/data/left-panel-content'
 import { useNameExpander } from '@/hooks/use-name-expander'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function LeftPanel({
 	activeSection,
 }: {
 	activeSection: string
 }) {
+	const mounted = useMounted()
+
 	const { handleNameClick } = useNameExpander({
 		fullName: ' Bhaskar Sharma',
 		elementId: 'typingName',
@@ -30,7 +33,7 @@ export default function LeftPanel({
 			<AnimatePresence mode="popLayout">
 				<motion.div
 					key={activeSection}
-					initial={{ opacity: 0, y: 10 }}
+					initial={mounted ? { opacity: 0, y: 10 } : false}
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -10 }}
 					transition={transition}

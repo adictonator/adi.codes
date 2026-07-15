@@ -20,11 +20,14 @@ import { ProjectLinks } from '@/components/project-links'
 import TerminalNav from '@/components/terminal-nav'
 import { PreviewModal } from '@/components/ui/preview-modal'
 import { BackgroundEffect } from '@/components/ui/background-effect'
+import { useMounted } from '@/hooks/use-mounted'
 
 type FilterType = 'all' | 'experiment' | 'open-source' | 'side-project'
 type StatusFilter = 'all' | 'published' | 'in-progress' | 'archived' | 'concept'
 
 export default function ProjectsPage() {
+	const mounted = useMounted()
+
 	const [categoryFilter, setCategoryFilter] = useState<FilterType>('all')
 	const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
@@ -129,7 +132,7 @@ export default function ProjectsPage() {
 				{/* Header Section */}
 				<div className="mb-8 border-b border-dashed border-neutral-800 pb-8">
 					<motion.div
-						initial={{ opacity: 0, y: -20 }}
+						initial={mounted ? { opacity: 0, y: -20 } : false}
 						animate={{ opacity: 1, y: 0 }}
 						className="space-y-4">
 						<div className="flex items-center gap-3">
@@ -255,7 +258,7 @@ export default function ProjectsPage() {
 					{filteredProjects.map((project, index) => (
 						<motion.article
 							key={project.title}
-							initial={{ opacity: 0, y: 20 }}
+							initial={mounted ? { opacity: 0, y: 20 } : false}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: index * 0.05 }}
 							role="button"
@@ -386,7 +389,7 @@ export default function ProjectsPage() {
 				{/* Empty State */}
 				{filteredProjects.length === 0 && (
 					<motion.div
-						initial={{ opacity: 0 }}
+						initial={mounted ? { opacity: 0 } : false}
 						animate={{ opacity: 1 }}
 						className="flex flex-col items-center justify-center border border-dashed border-neutral-800 bg-neutral-950/30 py-16">
 						<Terminal className="mb-4 h-12 w-12 text-neutral-700" />

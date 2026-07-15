@@ -6,8 +6,11 @@ import SpotifyPlaylist from './social-section/spotify-playlist'
 import DiscordInvite from './social-section/discord-invite'
 import Discord from './social-icons/discord'
 import Spotify from './social-icons/spotify'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function SocialConnects() {
+	const mounted = useMounted()
+
 	return (
 		<div className="divide-border grid min-w-0 divide-x divide-dashed md:grid-cols-2">
 			<div className="divide-border grid divide-y divide-dashed">
@@ -17,7 +20,7 @@ export default function SocialConnects() {
 						href={platform.url}
 						target="_blank"
 						rel="noopener noreferrer"
-						initial={{ opacity: 0, y: 20 }}
+						initial={mounted ? { opacity: 0, y: 20 } : false}
 						animate={{ opacity: 1, y: 0 }}
 						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-2 self-start overflow-hidden bg-gradient-to-tr p-3 sm:gap-3 sm:p-4 md:p-5 lg:p-6`}>
 						<div className="flex items-center gap-2 sm:gap-3">
@@ -43,7 +46,7 @@ export default function SocialConnects() {
 			</div>
 			<div className="divide-border grid divide-y divide-dashed">
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
+					initial={mounted ? { opacity: 0, y: 20 } : false}
 					animate={{ opacity: 1, y: 0 }}
 					className={`group/social divide-border relative flex divide-x divide-dashed overflow-hidden transition-all duration-500`}>
 					<div className="flex flex-1 items-center justify-between p-3 sm:p-4 md:p-5 lg:p-6">
@@ -63,7 +66,7 @@ export default function SocialConnects() {
 				</motion.div>
 
 				<motion.div
-					initial={{ opacity: 0, y: 20 }}
+					initial={mounted ? { opacity: 0, y: 20 } : false}
 					animate={{ opacity: 1, y: 0 }}
 					className={`group/social relative overflow-hidden transition-all duration-500`}>
 					<div className="flex items-center justify-between p-3 sm:p-4 md:p-5 lg:p-6">

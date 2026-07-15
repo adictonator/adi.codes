@@ -2,12 +2,14 @@
 
 import { skills } from '@/data/skills'
 import { motion } from 'framer-motion'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function SkillsShowcase({
 	selectedCategory,
 }: {
 	selectedCategory: string | null
 }) {
+	const mounted = useMounted()
 	const filteredSkills = skills.filter(
 		skill => !selectedCategory || skill.category === selectedCategory,
 	)
@@ -17,7 +19,7 @@ export default function SkillsShowcase({
 			{filteredSkills.map((skill, index) => (
 				<motion.div
 					key={skill.name}
-					initial={{ opacity: 0, y: 20 }}
+					initial={mounted ? { opacity: 0, y: 20 } : false}
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -20 }}
 					transition={{ delay: index * 0.1 }}
@@ -65,7 +67,7 @@ export default function SkillsShowcase({
 						{skill.tags.map(tag => (
 							<span
 								key={tag}
-								className="bg-white/5 px-2 py-0.5 text-[9px] font-light tracking-wider text-white/60 sm:px-2.5 sm:text-xs lg:px-3 lg:py-1 lg:text-xs">
+								className="bg-neutral-100/5 px-2 py-0.5 text-[9px] font-light tracking-wider text-neutral-100/60 sm:px-2.5 sm:text-xs lg:px-3 lg:py-1 lg:text-xs">
 								{tag}
 							</span>
 						))}

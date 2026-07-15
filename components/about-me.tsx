@@ -2,12 +2,15 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function AboutMe() {
+	const mounted = useMounted()
+
 	return (
 		<article className="relative">
 			<motion.div
-				initial={{ opacity: 0, y: 20 }}
+				initial={mounted ? { opacity: 0, y: 20 } : false}
 				animate={{ opacity: 1, y: 0 }}
 				className="divide-border grid min-w-0 grid-cols-1 gap-y-6 divide-dashed sm:gap-x-4 md:gap-x-0 md:divide-x lg:gap-x-0 lg:gap-y-8 2xl:grid-cols-2">
 				<div className="text-primary space-y-6 p-3 text-base leading-relaxed tracking-wide sm:p-4 md:space-y-8 md:p-5 md:text-lg 2xl:space-y-16 2xl:p-6">

@@ -3,8 +3,11 @@
 import { experiences } from '@/data/experience'
 import { motion } from 'framer-motion'
 import { Briefcase, ChevronRight, University } from 'lucide-react'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function TimelineExperience() {
+	const mounted = useMounted()
+
 	return (
 		<div className="divide-border relative grid min-w-0 divide-y divide-dashed sm:gap-x-4 md:grid-cols-2 md:gap-x-0 md:divide-x">
 			{experiences.map((exp, index) => {
@@ -66,10 +69,11 @@ export default function TimelineExperience() {
 											(achievement, i) => (
 												<motion.li
 													key={i}
-													initial={{
-														opacity: 0,
-														x: -20,
-													}}
+													initial={
+														mounted
+															? { opacity: 0, x: -20 }
+															: false
+													}
 													animate={{
 														opacity: 1,
 														x: 0,
@@ -94,7 +98,7 @@ export default function TimelineExperience() {
 							</div>
 						</section>
 
-						<div className="relative right-4 bottom-0 w-full self-end overflow-hidden text-5xl font-medium tracking-wider text-amber-200/20 group-hover:text-amber-200/50 lg:text-8xl">
+						<div className="relative right-4 bottom-0 w-full self-end overflow-hidden text-5xl font-medium tracking-wider text-amber-700/15 group-hover:text-amber-700/40 lg:text-8xl dark:text-amber-200/20 dark:group-hover:text-amber-200/50">
 							<div className="flex w-auto transform items-center justify-end justify-self-end whitespace-nowrap">
 								<div className="translate-x-0 text-right transition-transform duration-300 ease-out group-hover:mr-8 group-hover:-translate-x-full">
 									{startYear}

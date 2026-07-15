@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ShieldAlert, Scale, FileText, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
+import { useMounted } from '@/hooks/use-mounted'
 
 interface CopyrightNoticeProps {
 	year?: number
@@ -15,6 +16,8 @@ export default function CopyrightNotice({
 	authorName = 'Aditya Bhaskar Sharma',
 	minimal = false,
 }: CopyrightNoticeProps) {
+	const mounted = useMounted()
+
 	if (minimal) {
 		return (
 			<div className="border-t border-dashed border-neutral-800 pt-6 font-mono text-xs text-neutral-500">
@@ -32,7 +35,7 @@ export default function CopyrightNotice({
 
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 20 }}
+			initial={mounted ? { opacity: 0, y: 20 } : false}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.3 }}
 			className="mt-12 space-y-6 border-t border-dashed border-neutral-800 pt-8">

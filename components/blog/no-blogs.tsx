@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowUpRight, Terminal } from 'lucide-react'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function NoBlogs() {
+	const mounted = useMounted()
+
 	const [isTyping, setIsTyping] = useState(true)
 	const [showCursor, setShowCursor] = useState(true)
 	const [terminalText, setTerminalText] = useState('')
@@ -95,7 +98,7 @@ export default function NoBlogs() {
 
 					{/* ASCII Art */}
 					<motion.div
-						initial={{ opacity: 0 }}
+						initial={mounted ? { opacity: 0 } : false}
 						animate={{ opacity: 1 }}
 						transition={{ delay: 3, duration: 1 }}
 						className="mt-4 font-mono text-xs text-blue-400/80">
@@ -104,7 +107,7 @@ export default function NoBlogs() {
 
 					{/* Coming Soon Message */}
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
+						initial={mounted ? { opacity: 0, y: 20 } : false}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 4, duration: 0.6 }}
 						className="mt-6 flex items-center justify-between">

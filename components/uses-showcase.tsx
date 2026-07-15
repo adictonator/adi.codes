@@ -5,8 +5,11 @@ import { motion } from 'framer-motion'
 import { setup, SetupItem } from '@/data/uses'
 import { ArrowUpRight } from 'lucide-react'
 import { Dialog } from './ui/dialog'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function UsesShowcase() {
+	const mounted = useMounted()
+
 	const [selectedItem, setSelectedItem] = useState<SetupItem | null>(null)
 	const categories = ['Hardware', 'Development', 'Productivity'] as const
 
@@ -40,7 +43,7 @@ export default function UsesShowcase() {
 								.map((item, index) => (
 									<motion.li
 										key={index}
-										initial={{ opacity: 0, x: -20 }}
+										initial={mounted ? { opacity: 0, x: -20 } : false}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{ delay: index * 0.1 }}
 										{...(item.affiliateLink && {

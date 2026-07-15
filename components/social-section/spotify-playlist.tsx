@@ -2,18 +2,21 @@ import { SpotifyPlaylistProps } from '@/data/socials'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Link from 'next/link'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function SpotifyPlaylist({
 	playlists,
 }: {
 	playlists: SpotifyPlaylistProps[]
 }) {
+	const mounted = useMounted()
+
 	return (
 		<ul className="mb-3.5">
 			{playlists.map((playlist, index) => (
 				<motion.li
 					key={index}
-					initial={{ opacity: 0, x: -20 }}
+					initial={mounted ? { opacity: 0, x: -20 } : false}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ delay: index * 0.1 }}
 					className="group/item relative w-full text-left">

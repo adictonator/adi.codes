@@ -11,19 +11,20 @@
 }
 
 @theme {
+	/* Light theme (default) */
 	--color-background: hsl(60 6% 96%);
-	--color-foreground: oklch(0.205 0 0 / 0.55);
+	--color-foreground: oklch(1 0 0 / 0.65);
 
-	--color-primary: oklch(0.922 0 0);
+	--color-primary: oklch(0.269 0 0);
 	--color-primary-foreground: oklch(0.556 0 0);
 
-	--color-secondary: oklch(0.205 0 0);
-	--color-secondary-foreground: hsl(0 0% 43%);
+	--color-secondary: oklch(0.906 0 0);
+	--color-secondary-foreground: hsl(0 0% 35%);
 
-	--color-border: oklch(0.371 0 0 / 0.8);
+	--color-border: oklch(0.75 0 0 / 0.8);
 
-	--color-muted: oklch(0.708 0 0);
-	--color-muted-foreground: oklch(0.556 0 0);
+	--color-muted: oklch(0.51 0 0);
+	--color-muted-foreground: oklch(0.47 0 0);
 
 	--color-accent: hsl(216 91% 59%);
 	--color-accent-foreground: hsl(60 6% 96%);
@@ -57,9 +58,54 @@
 	--breakpoint-3xl: 120rem; /* 1920px */
 }
 
+/*
+ * The components were authored dark-first with raw neutral-* utilities
+ * (text-neutral-300 on dark panels, bg-neutral-900 cards, …). Instead of
+ * re-theming every class, light mode inverts the neutral scale so the
+ * same markup reads correctly on a light background. `.dark` restores the
+ * true Tailwind values — both for dark mode itself and for subtrees that
+ * force a dark look (e.g. the terminal-style mobile nav) inside light mode.
+ */
+:root:not(.dark) {
+	--color-neutral-50: oklch(0.145 0 0);
+	--color-neutral-100: oklch(0.205 0 0);
+	--color-neutral-200: oklch(0.269 0 0);
+	--color-neutral-300: oklch(0.371 0 0);
+	--color-neutral-400: oklch(0.439 0 0);
+	--color-neutral-500: oklch(0.556 0 0);
+	--color-neutral-600: oklch(0.708 0 0);
+	--color-neutral-700: oklch(0.87 0 0);
+	--color-neutral-800: oklch(0.922 0 0);
+	--color-neutral-900: oklch(0.97 0 0);
+	--color-neutral-950: oklch(0.985 0 0);
+}
+
 .dark {
-	/*--color-background: hsl(0 0% 7%);*/
 	--color-background: oklch(0.145 0 0 / 0.9);
+	--color-foreground: oklch(0.205 0 0 / 0.55);
+
+	--color-primary: oklch(0.922 0 0);
+	--color-primary-foreground: oklch(0.556 0 0);
+
+	--color-secondary: oklch(0.205 0 0);
+	--color-secondary-foreground: hsl(0 0% 43%);
+
+	--color-border: oklch(0.371 0 0 / 0.8);
+
+	--color-muted: oklch(0.708 0 0);
+	--color-muted-foreground: oklch(0.556 0 0);
+
+	--color-neutral-50: oklch(0.985 0 0);
+	--color-neutral-100: oklch(0.97 0 0);
+	--color-neutral-200: oklch(0.922 0 0);
+	--color-neutral-300: oklch(0.87 0 0);
+	--color-neutral-400: oklch(0.708 0 0);
+	--color-neutral-500: oklch(0.556 0 0);
+	--color-neutral-600: oklch(0.439 0 0);
+	--color-neutral-700: oklch(0.371 0 0);
+	--color-neutral-800: oklch(0.269 0 0);
+	--color-neutral-900: oklch(0.205 0 0);
+	--color-neutral-950: oklch(0.145 0 0);
 }
 
 @keyframes gradient {

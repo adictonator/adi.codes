@@ -4,14 +4,17 @@ import { Mail, Download, ArrowUpRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { trackHireClick, trackResumeClick } from '@/lib/ga'
 import { siteConfig } from '@/lib/site'
+import { useMounted } from '@/hooks/use-mounted'
 
 export default function HireMe() {
+	const mounted = useMounted()
+
 	return (
 		<div className="relative">
 			<div className="divide-border border-border grid min-w-0 grid-cols-1 divide-dashed border-b border-dashed sm:gap-x-4 md:gap-x-6 md:grid-cols-2 md:divide-x lg:gap-x-8">
 				<motion.div
 					className="space-y-3 p-3 sm:p-4 md:p-5 lg:p-6"
-					initial={{ opacity: 0 }}
+					initial={mounted ? { opacity: 0 } : false}
 					animate={{ opacity: 1 }}>
 					<h3 className="text-lg font-light text-neutral-200 sm:text-xl md:text-xl lg:text-2xl">
 						Full-time & contract roles
@@ -25,7 +28,7 @@ export default function HireMe() {
 				</motion.div>
 				<motion.div
 					className="space-y-3 p-3 sm:p-4 md:p-5 lg:p-6"
-					initial={{ opacity: 0 }}
+					initial={mounted ? { opacity: 0 } : false}
 					animate={{ opacity: 1 }}>
 					<h3 className="text-lg font-light text-neutral-200 sm:text-xl md:text-xl lg:text-2xl">
 						Hiring for a project instead?

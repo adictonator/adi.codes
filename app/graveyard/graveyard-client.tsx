@@ -14,6 +14,7 @@ import {
 import { graveyard, GraveyardProject } from '@/data/graveyard'
 import TerminalNav from '@/components/terminal-nav'
 import { BackgroundEffect } from '@/components/ui/background-effect'
+import { useMounted } from '@/hooks/use-mounted'
 
 // Turn two dates into a human lifespan: "18 days", "2 months", "1 year".
 function lifespan(born: string, died: string): string {
@@ -40,9 +41,11 @@ function Headstone({
 	project: GraveyardProject
 	index: number
 }) {
+	const mounted = useMounted()
+
 	return (
 		<motion.article
-			initial={{ opacity: 0, y: 20 }}
+			initial={mounted ? { opacity: 0, y: 20 } : false}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: index * 0.08 }}
 			className="group relative flex flex-col border border-dashed border-neutral-800 bg-neutral-950/50 transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-900/40">
@@ -148,6 +151,8 @@ function Headstone({
 }
 
 export default function GraveyardPage() {
+	const mounted = useMounted()
+
 	const buried = graveyard.length
 	const everShipped = graveyard.filter(p => p.wasLive).length
 
@@ -165,7 +170,7 @@ export default function GraveyardPage() {
 				{/* Header */}
 				<div className="mb-8 border-b border-dashed border-neutral-800 pb-8">
 					<motion.div
-						initial={{ opacity: 0, y: -20 }}
+						initial={mounted ? { opacity: 0, y: -20 } : false}
 						animate={{ opacity: 1, y: 0 }}
 						className="space-y-4">
 						<div className="flex items-center gap-3">
@@ -215,7 +220,7 @@ export default function GraveyardPage() {
 
 				{/* Footer note */}
 				<motion.div
-					initial={{ opacity: 0 }}
+					initial={mounted ? { opacity: 0 } : false}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.3 }}
 					className="text-xxs mt-8 border-t border-dashed border-neutral-800 pt-6 text-center font-mono text-neutral-600">

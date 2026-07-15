@@ -15,6 +15,7 @@ import { useState } from 'react'
 import TerminalNav from '@/components/terminal-nav'
 import FloatingQuickNav from '@/components/floating-quick-nav'
 import { BackgroundEffect } from '../ui/background-effect'
+import { useMounted } from '@/hooks/use-mounted'
 
 type PostData = {
 	slug: string
@@ -30,6 +31,8 @@ interface BlogListProps {
 }
 
 export default function BlogList({ posts }: BlogListProps) {
+	const mounted = useMounted()
+
 	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
 	// Calculate reading time based on description length (rough estimate)
@@ -55,7 +58,7 @@ export default function BlogList({ posts }: BlogListProps) {
 				{/* Header Section */}
 				<header className="mb-12">
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
+						initial={mounted ? { opacity: 0, y: 20 } : false}
 						animate={{ opacity: 1, y: 0 }}
 						className="space-y-4">
 						<div className="flex items-center gap-3">
@@ -93,7 +96,7 @@ export default function BlogList({ posts }: BlogListProps) {
 							return (
 								<motion.div
 									key={post.slug}
-									initial={{ opacity: 0, y: 20 }}
+									initial={mounted ? { opacity: 0, y: 20 } : false}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ delay: index * 0.05 }}
 									onMouseEnter={() => setHoveredIndex(index)}
