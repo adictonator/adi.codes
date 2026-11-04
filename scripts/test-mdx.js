@@ -1,55 +1,80 @@
+// Compiles every post in content/blog with the same MDX + remark-gfm setup
+// the site uses (app/blog/[slug]/page.tsx), so syntax that would fail the
+// Vercel build — `<https://…>` autolinks, a stray `{`, an unclosed tag —
+// fails here first, with the line number.
+//
+//   bun run test:mdx            all posts
+//   bun run test:mdx my-post    just one
+
 const fs = require('fs')
 const path = require('path')
 const matter = require('gray-matter')
 
 const contentDir = path.join(process.cwd(), 'content', 'blog')
 
-function getAllFiles() {
-	if (!fs.existsSync(contentDir)) return []
-	return fs
-		.readdirSync(contentDir)
-		.filter(f => f.endsWith('.md') || f.endsWith('.mdx'))
+async function checkFile(file, compile, remarkGfm) {
+	const slug = file.replace(/\.mdx?$/, '')
+	const src = fs.readFileSync(path.join(contentDir, file), 'utf8')
+	const problems = []
+
+	if (!src.trim()) return { slug, problems: ['file is empty'] }
+
+	const { data, content } = matter(src)
+	if (!data || Object.keys(data).length === 0)
+		problems.push('missing frontmatter')
+	if (!content.trim()) problems.push('empty body')
+
+	try {
+		await compile(content, { remarkPlugins: [remarkGfm] })
+	} catch (err) {
+		// gray-matter strips the frontmatter, so shift line numbers back.
+		const offset = src.slice(0, src.indexOf(content)).split('\n').length - 1
+		const line = err.line ? `line ${err.line + offset}: ` : ''
+		problems.push(`MDX won't compile — ${line}${err.reason || err.message}`)
+	}
+
+	return { slug, draft: data.status === 'draft', problems }
 }
 
 async function run() {
-	const files = getAllFiles()
-	if (!files.length) {
-		console.log('No blog files found in content/blog')
-		process.exit(0)
+	if (!fs.existsSync(contentDir)) {
+		console.log('No content/blog directory')
+		return
 	}
 
-	let failed = false
+	const only = process.argv[2]
+	const files = fs
+		.readdirSync(contentDir)
+		.filter(f => /\.mdx?$/.test(f))
+		.filter(f => !only || f.replace(/\.mdx?$/, '') === only)
 
+	if (!files.length) {
+		console.log(only ? `No post named "${only}"` : 'No blog files found')
+		process.exit(only ? 1 : 0)
+	}
+
+	const { compile } = await import('@mdx-js/mdx')
+	const { default: remarkGfm } = await import('remark-gfm')
+
+	let failedPublished = 0
 	for (const file of files) {
-		const slug = file.replace(/\.mdx?$/, '')
-		process.stdout.write(`Checking ${slug} ... `)
-		const filePath = path.join(contentDir, file)
-		try {
-			const src = fs.readFileSync(filePath, 'utf8')
-			if (!src || !src.trim()) throw new Error('Empty file')
-			const { data, content } = matter(src)
-			if (!data || Object.keys(data).length === 0)
-				throw new Error('Missing frontmatter')
-			if (!content || !content.trim())
-				throw new Error('Empty content body')
-			console.log('OK')
-		} catch (err) {
-			console.error(
-				'\nERROR in',
-				slug,
-				':',
-				err && err.message ? err.message : err,
-			)
-			failed = true
+		const { slug, draft, problems } = await checkFile(file, compile, remarkGfm)
+		const label = `${slug}${draft ? ' [draft]' : ''}`
+		if (problems.length === 0) {
+			console.log(`OK    ${label}`)
+		} else {
+			console.log(`FAIL  ${label}`)
+			for (const p of problems) console.log(`        ${p}`)
+			if (!draft) failedPublished++
 		}
 	}
 
-	if (failed) {
-		console.error('\nOne or more posts failed checks')
-		process.exit(1)
-	}
-	console.log('\nAll blog posts passed basic MD checks')
-	process.exit(0)
+	// Drafts are reported but only published posts fail the run — a broken
+	// draft doesn't block deploying everything else.
+	if (failedPublished) process.exit(1)
 }
 
-run()
+run().catch(err => {
+	console.error(err)
+	process.exit(1)
+})

@@ -1,55 +1,77 @@
-import { getPostBySlug, getAllPosts } from '@/lib/mdx'
+import type { ComponentPropsWithoutRef } from 'react'
+import Link from 'next/link'
+import { MDXRemote, type MDXRemoteProps } from 'next-mdx-remote/rsc'
+import remarkGfm from 'remark-gfm'
+import rehypeSlug from 'rehype-slug'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import { getAllPosts, getPostBySlug, getRelatedPosts } from '@/lib/mdx'
 import { siteConfig } from '@/lib/site'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { pageMetadata } from '@/lib/metadata'
+import PageShell from '@/components/page-shell'
 import AnimatedBlogPost from '@/components/blog/animated-blog-post'
 import CodeBlock from '@/components/blog/code-block'
 
-const mdxComponents = {
-	pre: ({ children, ...props }: any) => {
-		const codeElement = children?.props
-		if (codeElement?.children && typeof codeElement.children === 'string') {
-			const className = codeElement.className || 'language-text'
+// GFM tables/strikethrough, plus stable heading ids wrapped in anchor links so
+// headings are deep-linkable (and eligible as Google jump-to-section results).
+const mdxOptions: MDXRemoteProps['options'] = {
+	mdxOptions: {
+		remarkPlugins: [remarkGfm],
+		rehypePlugins: [
+			rehypeSlug,
+			[
+				rehypeAutolinkHeadings,
+				{ behavior: 'wrap', properties: { className: ['anchor'] } },
+			],
+		],
+	},
+}
+
+const mdxComponents: MDXRemoteProps['components'] = {
+	pre: ({ children, ...props }: ComponentPropsWithoutRef<'pre'>) => {
+		const codeElement = (children as { props?: Record<string, unknown> })
+			?.props
+		if (typeof codeElement?.children === 'string') {
 			return (
-				<CodeBlock className={className}>
+				<CodeBlock
+					className={
+						(codeElement.className as string) || 'language-text'
+					}>
 					{codeElement.children}
 				</CodeBlock>
 			)
 		}
 		return <pre {...props}>{children}</pre>
 	},
-
-	// Map heading elements so we can apply Tailwind classes directly from MDX
-	h1: (props: any) => (
-		<h1
-			className="mt-8 mb-4 text-3xl leading-tight font-bold md:text-4xl"
-			{...props}
-		/>
+	// The post title is the page's only <h1>. A `#` heading in the body would
+	// be a second one, so it renders as an <h2> instead.
+	h1: (props: ComponentPropsWithoutRef<'h2'>) => <h2 {...props} />,
+	// Internal links stay client-side; external ones open in a new tab.
+	a: ({ href = '', ...props }: ComponentPropsWithoutRef<'a'>) => {
+		if (href.startsWith('/')) return <Link href={href} {...props} />
+		if (href.startsWith('#')) return <a href={href} {...props} />
+		return (
+			<a href={href} target="_blank" rel="noopener noreferrer" {...props} />
+		)
+	},
+	// Wide tables scroll inside the post instead of widening the page on phones.
+	table: (props: ComponentPropsWithoutRef<'table'>) => (
+		<div className="overflow-x-auto">
+			<table {...props} />
+		</div>
 	),
-	h2: (props: any) => (
-		<h2
-			className="anchor mt-6 mb-3 text-2xl leading-tight font-semibold md:text-3xl"
-			{...props}
-		/>
-	),
-	h3: (props: any) => (
-		<h3
-			className="mt-5 mb-2 text-xl font-semibold md:text-2xl"
-			{...props}
-		/>
-	),
-	h4: (props: any) => (
-		<h4 className="mt-4 mb-2 text-lg font-medium" {...props} />
+	img: ({ alt = '', ...props }: ComponentPropsWithoutRef<'img'>) => (
+		// eslint-disable-next-line @next/next/no-img-element
+		<img alt={alt} loading="lazy" decoding="async" {...props} />
 	),
 }
 
-// Only slugs returned by getAllPosts() (which excludes drafts) are valid —
-// anything else 404s instead of falling back to on-demand SSR, so a draft's
-// slug can't be reached by guessing the URL.
+// Only slugs returned by getAllPosts() are valid — anything else 404s instead
+// of falling back to on-demand SSR. Since getAllPosts() drops drafts in any
+// deployed build, a draft's URL can't be reached by guessing it.
 export const dynamicParams = false
 
-export async function generateStaticParams() {
-	const posts = getAllPosts()
-	return posts.map(post => ({ slug: post.slug }))
+export function generateStaticParams() {
+	return getAllPosts().map(post => ({ slug: post.slug }))
 }
 
 export async function generateMetadata({
@@ -58,48 +80,37 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>
 }) {
 	const { slug } = await params
-	const { frontmatter } = await getPostBySlug(slug)
+	const { post } = getPostBySlug(slug)
+	const year = new Date(post.date).getUTCFullYear()
 
-	const title = frontmatter.title as string
-	const description = frontmatter.description as string
-	const publishedTime = frontmatter.date as string
-	const tags = frontmatter.tags as string[]
-	// Ensure Open Graph images include the absolute URL to your dynamic OG endpoint
-	const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://adi.codes'
-	const ogImage = `${site}/api/og/${slug}`
-
-	return {
-		title,
-		description,
-		keywords: tags?.join(', '),
-		authors: [{ name: 'Aditya Bhaskar Sharma' }],
-		publisher: 'Aditya Bhaskar Sharma',
-		other: {
-			copyright: `&copy; ${new Date(publishedTime).getFullYear()} Aditya Bhaskar Sharma. All rights reserved.`,
-			license: 'CC BY-NC-ND 4.0 with AI restrictions',
-			'license-url': 'https://adi.codes/license',
-			'ai-training': 'prohibited',
+	return pageMetadata({
+		title: post.isDraft ? `[Draft] ${post.title}` : post.title,
+		description: post.description,
+		path: `/blog/${slug}`,
+		keywords: post.tags,
+		// Belt and braces: drafts are never built in a deployed build, but if
+		// one ever is (SHOW_DRAFTS=1 on the host), keep it out of the index.
+		noIndex: post.isDraft,
+		image: {
+			url: `/api/og/${slug}`,
+			width: 1200,
+			height: 630,
+			alt: post.title,
 		},
 		openGraph: {
-			title,
-			description,
 			type: 'article',
-			publishedTime,
-			authors: ['Aditya Bhaskar Sharma'],
-			tags: frontmatter.tags as string[],
-			url: `${site}/blog/${slug}`,
-			images: [ogImage],
+			publishedTime: post.date,
+			...(post.updated && { modifiedTime: post.updated }),
+			authors: [siteConfig.url],
+			tags: post.tags,
 		},
-		twitter: {
-			card: 'summary_large_image',
-			title,
-			description,
-			creator: '@adictonator',
+		other: {
+			copyright: `© ${year} ${siteConfig.name}. All rights reserved.`,
+			license: 'CC BY-NC-ND 4.0 with AI restrictions',
+			'license-url': `${siteConfig.url}/license`,
+			'ai-training': 'prohibited',
 		},
-		alternates: {
-			canonical: `/blog/${slug}`,
-		},
-	}
+	})
 }
 
 export default async function BlogPost({
@@ -108,60 +119,71 @@ export default async function BlogPost({
 	params: Promise<{ slug: string }>
 }) {
 	const { slug } = await params
-	const { frontmatter, mdxContent } = await getPostBySlug(slug)
+	const { post, content } = getPostBySlug(slug)
+	const related = getRelatedPosts(slug)
+	const url = `${siteConfig.url}/blog/${slug}`
+	const year = new Date(post.date).getUTCFullYear()
 
 	const structuredData = {
 		'@context': 'https://schema.org',
-		'@type': 'BlogPosting',
-		headline: frontmatter.title,
-		description: frontmatter.description,
-		image: `${siteConfig.url}/api/og/${slug}`,
-		author: {
-			'@type': 'Person',
-			'@id': `${siteConfig.url}/#person`,
-			name: siteConfig.name,
-			url: siteConfig.url,
-		},
-		publisher: {
-			'@type': 'Person',
-			'@id': `${siteConfig.url}/#person`,
-			name: siteConfig.name,
-		},
-		datePublished: frontmatter.date,
-		dateModified: (frontmatter.updated as string) ?? frontmatter.date,
-		keywords: (frontmatter.tags as string[])?.join(', '),
-		url: `${siteConfig.url}/blog/${slug}`,
-		mainEntityOfPage: {
-			'@type': 'WebPage',
-			'@id': `${siteConfig.url}/blog/${slug}`,
-		},
-		license: 'https://adi.codes/license',
-		copyrightHolder: {
-			'@type': 'Person',
-			name: 'Aditya Bhaskar Sharma',
-		},
-		copyrightYear: new Date(frontmatter.date as string).getFullYear(),
-		copyrightNotice:
-			'© Aditya Bhaskar Sharma. All rights reserved. This content may not be used for AI training without explicit written permission.',
-		conditionsOfAccess:
-			'This work is licensed under CC BY-NC-ND 4.0 with additional AI use restrictions. See https://adi.codes/license for full terms.',
+		'@graph': [
+			{
+				'@type': 'BlogPosting',
+				headline: post.title,
+				description: post.description,
+				image: {
+					'@type': 'ImageObject',
+					url: `${siteConfig.url}/api/og/${slug}`,
+					width: 1200,
+					height: 630,
+				},
+				author: { '@id': `${siteConfig.url}/#person` },
+				publisher: { '@id': `${siteConfig.url}/#person` },
+				datePublished: post.date,
+				dateModified: post.updated ?? post.date,
+				keywords: post.tags.join(', '),
+				inLanguage: 'en',
+				url,
+				mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+				isPartOf: { '@id': `${siteConfig.url}/#website` },
+				license: `${siteConfig.url}/license`,
+				copyrightHolder: { '@id': `${siteConfig.url}/#person` },
+				copyrightYear: year,
+				copyrightNotice: `© ${siteConfig.name}. All rights reserved. This content may not be used for AI training without explicit written permission.`,
+				conditionsOfAccess: `This work is licensed under CC BY-NC-ND 4.0 with additional AI use restrictions. See ${siteConfig.url}/license for full terms.`,
+			},
+			{
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.url },
+					{ '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteConfig.url}/blog` },
+					{ '@type': 'ListItem', position: 3, name: post.title, item: url },
+				],
+			},
+		],
 	}
 
 	return (
-		<>
+		<PageShell
+			currentPath={`~/blog/${slug}`}
+			breadcrumbs={[
+				{ label: 'blog', href: '/blog', command: 'cd' },
+				{ label: slug, href: `/blog/${slug}` },
+			]}
+			availability="blog-post">
 			<script
 				type="application/ld+json"
 				dangerouslySetInnerHTML={{
 					__html: JSON.stringify(structuredData),
 				}}
 			/>
-			<AnimatedBlogPost
-				slug={slug}
-				title={frontmatter.title as string}
-				date={frontmatter.date as string}
-				tags={frontmatter.tags as string[]}>
-				<MDXRemote source={mdxContent} components={mdxComponents} />
+			<AnimatedBlogPost post={post} related={related}>
+				<MDXRemote
+					source={content}
+					components={mdxComponents}
+					options={mdxOptions}
+				/>
 			</AnimatedBlogPost>
-		</>
+		</PageShell>
 	)
 }

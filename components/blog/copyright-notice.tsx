@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { ShieldAlert, Scale, FileText, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { useMounted } from '@/hooks/use-mounted'
+import { mailto } from '@/lib/site'
 
 interface CopyrightNoticeProps {
 	year?: number
@@ -20,13 +21,14 @@ export default function CopyrightNotice({
 
 	if (minimal) {
 		return (
-			<div className="border-t border-dashed border-neutral-800 pt-6 font-mono text-xs text-neutral-500">
+			<div className="border-t border-dashed border-neutral-800 pt-6 font-mono text-xs leading-relaxed text-neutral-500">
 				<p>
-					© {year} {authorName}. All rights reserved.{' '}
+					&copy; {year} {authorName}. Licensed CC BY-NC-ND 4.0 —
+					share it with credit, but not for AI training.{' '}
 					<Link
 						href="/license"
 						className="text-blue-400 hover:underline">
-						View License
+						Full license
 					</Link>
 				</p>
 			</div>
@@ -47,17 +49,17 @@ export default function CopyrightNotice({
 			</div>
 
 			{/* License Information */}
-			<div className="space-y-6 rounded-lg border border-neutral-800 bg-neutral-900/30 p-6">
+			<div className="space-y-6 border border-neutral-800 bg-neutral-900/30 p-6">
 				{/* Main Copyright */}
 				<div className="flex items-start gap-3">
-					<Scale className="mt-1 h-5 w-5 shrink-0 text-blue-400" />
+					<Scale className="mt-1 h-5 w-5 shrink-0 text-neutral-500" />
 					<div className="space-y-2">
 						<h3 className="font-mono text-sm font-medium text-neutral-200">
 							Copyright & Ownership
 						</h3>
 						<p className="text-sm leading-relaxed text-neutral-400">
-							© {year} {authorName}. All rights reserved. This
-							content is protected by copyright law and
+							&copy; {year} {authorName}. All rights reserved.
+							This content is protected by copyright law and
 							international treaties.
 						</p>
 					</div>
@@ -65,7 +67,7 @@ export default function CopyrightNotice({
 
 				{/* AI Use Restriction */}
 				<div className="flex items-start gap-3">
-					<ShieldAlert className="mt-1 h-5 w-5 shrink-0 text-amber-400" />
+					<ShieldAlert className="mt-1 h-5 w-5 shrink-0 text-neutral-500" />
 					<div className="space-y-2">
 						<h3 className="font-mono text-sm font-medium text-neutral-200">
 							AI Training & Model Use Prohibited
@@ -82,7 +84,7 @@ export default function CopyrightNotice({
 
 				{/* License Terms */}
 				<div className="flex items-start gap-3">
-					<FileText className="mt-1 h-5 w-5 shrink-0 text-purple-400" />
+					<FileText className="mt-1 h-5 w-5 shrink-0 text-neutral-500" />
 					<div className="space-y-2">
 						<h3 className="font-mono text-sm font-medium text-neutral-200">
 							License Terms
@@ -120,8 +122,13 @@ export default function CopyrightNotice({
 			{/* Footer Note */}
 			<div className="font-mono text-xs text-neutral-600">
 				<span className="text-neutral-700">#</span> For licensing
-				inquiries or permission requests, please contact me through my
-				social channels.
+				inquiries or permission requests,{' '}
+				<a
+					href={mailto('License request via adi.codes')}
+					className="text-blue-400 hover:underline">
+					email me
+				</a>
+				.
 			</div>
 		</motion.div>
 	)

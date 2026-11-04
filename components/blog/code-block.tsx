@@ -2,10 +2,7 @@
 
 import { useState } from 'react'
 import { Copy, Check } from 'lucide-react'
-import { Fira_Code } from 'next/font/google'
 import { Highlight, themes } from 'prism-react-renderer'
-
-const firaCode = Fira_Code({ subsets: ['latin'] })
 
 interface CodeBlockProps {
 	children: string
@@ -15,95 +12,68 @@ interface CodeBlockProps {
 export default function CodeBlock({ children, className }: CodeBlockProps) {
 	const [copied, setCopied] = useState(false)
 
-	// Extract language from className (e.g., "language-tsx" -> "tsx")
+	// "language-tsx" -> "tsx"
 	const language = className?.replace('language-', '') || 'text'
 	const code = children.trim()
 
-	const copyToClipboard = () => {
-		navigator.clipboard.writeText(code)
-		setCopied(true)
-		setTimeout(() => setCopied(false), 2000)
+	const copyToClipboard = async () => {
+		try {
+			await navigator.clipboard.writeText(code)
+			setCopied(true)
+			setTimeout(() => setCopied(false), 2000)
+		} catch {
+			// Clipboard can be blocked (http, iframes); nothing useful to show.
+		}
 	}
 
+	// `dark` keeps the block dark in light mode: the syntax theme is a dark one.
 	return (
-		<div className="group relative my-8 overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900/50">
-			<div className="flex items-center justify-between border-b border-neutral-800 bg-neutral-800/50 px-4 py-2">
+		<div className="dark not-prose group relative my-8 overflow-hidden border border-dashed border-neutral-800 bg-neutral-900 text-neutral-200">
+			<div className="flex items-center justify-between border-b border-dashed border-neutral-800 bg-neutral-900/80 px-4 py-2 font-mono">
 				<span className="text-xs text-neutral-400">{language}</span>
 				<button
+					type="button"
 					onClick={copyToClipboard}
-					className="flex items-center gap-1 rounded px-2 py-1 text-xs text-neutral-500 transition-colors hover:text-neutral-300">
+					aria-label={copied ? 'Copied' : 'Copy code'}
+					className="flex items-center gap-1 px-2 py-1 text-xs text-neutral-500 transition-colors hover:text-neutral-300">
 					{copied ? (
-						<Check className="h-3.5 w-3.5 text-green-500" />
+						<Check className="size-3.5 text-emerald-500" />
 					) : (
-						<Copy className="h-3.5 w-3.5" />
+						<Copy className="size-3.5" />
 					)}
-					{copied ? 'Copied!' : 'Copy'}
+					<span aria-live="polite">{copied ? 'Copied!' : 'Copy'}</span>
 				</button>
 			</div>
 			<div className="relative overflow-x-auto">
 				<Highlight
 					theme={themes.oneDark}
 					code={code}
-					language={language as any}>
-					{({
-						className,
-						style,
-						tokens,
-						getLineProps,
-						getTokenProps,
-					}) => (
-						<div className="flex">
-							{/* Line numbers gutter */}
+					language={language}>
+					{({ style, tokens, getLineProps, getTokenProps }) => (
+						<div className="font-fira flex text-sm leading-6">
+							{/* Line numbers */}
 							<div
-								className={`sticky left-0 z-10 border-r border-neutral-800 bg-neutral-900/90 py-4 pr-3 pl-4 text-right select-none ${firaCode.className}`}>
-								{tokens.map((line, i) => (
-									<div
-										key={i + 1}
-										className="relative flex h-6 items-center justify-end text-sm leading-relaxed text-neutral-600">
-										<span>{i + 1}</span>
+								aria-hidden="true"
+								className="sticky left-0 z-10 border-r border-dashed border-neutral-800 bg-neutral-900 py-4 pr-3 pl-4 text-right text-neutral-600 select-none">
+								{tokens.map((_, i) => (
+									<div key={i} className="h-6">
+										{i + 1}
 									</div>
 								))}
 							</div>
-							{/* Code content */}
 							<pre
-								className={`flex-1 p-4 ${firaCode.className} text-sm leading-relaxed`}
-								style={{
-									...style,
-									backgroundColor: 'transparent',
-									margin: 0,
-									fontSize: '14px',
-									lineHeight: '1.5rem',
-								}}>
+								className="flex-1 p-4"
+								style={{ ...style, backgroundColor: 'transparent', margin: 0 }}>
 								{tokens.map((line, i) => {
-									const lineProps = getLineProps({
-										line,
-										key: i,
-									})
-									const { key: lineKey, ...restLineProps } =
-										lineProps
+									const { key: _lineKey, ...lineProps } =
+										getLineProps({ line, key: i })
 									return (
-										<div
-											key={i}
-											{...restLineProps}
-											className="h-6"
-											style={{ margin: 0, padding: 0 }}>
-											{line.map((token, key) => (
-												<span
-													{...getTokenProps({
-														token,
-														key,
-													})}
-													style={{
-														...getTokenProps({
-															token,
-															key,
-														}).style,
-														fontFamily: 'inherit',
-														fontSize: 'inherit',
-														lineHeight: 'inherit',
-													}}
-												/>
-											))}
+										<div key={i} {...lineProps} className="h-6">
+											{line.map((token, key) => {
+												const { key: _tokenKey, ...tokenProps } =
+													getTokenProps({ token, key })
+												return <span key={key} {...tokenProps} />
+											})}
 										</div>
 									)
 								})}

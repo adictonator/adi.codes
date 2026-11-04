@@ -72,7 +72,7 @@ export default function NoBlogs() {
 								|___/
 `
 	return (
-		<div className="min-h-[400px] border border-dashed border-neutral-700/80 bg-neutral-950">
+		<div className="min-h-100 border border-dashed border-neutral-700/80 bg-neutral-950">
 			<div className="h-full p-6">
 				<div className="flex h-full flex-col">
 					{/* Terminal Header */}
@@ -122,7 +122,7 @@ export default function NoBlogs() {
 						</div>
 
 						<Link
-							href="/rss"
+							href="/feed.xml"
 							className="flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/50 px-3 py-1.5 text-sm text-neutral-400 hover:bg-neutral-900 hover:text-neutral-300">
 							<span>Subscribe</span>
 							<ArrowUpRight className="h-3.5 w-3.5" />

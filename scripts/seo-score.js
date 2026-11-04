@@ -133,10 +133,11 @@ function scoreSlugMatch(title, slug) {
 	return Math.round(config.weights.slugMatch * ratio)
 }
 
-function scoreOgImage(frontmatter) {
-	return frontmatter.image || frontmatter.ogImage || frontmatter.og_image
-		? config.weights.ogImage
-		: 0
+// Every post gets an OG image from app/api/og/[slug], so this is always
+// satisfied. Frontmatter image fields are NOT read by the app — don't ask for
+// them here, or the report sends you off adding inert frontmatter.
+function scoreOgImage() {
+	return config.weights.ogImage
 }
 
 function scoreImageAlt(total, withAlt) {
@@ -149,12 +150,10 @@ function scoreInternalLinks(n) {
 	return n >= 1 ? config.weights.internalLinks : 0
 }
 
-function scoreCanonical(frontmatter) {
-	return frontmatter.canonical ||
-		frontmatter.canonical_url ||
-		frontmatter.canonicalUrl
-		? config.weights.canonical
-		: 0
+// app/blog/[slug]/page.tsx always emits alternates.canonical = /blog/<slug>.
+// Same as above: a frontmatter canonical field would do nothing.
+function scoreCanonical() {
+	return config.weights.canonical
 }
 
 function scoreAccessibility(totalImages, withAlt) {
@@ -198,19 +197,13 @@ function analyzePost(file) {
 	signals.wordCount = { value: words, score: scoreWordCount(words) }
 	signals.readingTime = { value: mins, score: scoreReadingTime(mins) }
 	signals.slugMatch = { value: slug, score: scoreSlugMatch(title, slug) }
-	signals.ogImage = {
-		value: !!(fm.image || fm.ogImage || fm.og_image),
-		score: scoreOgImage(fm),
-	}
+	signals.ogImage = { value: `auto: /api/og/${slug}`, score: scoreOgImage() }
 	signals.imageAlt = {
 		value: images,
 		score: scoreImageAlt(images.total, images.withAlt),
 	}
 	signals.internalLinks = { value: links, score: scoreInternalLinks(links) }
-	signals.canonical = {
-		value: !!(fm.canonical || fm.canonical_url || fm.canonicalUrl),
-		score: scoreCanonical(fm),
-	}
+	signals.canonical = { value: `auto: /blog/${slug}`, score: scoreCanonical() }
 	signals.accessibility = {
 		value: { totalImages: images.total, withAlt: images.withAlt },
 		score: scoreAccessibility(images.total, images.withAlt),
@@ -227,18 +220,19 @@ function analyzePost(file) {
 	// H1 is provided via frontmatter.title in the site template; do not recommend adding an H1 here
 	if (words < 300)
 		recommendations.push('Consider increasing word count (min 300 words)')
-	if (!fm.image && !fm.ogImage && !fm.og_image)
-		recommendations.push(
-			'Add an og/image in frontmatter for social previews',
-		)
 	if (images.total > 0 && images.withAlt < images.total)
 		recommendations.push('Add alt text to images for accessibility and SEO')
 	if (links < 1)
 		recommendations.push('Add at least one internal link to other content')
-	if (!(fm.canonical || fm.canonical_url || fm.canonicalUrl))
-		recommendations.push('Add a canonical URL to frontmatter')
 
-	return { slug, file: filePath, score: totalScore, signals, recommendations }
+	return {
+		slug,
+		file: filePath,
+		draft: fm.status === 'draft',
+		score: totalScore,
+		signals,
+		recommendations,
+	}
 }
 
 function ensureOutDir() {
@@ -260,7 +254,9 @@ function run() {
 		const outPath = path.join(outDir, `${r.slug}.json`)
 		fs.writeFileSync(outPath, JSON.stringify(r, null, 2), 'utf8')
 		// Human summary
-		console.log(`Post: ${r.slug} — Score: ${r.score}/100`)
+		console.log(
+			`Post: ${r.slug}${r.draft ? ' [draft]' : ''} — Score: ${r.score}/100`,
+		)
 		for (const rec of r.recommendations) console.log(`  - ${rec}`)
 		console.log('')
 	}
@@ -271,9 +267,15 @@ function run() {
 	)
 	console.log(`Average SEO score: ${avg}/100 across ${reports.length} posts`)
 
-	if (reports.some(r => r.score < config.minScore)) {
+	// Drafts are work in progress — report them, but only gate on what ships.
+	const failing = reports.filter(
+		r => !r.draft && r.score < config.minScore,
+	)
+	if (failing.length) {
 		console.error(
-			`One or more posts scored below the minScore (${config.minScore})`,
+			`Below the minScore (${config.minScore}): ${failing
+				.map(r => r.slug)
+				.join(', ')}`,
 		)
 		process.exit(2)
 	}
