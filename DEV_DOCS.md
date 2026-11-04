@@ -43,7 +43,7 @@ Recommended dev tools to install (Bun + Homebrew where noted):
     # prose lint (vale)
     bun run lint:prose
 
-    # compile all MDX posts to catch MDX/component runtime errors
+    # compile all MDX posts with the site's MDX setup
     bun run test:mdx
 
     # run all the quick checks
@@ -53,5 +53,5 @@ Recommended dev tools to install (Bun + Homebrew where noted):
 Notes
 
 - Vale requires a `styles/` folder if you want stronger rules; a basic `.vale.ini` is included.
-- The `test-mdx` script uses the repo's `lib/mdx.ts` to compile posts with the same pipeline used by the site. It uses `tsx` to run TypeScript directly.
-- GitHub Actions workflow is included to run these checks on PRs.
+- `test:mdx` compiles every post with `@mdx-js/mdx` + `remark-gfm`, the same MDX setup the site uses, and reports syntax errors with line numbers. Drafts are reported but only published posts fail the run.
+- `bun run lint` uses `eslint.config.mjs` (flat config, `next/core-web-vitals`). It currently crashes inside `@typescript-eslint` because the repo is on TypeScript 7, which doesn't expose the JS API typescript-eslint needs; `bun run typecheck` works. Writing and publishing posts is covered in `BLOGGING.md`.

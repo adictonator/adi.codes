@@ -1,74 +1,49 @@
-<!--
-	Clean, minimal profile README inspired by the site's design.
-	Uses an inline SVG accent, small iconography and a dynamic Shields badge
-	that reads from `.github/status.json`.
--->
+# adi.codes
 
-# Hi — I’m Adi 👋
+Source for [adi.codes](https://adi.codes), the portfolio and notes of Aditya
+Bhaskar Sharma — product engineer, iOS, React Native and full-stack web.
 
-<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:8px;">
-	<rect width="24" height="24" rx="6" fill="#2b6cb0" />
-	<path d="M7 12h10M7 8h6M7 16h10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+**Open to full-time roles, contracts (short or long term) and freelance
+projects.** [Email](mailto:adityabhaskarsharma@gmail.com) ·
+[LinkedIn](https://www.linkedin.com/in/-abs-) ·
+[Résumé](https://adi.codes/assets/resume/mobile-resume-latest.pdf) ·
+client projects go through [LazyCodeLab](https://lazycodelab.com).
 
-Welcome — I build thoughtful front-end experiences, small modular systems, and mobile apps. I care about clear interfaces, accessible interactions, and tooling that ships.
+## What's in here
 
----
+- **Next.js 16** (App Router, React 19, Turbopack), **Tailwind CSS 4**,
+  Framer Motion, TypeScript.
+- A terminal-flavoured, two-panel homepage that tracks the section you're
+  reading; on phones it collapses into one column with a bottom nav.
+- Projects and a project graveyard driven from `data/projects.ts` and
+  `data/graveyard.ts` — honest status, version and dates for each.
+- A markdown/MDX blog with drafts, generated social images
+  (`/api/og/<slug>`), JSON-LD, sitemap, and a full-content RSS feed at
+  `/feed.xml`. Writing and publishing a post is two commands — see
+  [`BLOGGING.md`](./BLOGGING.md).
+- Light and dark themes from one set of classes: light mode remaps the neutral
+  and accent scales in `app/globals.css` instead of duplicating styles.
 
-## About
+## Run it
 
-I’m a product-minded software engineer who turns ideas into polished UIs and reliable developer experiences. You can find my work and writing at https://adi.codes.
+```bash
+bun install
+bun run dev        # http://localhost:3000
+bun run build      # production build + sitemap
+bun run typecheck
+```
 
-What I care about:
+## Where things live
 
-- Clean, readable UI and code
-- Fast, accessible experiences
-- Small teams moving quickly with strong design sense
+| Path | What |
+| --- | --- |
+| `lib/site.ts` | Name, role, availability, links — the one place to update them |
+| `lib/metadata.ts` | Per-page SEO metadata (canonical, Open Graph, X, RSS link) |
+| `data/` | Projects, experience, skills, uses, socials, graveyard |
+| `content/blog/` | Posts (the filename is the URL) |
+| `components/page-shell.tsx` | Frame for every page except the homepage |
 
----
+## License
 
-## Right now — Mudo (iOS)
-
-![Currently working on](https://img.shields.io/badge/dynamic/json?label=Currently%20working%20on&query=$.current&url=https%3A%2F%2Fraw.githubusercontent.com%2Fadictonator%2Fadi.codes%2Fmaster%2F.github%2Fstatus.json&color=2b6cb0)
-
-I’m focused on Mudo — an iOS app aiming for a polished, delightful experience. Current priorities:
-
-- Implementing core flows and state management
-- Polishing animations and transitions
-- Improving offline resilience and data sync
-- Shipping an early beta and iterating on feedback
-
-If you want to test or chat about details, DM me — feedback is gold.
-
----
-
-## Skills & tools
-
-- Languages: TypeScript · JavaScript · Swift · HTML · CSS
-- Front-end: React · Next.js · Tailwind / PostCSS
-- Mobile: Swift · SwiftUI / UIKit · MVVM · Combine
-- Tooling: Git · Bun / npm · Storybook · Jest · Testing Library
-
----
-
-## Quick links
-
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle;margin-right:6px;">
-	<path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="#2b6cb0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-	<path d="M7 12h10M7 8h6M7 16h10" stroke="#2b6cb0" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-[Website](https://adi.codes) · [Blog](https://adi.codes/blog) · [Projects](https://github.com/adictonator?tab=repositories)
-
----
-
-## Want to reach me?
-
-- Website: https://adi.codes
-- Email: available on my site
-- Socials: links on my site (Twitter / Threads / LinkedIn)
-
----
-
-Thanks for stopping by — I keep this short and updated. If something here connects, let’s talk.
-
-— Adi
+Content is © Aditya Bhaskar Sharma, licensed CC BY-NC-ND 4.0 with additional
+AI-use restrictions — see [adi.codes/license](https://adi.codes/license).
