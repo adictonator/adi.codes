@@ -56,7 +56,7 @@ function StatusBar() {
 				transition={{ duration: 2, repeat: Infinity }}
 				className="h-1 w-1 rounded-full bg-emerald-500"
 			/>
-			<span className="font-mono text-[8px] text-neutral-600">
+			<span className="text-tiny font-mono text-neutral-600">
 				Desktop site has easter eggs, btw &mdash; v1.0.0
 			</span>
 		</div>

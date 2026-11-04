@@ -1,9 +1,13 @@
 import { getAllPosts } from '@/lib/mdx'
+import { pageMetadata } from '@/lib/metadata'
+import { siteConfig } from '@/lib/site'
 import HomeClient from './home-client'
 
-export default function Home() {
-	// Fetch blog posts on the server
-	const posts = getAllPosts()
+export const metadata = pageMetadata({
+	description: siteConfig.description,
+	path: '/',
+})
 
-	return <HomeClient posts={posts} />
+export default function Home() {
+	return <HomeClient posts={getAllPosts()} />
 }

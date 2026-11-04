@@ -9,6 +9,7 @@ import TerminalEasterEgg from './footer/terminal-easter-egg'
 import KeySequenceDialog from './footer/key-sequence-dialog'
 import { Heart } from 'lucide-react'
 import Link from 'next/link'
+import { siteConfig } from '@/lib/site'
 
 export default function Footer() {
 	const [easterEggsUnlocked, setEasterEggsUnlocked] = useState(false)
@@ -32,13 +33,20 @@ export default function Footer() {
 
 							<div className="text-xxs text-neutral-600 sm:text-xs">
 								<p className="mb-1">
-									&copy; {new Date().getFullYear()} - All
-									rights reserved and stuff.{' '}
+									&copy; {new Date().getFullYear()}{' '}
+									{siteConfig.name} — all rights reserved and
+									stuff.{' '}
 									<Link
 										href="/license"
 										className="text-blue-400 hover:underline">
 										License
-									</Link>
+									</Link>{' '}
+									·{' '}
+									<a
+										href={siteConfig.feed}
+										className="text-blue-400 hover:underline">
+										RSS
+									</a>
 								</p>
 								<p>
 									No cookies were harmed in the making of this

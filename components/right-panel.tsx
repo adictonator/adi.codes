@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
 import Section from './section'
 import AboutMe from './about-me'
 import TimelineExperience from './timeline-experience'
@@ -10,29 +11,22 @@ import HireMe from './hire-me'
 import Footer from './footer'
 import BlogShowcase from './blog-showcase'
 import CreativeLab from './creative-lab'
-//import GitHubActivity from './github-activity'
 import VerticalNav from './vertical-nav'
-import Link from 'next/link'
+import MobileIntro from './mobile-intro'
+import type { Post } from '@/lib/mdx'
 import { siteConfig } from '@/lib/site'
 import { trackResumeClick } from '@/lib/ga'
 
-type PostData = {
-	slug: string
-	title?: string
-	date?: string
-	description?: string
-	tags?: string[]
-	[key: string]: any
-}
-
-// Add scrollRef prop to the component interface
 interface RightPanelProps {
 	onScroll: (section: string) => void
 	activeSection: string
 	onNavigate: (section: string) => void
 	scrollRef?: React.RefObject<HTMLDivElement | null>
-	posts?: PostData[]
+	posts?: Post[]
 }
+
+const headerLinkClass =
+	'text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100'
 
 export default function RightPanel({
 	onScroll,
@@ -102,40 +96,38 @@ export default function RightPanel({
 		// h-dvh (not h-screen): on iOS Safari 100vh is the large-viewport
 		// height, which pushes fixed-bottom UI (the mobile nav) behind the
 		// browser toolbar. dvh tracks the actually visible area.
-		<section className="flex h-dvh w-full md:w-1/2" id="right-panel">
+		<div className="flex h-dvh w-full md:w-1/2">
 			<VerticalNav
 				activeSection={activeSection}
 				onNavigate={onNavigate}
-				hasNotes={posts.length > 0}
 			/>
 
-			<section
-				className="bg-foreground border-border relative z-20 flex h-dvh w-full flex-1 flex-col border-dashed transition-all duration-200 md:w-1/2 md:border-l"
+			<div
+				className="bg-foreground border-border relative z-20 flex h-dvh w-full min-w-0 flex-1 flex-col border-dashed md:border-l"
 				id="right-panel">
-				{/* Apply the scrollRef to the scrollable container */}
 				<div
 					ref={node => {
 						containerRef.current = node
 						if (scrollRef) scrollRef.current = node
 					}}
-					className="flex-1 overflow-y-auto scroll-smooth">
+					// pb-24 keeps the footer clear of the fixed mobile nav.
+					className="flex-1 overflow-x-hidden overflow-y-auto pb-24 motion-safe:scroll-smooth md:pb-0">
+					<MobileIntro />
 					<Section title="Who? Me? Oh, okay" ariaTitle="about">
 						<AboutMe />
 					</Section>
 					<Section
-						title="Experimental stuff"
+						title="Things I've shipped"
 						ariaTitle="lab"
 						headerChildren={
-							<Link
-								className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100"
-								href={'/projects'}>
-								View all projects
+							<Link className={headerLinkClass} href="/projects">
+								All projects
 							</Link>
 						}>
 						<CreativeLab />
 					</Section>
 					<Section
-						title="	Professional Experience"
+						title="Professional experience"
 						ariaTitle="experience"
 						headerChildren={
 							<a
@@ -146,8 +138,8 @@ export default function RightPanel({
 								onClick={() =>
 									trackResumeClick({ variant: 'ios' })
 								}
-								className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100">
-								Download Résumé
+								className={headerLinkClass}>
+								Résumé
 							</a>
 						}>
 						<TimelineExperience />
@@ -163,23 +155,16 @@ export default function RightPanel({
 						}>
 						<SkillsShowcase selectedCategory={selectedCategory} />
 					</Section>
-					{posts.length > 0 && (
-						<Section
-							title="Notes"
-							ariaTitle="blog"
-							headerChildren={
-								<Link
-									className="text-neutral-300/80 transition-colors duration-200 hover:text-neutral-100"
-									href={'/blog'}>
-									View all articles
-								</Link>
-							}>
-							<BlogShowcase posts={posts} />
-						</Section>
-					)}
-					{/*<Section title="I've been coding" ariaTitle="opensource">
-					<GitHubActivity />
-					</Section>*/}
+					<Section
+						title="Notes"
+						ariaTitle="blog"
+						headerChildren={
+							<Link className={headerLinkClass} href="/blog">
+								All notes
+							</Link>
+						}>
+						<BlogShowcase posts={posts} />
+					</Section>
 					<Section title="Uses" ariaTitle="uses">
 						<UsesShowcase />
 					</Section>
@@ -187,13 +172,13 @@ export default function RightPanel({
 						title="Let's talk"
 						ariaTitle="hire"
 						headerChildren={
-							<span className="flex items-center gap-3 border border-emerald-500/20 bg-emerald-500/10 px-3.5 py-1.5">
+							<span className="flex items-center gap-2.5 border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 sm:px-3.5 sm:py-1.5">
 								<span className="relative flex size-2">
-									<span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+									<span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
 									<span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
 								</span>
-								<span className="text-xs text-emerald-400">
-									Available for Hire
+								<span className="text-emerald-400 normal-case">
+									Open to work
 								</span>
 							</span>
 						}>
@@ -204,7 +189,7 @@ export default function RightPanel({
 					</Section>
 					<Footer />
 				</div>
-			</section>
-		</section>
+			</div>
+		</div>
 	)
 }

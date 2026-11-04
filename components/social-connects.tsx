@@ -12,8 +12,10 @@ export default function SocialConnects() {
 	const mounted = useMounted()
 
 	return (
-		<div className="divide-border grid min-w-0 divide-x divide-dashed md:grid-cols-2">
-			<div className="divide-border grid divide-y divide-dashed">
+		// Columns draw right/bottom borders; the wrapper clips the outer edges.
+		<div className="overflow-hidden">
+		<div className="-mr-px -mb-px grid min-w-0 md:grid-cols-2">
+			<div className="divide-border border-border grid divide-y divide-dashed border-r border-b border-dashed">
 				{socialPlatforms.map((platform: SocialPlatform) => (
 					<motion.a
 						key={platform.name}
@@ -22,7 +24,7 @@ export default function SocialConnects() {
 						rel="noopener noreferrer"
 						initial={mounted ? { opacity: 0, y: 20 } : false}
 						animate={{ opacity: 1, y: 0 }}
-						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-2 self-start overflow-hidden bg-gradient-to-tr p-3 sm:gap-3 sm:p-4 md:p-5 lg:p-6`}>
+						className={`group/social hover:bg-secondary relative flex h-full items-center justify-between gap-2 overflow-hidden p-3 sm:gap-3 sm:p-4 md:p-5 lg:p-6`}>
 						<div className="flex items-center gap-2 sm:gap-3">
 							<platform.icon
 								className={`text-muted size-5 fill-current duration-200 sm:size-6 ${platform.color}`}
@@ -33,7 +35,7 @@ export default function SocialConnects() {
 						</div>
 						{platform.stats && platform.statLabel && (
 							<div className="flex flex-col items-end">
-								<span className="text-muted-foreground ml-2 text-[10px] sm:text-xs md:text-xs lg:text-sm">
+								<span className="text-muted-foreground ml-2 text-xxs sm:text-xs lg:text-sm">
 									{platform.statLabel}
 								</span>
 								<span className="text-primary text-lg font-light tabular-nums sm:text-xl md:text-2xl">
@@ -44,7 +46,7 @@ export default function SocialConnects() {
 					</motion.a>
 				))}
 			</div>
-			<div className="divide-border grid divide-y divide-dashed">
+			<div className="divide-border border-border grid divide-y divide-dashed self-start border-r border-b border-dashed">
 				<motion.div
 					initial={mounted ? { opacity: 0, y: 20 } : false}
 					animate={{ opacity: 1, y: 0 }}
@@ -87,6 +89,7 @@ export default function SocialConnects() {
 					</div>
 				</motion.div>
 			</div>
+		</div>
 		</div>
 	)
 }

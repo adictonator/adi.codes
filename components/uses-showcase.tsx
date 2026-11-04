@@ -26,11 +26,13 @@ export default function UsesShowcase() {
 
 	return (
 		<>
-			<div className="divide-border grid w-full min-w-0 grid-cols-1 divide-dashed overflow-hidden max-sm:gap-x-4 md:divide-x xl:divide-y 2xl:grid-cols-3">
+			{/* Cells draw right/bottom borders; the wrapper clips the outer edges. */}
+			<div className="overflow-hidden">
+			<div className="-mr-px -mb-px grid w-full min-w-0 grid-cols-1 2xl:grid-cols-3">
 				{categories.map(category => (
 					<article
 						key={category}
-						className="group relative flex flex-col transition-colors">
+						className="group border-border relative flex flex-col border-r border-b border-dashed transition-colors">
 						<header className="p-3 lg:p-4 2xl:p-6">
 							<h3 className="text-muted text-lg sm:text-xl md:text-xl lg:text-2xl">
 								{category}
@@ -43,7 +45,9 @@ export default function UsesShowcase() {
 								.map((item, index) => (
 									<motion.li
 										key={index}
-										initial={mounted ? { opacity: 0, x: -20 } : false}
+										initial={
+											mounted ? { opacity: 0, x: -20 } : false
+										}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{ delay: index * 0.1 }}
 										{...(item.affiliateLink && {
@@ -79,7 +83,7 @@ export default function UsesShowcase() {
 								animate={{ y: 0 }}
 								transition={{ delay: 0.2 }}
 								className="flex flex-col items-end">
-								<span className="text-tiny text-muted-foreground/50 group-hover:text-muted-foreground tracking-[0.3em] duration-200 sm:text-xs sm:tracking-[0.5em]">
+								<span className="text-tiny text-muted-foreground/50 group-hover:text-muted-foreground tracking-widest duration-200 sm:text-xs">
 									{category === 'Hardware'
 										? '01:SYSTEM'
 										: category === 'Development'
@@ -99,6 +103,7 @@ export default function UsesShowcase() {
 						</footer>
 					</article>
 				))}
+			</div>
 			</div>
 
 			<Dialog

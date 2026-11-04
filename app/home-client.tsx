@@ -8,18 +8,10 @@ import { BackgroundEffect } from '@/components/ui/background-effect'
 import MobileNavigation from '@/components/mobile-navigation'
 import { useMobileDetection } from '@/hooks/use-mobile-detection'
 import { cn } from '@/lib/utils'
-
-type PostData = {
-	slug: string
-	title?: string
-	date?: string
-	description?: string
-	tags?: string[]
-	[key: string]: any
-}
+import type { Post } from '@/lib/mdx'
 
 interface HomeClientProps {
-	posts: PostData[]
+	posts: Post[]
 }
 
 export default function HomeClient({ posts }: HomeClientProps) {

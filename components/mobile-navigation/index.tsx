@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, RefObject } from 'react'
-import { motion } from 'framer-motion'
 import { navigationItems } from './data'
 import { useScrollMinimize } from './hooks/use-scroll-minimize'
 import { TerminalContainer } from './components/terminal-container'
@@ -12,7 +11,7 @@ import { MoreMenu } from './components/more-menu'
 interface MobileNavigationProps {
 	activeSection: string
 	onSectionChange: (section: string) => void
-	scrollRef?: RefObject<HTMLDivElement | null> // Make scrollRef optional
+	scrollRef?: RefObject<HTMLDivElement | null>
 }
 
 export default function MobileNavigation({
@@ -68,19 +67,6 @@ export default function MobileNavigation({
 				firstFocusableRef={firstFocusableRef}
 				secondaryNavItems={secondaryNavItems}
 			/>
-
-			{/* CSS for scanline effect - move to global styles */}
-			<style jsx global>{`
-				.bg-scanline {
-					background: linear-gradient(
-						to bottom,
-						rgba(255, 255, 255, 0) 0%,
-						rgba(255, 255, 255, 0.03) 50%,
-						rgba(255, 255, 255, 0) 100%
-					);
-					background-size: 100% 4px;
-				}
-			`}</style>
 		</>
 	)
 }

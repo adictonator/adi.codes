@@ -15,7 +15,10 @@ export default function SkillsShowcase({
 	)
 
 	return (
-		<div className="divide-border *:border-border 3xl:grid-cols-3 grid grid-cols-2 divide-x divide-dashed *:border-b *:border-dashed last:*:border-r [&:has(>:nth-child(4))]:divide-y [&:not(:has(>:nth-child(4)))]:divide-y-0 [&:not(:has(>:nth-child(4)))>*]:border-b-0 [&>*:last-child]:border-b-0">
+		// Cells draw right/bottom borders; the wrapper clips the outer edges,
+		// so the grid stays correct whatever the filter leaves behind.
+		<div className="overflow-hidden">
+		<div className="3xl:grid-cols-3 -mr-px -mb-px grid grid-cols-2">
 			{filteredSkills.map((skill, index) => (
 				<motion.div
 					key={skill.name}
@@ -23,7 +26,7 @@ export default function SkillsShowcase({
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -20 }}
 					transition={{ delay: index * 0.1 }}
-					className="group/skill hover:bg-secondary relative grid h-full min-w-0 overflow-hidden px-3 py-2 sm:px-4 sm:py-2.5 md:aspect-auto md:p-4 2xl:aspect-video 2xl:p-6">
+					className="group/skill hover:bg-secondary border-border relative grid h-full min-w-0 overflow-hidden border-r border-b border-dashed px-3 py-2.5 sm:px-4 md:p-4 2xl:aspect-video 2xl:p-6">
 					<div className="flex flex-col items-start justify-between max-md:flex-col md:flex-col lg:flex-row">
 						<div className="flex w-full flex-1 flex-col">
 							<div className="flex items-center gap-2 md:gap-3">
@@ -31,7 +34,7 @@ export default function SkillsShowcase({
 									{skill.name}
 								</h3>
 							</div>
-							<div className="mt-2 flex items-center gap-1 text-[11px] font-light sm:text-xs md:gap-2 md:text-xs lg:gap-3 lg:text-sm">
+							<div className="mt-2 flex flex-wrap items-center gap-1 text-xs font-light md:gap-2 lg:gap-3 lg:text-sm">
 								<span className="text-muted max-md:hidden">
 									{skill.category}
 								</span>
@@ -44,7 +47,7 @@ export default function SkillsShowcase({
 								<span className="text-muted-foreground">
 									&bull;
 								</span>
-								<span className="text-muted text-[10px] sm:text-xs lg:text-sm">
+								<span className="text-muted text-xxs sm:text-xs lg:text-sm">
 									{skill.projectCount}{' '}
 									{skill.projectCount > 1
 										? 'projects'
@@ -67,7 +70,7 @@ export default function SkillsShowcase({
 						{skill.tags.map(tag => (
 							<span
 								key={tag}
-								className="bg-neutral-100/5 px-2 py-0.5 text-[9px] font-light tracking-wider text-neutral-100/60 sm:px-2.5 sm:text-xs lg:px-3 lg:py-1 lg:text-xs">
+								className="bg-neutral-100/5 px-2 py-0.5 text-xxs font-light tracking-wider text-neutral-100/60 sm:px-2.5 sm:text-xs lg:px-3 lg:py-1">
 								{tag}
 							</span>
 						))}
@@ -81,7 +84,7 @@ export default function SkillsShowcase({
 								duration: 1,
 								ease: [0.32, 0.72, 0, 1],
 							}}
-							className="bg-foreground h-full transition-[background-color] duration-300 group-hover/skill:bg-[var(--brand-color)]"
+							className="bg-foreground h-full transition-colors duration-300 group-hover/skill:bg-(--brand-color)"
 							style={
 								{
 									'--brand-color': skill.brandColor,
@@ -91,6 +94,7 @@ export default function SkillsShowcase({
 					</div>
 				</motion.div>
 			))}
+		</div>
 		</div>
 	)
 }

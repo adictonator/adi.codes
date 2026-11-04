@@ -6,9 +6,11 @@ export function formatSectionName(section: string): string {
 		case 'experience':
 			return '~/exp'
 		case 'connect':
-			return '~/contact'
-		case 'skills':
-			return '~/skills'
+			return '~/social'
+		case 'lab':
+			return '~/projects'
+		case 'blog':
+			return '~/notes'
 		default:
 			return `~/${section}`
 	}

@@ -1,10 +1,14 @@
 'use client'
 
 import { useEffect, MutableRefObject } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Terminal, X, ChevronRight } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { Terminal, X, ChevronRight, Download, FolderGit2, FileText, SunMoon } from 'lucide-react'
 import { TerminalHeader } from './terminal-header'
 import { NavItemType } from './nav-item'
+import { siteConfig } from '@/lib/site'
+import { trackResumeClick } from '@/lib/ga'
 
 interface MoreMenuProps {
 	isOpen: boolean
@@ -25,6 +29,8 @@ export function MoreMenu({
 	firstFocusableRef,
 	secondaryNavItems,
 }: MoreMenuProps) {
+	const { resolvedTheme, setTheme } = useTheme()
+
 	// Focus management
 	useEffect(() => {
 		if (!isOpen) return
@@ -76,7 +82,7 @@ export function MoreMenu({
 							stiffness: 400,
 							mass: 0.8,
 						}}
-						className="dark border-border bg-secondary fixed right-4 bottom-24 left-4 z-50 overflow-hidden border shadow-[0_0_20px_rgba(0,255,170,0.15)]">
+						className="dark border-border bg-secondary fixed right-4 bottom-24 left-4 z-50 overflow-hidden border shadow-lg shadow-emerald-400/15">
 						{/* Header with close button */}
 						<TerminalHeader
 							title="menu.sh"
@@ -99,7 +105,7 @@ export function MoreMenu({
 						<div className="flex items-center gap-2 border-b border-dashed border-neutral-800 bg-black/20 px-4 py-2">
 							<Terminal className="h-3.5 w-3.5 text-emerald-500" />
 							<h3 className="text-xs font-medium text-neutral-400">
-								Additional Sections
+								More sections
 							</h3>
 						</div>
 
@@ -117,6 +123,41 @@ export function MoreMenu({
 									}}
 								/>
 							))}
+						</div>
+
+						{/* Pages and the résumé, one tap from anywhere */}
+						<div className="grid grid-cols-2 border-t border-dashed border-neutral-800 font-mono text-xs text-neutral-400">
+							<a
+								href={siteConfig.resume}
+								target="_blank"
+								rel="noopener noreferrer"
+								download
+								onClick={() => trackResumeClick({ variant: 'mobile-menu' })}
+								className="flex items-center gap-2 border-r border-b border-dashed border-neutral-800 px-4 py-3 hover:bg-neutral-800/30">
+								<Download className="size-3.5 text-emerald-500" />
+								résumé
+							</a>
+							<Link
+								href="/projects"
+								className="flex items-center gap-2 border-b border-dashed border-neutral-800 px-4 py-3 hover:bg-neutral-800/30">
+								<FolderGit2 className="size-3.5 text-emerald-500" />
+								all projects
+							</Link>
+							<Link
+								href="/blog"
+								className="flex items-center gap-2 border-r border-b border-dashed border-neutral-800 px-4 py-3 hover:bg-neutral-800/30">
+								<FileText className="size-3.5 text-emerald-500" />
+								blog
+							</Link>
+							<button
+								type="button"
+								onClick={() =>
+									setTheme(resolvedTheme === 'light' ? 'dark' : 'light')
+								}
+								className="flex items-center gap-2 border-b border-dashed border-neutral-800 px-4 py-3 text-left hover:bg-neutral-800/30">
+								<SunMoon className="size-3.5 text-emerald-500" />
+								toggle theme
+							</button>
 						</div>
 
 						{/* Footer */}

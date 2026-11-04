@@ -10,7 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
 	{ id: 'about', label: 'About' },
-	{ id: 'lab', label: 'Lab' },
+	{ id: 'lab', label: 'Projects' },
 	{ id: 'experience', label: 'Work' },
 	{ id: 'skills', label: 'Skills' },
 	{ id: 'blog', label: 'Notes' },
@@ -22,11 +22,9 @@ const NAV_ITEMS: NavItem[] = [
 export default function VerticalNav({
 	activeSection,
 	onNavigate,
-	hasNotes,
 }: {
 	activeSection: string
 	onNavigate: (id: string) => void
-	hasNotes: boolean
 }) {
 	const handleNavClick = (
 		e: React.MouseEvent<HTMLAnchorElement>,
@@ -36,7 +34,7 @@ export default function VerticalNav({
 		onNavigate(id)
 	}
 
-	const navItems = NAV_ITEMS.filter(item => item.id !== 'blog' || hasNotes)
+	const navItems = NAV_ITEMS
 
 	return (
 		<aside className="bg-foreground border-border divide-border z-20 hidden h-full flex-col items-center justify-center divide-y divide-dashed border-l border-dashed backdrop-blur-sm md:flex">
