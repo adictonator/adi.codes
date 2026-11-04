@@ -182,7 +182,7 @@ export const skills: Skill[] = [
 		name: 'Blade',
 		expertise: 72,
 		category: 'Templates',
-		tags: ['Shopify', 'Laravel', 'PHP'],
+		tags: ['Laravel', 'Components', 'PHP'],
 		yearsOfExperience: 2,
 		projectCount: 2,
 		brandColor: '#F05340',

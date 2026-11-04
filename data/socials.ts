@@ -10,6 +10,7 @@ import Patreon from '@/components/social-icons/patreon'
 import Ko from '@/components/social-icons/ko-fi'
 import { SVGProps } from 'react'
 import LinkedIn from '@/components/social-icons/linked-in'
+import GitHub from '@/components/social-icons/github'
 
 // Define a type for donation platforms
 type DonationPlatform = {
@@ -34,55 +35,62 @@ export type SocialPlatform = {
 	handle: string
 	url: string
 	color?: string
-	stats: string
-	statLabel: string
+	stats?: string
+	statLabel?: string
 }
 
-export const socialPlatforms = [
+export const socialPlatforms: SocialPlatform[] = [
 	{
 		name: 'Threads',
 		icon: Threads,
 		handle: '@adictonator',
-		stats: '100',
+		stats: '300',
 		statLabel: 'Thriends?',
-		url: 'https://threads.net/@adictonator',
+		url: 'https://www.threads.com/@adictonator',
 		color: 'group-hover/social:text-neutral-600',
 	},
 
 	{
-		name: 'Twitter',
+		name: 'X',
 		icon: Twitter,
 		handle: '@adictonator',
 		stats: '300',
 		statLabel: 'Followers',
-		url: 'https://twitter.com/@adictonator',
+		url: 'https://x.com/adictonator',
 		color: 'group-hover/social:text-neutral-600',
 	},
 	{
 		name: 'LinkedIn',
 		icon: LinkedIn,
 		handle: '-abs-',
-		stats: '350',
+		stats: '500',
 		statLabel: 'Connections',
-		url: 'https://linkedin.com/in/-abs-',
+		url: 'https://www.linkedin.com/in/-abs-',
 		color: 'group-hover/social:text-sky-600',
+	},
+	{
+		name: 'GitHub',
+		icon: GitHub,
+		handle: 'adictonator',
+		url: 'https://github.com/adictonator',
+		color: 'group-hover/social:text-neutral-600',
 	},
 	{
 		name: 'YouTube',
 		icon: YouTube,
 		handle: '@lazycodelab',
-		stats: '120',
+		stats: '215',
 		statLabel: 'Subscribers',
-		url: 'https://youtube.com/@lcl',
+		url: 'https://www.youtube.com/@lazycodelab',
 		color: 'group-hover/social:text-red-700',
 	},
 	{
 		name: 'Instagram',
 		icon: Instagram,
 		handle: '@lazycodelab',
-		stats: '200',
+		stats: '250',
 		statLabel: 'Followers',
-		url: 'https://instagram.com/lazycodelab',
+		url: 'https://www.instagram.com/lazycodelab',
 		color: 'group-hover/social:text-fuchsia-600',
 	},
 ]

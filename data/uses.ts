@@ -11,15 +11,18 @@ export const setup: SetupItem[] = [
 		name: 'Mac Mini M4 2024',
 		description: '24GB RAM, 500GB SSD - Primary development machine',
 		category: 'Hardware',
-		image: '/assets/images/me.png',
 		//affiliateLink: 'https://amazon.com/...',
 	},
 	{
 		name: 'MacBook Pro 16" 2019 Intel',
 		description: '64GB RAM, 2TB SSD - Secondary development machine',
 		category: 'Hardware',
-		image: '/assets/images/me.png',
 		//affiliateLink: 'https://amazon.com/...',
+	},
+	{
+		name: 'Desktop PC',
+		description: 'Ryzen 7 3700X, RTX 2070 Super, 16GB RAM - Gaming and Ollama',
+		category: 'Hardware',
 	},
 	{
 		name: 'Acer XV2720',
@@ -46,6 +49,11 @@ export const setup: SetupItem[] = [
 		//affiliateLink: 'https://www.rode.com/microphones/nt-usbmini',
 	},
 	{
+		name: 'Logitech Brio 4K',
+		description: 'Webcam - For calls',
+		category: 'Hardware',
+	},
+	{
 		name: 'iPhone 15 Pro',
 		description: '128GB - Primary mobile device',
 		category: 'Hardware',
@@ -56,8 +64,28 @@ export const setup: SetupItem[] = [
 		category: 'Hardware',
 	},
 	{
+		name: 'Xcode',
+		description: 'iOS & macOS - Swift and SwiftUI',
+		category: 'Development',
+	},
+	{
 		name: 'VS Code',
-		description: 'Primary IDE - Using Material theme',
+		description: 'Primary IDE - One Dark Pro theme, Fira Code',
+		category: 'Development',
+	},
+	{
+		name: 'Claude Code',
+		description: 'AI coding agent - In the terminal and VS Code',
+		category: 'Development',
+	},
+	{
+		name: 'Ollama',
+		description: "Local LLMs - On the desktop PC's RTX 2070 Super",
+		category: 'Development',
+	},
+	{
+		name: 'Figma',
+		description: 'UI design and prototyping',
 		category: 'Development',
 	},
 	{
@@ -72,12 +100,7 @@ export const setup: SetupItem[] = [
 	},
 	{
 		name: 'Local',
-		description: 'Local Wordpress Development Environment',
-		category: 'Development',
-	},
-	{
-		name: 'TablePlus',
-		description: 'Database Management',
+		description: 'Local WordPress development environment',
 		category: 'Development',
 	},
 	{
@@ -91,6 +114,16 @@ export const setup: SetupItem[] = [
 		category: 'Development',
 	},
 	{
+		name: 'Slack',
+		description: 'Communication - For team chat',
+		category: 'Productivity',
+	},
+	{
+		name: 'Microsoft Teams',
+		description: 'Communication - Meetings and chat',
+		category: 'Productivity',
+	},
+	{
 		name: 'Zoom',
 		description: 'Communication - For team meetings',
 		category: 'Productivity',
@@ -101,28 +134,33 @@ export const setup: SetupItem[] = [
 		category: 'Productivity',
 	},
 	{
-		name: 'Slack',
-		description: 'Communication - For team chat',
-		category: 'Productivity',
-	},
-	{
-		name: 'Skype',
-		description: 'Communication - For clients',
-		category: 'Productivity',
-	},
-	{
 		name: 'TickTick',
 		description: 'Task Management - For personal tasks',
 		category: 'Productivity',
 	},
 	{
-		name: 'Google Chrome',
-		description: 'Primary Browser',
+		name: 'Bitwarden',
+		description: 'Password Manager',
 		category: 'Productivity',
 	},
 	{
-		name: 'Raycast',
-		description: 'Productivity Tool - Replaced Spotlight',
+		name: 'Wispr Flow',
+		description: 'Voice dictation - Talking instead of typing',
+		category: 'Productivity',
+	},
+	{
+		name: 'Firefox',
+		description: 'Primary Browser - Switched from Chrome',
+		category: 'Productivity',
+	},
+	{
+		name: 'DaVinci Resolve',
+		description: 'Video editing',
+		category: 'Productivity',
+	},
+	{
+		name: 'OBS',
+		description: 'Screen recording',
 		category: 'Productivity',
 	},
 ]

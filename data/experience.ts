@@ -15,28 +15,29 @@ type Experience = {
 export const experiences: Experience[] = [
 	{
 		period: '2022 - CURR',
-		role: 'Founder & CEO',
+		role: 'Founder & Product Engineer',
 		company: 'LazyCodeLab Pvt. Ltd.',
 		companyUrl: 'https://lazycodelab.com',
 		location: 'Remote',
 		type: 'engineering',
 		summary:
-			'Solo product studio — custom Shopify apps and themes for merchants, plus my own iOS and web products, owned end to end',
+			'A one-person app, Shopify and web studio. Client builds and stalled projects taken through to shipped, plus my own iOS, macOS and WordPress products, owned end to end',
 		details: {
 			achievements: [
+				'Shipped Mudo, Gita Essence, Quotle and Heckle as a one-person team — product, design, code, and App Store releases (Quotle on Google Play too)',
+				'Sole engineer on WP Snippets AI and AI Blackout, two WordPress plugins built from an empty repo',
 				'Helped 10+ merchants with custom Shopify apps and themes',
 				'Hired and led a remote, cross-functional team of 6 for about a year to test scaling the agency model — ran hiring, mentoring, and delivery, then deliberately returned to solo operations in 2024',
 				'Launched 2 products with 30+ paying customers',
 				'Increased revenue by 200% in 6 months',
-				'Ship iOS apps end to end as a one-person team — product, design, code, and App Store releases',
 			],
 			skills: [
+				'Swift',
+				'SwiftUI',
+				'React Native',
+				'Next.js',
 				'Shopify',
-				'Node.js',
-				'AWS',
-				'Kubernetes',
-				'Redis',
-				'Liquid',
+				'WordPress',
 			],
 		},
 	},
@@ -50,12 +51,12 @@ export const experiences: Experience[] = [
 			'Went full-time freelance and stayed there — WordPress, Shopify and bespoke PHP for merchants and small businesses, one contract at a time',
 		details: {
 			achievements: [
-				'49 contracts, 4,073 billed hours and $90K+ earned at a 5.0★ rating',
+				'49 Upwork contracts, 4,073 billed hours and $90K+ earned across my freelance years, at a 5.0★ rating',
 				"Built Wooden Ladle's ordering platform from scratch in CodeIgniter — stock management, pickup flow, and a bespoke admin panel",
 				'Custom WordPress theme and WooCommerce build for Hoppe Jewelers, including a build-your-own product designer',
 				'Performance and UX work on Skoolmaths, a UK maths LMS serving thousands of students',
 				'Custom Braintree/Wallee checkout integrations for Shopify stores in pure Liquid — no third-party checkout app',
-				'Took over CSS & JavaScript Toolbox in 2019, a WordPress.org plugin running on ~10,000 sites',
+				'Took over CSS & JavaScript Toolbox in 2019 — a WordPress.org plugin on 10,000 sites that I still maintain',
 			],
 			skills: [
 				'WordPress',
@@ -80,7 +81,7 @@ export const experiences: Experience[] = [
 			achievements: [
 				'Implemented WebSocket-based live data synchronization reducing latency by 80%',
 				'Led migration of monolithic architecture to microservices',
-				'Helped developing a custom CMS for a client, increasing revenue by 30%',
+				'Helped develop a custom CMS for a client, increasing revenue by 30%',
 				'Improved code quality and reduced technical debt by 40%',
 				'Enhanced a WordPress plugin for a client, increasing user engagement by 50%',
 				'Mentored 4 junior developers who were promoted to mid-level roles',
@@ -106,10 +107,10 @@ export const experiences: Experience[] = [
 			'Handled various PHP-based projects, including WordPress and Laravel. Coordinated with clients and managed projects.',
 		details: {
 			achievements: [
-				'Worked on 5+ projects and learned about WordPress and Laravel',
-				'Learned about project management and client communication',
-				'Got to know about the importance of teamwork and collaboration',
-				'Learned how to manage time and meet deadlines',
+				'Delivered 5+ WordPress and Laravel projects',
+				'Worked directly with clients on scope, updates and handover',
+				'Ran parallel projects against fixed deadlines',
+				'Learned that teamwork and clear communication matter as much as the code',
 			],
 			skills: [
 				'Teamwork',
@@ -128,17 +129,17 @@ export const experiences: Experience[] = [
 		location: 'Global',
 		type: 'freelance',
 		summary:
-			'Continued freelancing right off the college and tried to do it full-time over Fiverr and Upwork.',
+			'Went straight from college into full-time freelancing on Fiverr and Upwork.',
 		details: {
 			achievements: [
-				'Worked on 10+ projects and built a few long-term relationships',
-				'Learned about freelancing and how to deal with clients',
-				'Got to know about the importance of communication and time management',
-				'Learned how to manage finances and taxes',
+				'Delivered 10+ projects and built a few long-term client relationships',
+				'Learned to scope, price and communicate like a business, not a student',
+				'Figured out time management the hard way',
+				'Also figured out finances and taxes the hard way',
 			],
 			skills: [
 				'jQuery',
-				'JavScript',
+				'JavaScript',
 				'PHP',
 				'WordPress',
 				'React',
