@@ -1,6 +1,6 @@
 import './globals.css'
 import { Suspense } from 'react'
-import { Fira_Code, IBM_Plex_Mono } from 'next/font/google'
+import { preload } from 'react-dom'
 import Script from 'next/script'
 import { Providers } from './providers'
 import { ToastProvider } from '@/components/ui/toast'
@@ -13,17 +13,14 @@ import { siteConfig } from '@/lib/site'
 import { pageMetadata } from '@/lib/metadata'
 import type { Metadata, Viewport } from 'next'
 
-const firaCode = Fira_Code({
-	subsets: ['latin'],
-	weight: ['400', '700'],
-	variable: '--font-fira',
-})
-
-const ibmPlex = IBM_Plex_Mono({
-	subsets: ['latin'],
-	weight: ['400', '500', '700'],
-	variable: '--font-ibm',
-})
+// Fonts are self-hosted, see the @font-face rules in globals.css. Preload the
+// latin files every page renders with, as next/font/google used to.
+const preloadedFonts = [
+	'/fonts/fira-code-latin.woff2',
+	'/fonts/ibm-plex-mono-400-latin.woff2',
+	'/fonts/ibm-plex-mono-500-latin.woff2',
+	'/fonts/ibm-plex-mono-700-latin.woff2',
+]
 
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
@@ -119,10 +116,12 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode
 }) {
+	for (const href of preloadedFonts)
+		preload(href, { as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' })
+
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body
-				className={`${firaCode.variable} ${ibmPlex.variable} font-fira bg-background h-full min-w-0 antialiased`}>
+			<body className="font-fira bg-background h-full min-w-0 antialiased">
 				<Script
 					id="json-ld-person"
 					type="application/ld+json"
