@@ -60,50 +60,67 @@ export const projects: Project[] = [
 		title: 'Gita Essence',
 		category: 'mobile-app',
 		description:
-			'iOS app bringing timeless wisdom from the Bhagavad Gita with daily verses, meditation guides, and personalized spiritual insights',
-		stack: ['SwiftUI', 'Notifications', 'UIKit'],
+			"A daily verse from the Bhagavad Gita, in Sanskrit, Hindi and English. Shipped it in SwiftUI first as my 'can I actually get through App Review' test, then tore it down and rebuilt the whole thing in React Native and Expo when I wanted one codebase again. Now on v2.3 with paid subscriptions.",
+		stack: [
+			'React Native',
+			'Expo',
+			'TypeScript',
+			'RevenueCat',
+			'Notifications',
+		],
 		status: 'published',
 		preview: {
 			image: '/assets/images/projects/gita-essence/cover.svg',
 		},
 		links: {
-			appStore: 'https://apps.apple.com/app/gita-essence',
+			appStore:
+				'https://apps.apple.com/us/app/gita-essence-daily-verse/id6745466583',
 		},
 		metadata: {
-			lastUpdated: '2025-06-15',
-			version: '1.0.0',
+			lastUpdated: '2026-07-15',
+			version: '2.3.0',
 		},
 		features: [
 			'Daily verse notifications',
-			'Hindi & English translations',
-			'Transliterations for pronunciation',
+			'Sanskrit, Hindi & English with transliterations',
 			'Offline access to all verses',
+			'Subscriptions via RevenueCat',
+			'Rewritten from SwiftUI to React Native',
 		],
-		importance: 'secondary',
-		priority: 3,
+		importance: 'primary',
+		priority: 2,
 	},
 	{
 		title: 'CheckMate',
 		category: 'browser-extension',
 		description:
-			'Real-time fact-checking Chrome extension that verifies claims as you browse, powered by AI and multiple data sources',
-		stack: ['TypeScript', 'Chrome API', 'OpenAI', 'React'],
-		status: 'stale',
+			"Highlight a claim anywhere on the web, right-click, and get a verdict with real sources in a side panel. The listing had gone quiet, so I rewrote the whole thing from scratch and relaunched it at v1.0.0. Sources come from Google's search grounding, not the model, so a citation can't be invented: no sources, no verdict.",
+		stack: [
+			'Chrome MV3',
+			'React',
+			'TypeScript',
+			'Cloudflare Workers',
+			'D1',
+			'Gemini',
+		],
+		status: 'published',
 		preview: {
-			image: '/assets/images/projects/checkmate/checkmate-cover.png',
+			image: '/assets/images/projects/checkmate/checkmate-cover.webp',
 		},
 		links: {
-			chromeStore: 'https://chrome.google.com/webstore/detail/checkmate',
+			chromeStore:
+				'https://chromewebstore.google.com/detail/checkmate-ai-fact-checker/dakejmpmagfgfofgfmnlnbdkmiccaaba',
 		},
 		metadata: {
-			lastUpdated: '2024-09-28',
-			version: '1.5.2',
+			lastUpdated: '2026-09-04',
+			version: '1.0.0',
 		},
 		features: [
-			'Instant fact verification',
-			'Source credibility scoring',
-			'Context-aware detection',
-			'Privacy-first design',
+			'Side-panel fact checks on any selected text',
+			'Citations from search grounding, never from the model',
+			'Cloudflare Worker on D1 holds the AI key, meters the free tier, runs billing',
+			'No content script, no all-URLs access — it only sees what you send it',
+			'Full rewrite of an existing Chrome Web Store listing',
 		],
 		importance: 'primary',
 		priority: 3,
@@ -112,89 +129,77 @@ export const projects: Project[] = [
 		title: 'WP Snippets AI',
 		category: 'tool',
 		description:
-			'Premium WordPress plugin that generates custom code snippets using AI. Extends functionality without bloat',
+			"A WordPress plugin that writes, refines and places your code snippets for you — four AI providers behind one interface, a React admin with revision history and diffing, and conditional placement across 20+ hook locations. It's what CSS & JavaScript Toolbox could never safely grow into, so the plugin's owner and I started it fresh: product calls shared, the engineering all mine.",
 		stack: [
 			'PHP',
 			'WordPress',
 			'React',
-			'MySQL',
+			'TypeScript',
+			'WP REST API',
 			'Tailwind CSS',
-			'Shadcn UI',
 		],
 		status: 'published',
 		preview: {
-			image: '/assets/images/projects/wpsai/wpsai-cover.png',
+			image: '/assets/images/projects/wpsai/wpsai-cover.webp',
 		},
 		links: {
 			website: 'https://wpsnippets.ai',
+			caseStudy: 'https://lazycodelab.com/work/wp-snippets-ai',
 		},
 		metadata: {
-			lastUpdated: '2025-10-26',
-			version: '1.3.0',
+			lastUpdated: '2026-08-17',
+			version: '2.3.0',
 		},
 		features: [
-			'AI-powered snippet generation',
-			'Built-in code editor',
-			'Version control & rollback',
-			'Security scanning',
+			'OpenAI, Anthropic, Gemini and xAI behind one provider factory',
+			'Generate, refine and explain snippets in place',
+			'Revision history with diffing',
+			'Conditional placement across 20+ hooks',
+			'Elementor + Gutenberg support',
+			'Self-hosted licensing and update server (WPSAI Hub)',
 		],
 		importance: 'primary',
-		priority: 2,
+		priority: 1,
 	},
 	{
 		title: 'Mudo: Anxiety & Mood Tracker',
 		category: 'mobile-app',
 		description:
-			'Minimalist anxiety & mood tracker I built for iOS. It reduces friction and helps you track emotional patterns with quick check-ins and beautiful data visualizations',
+			"The app that made me learn Swift properly. Every mood tracker I tried wanted a paragraph and a photo; I wanted to log how I felt and put the phone down. Ten seconds, no streak guilt, everything stays on your device. A year on the App Store and fourteen minor versions in, it's still the thing I'm proudest of.",
 		stack: [
 			'Swift',
 			'SwiftUI',
 			'CoreData',
-			'Charts',
+			'CloudKit',
+			'Foundation Models',
+			'RevenueCat',
 			'WidgetKit',
-			'iCloud',
-			'UIKit',
-			'Combine',
 		],
 		status: 'published',
 		preview: {
-			image: '/assets/images/projects/mudo/mudo-cover.png',
+			image: '/assets/images/projects/mudo/mudo-cover.webp',
 		},
 		links: {
 			website: 'https://mudoapp.com',
-			appStore: 'https://apps.apple.com/app/mudo-mood-journal',
+			appStore:
+				'https://apps.apple.com/us/app/mudo-anxiety-mood-tracker/id6746933711',
 			caseStudy: 'https://lazycodelab.com/work/mudo',
 		},
 		metadata: {
-			lastUpdated: '2026-01-27',
-			version: '2.2.0',
+			lastUpdated: '2026-09-24',
+			version: '2.14.0',
 		},
 		features: [
 			'< 10 second check-ins',
-			'Mood pattern insights',
-			'Smart notifications',
-			'Weekly reports',
+			'On-device insights via Foundation Models',
 			'Mood dip and recovery tracking',
+			'Home screen widgets',
 			'Data export (CSV & JSON)',
 			'iCloud sync',
-			'Privacy-first design',
+			'Privacy-first — nothing leaves the device',
 		],
 		importance: 'primary',
 		priority: 1,
-		timeline: [
-			{
-				date: '2025-10-27',
-				type: 'update',
-				title: 'v1.0 Released',
-				description: 'Internal testing with 25 users',
-			},
-			{
-				date: '2025-12-15',
-				type: 'milestone',
-				title: 'MVP Complete',
-				description: 'Core journaling features implemented',
-			},
-		],
 	},
 	{
 		title: 'HypeFlags',
@@ -204,7 +209,7 @@ export const projects: Project[] = [
 		stack: ['Shopify', 'Liquid', 'JavaScript', 'Custom Storefront Apps'],
 		status: 'published',
 		preview: {
-			image: '/assets/images/projects/hypeflags/cover.png',
+			image: '/assets/images/projects/hypeflags/cover.webp',
 		},
 		links: {
 			website: 'https://hypeflags.com',
@@ -226,15 +231,12 @@ export const projects: Project[] = [
 		title: 'Scope Creep',
 		category: 'game',
 		description:
-			"2D puzzle-platformer where every level adds a new mechanic you didn't ask for. A satirical take on project management",
+			"2D puzzle-platformer where every level bolts on a mechanic you didn't ask for — a game about project management that ironically lost to scope creep. Parked since late 2025 while newer Godot projects jumped the queue. The joke wrote itself; the levels did not.",
 		stack: ['Godot', 'GDScript', 'Aseprite'],
-		status: 'in-progress',
-		preview: {
-			image: '/images/scope-creep.png',
-		},
+		status: 'stale',
 		links: {},
 		metadata: {
-			lastUpdated: '2024-10-10',
+			lastUpdated: '2025-09-29',
 		},
 		features: [
 			'Progressive mechanic overload',
@@ -245,15 +247,109 @@ export const projects: Project[] = [
 		priority: 3,
 	},
 	{
+		title: 'Bug Off!',
+		category: 'game',
+		description:
+			"You're a cockroach on a floor full of feet. Bait a swat, dodge on the last frame, keep the chain alive. Single-screen arcade score-attack in Godot — the loop is closed, it's playable end to end, and the itch.io export preset has been sitting configured for weeks. It isn't unfinished, it's un-shipped, and I've written myself a whole document about the difference.",
+		stack: ['Godot 4.7', 'GDScript', 'Aseprite'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-07-28',
+		},
+		features: [
+			'Score by brushing past danger, not avoiding it',
+			'One hit kills — fast-restart arcade loop',
+			'PC + HTML5 export for itch.io',
+			'GDD, backlog and cut list kept as separate docs',
+		],
+		importance: 'secondary',
+		priority: 3,
+	},
+	{
+		title: 'Totally Normal Browsing',
+		category: 'game',
+		description:
+			'You work a desk job reading other people\'s browsing history and deciding who gets flagged. Fifteen suspect profiles, a week-by-week directive system, an upgrade shop, and multiple endings — the biggest Godot thing I\'ve built, and the one where the writing matters more than the code.',
+		stack: ['Godot 4.6', 'GDScript'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-04-09',
+		},
+		features: [
+			'15 suspect profiles with branching evidence',
+			'Week/day directive structure',
+			'Upgrade shop and multiple endings',
+			'Autoload-driven state architecture',
+		],
+		importance: 'secondary',
+		priority: 3,
+	},
+	{
+		title: 'Almost Perfect',
+		category: 'game',
+		description:
+			"A mobile game where perfection is failure. Stop the slider at exactly 0.5 and you lose; get close but not perfect and you advance. Twenty levels, ten task types, all built around one tolerance check that inverts everything you've been trained to do in a game.",
+		stack: ['Godot 4.3', 'GDScript'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-03-01',
+		},
+		features: [
+			'"Perfect" is a fail state',
+			'10 task types across 20 data-driven levels',
+			'Configurable tolerance evaluator',
+		],
+		importance: 'secondary',
+		priority: 4,
+	},
+	{
+		title: 'Ship It',
+		category: 'game',
+		description:
+			'A card-driven game about shipping software under pressure — briefs, meters, and a debug minigame that punishes you for the shortcuts you took three cards ago. Playable skeleton, design doc written, parked while Bug Off! hogs the finish line.',
+		stack: ['Godot', 'GDScript'],
+		status: 'in-progress',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-04-11',
+		},
+		features: [
+			'Card stage with brief → outcome loop',
+			'Competing meters as the core tension',
+			'Debug minigame',
+		],
+		importance: 'secondary',
+		priority: 4,
+	},
+	{
+		title: 'Tether',
+		category: 'game',
+		description:
+			"A one-button arcade game about momentum — you're a spark falling through the dark, hold to swing around an anchor, release to fling onward. Right now it is exactly one file: a design doc that opens with \"draft the itch.io page before writing code.\" After Scope Creep, I'm trying the fence-first approach.",
+		stack: ['Godot', 'GDScript'],
+		status: 'concept',
+		links: {},
+		metadata: {
+			lastUpdated: '2026-07-22',
+		},
+		features: [
+			'One mechanic: swing and release',
+			'Endless + procedural, no level pipeline',
+			'Scope fenced by the pitch before any code',
+		],
+		importance: 'secondary',
+		priority: 5,
+	},
+	{
 		title: 'ShadyHumans',
 		category: 'game',
 		description:
 			'Narrative-driven PC game exploring the grey areas of human morality. Currently in pre-production phase',
 		stack: ['Godot', 'GDScript', 'Blender'],
 		status: 'concept',
-		preview: {
-			image: '/images/shadyhumans.png',
-		},
 		links: {
 			website: 'https://shadyhumans.com',
 		},
@@ -272,49 +368,73 @@ export const projects: Project[] = [
 		title: 'CSS & JavaScript Toolbox',
 		category: 'tool',
 		description:
-			'A curated collection of reusable CSS snippets and JavaScript utilities for rapid web development',
-		stack: ['HTML', 'CSS', 'JavaScript', 'Vite', 'Tailwind CSS'],
-		status: 'archived',
-		preview: {
-			image: '/images/css-js-toolbox.png',
-		},
+			"A WordPress plugin published in 2011 — older than most of my career — that I've been the developer on since 2019, for Wipeout Media. 10,000 sites run it right now. That number is the whole job: every release is a security patch or a PHP compat fix that cannot break someone else's live site, and there's no rewrite-it-from-scratch option when 10,000 people are already standing on it. Least glamorous thing I do, and the thing that taught me the most caution.",
+		stack: ['WordPress', 'PHP', 'JavaScript', 'Gutenberg'],
+		status: 'published',
 		links: {
-			source: 'https://github.com/adictonator/css-js-toolbox',
+			website: 'https://wordpress.org/plugins/css-javascript-toolbox/',
 		},
 		metadata: {
-			lastUpdated: '2023-12-01',
-			version: '1.0.0',
+			lastUpdated: '2026-08-26',
+			version: '12.0.7',
 		},
 		features: [
-			'Modular CSS components',
-			'Vanilla JS utilities',
-			'Responsive design patterns',
+			'10,000 active installs, 550k+ downloads',
+			'96/100 rating across 84 reviews',
+			'On the plugin since v9.4 (2019), now shipping v12.0.7',
+			'Security hardening & PHP compatibility across major WP releases',
+			'Premium PLUS edition with a custom Gutenberg block',
 		],
-		importance: 'secondary',
-		priority: 4,
+		importance: 'primary',
+		priority: 2,
+	},
+	{
+		title: 'AI Blackout',
+		category: 'tool',
+		description:
+			"A free WordPress plugin for site owners who are done with AI companies training on their work for nothing. Blocks 26 AI crawlers, publishes a formal reservation of rights against AI training, and switches off the AI that WordPress core and other plugins keep quietly adding. Setup is one question. Then it asks your own site for a page while pretending to be a crawler, so you can see it actually works.",
+		stack: ['WordPress', 'PHP', 'robots.txt', 'Content Signals'],
+		status: 'published',
+		links: {
+			website: 'https://wordpress.org/plugins/ai-blackout/',
+		},
+		metadata: {
+			lastUpdated: '2026-09-12',
+			version: '2.0.0',
+		},
+		features: [
+			'Blocks 26 AI crawlers, leaves Google search untouched',
+			'Formal reservation of rights against AI training',
+			'Switches off the AI in WordPress core and in other plugins',
+			'One-question setup that writes every layer the server allows',
+			'Self-test that requests a page as a crawler and shows the result',
+		],
+		importance: 'primary',
+		priority: 2,
 	},
 	{
 		title: 'Heckle: Dev Focus Monitor',
 		category: 'desktop-app',
 		description:
-			'A mischievous desktop companion that pops up with random jokes, remarks, and distractions to keep you productive (or on your toes).',
-		stack: ['SwiftUI', 'macOS', 'NSApplication', 'Combine', 'UIKit'],
+			"A menu bar gremlin that heckles you while you code. Zero productivity value, shipped on the Mac App Store anyway, because sometimes the point is finding out how fast you can take a stupid idea from Xcode to a live listing. Answer: faster than you'd think.",
+		stack: ['SwiftUI', 'macOS', 'AppKit', 'Combine'],
 		status: 'published',
 		preview: {
-			image: '/assets/images/projects/heckle/heckle-cover.png',
+			image: '/assets/images/projects/heckle/heckle-cover.webp',
 		},
 		links: {
 			appStore:
 				'https://apps.apple.com/us/app/heckle-dev-focus-monitor/id6757296937',
 		},
 		metadata: {
-			lastUpdated: '2026-02-01',
+			lastUpdated: '2026-02-09',
 			version: '1.0.0',
 		},
 		features: [
-			'Random jokes/remarks pop-up',
-			'Developer productivity',
+			'Native SwiftUI menu bar app',
+			'Random jokes and remarks while you code',
 			'Customizable distraction settings',
+			'Signed, notarized, through Mac App Store review',
 		],
 		importance: 'primary',
 		priority: 2,
@@ -357,7 +477,7 @@ export const projects: Project[] = [
 		title: 'Quotle',
 		category: 'game',
 		description:
-			"Wordle, but for the iconic lines you can't stop quoting. Guess the quote in six tries, keep your streak alive, and argue with friends about which show said it first. Trimmed down to a tight v1 launch line.",
+			"Wordle, but for the iconic lines you can't stop quoting. Guess the quote in six tries, keep your streak alive, and argue with friends about which show said it first. On both stores — and yes, I did round up the twelve Android testers Google demands.",
 		stack: [
 			'Expo',
 			'React Native',
@@ -367,22 +487,51 @@ export const projects: Project[] = [
 		],
 		status: 'published',
 		preview: {
-			image: '/assets/images/projects/quotle/cover.png',
+			image: '/assets/images/projects/quotle/cover.webp',
 		},
-		links: {},
+		links: {
+			appStore:
+				'https://apps.apple.com/us/app/quotle-tv-quote-word-game/id6758567850',
+			playStore:
+				'https://play.google.com/store/apps/details?id=com.lazycodelab.quotle',
+		},
 		metadata: {
-			lastUpdated: '2026-06-05',
-			version: '1.0.0',
+			lastUpdated: '2026-06-21',
+			version: '1.2.0',
 		},
 		features: [
 			'Daily puzzle + endless practice mode',
 			'Six guesses, streaks & stats',
-			'Pro-gated hints',
+			'Pro-gated hints via RevenueCat',
 			'Shareable results',
 			'Fully offline, local-first',
 		],
 		importance: 'primary',
 		priority: 2,
+	},
+	{
+		title: 'Practix',
+		category: 'web-app',
+		description:
+			"An 11-week pixel art curriculum you can actually check off. Learning pixel art doesn't fail on talent, it fails on structure — a wall of tutorials and no idea what to draw today. So every drill names its subject, its canvas size, and two or three tips, and nothing else. Built it because I was the student who needed it.",
+		stack: ['Vite', 'React', 'Tailwind CSS', 'localStorage'],
+		status: 'in-progress',
+		links: {
+			source: 'https://github.com/lazycodelab/practix',
+		},
+		metadata: {
+			lastUpdated: '2026-08-11',
+			version: '1.0.0',
+		},
+		features: [
+			'33 drills across 6 phases, each with a named subject',
+			'Filter every drill by the concept it teaches',
+			'Per-week notes and a running journal',
+			'Fork it and rewrite curriculum.md — the app reshapes itself',
+			'localStorage only — no account, no server, no telemetry',
+		],
+		importance: 'secondary',
+		priority: 3,
 	},
 	{
 		title: 'YT Planner',

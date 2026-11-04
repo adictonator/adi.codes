@@ -12,8 +12,8 @@ import {
 	ArrowRight,
 } from 'lucide-react'
 import { graveyard, GraveyardProject } from '@/data/graveyard'
-import TerminalNav from '@/components/terminal-nav'
-import { BackgroundEffect } from '@/components/ui/background-effect'
+import Link from 'next/link'
+import { formatDate as formatUtcDate } from '@/lib/format'
 import { useMounted } from '@/hooks/use-mounted'
 
 // Turn two dates into a human lifespan: "18 days", "2 months", "1 year".
@@ -28,10 +28,7 @@ function lifespan(born: string, died: string): string {
 }
 
 function formatDate(d: string): string {
-	return new Date(d).toLocaleDateString('en-US', {
-		month: 'short',
-		year: 'numeric',
-	})
+	return formatUtcDate(d, 'monthYear')
 }
 
 function Headstone({
@@ -150,23 +147,14 @@ function Headstone({
 	)
 }
 
-export default function GraveyardPage() {
+export default function GraveyardClient() {
 	const mounted = useMounted()
 
 	const buried = graveyard.length
 	const everShipped = graveyard.filter(p => p.wasLive).length
 
 	return (
-		<div className="border-border mx-auto min-h-screen border-x border-dashed bg-neutral-950 md:max-w-4xl">
-			<TerminalNav
-				currentPath="~/graveyard"
-				breadcrumbs={[
-					{ label: 'projects', href: '/projects', command: 'cd' },
-					{ label: 'graveyard', href: '/graveyard', command: 'cd' },
-				]}
-			/>
-
-			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+		<>
 				{/* Header */}
 				<div className="mb-8 border-b border-dashed border-neutral-800 pb-8">
 					<motion.div
@@ -188,17 +176,15 @@ export default function GraveyardPage() {
 						</p>
 
 						{/* Stats */}
-						<div className="text-xxs flex flex-wrap items-center gap-4 border-t border-dashed border-neutral-800 pt-4 font-mono text-neutral-600">
+						<div className="text-xxs flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-dashed border-neutral-800 pt-4 font-mono text-neutral-600">
 							<span className="flex items-center gap-2">
 								<span className="h-1.5 w-1.5 rounded-full bg-rose-500/70" />
 								{buried} buried
 							</span>
-							<span>•</span>
 							<span className="flex items-center gap-1.5">
 								<Globe className="size-3" />
 								{everShipped} ever shipped
 							</span>
-							<span>•</span>
 							<span className="flex items-center gap-1.5">
 								<GlassWater className="size-3" />
 								all gone but not wasted
@@ -227,16 +213,13 @@ export default function GraveyardPage() {
 					<p>
 						$ git log --dead — {buried} entr
 						{buried === 1 ? 'y' : 'ies'}. Looking for the living?{' '}
-						<a
+						<Link
 							href="/projects"
-							className="text-emerald-500/70 underline-offset-2 hover:underline">
+							className="text-emerald-500 underline-offset-2 hover:underline">
 							cd ~/projects
-						</a>
+						</Link>
 					</p>
 				</motion.div>
-			</div>
-
-			<BackgroundEffect variant="grid" intensity={0.3} opacity={0.5} />
-		</div>
+		</>
 	)
 }

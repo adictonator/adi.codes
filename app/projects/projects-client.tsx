@@ -1,420 +1,288 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import {
-	Terminal,
-	Play,
-	Sparkles,
-	TrendingUp,
-	Code,
-	ArrowUpRight,
-	Filter,
-	Rocket,
-	Wrench,
-	Star,
-	Skull,
-} from 'lucide-react'
+import Link from 'next/link'
+import { Terminal, Play, ArrowUpRight, Filter, Rocket, Wrench, Skull } from 'lucide-react'
 import { useState, useMemo } from 'react'
 import { projects, Project } from '@/data/projects'
 import { ProjectLinks } from '@/components/project-links'
-import TerminalNav from '@/components/terminal-nav'
 import { PreviewModal } from '@/components/ui/preview-modal'
-import { BackgroundEffect } from '@/components/ui/background-effect'
+import { categoryGroups, categoryLabels, statusStyles } from '@/lib/project-status'
+import { formatDate } from '@/lib/format'
+import { cn } from '@/lib/utils'
 import { useMounted } from '@/hooks/use-mounted'
 
-type FilterType = 'all' | 'experiment' | 'open-source' | 'side-project'
-type StatusFilter = 'all' | 'published' | 'in-progress' | 'archived' | 'concept'
+type Status = Project['status']
 
-export default function ProjectsPage() {
+const statusOrder: Status[] = ['published', 'in-progress', 'stale', 'concept', 'archived']
+
+function chipClass(active: boolean, tone: 'emerald' | 'amber') {
+	return cn(
+		'flex items-center gap-2 border border-dashed px-3 py-1.5 font-mono text-xs transition-colors',
+		active
+			? tone === 'emerald'
+				? 'border-emerald-700 bg-emerald-500/10 text-emerald-400'
+				: 'border-amber-700 bg-amber-500/10 text-amber-400'
+			: 'border-neutral-800 bg-neutral-900/30 text-neutral-500 hover:border-neutral-700 hover:text-neutral-400',
+	)
+}
+
+export default function ProjectsClient() {
 	const mounted = useMounted()
 
-	const [categoryFilter, setCategoryFilter] = useState<FilterType>('all')
-	const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
+	const [group, setGroup] = useState('all')
+	const [status, setStatus] = useState<Status | 'all'>('all')
 	const [activeProject, setActiveProject] = useState<Project | null>(null)
-	const [isPreviewOpen, setIsPreviewOpen] = useState(false)
 
-	const openPreview = (project: Project) => {
-		setActiveProject(project)
-		setIsPreviewOpen(true)
-	}
+	const inGroup = (p: Project, value: string) =>
+		value === 'all' ||
+		categoryGroups.find(g => g.value === value)?.categories.includes(p.category)
 
-	// Filter and sort projects
-	const filteredProjects = useMemo(() => {
-		return projects
-			.filter(p => {
-				const categoryMatch =
-					categoryFilter === 'all' ||
-					p.category.toLowerCase().replace(' ', '-') ===
-						categoryFilter
-				const statusMatch =
-					statusFilter === 'all' || p.status === statusFilter
-				return categoryMatch && statusMatch
-			})
-			.sort((a, b) => {
-				// Sort by priority first (1 = highest, 5 = lowest)
-				if (a.priority !== b.priority) {
-					return a.priority - b.priority
-				}
-				// Then by importance
-				if (a.importance !== b.importance) {
-					return a.importance === 'primary' ? -1 : 1
-				}
-				// Finally by date
-				return (
-					new Date(b.metadata.lastUpdated).getTime() -
-					new Date(a.metadata.lastUpdated).getTime()
-				)
-			})
-	}, [categoryFilter, statusFilter])
-
-	const categoryFilters: {
-		value: FilterType
-		label: string
-		icon: any
-		count: number
-	}[] = [
-		{
-			value: 'all',
-			label: 'all projects',
-			icon: Code,
-			count: projects.length,
-		},
-		{
-			value: 'side-project',
-			label: 'live & deployed',
-			icon: Rocket,
-			count: projects.filter(p =>
-				p.category.toLowerCase().includes('project'),
-			).length,
-		},
-		{
-			value: 'experiment',
-			label: 'experiments & wip',
-			icon: Sparkles,
-			count: projects.filter(p => p.category === 'experiment').length,
-		},
-		//{
-		//	value: 'open-source',
-		//	label: 'open source',
-		//	icon: Github,
-		//	count: projects.filter(p => p.category === 'Open Source').length,
-		//},
+	// Only offer filters that match something.
+	const groups = [
+		{ value: 'all', label: 'all', count: projects.length },
+		...categoryGroups
+			.map(g => ({
+				value: g.value,
+				label: g.label,
+				count: projects.filter(p => g.categories.includes(p.category)).length,
+			}))
+			.filter(g => g.count > 0),
 	]
+	const statuses = statusOrder
+		.map(s => ({ value: s, count: projects.filter(p => p.status === s).length }))
+		.filter(s => s.count > 0)
 
-	const statusFilters: { value: StatusFilter; label: string; icon: any }[] = [
-		{ value: 'all', label: 'all', icon: Code },
-		{ value: 'published', label: 'published', icon: Rocket },
-		{ value: 'in-progress', label: 'in progress', icon: Wrench },
-		{ value: 'concept', label: 'concept', icon: Sparkles },
-		{ value: 'archived', label: 'archived', icon: Terminal },
-	]
+	const filteredProjects = useMemo(
+		() =>
+			projects
+				.filter(p => inGroup(p, group) && (status === 'all' || p.status === status))
+				.sort(
+					(a, b) =>
+						a.priority - b.priority ||
+						(a.importance === b.importance ? 0 : a.importance === 'primary' ? -1 : 1) ||
+						new Date(b.metadata.lastUpdated).getTime() -
+							new Date(a.metadata.lastUpdated).getTime(),
+				),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[group, status],
+	)
 
-	const stats = {
-		total: projects.length,
-		published: projects.filter(p => p.status === 'published').length,
-		inProgress: projects.filter(p => p.status === 'in-progress').length,
-		totalStars: projects.reduce(
-			(acc, p) => acc + (p.metadata.stars || 0),
-			0,
-		),
-	}
+	const live = projects.filter(p => p.status === 'published').length
+	const inProgress = projects.filter(p => p.status === 'in-progress').length
 
 	return (
-		<div className="border-border mx-auto min-h-screen border-x border-dashed bg-neutral-950 md:max-w-4xl">
-			<TerminalNav
-				currentPath="~/projects"
-				breadcrumbs={[
-					{ label: 'projects', href: '/projects', command: 'cd' },
-				]}
-			/>
-
-			<div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-				{/* Header Section */}
-				<div className="mb-8 border-b border-dashed border-neutral-800 pb-8">
-					<motion.div
-						initial={mounted ? { opacity: 0, y: -20 } : false}
-						animate={{ opacity: 1, y: 0 }}
-						className="space-y-4">
-						<div className="flex items-center gap-3">
-							<Terminal className="h-6 w-6 text-emerald-500" />
-							<h1 className="font-mono text-2xl text-neutral-200 sm:text-3xl">
-								projects/
-							</h1>
-						</div>
-						<p className="max-w-2xl font-mono text-sm text-neutral-500">
-							A collection of live projects, work-in-progress
-							experiments, and open-source contributions.
-							Showcasing everything from production apps to
-							weekend hacks.
-						</p>
-
-						{/* Graveyard link — the dead ones live here */}
-						<a
-							href="/graveyard"
-							className="group inline-flex w-fit items-center gap-2 border border-dashed border-neutral-800 bg-neutral-950/50 px-3 py-1.5 font-mono text-xs text-neutral-500 transition-all duration-200 hover:border-rose-900/60 hover:text-rose-400">
-							<Skull className="size-3.5 text-rose-500/60 transition-colors group-hover:text-rose-400" />
-							<span>visit the graveyard</span>
-							<span className="text-xxs text-neutral-700 group-hover:text-rose-500/60">
-								// projects that didn&apos;t make it
-							</span>
-						</a>
-
-						{/* Stats Bar */}
-						<div className="flex flex-wrap items-center gap-4 border-t border-dashed border-neutral-800 pt-4 font-mono text-xs text-neutral-600">
-							<span className="flex items-center gap-2">
-								<span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-								{filteredProjects.length} projects
-							</span>
-							<span>•</span>
-							<span className="flex items-center gap-1.5">
-								<Rocket className="size-3" />
-								{stats.published} live
-							</span>
-							<span>•</span>
-							<span className="flex items-center gap-1.5">
-								<Wrench className="size-3" />
-								{stats.inProgress} in progress
-							</span>
-							<span>•</span>
-							<span className="flex items-center gap-1.5">
-								<Star className="size-3" />
-								{stats.totalStars} stars
-							</span>
-						</div>
-					</motion.div>
-				</div>
-
-				{/* Filters Section */}
-				<div className="mb-8 space-y-4">
-					{/* Category Filters */}
-					<div className="border border-dashed border-neutral-800 bg-neutral-950/50 p-4">
-						<div className="mb-3 flex items-center gap-2">
-							<Filter className="h-3.5 w-3.5 text-neutral-600" />
-							<span className="font-mono text-xs text-neutral-600">
-								filter by category
-							</span>
-						</div>
-						<div className="flex flex-wrap gap-2">
-							{categoryFilters.map(
-								({ value, label, icon: Icon, count }) => (
-									<motion.button
-										key={value}
-										onClick={() => setCategoryFilter(value)}
-										whileHover={{ y: -1 }}
-										whileTap={{ y: 0 }}
-										className={`flex items-center gap-2 border border-dashed px-3 py-1.5 font-mono text-xs transition-all duration-200 ${
-											categoryFilter === value
-												? 'border-emerald-700 bg-emerald-950/30 text-emerald-400'
-												: 'border-neutral-800 bg-neutral-900/30 text-neutral-500 hover:border-neutral-700 hover:text-neutral-400'
-										}`}>
-										<Icon className="h-3.5 w-3.5" />
-										<span>{label}</span>
-										<span
-											className={`text-xxs rounded-full px-1.5 py-0.5 ${
-												categoryFilter === value
-													? 'bg-emerald-900/50 text-emerald-400'
-													: 'bg-neutral-800 text-neutral-600'
-											}`}>
-											{count}
-										</span>
-									</motion.button>
-								),
-							)}
-						</div>
+		<>
+			{/* Header */}
+			<div className="mb-8 border-b border-dashed border-neutral-800 pb-8">
+				<motion.div
+					initial={mounted ? { opacity: 0, y: -20 } : false}
+					animate={{ opacity: 1, y: 0 }}
+					className="space-y-4">
+					<div className="flex items-center gap-3">
+						<Terminal className="size-6 text-emerald-500" />
+						<h1 className="font-mono text-2xl text-neutral-200 sm:text-3xl">
+							projects/
+						</h1>
 					</div>
+					<p className="max-w-2xl font-mono text-sm leading-relaxed text-neutral-500">
+						Everything I&apos;ve built that&apos;s still breathing: apps
+						on the App Store, WordPress plugins other people&apos;s
+						sites depend on, client builds, and the half-finished
+						things I haven&apos;t given up on yet. Tap a card for the
+						details.
+					</p>
 
-					{/* Status Filters */}
-					<div className="border border-dashed border-neutral-800 bg-neutral-950/50 p-4">
-						<div className="mb-3 flex items-center gap-2">
-							<Terminal className="h-3.5 w-3.5 text-neutral-600" />
-							<span className="font-mono text-xs text-neutral-600">
-								filter by status
-							</span>
-						</div>
-						<div className="flex flex-wrap gap-2">
-							{statusFilters.map(
-								({ value, label, icon: Icon }) => (
-									<motion.button
-										key={value}
-										onClick={() => setStatusFilter(value)}
-										whileHover={{ y: -1 }}
-										whileTap={{ y: 0 }}
-										className={`flex items-center gap-1.5 border border-dashed px-3 py-1 font-mono text-xs transition-all duration-200 ${
-											statusFilter === value
-												? 'border-amber-700 bg-amber-950/30 text-amber-400'
-												: 'border-neutral-800 bg-neutral-900/30 text-neutral-500 hover:border-neutral-700 hover:text-neutral-400'
-										}`}>
-										<Icon className="size-3" />
-										<span>{label}</span>
-									</motion.button>
-								),
-							)}
-						</div>
+					<Link
+						href="/graveyard"
+						className="group inline-flex w-fit flex-wrap items-center gap-2 border border-dashed border-neutral-800 bg-neutral-950/50 px-3 py-1.5 font-mono text-xs text-neutral-500 transition-colors hover:border-rose-900/60 hover:text-rose-400">
+						<Skull className="size-3.5 text-rose-500/60 transition-colors group-hover:text-rose-400" />
+						<span>visit the graveyard</span>
+						<span className="text-xxs text-neutral-700 group-hover:text-rose-500/60">
+							{'//'} projects that didn&apos;t make it
+						</span>
+					</Link>
+
+					<div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-dashed border-neutral-800 pt-4 font-mono text-xs text-neutral-600">
+						<span className="flex items-center gap-2">
+							<span className="size-1.5 rounded-full bg-emerald-500" />
+							{projects.length} projects
+						</span>
+						<span aria-hidden="true">•</span>
+						<span className="flex items-center gap-1.5">
+							<Rocket className="size-3" />
+							{live} live
+						</span>
+						<span aria-hidden="true">•</span>
+						<span className="flex items-center gap-1.5">
+							<Wrench className="size-3" />
+							{inProgress} in progress
+						</span>
 					</div>
-				</div>
-
-				{/* Projects Grid */}
-				<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-					{filteredProjects.map((project, index) => (
-						<motion.article
-							key={project.title}
-							initial={mounted ? { opacity: 0, y: 20 } : false}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: index * 0.05 }}
-							role="button"
-							tabIndex={0}
-							aria-label={`View ${project.title} details`}
-							onClick={() => openPreview(project)}
-							onKeyDown={e => {
-								if (e.key === 'Enter' || e.key === ' ') {
-									e.preventDefault()
-									openPreview(project)
-								}
-							}}
-							className="group focus-visible:ring-emerald-500/40 relative flex cursor-pointer flex-col border border-dashed border-neutral-800 bg-neutral-950/50 transition-all duration-300 outline-none hover:border-neutral-700 hover:bg-neutral-900/50 focus-visible:ring-2">
-							{/* Header Bar */}
-							<div className="flex items-center justify-between border-b border-dashed border-neutral-800 bg-neutral-900/30 px-3 py-2">
-								<div className="flex items-center gap-2">
-									<motion.div
-										className={`h-1.5 w-1.5 rounded-full ${
-											project.status === 'published'
-												? 'bg-emerald-500'
-												: project.status ===
-													  'in-progress'
-													? 'bg-amber-500'
-													: 'bg-neutral-600'
-										}`}
-										animate={{
-											scale: [1, 1.2, 1],
-										}}
-										transition={{
-											duration: 2,
-											repeat: Infinity,
-											ease: 'easeInOut',
-										}}
-									/>
-									<span className="text-xxs font-mono text-neutral-600">
-										{project.category.toLowerCase()}
-									</span>
-								</div>
-								<span
-									onClick={e => e.stopPropagation()}
-									className="contents">
-									<ProjectLinks
-										project={project}
-										variant="icon"
-									/>
-								</span>
-							</div>
-
-							{/* Preview Image */}
-							{project.preview?.image && (
-								<div className="relative aspect-video overflow-hidden border-b border-dashed border-neutral-800 bg-neutral-900">
-									<img
-										src={project.preview.image}
-										alt={project.title}
-										className="h-full w-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-									/>
-									{project.preview.video && (
-										<motion.div
-											initial={{ opacity: 0 }}
-											whileHover={{ opacity: 1 }}
-											className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-[1px]">
-											<div className="flex items-center gap-2 border border-dashed border-neutral-600 bg-neutral-950/90 px-3 py-2 font-mono text-xs text-neutral-400">
-												<Play className="size-3" />
-												<span>play demo</span>
-											</div>
-										</motion.div>
-									)}
-								</div>
-							)}
-
-							{/* Content */}
-							<div className="flex flex-1 flex-col p-4">
-								<div className="mb-3 space-y-2">
-									<h3 className="font-mono text-sm font-normal text-neutral-200 transition-colors group-hover:text-emerald-400">
-										{project.title}
-									</h3>
-									<p className="line-clamp-2 text-xs leading-relaxed text-neutral-500">
-										{project.description}
-									</p>
-								</div>
-
-								{/* Tech Stack */}
-								<div className="mb-4 flex flex-wrap gap-1">
-									{project.stack.slice(0, 3).map(tech => (
-										<span
-											key={tech}
-											className="text-xxs border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
-											{tech}
-										</span>
-									))}
-									{project.stack.length > 3 && (
-										<span className="text-xxs border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-neutral-600">
-											+{project.stack.length - 3}
-										</span>
-									)}
-								</div>
-
-								{/* Footer */}
-								<div className="text-xxs mt-auto flex items-center justify-between border-t border-dashed border-neutral-800 pt-3 text-neutral-600">
-									<div className="flex items-center gap-2">
-										{project.metadata.stars && (
-											<span>
-												⭐ {project.metadata.stars}
-											</span>
-										)}
-										{project.metadata.lastUpdated && (
-											<span className="font-mono">
-												{new Date(
-													project.metadata.lastUpdated,
-												).toLocaleDateString('en-US', {
-													month: 'short',
-													year: '2-digit',
-												})}
-											</span>
-										)}
-									</div>
-									<motion.span
-										whileHover={{ x: 2 }}
-										className="text-neutral-700 transition-colors group-hover:text-neutral-500">
-										<ArrowUpRight className="size-3" />
-									</motion.span>
-								</div>
-							</div>
-						</motion.article>
-					))}
-				</div>
-
-				{/* Empty State */}
-				{filteredProjects.length === 0 && (
-					<motion.div
-						initial={mounted ? { opacity: 0 } : false}
-						animate={{ opacity: 1 }}
-						className="flex flex-col items-center justify-center border border-dashed border-neutral-800 bg-neutral-950/30 py-16">
-						<Terminal className="mb-4 h-12 w-12 text-neutral-700" />
-						<p className="font-mono text-sm text-neutral-600">
-							No projects found with current filters
-						</p>
-						<button
-							onClick={() => {
-								setCategoryFilter('all')
-								setStatusFilter('all')
-							}}
-							className="mt-4 border border-dashed border-neutral-800 bg-neutral-900/30 px-4 py-2 font-mono text-xs text-neutral-500 transition-colors hover:border-neutral-700 hover:text-neutral-400">
-							reset filters
-						</button>
-					</motion.div>
-				)}
+				</motion.div>
 			</div>
 
+			{/* Filters */}
+			<div className="mb-8 space-y-4">
+				<fieldset className="border border-dashed border-neutral-800 bg-neutral-950/50 p-4">
+					<legend className="sr-only">Filter by type</legend>
+					<div className="mb-3 flex items-center gap-2 font-mono text-xs text-neutral-600">
+						<Filter className="size-3.5" />
+						filter by type
+					</div>
+					<div className="flex flex-wrap gap-2">
+						{groups.map(g => (
+							<button
+								key={g.value}
+								type="button"
+								aria-pressed={group === g.value}
+								onClick={() => setGroup(g.value)}
+								className={chipClass(group === g.value, 'emerald')}>
+								{g.label}
+								<span className="text-xxs text-neutral-600">{g.count}</span>
+							</button>
+						))}
+					</div>
+				</fieldset>
+
+				<fieldset className="border border-dashed border-neutral-800 bg-neutral-950/50 p-4">
+					<legend className="sr-only">Filter by status</legend>
+					<div className="mb-3 flex items-center gap-2 font-mono text-xs text-neutral-600">
+						<Terminal className="size-3.5" />
+						filter by status
+					</div>
+					<div className="flex flex-wrap gap-2">
+						<button
+							type="button"
+							aria-pressed={status === 'all'}
+							onClick={() => setStatus('all')}
+							className={chipClass(status === 'all', 'amber')}>
+							all
+						</button>
+						{statuses.map(s => (
+							<button
+								key={s.value}
+								type="button"
+								aria-pressed={status === s.value}
+								onClick={() => setStatus(s.value)}
+								className={chipClass(status === s.value, 'amber')}>
+								<span className={cn('size-1.5 rounded-full', statusStyles[s.value].dot)} />
+								{statusStyles[s.value].label}
+								<span className="text-xxs text-neutral-600">{s.count}</span>
+							</button>
+						))}
+					</div>
+				</fieldset>
+			</div>
+
+			{/* Grid */}
+			<div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{filteredProjects.map((project, index) => (
+					<motion.article
+						key={project.title}
+						initial={mounted ? { opacity: 0, y: 20 } : false}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: index * 0.03 }}
+						className="group relative flex flex-col border border-dashed border-neutral-800 bg-neutral-950/50 transition-colors hover:border-neutral-700 hover:bg-neutral-900/50">
+						{/* Header bar */}
+						<div className="flex items-center justify-between gap-2 border-b border-dashed border-neutral-800 bg-neutral-900/30 px-3 py-2">
+							<span className="flex items-center gap-2 font-mono text-xxs">
+								<span className={cn('size-1.5 rounded-full', statusStyles[project.status].dot)} />
+								<span className="text-neutral-600">{categoryLabels[project.category]}</span>
+								<span className="text-neutral-700">/</span>
+								<span className={statusStyles[project.status].text}>
+									{statusStyles[project.status].label}
+								</span>
+							</span>
+							{/* Above the card's stretched button, so these stay clickable. */}
+							<ProjectLinks project={project} variant="icon" className="relative z-10" />
+						</div>
+
+						{project.preview?.image && (
+							<div className="relative aspect-video overflow-hidden border-b border-dashed border-neutral-800 bg-neutral-900">
+								{/* eslint-disable-next-line @next/next/no-img-element */}
+								<img
+									src={project.preview.image}
+									alt=""
+									loading="lazy"
+									decoding="async"
+									className="size-full object-cover opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+								/>
+								{project.preview.video && (
+									<div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
+										<span className="flex items-center gap-2 border border-dashed border-neutral-600 bg-neutral-950/90 px-3 py-2 font-mono text-xs text-neutral-400">
+											<Play className="size-3" />
+											play demo
+										</span>
+									</div>
+								)}
+							</div>
+						)}
+
+						<div className="flex flex-1 flex-col p-4">
+							<h2 className="mb-2 font-mono text-sm font-normal text-neutral-200 transition-colors group-hover:text-emerald-400">
+								{/* Stretched button: the whole card opens the details. */}
+								<button
+									type="button"
+									onClick={() => setActiveProject(project)}
+									className="text-left after:absolute after:inset-0 focus-visible:outline-none focus-visible:after:ring-2 focus-visible:after:ring-emerald-500/40">
+									{project.title}
+								</button>
+							</h2>
+							<p className="mb-4 line-clamp-3 text-xs leading-relaxed text-neutral-500">
+								{project.description}
+							</p>
+
+							<div className="mb-4 flex flex-wrap gap-1">
+								{project.stack.slice(0, 3).map(tech => (
+									<span
+										key={tech}
+										className="border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-xxs text-neutral-600">
+										{tech}
+									</span>
+								))}
+								{project.stack.length > 3 && (
+									<span className="border border-dashed border-neutral-800 bg-neutral-900/50 px-1.5 py-0.5 font-mono text-xxs text-neutral-600">
+										+{project.stack.length - 3}
+									</span>
+								)}
+							</div>
+
+							<div className="mt-auto flex items-center justify-between border-t border-dashed border-neutral-800 pt-3 font-mono text-xxs text-neutral-600">
+								<span>
+									{project.metadata.version && `v${project.metadata.version} · `}
+									{formatDate(project.metadata.lastUpdated, 'monthYear')}
+								</span>
+								<ArrowUpRight className="size-3 text-neutral-700 transition-colors group-hover:text-neutral-500" />
+							</div>
+						</div>
+					</motion.article>
+				))}
+			</div>
+
+			{filteredProjects.length === 0 && (
+				<div className="flex flex-col items-center justify-center border border-dashed border-neutral-800 bg-neutral-950/30 py-16">
+					<Terminal className="mb-4 size-12 text-neutral-700" />
+					<p className="font-mono text-sm text-neutral-600">
+						No projects match both filters
+					</p>
+					<button
+						type="button"
+						onClick={() => {
+							setGroup('all')
+							setStatus('all')
+						}}
+						className="mt-4 border border-dashed border-neutral-800 bg-neutral-900/30 px-4 py-2 font-mono text-xs text-neutral-500 transition-colors hover:border-neutral-700 hover:text-neutral-400">
+						reset filters
+					</button>
+				</div>
+			)}
+
 			<PreviewModal
-				isOpen={isPreviewOpen}
-				onClose={() => setIsPreviewOpen(false)}
+				isOpen={activeProject !== null}
+				onClose={() => setActiveProject(null)}
 				project={activeProject}
 			/>
-
-			<BackgroundEffect variant="grid" intensity={0.4} opacity={0.7} />
-		</div>
+		</>
 	)
 }

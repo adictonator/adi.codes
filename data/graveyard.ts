@@ -64,8 +64,8 @@ export const graveyard: GraveyardProject[] = [
 		tagline: 'Reusable product blueprints for Shopify.',
 		category: 'tool',
 		stack: ['React Router', 'Shopify', 'Prisma', 'Polaris'],
-		born: '2026-01-15', // TODO: confirm real start date
-		died: '2026-02-17',
+		born: '2025-10-25',
+		died: '2025-10-25',
 		wasLive: false,
 		epitaph: 'Solved a real problem too few people had.',
 		causeOfDeath:
@@ -79,7 +79,7 @@ export const graveyard: GraveyardProject[] = [
 		category: 'desktop-app',
 		stack: ['SwiftUI', 'macOS', 'AppKit', 'Combine'],
 		born: '2025-12-30',
-		died: '2026-01-10', // TODO: confirm real end date
+		died: '2026-01-10',
 		wasLive: false,
 		epitaph: 'A dev tool for an audience of exactly me.',
 		causeOfDeath:
@@ -106,8 +106,8 @@ export const graveyard: GraveyardProject[] = [
 		tagline: 'Put the apps you doom-scroll behind a speed bump.',
 		category: 'mobile-app',
 		stack: ['Expo', 'React Native', 'TypeScript'],
-		born: '2026-02-10', // TODO: confirm real start date
-		died: '2026-02-17',
+		born: '2025-04-22',
+		died: '2025-04-24',
 		wasLive: false,
 		epitaph: 'The OS owns the off switch, not me.',
 		causeOfDeath:
@@ -120,8 +120,8 @@ export const graveyard: GraveyardProject[] = [
 		tagline: 'A Duolingo-shaped path for learning Sanskrit.',
 		category: 'mobile-app',
 		stack: ['Expo', 'React Native', 'TypeScript'],
-		born: '2026-02-10', // TODO: confirm real start date
-		died: '2026-02-17',
+		born: '2025-02-17',
+		died: '2025-02-25',
 		wasLive: false,
 		epitaph: 'Built the engine. Never wrote the lessons.',
 		causeOfDeath:

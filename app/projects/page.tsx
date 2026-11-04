@@ -1,22 +1,21 @@
-import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/metadata'
+import PageShell from '@/components/page-shell'
 import ProjectsClient from './projects-client'
 
-export const metadata: Metadata = {
-	title: 'Projects — iOS Apps, Web Apps & Dev Tools',
+export const metadata = pageMetadata({
+	title: 'Projects — iOS Apps, WordPress Plugins & Web Apps',
 	description:
-		'Shipped work by Aditya Bhaskar Sharma, product engineer: iOS apps built solo from idea to App Store (Swift, SwiftUI), web apps and developer tools in Next.js, React, and TypeScript.',
-	alternates: {
-		canonical: '/projects',
-	},
-	openGraph: {
-		title: 'Projects — iOS Apps, Web Apps & Dev Tools',
-		description:
-			'Shipped work by a product engineer: iOS apps from idea to App Store, web apps, and developer tools.',
-		url: 'https://adi.codes/projects',
-		type: 'website',
-	},
-}
+		'Shipped work by Aditya Bhaskar Sharma: iOS and macOS apps built solo, idea to App Store, WordPress plugins on 10,000+ sites, client builds, and what is in progress.',
+	path: '/projects',
+})
 
 export default function ProjectsPage() {
-	return <ProjectsClient />
+	return (
+		<PageShell
+			currentPath="~/projects"
+			breadcrumbs={[{ label: 'projects', href: '/projects', command: 'cd' }]}
+			availability="projects">
+			<ProjectsClient />
+		</PageShell>
+	)
 }

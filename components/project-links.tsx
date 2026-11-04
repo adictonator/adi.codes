@@ -102,7 +102,7 @@ export function ProjectLinks({
 							onClick={onClick}
 							className="flex items-center gap-2 border border-dashed border-neutral-800 bg-neutral-900/50 px-3 py-2 font-mono text-xs text-neutral-400 transition-colors hover:border-neutral-700 hover:text-neutral-300">
 							<Icon className="h-3.5 w-3.5" />
-							<span className="hidden sm:inline">{label}</span>
+							<span>{label}</span>
 						</a>
 					)
 				}
@@ -115,8 +115,8 @@ export function ProjectLinks({
 						rel="noopener noreferrer"
 						onClick={onClick}
 						title={label}
-						aria-label={label}
-						className="text-neutral-600 transition-colors hover:text-neutral-400">
+						aria-label={`${project.title} — ${label}`}
+						className="-m-1.5 p-1.5 text-neutral-600 transition-colors hover:text-neutral-400">
 						<Icon className="size-3.5" />
 					</a>
 				)
