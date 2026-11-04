@@ -3,7 +3,7 @@
 # is NOT available for AI training or machine learning purposes
 
 # Copyright
-Copyright © 2024-2025 Aditya Bhaskar Sharma. All rights reserved.
+Copyright © 2024-2026 Aditya Bhaskar Sharma. All rights reserved.
 
 # License
 License: CC BY-NC-ND 4.0 with additional AI use restrictions

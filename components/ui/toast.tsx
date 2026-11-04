@@ -46,7 +46,8 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 								animate={{ opacity: 1, y: 0 }}
 								exit={{ opacity: 0, y: 20 }}
 								transition={{ duration: 0.3 }}
-								className={`text-primary bg-secondary text-base"> fixed inset-x-0 bottom-8 z-[100] mx-auto w-fit border-2 border-dashed border-yellow-300/30 px-6 py-3`}>
+								role="status"
+								className="text-primary bg-secondary fixed inset-x-4 bottom-24 z-100 mx-auto w-fit max-w-md border-2 border-dashed border-yellow-300/30 px-6 py-3 text-center text-sm md:bottom-8 md:text-base">
 								{toast.message}
 							</motion.div>
 						))}

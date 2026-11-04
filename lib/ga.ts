@@ -72,7 +72,7 @@ export function trackNewsletterSignup({
 export function trackHireClick({
 	method,
 }: {
-	method: 'email' | 'lazycodelab'
+	method: 'email' | 'lazycodelab' | 'linkedin'
 }) {
 	trackEvent('hire_click', {
 		event_category: 'engagement',

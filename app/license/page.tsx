@@ -1,8 +1,6 @@
-'use client'
-
-import TerminalNav from '@/components/terminal-nav'
-import { BackgroundEffect } from '@/components/ui/background-effect'
-import FloatingQuickNav from '@/components/floating-quick-nav'
+import PageShell from '@/components/page-shell'
+import { pageMetadata } from '@/lib/metadata'
+import { mailto } from '@/lib/site'
 import {
 	Scale,
 	ShieldAlert,
@@ -13,15 +11,20 @@ import {
 	Mail,
 } from 'lucide-react'
 
+export const metadata = pageMetadata({
+	title: 'Content License & Terms',
+	description:
+		'How you can share content from adi.codes: CC BY-NC-ND 4.0 with attribution, and no use for AI training, datasets or model development without written permission.',
+	path: '/license',
+})
+
 export default function LicensePage() {
 	return (
-		<div className="border-border/50 mx-auto min-h-screen border-x border-dashed bg-neutral-950 md:max-w-4xl">
-			<TerminalNav
-				currentPath="~/license"
-				breadcrumbs={[{ label: 'license', href: '/license' }]}
-			/>
-
-			<div className="relative p-6 md:p-8">
+		<PageShell
+			currentPath="~/license"
+			breadcrumbs={[{ label: 'license', href: '/license' }]}
+			availability={false}>
+			<div className="relative">
 				{/* Header */}
 				<header className="mb-12 space-y-6">
 					<div className="font-mono text-xs">
@@ -31,7 +34,7 @@ export default function LicensePage() {
 					</div>
 
 					<div className="space-y-3">
-						<h1 className="text-4xl font-light tracking-tight text-neutral-200 xl:text-5xl">
+						<h1 className="text-3xl font-light tracking-tight text-balance text-neutral-200 sm:text-4xl xl:text-5xl">
 							Content License & Terms
 						</h1>
 						<p className="text-lg text-neutral-400">
@@ -65,12 +68,12 @@ export default function LicensePage() {
 					{/* Copyright Section */}
 					<section className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Scale className="h-6 w-6 text-blue-400" />
-							<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+							<Scale className="size-6 shrink-0 text-blue-400" />
+							<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 								Copyright Notice
 							</h2>
 						</div>
-						<div className="space-y-4 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-4 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								&copy; 2024-{new Date().getFullYear()} Aditya
 								Bhaskar Sharma. All rights reserved.
@@ -89,12 +92,12 @@ export default function LicensePage() {
 					{/* AI Use Restrictions */}
 					<section className="space-y-4">
 						<div className="flex items-center gap-3">
-							<ShieldAlert className="h-6 w-6 text-amber-400" />
-							<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+							<ShieldAlert className="size-6 shrink-0 text-amber-400" />
+							<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 								AI Training & Machine Learning Restrictions
 							</h2>
 						</div>
-						<div className="space-y-6 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-6 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								<strong className="text-neutral-200">
 									Explicit Prohibition:
@@ -138,13 +141,13 @@ export default function LicensePage() {
 					{/* License Terms */}
 					<section className="space-y-4">
 						<div className="flex items-center gap-3">
-							<FileText className="h-6 w-6 text-purple-400" />
-							<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+							<FileText className="size-6 shrink-0 text-blue-400" />
+							<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 								License Terms (CC BY-NC-ND 4.0 + AI
 								Restrictions)
 							</h2>
 						</div>
-						<div className="space-y-6 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-6 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								This work is licensed under a modified Creative
 								Commons Attribution-NonCommercial-NoDerivatives
@@ -208,10 +211,10 @@ export default function LicensePage() {
 
 					{/* Legal Enforcement */}
 					<section className="space-y-4">
-						<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+						<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 							Legal Enforcement
 						</h2>
-						<div className="space-y-4 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-4 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								Violations of these terms may result in:
 							</p>
@@ -238,10 +241,10 @@ export default function LicensePage() {
 
 					{/* Attribution Requirements */}
 					<section className="space-y-4">
-						<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+						<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 							Attribution Requirements
 						</h2>
-						<div className="space-y-4 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-4 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								When sharing or referencing content from this
 								website (within the allowed uses), you must
@@ -265,12 +268,12 @@ export default function LicensePage() {
 					{/* Permission Requests */}
 					<section className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Mail className="h-6 w-6 text-blue-400" />
-							<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+							<Mail className="size-6 shrink-0 text-blue-400" />
+							<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 								Permission Requests
 							</h2>
 						</div>
-						<div className="space-y-4 border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="space-y-4 border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-300">
 								For uses outside the scope of this license,
 								including commercial use, derivative works, or
@@ -278,8 +281,12 @@ export default function LicensePage() {
 								written permission.
 							</p>
 							<p className="leading-relaxed text-neutral-400">
-								To request permission, please contact me through
-								my social media channels listed on the homepage
+								To request permission,{' '}
+								<a
+									href={mailto('License request via adi.codes')}
+									className="border-b border-dashed border-neutral-700 text-neutral-300 hover:text-emerald-400">
+									email me
+								</a>{' '}
 								with:
 							</p>
 							<ul className="space-y-2 pl-4 text-sm text-neutral-400">
@@ -298,10 +305,10 @@ export default function LicensePage() {
 
 					{/* Updates Notice */}
 					<section className="space-y-4">
-						<h2 className="text-2xl font-light tracking-tight text-neutral-200">
+						<h2 className="text-xl font-light tracking-tight text-neutral-200 sm:text-2xl">
 							Updates to This License
 						</h2>
-						<div className="border border-neutral-800 bg-neutral-900/30 p-6">
+						<div className="border border-dashed border-neutral-800 bg-neutral-900/30 p-4 sm:p-6">
 							<p className="leading-relaxed text-neutral-400">
 								This license may be updated from time to time to
 								address new technologies, legal requirements, or
@@ -326,9 +333,6 @@ export default function LicensePage() {
 					</div>
 				</div>
 			</div>
-
-			<FloatingQuickNav />
-			<BackgroundEffect variant="grid" intensity={0.4} opacity={0.7} />
-		</div>
+		</PageShell>
 	)
 }

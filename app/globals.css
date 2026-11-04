@@ -108,6 +108,86 @@
 	--color-neutral-950: oklch(0.145 0 0);
 }
 
+/*
+ * Accent text colours were also picked for a dark background: emerald-400 or
+ * blue-400 on the light theme's near-white is too faint to read. Light mode
+ * borrows the deeper shades for the light ones; `.dark` (dark mode, and the
+ * dark-forced mobile nav) puts the real values back.
+ */
+:root:not(.dark) {
+	--color-emerald-300: oklch(50.8% 0.118 165.612);
+	--color-emerald-400: oklch(50.8% 0.118 165.612);
+	--color-emerald-500: oklch(59.6% 0.145 163.225);
+	--color-blue-400: oklch(54.6% 0.245 262.881);
+	--color-blue-500: oklch(54.6% 0.245 262.881);
+	--color-amber-200: oklch(55.5% 0.163 48.998);
+	--color-amber-300: oklch(55.5% 0.163 48.998);
+	--color-amber-400: oklch(55.5% 0.163 48.998);
+	--color-amber-500: oklch(66.6% 0.179 58.318);
+	--color-rose-400: oklch(58.6% 0.253 17.585);
+	--color-sky-400: oklch(58.8% 0.158 241.966);
+	--color-teal-400: oklch(60% 0.118 184.704);
+	--color-indigo-400: oklch(51.1% 0.262 276.966);
+}
+
+.dark {
+	--color-emerald-300: oklch(84.5% 0.143 164.978);
+	--color-emerald-400: oklch(76.5% 0.177 163.223);
+	--color-emerald-500: oklch(69.6% 0.17 162.48);
+	--color-blue-400: oklch(70.7% 0.165 254.624);
+	--color-blue-500: oklch(62.3% 0.214 259.815);
+	--color-amber-200: oklch(92.4% 0.12 95.746);
+	--color-amber-300: oklch(87.9% 0.169 91.605);
+	--color-amber-400: oklch(82.8% 0.189 84.429);
+	--color-amber-500: oklch(76.9% 0.188 70.08);
+	--color-rose-400: oklch(71.2% 0.194 13.428);
+	--color-sky-400: oklch(74.6% 0.16 232.661);
+	--color-teal-400: oklch(77.7% 0.152 181.912);
+	--color-indigo-400: oklch(67.3% 0.182 276.935);
+}
+
+/*
+ * Blog post typography. @tailwindcss/typography hard-codes its colours (white
+ * bold text, white links under prose-invert), which vanish on the light theme.
+ * These point every prose colour at the site's own variables instead, so posts
+ * follow the theme like the rest of the site. Unlayered on purpose: it has to
+ * win over the plugin's defaults.
+ */
+.prose.prose-site {
+	--tw-prose-body: var(--color-neutral-300);
+	--tw-prose-headings: var(--color-neutral-200);
+	--tw-prose-lead: var(--color-neutral-400);
+	--tw-prose-links: var(--color-blue-400);
+	--tw-prose-bold: var(--color-neutral-100);
+	--tw-prose-counters: var(--color-neutral-500);
+	--tw-prose-bullets: var(--color-neutral-600);
+	--tw-prose-hr: var(--color-neutral-800);
+	--tw-prose-quotes: var(--color-neutral-400);
+	--tw-prose-quote-borders: var(--color-neutral-700);
+	--tw-prose-captions: var(--color-neutral-500);
+	--tw-prose-kbd: var(--color-neutral-200);
+	--tw-prose-kbd-shadows: 255 255 255;
+	--tw-prose-code: var(--color-emerald-400);
+	--tw-prose-pre-code: var(--color-neutral-200);
+	--tw-prose-pre-bg: transparent;
+	--tw-prose-th-borders: var(--color-neutral-700);
+	--tw-prose-td-borders: var(--color-neutral-800);
+}
+
+/* Headings are wrapped in a self-link (rehype-autolink-headings); keep them
+   looking like headings, and clear of the sticky nav when jumped to. */
+.prose-site .anchor {
+	color: inherit;
+	text-decoration: none;
+}
+.prose-site :where(h2, h3, h4) {
+	scroll-margin-top: 7rem;
+}
+.prose-site :where(code):not(:where(pre code))::before,
+.prose-site :where(code):not(:where(pre code))::after {
+	content: none;
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;

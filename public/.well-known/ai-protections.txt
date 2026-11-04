@@ -3,7 +3,7 @@
 # for artificial intelligence training and development purposes.
 
 # Copyright Notice
-copyright: © 2024-2025 Aditya Bhaskar Sharma. All rights reserved.
+copyright: © 2024-2026 Aditya Bhaskar Sharma. All rights reserved.
 
 # License
 license: CC BY-NC-ND 4.0 with AI use restrictions

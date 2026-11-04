@@ -10,6 +10,8 @@ import { GoogleAnalyticsListener } from '@/components/analytics/google-analytics
 import { AnalyticsInteractions } from '@/components/analytics/analytics-interactions'
 import { GA_MEASUREMENT_ID, isGaEnabled } from '@/lib/ga'
 import { siteConfig } from '@/lib/site'
+import { pageMetadata } from '@/lib/metadata'
+import type { Metadata, Viewport } from 'next'
 
 const firaCode = Fira_Code({
 	subsets: ['latin'],
@@ -23,19 +25,16 @@ const ibmPlex = IBM_Plex_Mono({
 	variable: '--font-ibm',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
+	...pageMetadata({ description: siteConfig.description, path: '/' }),
 	title: {
 		default: siteConfig.title,
 		template: `%s — ${siteConfig.name}`,
 	},
-	description: siteConfig.description,
 	keywords: [...siteConfig.baseKeywords],
 	authors: [{ name: siteConfig.name, url: siteConfig.url }],
 	creator: siteConfig.name,
-	alternates: {
-		canonical: '/',
-	},
 	robots: {
 		index: true,
 		follow: true,
@@ -46,27 +45,14 @@ export const metadata = {
 			'max-snippet': -1,
 		},
 	},
-	openGraph: {
-		type: 'website',
-		url: siteConfig.url,
-		title: siteConfig.title,
-		description: siteConfig.description,
-		siteName: siteConfig.shortName,
-		images: [
-			{
-				url: '/assets/og.png',
-				width: 1200,
-				height: 630,
-				alt: `${siteConfig.name} — ${siteConfig.role} portfolio`,
-			},
-		],
-	},
-	twitter: {
-		card: 'summary_large_image',
-		title: siteConfig.title,
-		description: siteConfig.description,
-		images: ['/assets/og.png'],
-	},
+}
+
+// Colours the mobile browser's toolbar to match the page background.
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: '(prefers-color-scheme: light)', color: '#f5f5f3' },
+		{ media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+	],
 }
 
 const personJsonLd = {
@@ -81,11 +67,15 @@ const personJsonLd = {
 			image: `${siteConfig.url}${siteConfig.image}`,
 			email: `mailto:${siteConfig.email}`,
 			jobTitle: siteConfig.role,
-			description: siteConfig.description,
+			description: siteConfig.longDescription,
 			worksFor: {
 				'@type': 'Organization',
 				name: 'LazyCodeLab',
-				url: 'https://lazycodelab.com',
+				url: siteConfig.studio.url,
+			},
+			homeLocation: {
+				'@type': 'Place',
+				name: siteConfig.availability.location,
 			},
 			alumniOf: {
 				'@type': 'CollegeOrUniversity',
@@ -108,6 +98,7 @@ const personJsonLd = {
 				'Laravel',
 				'PHP',
 				'Shopify',
+				'WordPress plugin development',
 				'App Store Optimization',
 			],
 			sameAs: [...siteConfig.sameAs],

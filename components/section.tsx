@@ -17,10 +17,8 @@ export default function Section({
 			aria-labelledby={`${ariaTitle}-heading`}
 			data-section={ariaTitle}
 			id={ariaTitle}>
-			<StickyTitle>
-				{title}
-
-				{headerChildren && headerChildren}
+			<StickyTitle id={`${ariaTitle}-heading`} title={title}>
+				{headerChildren}
 			</StickyTitle>
 
 			{children}

@@ -37,10 +37,11 @@ export function Dialog({
 					ref={dialogRef}
 					role="dialog"
 					aria-modal="true"
+					aria-label={content?.name ?? 'Details'}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					exit={{ opacity: 0 }}
-					className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-6">
+					className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm md:p-6">
 					<motion.div
 						initial={{ scale: 0.98, y: 10 }}
 						animate={{ scale: 1, y: 0 }}
@@ -88,8 +89,8 @@ export function Dialog({
 
 						{/* Preview Footer */}
 						<footer className="border-t border-dashed border-neutral-800 p-4">
-							<div className="flex items-center justify-between">
-								<div>
+							<div className="flex items-center justify-between gap-4">
+								<div className="min-w-0">
 									<h3 className="text-base text-neutral-200 md:text-lg">
 										{content.name}
 									</h3>
